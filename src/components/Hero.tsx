@@ -4,14 +4,28 @@ import { ArrowRight, Play } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section id="home" className="pt-20 section-padding gradient-bg">
-      <div className="container-custom">
+    <section id="home" className="pt-20 section-padding gradient-bg relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-brand-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute top-40 right-10 w-72 h-72 bg-brand-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-1000"></div>
+        <div className="absolute -bottom-32 left-20 w-80 h-80 bg-brand-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-50"></div>
+      </div>
+
+      <div className="container-custom relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <div className="space-y-8 animate-fade-in">
-            <div className="space-y-4">
+            <div className="space-y-6">
+              <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
+                <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
+                <span className="text-sm font-medium text-gray-700">🚀 Solusi Digital UMKM Indonesia</span>
+              </div>
+              
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                <span className="gradient-text">Konten Bikin Cuan?</span>
+                <span className="gradient-text bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 bg-clip-text text-transparent animate-gradient">
+                  Konten Bikin Cuan?
+                </span>
                 <br />
                 <span className="text-gray-900">Kontenih Jawabannya.</span>
               </h1>
@@ -23,7 +37,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg" 
-                className="bg-brand-blue-600 hover:bg-brand-blue-700 text-white font-medium px-8 py-3 hover-scale group"
+                className="bg-gradient-to-r from-brand-blue-600 to-brand-blue-700 hover:from-brand-blue-700 hover:to-brand-blue-800 text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Mulai Sekarang
@@ -32,53 +46,82 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-brand-orange-500 text-brand-orange-500 hover:bg-brand-orange-50 font-medium px-8 py-3 hover-scale group"
+                className="border-2 border-brand-orange-500 text-brand-orange-500 hover:bg-brand-orange-500 hover:text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group backdrop-blur-sm bg-white/80"
                 onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                <Play className="mr-2 h-5 w-5" />
+                <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 Lihat Portfolio
               </Button>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-gray-200">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-brand-blue-600">100+</div>
-                <div className="text-sm text-gray-600">UMKM Klien</div>
+            <div className="grid grid-cols-3 gap-8 pt-8">
+              <div className="text-center group">
+                <div className="relative">
+                  <div className="text-3xl font-bold text-brand-blue-600 group-hover:scale-110 transition-transform">100+</div>
+                  <div className="absolute -inset-2 bg-brand-blue-100 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                </div>
+                <div className="text-sm text-gray-600 mt-1">UMKM Klien</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-brand-orange-500">500+</div>
-                <div className="text-sm text-gray-600">Konten Dibuat</div>
+              <div className="text-center group">
+                <div className="relative">
+                  <div className="text-3xl font-bold text-brand-orange-500 group-hover:scale-110 transition-transform">500+</div>
+                  <div className="absolute -inset-2 bg-brand-orange-100 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                </div>
+                <div className="text-sm text-gray-600 mt-1">Konten Dibuat</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-brand-blue-600">95%</div>
-                <div className="text-sm text-gray-600">Kepuasan Klien</div>
+              <div className="text-center group">
+                <div className="relative">
+                  <div className="text-3xl font-bold text-brand-blue-600 group-hover:scale-110 transition-transform">95%</div>
+                  <div className="absolute -inset-2 bg-brand-blue-100 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                </div>
+                <div className="text-sm text-gray-600 mt-1">Kepuasan Klien</div>
               </div>
             </div>
           </div>
 
           {/* Visual Content */}
           <div className="relative animate-scale-in">
-            <div className="aspect-square bg-gradient-to-br from-brand-blue-100 to-brand-orange-100 rounded-3xl p-8 shadow-2xl">
-              <div className="w-full h-full bg-white rounded-2xl shadow-lg flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-20 h-20 bg-gradient-to-br from-brand-blue-500 to-brand-orange-500 rounded-2xl mx-auto flex items-center justify-center">
-                    <span className="text-2xl font-bold text-white">K</span>
+            <div className="relative">
+              {/* Main Card */}
+              <div className="aspect-square bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/20">
+                <div className="w-full h-full bg-gradient-to-br from-brand-blue-50 to-brand-orange-50 rounded-2xl shadow-inner flex items-center justify-center relative overflow-hidden">
+                  {/* Animated Background Pattern */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-4 left-4 w-8 h-8 bg-brand-blue-500 rounded-full animate-bounce"></div>
+                    <div className="absolute top-8 right-8 w-6 h-6 bg-brand-orange-500 rounded-full animate-bounce delay-300"></div>
+                    <div className="absolute bottom-8 left-8 w-4 h-4 bg-brand-blue-500 rounded-full animate-bounce delay-700"></div>
+                    <div className="absolute bottom-4 right-4 w-5 h-5 bg-brand-orange-500 rounded-full animate-bounce delay-1000"></div>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="font-bold text-lg text-gray-900">Kontenih Agency</h3>
-                    <p className="text-sm text-gray-600">Your Digital Growth Partner</p>
+                  
+                  <div className="text-center space-y-6 relative z-10">
+                    <div className="w-24 h-24 bg-gradient-to-br from-brand-blue-500 to-brand-orange-500 rounded-2xl mx-auto flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-3">
+                      <span className="text-3xl font-bold text-white">K</span>
+                    </div>
+                    <div className="space-y-3">
+                      <h3 className="font-bold text-xl text-gray-900">Kontenih Agency</h3>
+                      <p className="text-sm text-gray-600 font-medium">Your Digital Growth Partner</p>
+                      <div className="flex justify-center space-x-2">
+                        <div className="w-2 h-2 bg-brand-blue-500 rounded-full animate-pulse"></div>
+                        <div className="w-2 h-2 bg-brand-orange-500 rounded-full animate-pulse delay-300"></div>
+                        <div className="w-2 h-2 bg-brand-blue-500 rounded-full animate-pulse delay-600"></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Floating Elements */}
-            <div className="absolute -top-4 -right-4 w-16 h-16 bg-brand-orange-500 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold">📱</span>
-            </div>
-            <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-brand-blue-500 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold">💡</span>
+              
+              {/* Floating Elements */}
+              <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-br from-brand-orange-500 to-brand-orange-600 rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-rotate-6 cursor-pointer">
+                <span className="text-2xl">📱</span>
+              </div>
+              <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-br from-brand-blue-500 to-brand-blue-600 rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-6 cursor-pointer">
+                <span className="text-xl">💡</span>
+              </div>
+              
+              {/* Additional Decorative Elements */}
+              <div className="absolute top-1/4 -left-4 w-8 h-8 bg-brand-orange-300 rounded-full opacity-60 animate-ping"></div>
+              <div className="absolute bottom-1/4 -right-4 w-6 h-6 bg-brand-blue-300 rounded-full opacity-60 animate-ping delay-500"></div>
             </div>
           </div>
         </div>
