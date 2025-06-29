@@ -43,7 +43,7 @@ const Header = () => {
           <div className="hidden md:block">
             <Button 
               className="bg-brand-orange-500 hover:bg-brand-orange-600 text-white font-medium px-6"
-              onClick={() => window.open('https://wa.me/6281234567890?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank')}
+              onClick={() => window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank')}
             >
               Konsultasi Sekarang
             </Button>
@@ -76,7 +76,7 @@ const Header = () => {
               <Button 
                 className="bg-brand-orange-500 hover:bg-brand-orange-600 text-white font-medium mt-4"
                 onClick={() => {
-                  window.open('https://wa.me/6281234567890?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank');
+                  window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank');
                   setIsMenuOpen(false);
                 }}
               >

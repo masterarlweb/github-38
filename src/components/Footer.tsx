@@ -16,7 +16,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://instagram.com/kontenih" 
+                href="https://instagram.com/masterarol_cc" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-brand-blue-600 rounded-full flex items-center justify-center hover:bg-brand-blue-700 transition-colors"
@@ -24,7 +24,7 @@ const Footer = () => {
                 <Instagram className="h-5 w-5" />
               </a>
               <a 
-                href="mailto:hello@kontenih.com"
+                href="mailto:hellokontenih@gmail.com"
                 className="w-10 h-10 bg-brand-orange-500 rounded-full flex items-center justify-center hover:bg-brand-orange-600 transition-colors"
               >
                 <Mail className="h-5 w-5" />
@@ -61,19 +61,19 @@ const Footer = () => {
             <div className="space-y-3 text-gray-400">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-brand-blue-500" />
-                <span>+62 812-3456-7890</span>
+                <span>+62 813-3613-5036</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-brand-orange-500" />
-                <span>hello@kontenih.com</span>
+                <span>hellokontenih@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Instagram className="h-5 w-5 text-brand-blue-500" />
-                <span>@kontenih</span>
+                <span>@masterarol_cc</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-brand-orange-500" />
-                <span>Jakarta, Indonesia</span>
+                <span>Surabaya, Indonesia</span>
               </div>
             </div>
           </div>

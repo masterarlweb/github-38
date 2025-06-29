@@ -37,7 +37,7 @@ Paket: ${formData.package}
 Mohon informasi lebih lanjut. Terima kasih!`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/6281234567890?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/62081336135036?text=${encodedMessage}`, '_blank');
     
     toast({
       title: "Pesan terkirim!",
@@ -51,25 +51,25 @@ Mohon informasi lebih lanjut. Terima kasih!`;
     {
       icon: Phone,
       title: 'WhatsApp',
-      details: '+62 812-3456-7890',
-      action: () => window.open('https://wa.me/6281234567890', '_blank')
+      details: '+62 813-3613-5036',
+      action: () => window.open('https://wa.me/62081336135036', '_blank')
     },
     {
       icon: Mail,
       title: 'Email',
-      details: 'hello@kontenih.com',
-      action: () => window.open('mailto:hello@kontenih.com', '_blank')
+      details: 'hellokontenih@gmail.com',
+      action: () => window.open('mailto:hellokontenih@gmail.com', '_blank')
     },
     {
       icon: Instagram,
       title: 'Instagram',
-      details: '@kontenih',
-      action: () => window.open('https://instagram.com/kontenih', '_blank')
+      details: '@masterarol_cc',
+      action: () => window.open('https://instagram.com/masterarol_cc', '_blank')
     },
     {
       icon: MapPin,
       title: 'Lokasi',
-      details: 'Jakarta, Indonesia',
+      details: 'Surabaya, Indonesia',
       action: () => {}
     }
   ];
@@ -178,7 +178,7 @@ Mohon informasi lebih lanjut. Terima kasih!`;
                 </p>
                 <Button 
                   className="bg-white text-green-600 hover:bg-gray-100 font-medium px-8 hover-scale"
-                  onClick={() => window.open('https://wa.me/6281234567890?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20gratis!', '_blank')}
+                  onClick={() => window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20gratis!', '_blank')}
                 >
                   💬 Chat WhatsApp
                 </Button>
