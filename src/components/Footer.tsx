@@ -1,5 +1,6 @@
 
 import { Instagram, Mail, MapPin, Phone } from 'lucide-react';
+import Logo from './Logo';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +11,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold gradient-text">Kontenih</h3>
+            <Logo size="md" showTagline={true} />
             <p className="text-gray-400 leading-relaxed">
               Agensi kreatif yang membantu UMKM Indonesia membangun kehadiran digital yang menarik dan profesional.
             </p>
