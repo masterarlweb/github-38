@@ -1,43 +1,36 @@
 
 import { Card, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Palette, Video, Instagram } from 'lucide-react';
 
 const Gallery = () => {
-  const portfolioItems = [
+  const graphicDesignPortfolio = [
+    // Placeholder items - user will add real content
     {
-      title: 'Warung Nasi Ibu Sari',
-      category: 'Food & Beverage',
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop',
-      description: 'Branding komprehensif untuk warung tradisional'
-    },
+      title: 'Coming Soon',
+      category: 'Logo Design',
+      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop',
+      description: 'Portfolio graphic design akan segera ditambahkan'
+    }
+  ];
+
+  const contentCreationPortfolio = [
+    // Placeholder items - user will add real content
     {
-      title: 'Toko Baju Cantik',
-      category: 'Fashion',
-      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop',
-      description: 'Manajemen Instagram dengan 500% growth'
-    },
+      title: 'Coming Soon',
+      category: 'Video Content',
+      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=300&fit=crop',
+      description: 'Portfolio content creation akan segera ditambahkan'
+    }
+  ];
+
+  const endorsementPortfolio = [
+    // Placeholder items - user will add real content
     {
-      title: 'Kedai Kopi Lokal',
-      category: 'F&B',
-      image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=300&fit=crop',
-      description: 'Video content yang viral di TikTok'
-    },
-    {
-      title: 'Skincare Alami',
-      category: 'Beauty',
-      image: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400&h=300&fit=crop',
-      description: 'Product photography & social media kit'
-    },
-    {
-      title: 'Cake & Bakery',
-      category: 'F&B',
-      image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop',
-      description: 'Instagram feed yang engaging'
-    },
-    {
-      title: 'Aksesoris Handmade',
-      category: 'Craft',
-      image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=300&fit=crop',
-      description: 'Branding visual untuk produk handmade'
+      title: 'Coming Soon',
+      category: 'Influencer Campaign',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop',
+      description: 'Portfolio endorsement akan segera ditambahkan'
     }
   ];
 
@@ -76,28 +69,106 @@ const Gallery = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioItems.map((item, index) => (
-              <Card key={index} className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <div className="space-y-2">
-                    <span className="text-xs font-medium text-brand-orange-500 uppercase tracking-wide">
-                      {item.category}
-                    </span>
-                    <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
-                    <p className="text-gray-600 text-sm">{item.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <Tabs defaultValue="graphic-design" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-12 bg-white/80 backdrop-blur-sm p-1 rounded-2xl shadow-lg">
+              <TabsTrigger 
+                value="graphic-design" 
+                className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-brand-blue-500 data-[state=active]:text-white"
+              >
+                <Palette className="w-4 h-4" />
+                Graphic Design
+              </TabsTrigger>
+              <TabsTrigger 
+                value="content-creation"
+                className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-brand-orange-500 data-[state=active]:text-white"
+              >
+                <Video className="w-4 h-4" />
+                Content Creation
+              </TabsTrigger>
+              <TabsTrigger 
+                value="endorsement"
+                className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-blue-500 data-[state=active]:to-brand-orange-500 data-[state=active]:text-white"
+              >
+                <Instagram className="w-4 h-4" />
+                Endorsement
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="graphic-design" className="mt-0">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {graphicDesignPortfolio.map((item, index) => (
+                  <Card key={index} className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div className="aspect-video overflow-hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <CardContent className="p-6">
+                      <div className="space-y-2">
+                        <span className="text-xs font-medium text-brand-blue-500 uppercase tracking-wide">
+                          {item.category}
+                        </span>
+                        <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
+                        <p className="text-gray-600 text-sm">{item.description}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="content-creation" className="mt-0">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {contentCreationPortfolio.map((item, index) => (
+                  <Card key={index} className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div className="aspect-video overflow-hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <CardContent className="p-6">
+                      <div className="space-y-2">
+                        <span className="text-xs font-medium text-brand-orange-500 uppercase tracking-wide">
+                          {item.category}
+                        </span>
+                        <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
+                        <p className="text-gray-600 text-sm">{item.description}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="endorsement" className="mt-0">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {endorsementPortfolio.map((item, index) => (
+                  <Card key={index} className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                    <div className="aspect-video overflow-hidden">
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <CardContent className="p-6">
+                      <div className="space-y-2">
+                        <span className="text-xs font-medium text-purple-500 uppercase tracking-wide">
+                          {item.category}
+                        </span>
+                        <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
+                        <p className="text-gray-600 text-sm">{item.description}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
 
         {/* Testimonials Section */}
