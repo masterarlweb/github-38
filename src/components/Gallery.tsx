@@ -25,12 +25,23 @@ const Gallery = () => {
   ];
 
   const endorsementPortfolio = [
-    // Placeholder items - user will add real content
     {
-      title: 'Coming Soon',
-      category: 'Influencer Campaign',
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop',
-      description: 'Portfolio endorsement akan segera ditambahkan'
+      title: 'Endorsement Rate Card',
+      category: 'Rate Card Professional',
+      image: '/lovable-uploads/7363e89c-9acb-4aa0-a03e-599d2fbd5a5d.png',
+      description: 'Rate card professional untuk layanan endorsement dengan talent berpengalaman Gabrielle Rora'
+    },
+    {
+      title: 'Instagram Insights & Analytics',
+      category: 'Social Media Performance',
+      image: '/lovable-uploads/383a3c2f-7973-4169-9848-5227567fd945.png',
+      description: 'Performa Instagram dengan 64.8K account reached, 459 account engaged, dan 3.3K total followers'
+    },
+    {
+      title: 'Food Review & Endorsement Portfolio',
+      category: 'Kuliner Content',
+      image: '/lovable-uploads/e67cb47d-660e-44fa-a92a-b1f6a99ba625.png',
+      description: 'Portfolio review kuliner dan endorsement sebagai talent KulinerGresik dengan berbagai konten makanan dan review tempat makan'
     }
   ];
 
