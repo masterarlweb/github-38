@@ -5,60 +5,46 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 const Services = () => {
   const services = [
     {
-      icon: Instagram,
-      title: 'Manajemen Sosial Media',
-      subtitle: 'Instagram & TikTok',
-      description: 'Pengelolaan akun media sosial secara profesional dengan strategi posting yang konsisten dan engaging.',
+      icon: Palette,
+      title: 'Graphic Design',
+      subtitle: 'Visual Identity',
+      description: 'Logo, feed template, packaging, dan identitas visual produk/jasa untuk membangun brand yang kuat dan memorable.',
       features: [
-        'Content Planning & Scheduling',
-        'Community Management', 
-        'Hashtag Strategy',
-        'Analytics & Reporting'
+        'Logo Design',
+        'Feed Template',
+        'Packaging Design',
+        'Identitas Visual Produk/Jasa'
       ],
       color: 'from-brand-blue-500 to-brand-blue-600',
       bgColor: 'from-brand-blue-50 to-brand-blue-100'
     },
     {
-      icon: Palette,
-      title: 'Desain Feed & Story',
-      subtitle: 'Visual Branding',
-      description: 'Desain visual yang menarik dan konsisten untuk membangun brand identity yang kuat di media sosial.',
+      icon: Video,
+      title: 'Content Creation',
+      subtitle: 'Visual Storytelling',
+      description: 'Video reels, sinematografi produk, fotografi katalog, behind-the-scenes, dan storytelling visual berkualitas tinggi.',
       features: [
-        'Feed Template Design',
-        'Instagram Story Templates',
-        'Highlight Covers',
-        'Brand Guidelines'
+        'Video Reels',
+        'Sinematografi Produk',
+        'Fotografi Katalog',
+        'Behind-the-scenes & Storytelling'
       ],
       color: 'from-brand-orange-500 to-brand-orange-600',
       bgColor: 'from-brand-orange-50 to-brand-orange-100'
     },
     {
-      icon: Video,
-      title: 'Video Promosi & Foto Produk',
-      subtitle: 'Content Creation',
-      description: 'Produksi konten visual berkualitas tinggi untuk meningkatkan daya tarik dan konversi penjualan.',
+      icon: Instagram,
+      title: 'Endorsement/Influencer Marketing',
+      subtitle: 'Strategic Partnership',
+      description: 'Strategi kerja sama dengan micro dan nano influencer untuk promosi UMKM secara natural dan efektif.',
       features: [
-        'Product Photography',
-        'Video Promosi',
-        'Reels & TikTok Content',
-        'Stop Motion Animation'
+        'Micro Influencer Partnership',
+        'Nano Influencer Strategy',
+        'Natural Promotion Campaign',
+        'UMKM-focused Marketing'
       ],
       color: 'from-brand-blue-500 to-brand-orange-500',
       bgColor: 'from-purple-50 to-pink-50'
-    },
-    {
-      icon: Camera,
-      title: 'Branding Visual UMKM',
-      subtitle: 'Complete Package',
-      description: 'Paket lengkap branding visual untuk UMKM yang ingin tampil profesional dan memorable.',
-      features: [
-        'Logo Design',
-        'Brand Identity',
-        'Marketing Materials',
-        'Social Media Kit'
-      ],
-      color: 'from-brand-orange-500 to-brand-blue-500',
-      bgColor: 'from-green-50 to-blue-50'
     }
   ];
 
@@ -84,7 +70,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <Card 
               key={index} 
