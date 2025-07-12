@@ -9,12 +9,12 @@ const Pricing = () => {
       name: 'Graphic Design',
       description: 'Solusi visual untuk identitas brand UMKM',
       services: [
-        { item: 'Logo Design', price: 'Mulai dari 500rb' },
-        { item: 'Feed Template (10 design)', price: '750rb' },
-        { item: 'Packaging Design', price: 'Mulai dari 1 juta' },
-        { item: 'Brand Identity Package', price: '2.5 juta' },
-        { item: 'Menu/Katalog Design', price: '800rb' },
-        { item: 'Banner/Poster Design', price: '200rb/design' }
+        { item: 'Logo Design', price: '-' },
+        { item: 'Feed Template (10 design)', price: '-' },
+        { item: 'Packaging Design', price: '-' },
+        { item: 'Brand Identity Package', price: '-' },
+        { item: 'Menu/Katalog Design', price: '-' },
+        { item: 'Banner/Poster Design', price: '-' }
       ],
       color: 'border-brand-blue-500',
       headerColor: 'bg-brand-blue-500',
@@ -24,12 +24,12 @@ const Pricing = () => {
       name: 'Content Creation',
       description: 'Konten visual dan video untuk media sosial',
       services: [
-        { item: 'Feed Instagram (12 post)', price: '1.5 juta/bulan' },
-        { item: 'Instagram Story (8 story)', price: '800rb/bulan' },
-        { item: 'Reels/TikTok (5 video)', price: '1.2 juta/bulan' },
-        { item: 'Foto Produk (10 foto)', price: '1 juta' },
-        { item: 'Video Promosi (1 video)', price: '2 juta' },
-        { item: 'Paket Lengkap Content', price: '2.8 juta/bulan' }
+        { item: 'Reels/Feed Post', price: '300rb/post' },
+        { item: 'Instagram Story', price: '150rb/story' },
+        { item: 'Fee Visit/Review', price: '150rb/visit' },
+        { item: 'Talent Fee (Shooting)', price: '250rb/3 jam' },
+        { item: 'Package Content Creation', price: 'Mulai dari 500rb' },
+        { item: 'Campaign Management', price: 'Custom quote' }
       ],
       color: 'border-brand-orange-500',
       headerColor: 'bg-brand-orange-500',
