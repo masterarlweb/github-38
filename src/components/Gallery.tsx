@@ -76,7 +76,7 @@ const Gallery = () => {
               Portfolio <span className="gradient-text">Kami</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Lihat berbagai project yang telah kami kerjakan untuk UMKM Indonesia
+              Lihat berbagai project yang telah kami kerjakan untuk berbagai klien
             </p>
           </div>
 
@@ -189,7 +189,7 @@ const Gallery = () => {
               Testimoni <span className="gradient-text">Klien</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Apa kata klien UMKM yang telah merasakan dampak positif layanan kami
+              Apa kata klien yang telah merasakan dampak positif layanan kami
             </p>
           </div>
 

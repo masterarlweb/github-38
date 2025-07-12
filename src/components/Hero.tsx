@@ -19,7 +19,7 @@ const Hero = () => {
             <div className="space-y-6">
               <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                <span className="text-sm font-medium text-gray-700">🚀 Solusi Digital UMKM Indonesia</span>
+                <span className="text-sm font-medium text-gray-700">🚀 Solusi Digital untuk Semua</span>
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
@@ -30,7 +30,7 @@ const Hero = () => {
                 <span className="text-gray-900">Kontenih Jawabannya.</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                Agensi kreatif yang membantu UMKM Indonesia membangun kehadiran digital yang menarik dan profesional melalui konten sosial media berkualitas.
+                Agensi kreatif yang membantu bisnis membangun kehadiran digital yang menarik dan profesional melalui konten sosial media berkualitas.
               </p>
             </div>
 
@@ -54,6 +54,26 @@ const Hero = () => {
               </Button>
             </div>
 
+            {/* About Kontenih */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
+              <h3 className="text-lg font-bold text-gray-900 mb-3">Tentang Kontenih</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Kontenih adalah agensi kreatif yang berfokus pada pembuatan konten digital berkualitas tinggi. 
+                Kami menyediakan layanan graphic design, content creation, dan endorsement untuk membantu 
+                brand dan bisnis membangun presence yang kuat di media sosial.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-brand-blue-600">3+</div>
+                  <div className="text-xs text-gray-600">Tahun Pengalaman</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-brand-orange-500">50+</div>
+                  <div className="text-xs text-gray-600">Project Selesai</div>
+                </div>
+              </div>
+            </div>
+
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 pt-8">
               <div className="text-center group">
@@ -61,7 +81,7 @@ const Hero = () => {
                   <div className="text-3xl font-bold text-brand-blue-600 group-hover:scale-110 transition-transform">100+</div>
                   <div className="absolute -inset-2 bg-brand-blue-100 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
-                <div className="text-sm text-gray-600 mt-1">UMKM Klien</div>
+                <div className="text-sm text-gray-600 mt-1">Happy Clients</div>
               </div>
               <div className="text-center group">
                 <div className="relative">
