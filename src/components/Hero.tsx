@@ -30,7 +30,7 @@ const Hero = () => {
                 <span className="text-gray-900">Kontenih Jawabannya.</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                Agensi kreatif yang membantu bisnis membangun kehadiran digital yang menarik dan profesional melalui konten sosial media berkualitas.
+                Agensi kreatif yang membantu semua jenis bisnis membangun kehadiran digital yang kuat dan profesional melalui strategi konten yang efektif.
               </p>
             </div>
 
