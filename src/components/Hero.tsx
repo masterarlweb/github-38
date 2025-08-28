@@ -19,7 +19,7 @@ const Hero = () => {
             <div className="space-y-6">
               <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                <span className="text-sm font-medium text-gray-700">🚀 Solusi Digital untuk Semua</span>
+                <span className="text-sm font-medium text-gray-700">🚀 First AI Automation Agency & SMMA</span>
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
@@ -30,7 +30,7 @@ const Hero = () => {
                 <span className="text-gray-900">Kontenih Jawabannya.</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                Agensi kreatif yang membantu semua jenis bisnis membangun kehadiran digital yang kuat dan profesional melalui strategi konten yang efektif.
+                Mendorong pertumbuhan bisnis dengan solusi AI dan strategi pemasaran digital yang terintegrasi untuk semua jenis bisnis.
               </p>
             </div>
 
