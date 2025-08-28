@@ -9,7 +9,7 @@ const Pricing = () => {
       name: 'AI System Creation',
       description: 'Solusi AI dan otomatisasi untuk transformasi digital',
       services: [
-        { item: 'Create AI System', price: '10rb' },
+        { item: 'Create AI System', price: '100rb' },
         { item: 'AI Consultant', price: '300rb/bulan' },
         { item: 'Custom Automation', price: 'Custom quote' },
         { item: 'Bot Development', price: 'Custom quote' },
