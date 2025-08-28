@@ -56,13 +56,38 @@ const Hero = () => {
 
             {/* About Kontenih */}
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Tentang Kontenih</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Kontenih adalah agensi kreatif yang berfokus pada pembuatan konten digital berkualitas tinggi. 
-                Kami menyediakan layanan graphic design, content creation, dan endorsement untuk membantu 
-                brand dan bisnis membangun presence yang kuat di media sosial.
+              <div className="flex items-center gap-2 mb-3">
+                <h3 className="text-lg font-bold text-gray-900">Tentang Kontenih</h3>
+                <div className="px-3 py-1 bg-gradient-to-r from-brand-blue-500 to-brand-orange-500 text-white text-xs font-semibold rounded-full">
+                  First AI Automation Agency & SMMA
+                </div>
+              </div>
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Mendorong pertumbuhan bisnis dengan solusi AI dan strategi pemasaran digital yang terintegrasi. 
+                Kami menggabungkan teknologi terdepan dengan kreativitas untuk menghasilkan konten yang 
+                tidak hanya menarik, tetapi juga efektif dalam meningkatkan engagement dan konversi.
               </p>
-              <div className="grid grid-cols-2 gap-4 mt-4">
+              
+              {/* Tujuan Kontenih */}
+              <div className="space-y-3 mb-4">
+                <h4 className="text-sm font-semibold text-gray-900">Tujuan Kontenih:</h4>
+                <div className="grid gap-2 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-brand-blue-500 rounded-full"></div>
+                    <span>Membantu brand mencapai potensi maksimal melalui konten berkualitas</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-brand-orange-500 rounded-full"></div>
+                    <span>Mengintegrasikan AI untuk efisiensi dan konsistensi konten</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-brand-blue-500 rounded-full"></div>
+                    <span>Menciptakan strategi digital yang terukur dan berkelanjutan</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-brand-blue-600">3+</div>
                   <div className="text-xs text-gray-600">Tahun Pengalaman</div>
