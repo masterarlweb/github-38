@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Logo size="md" showTagline={true} />
             <p className="text-gray-400 leading-relaxed">
-              Agensi kreatif yang membantu UMKM Indonesia membangun kehadiran digital yang menarik dan profesional.
+              Agensi kreatif yang membantu bisnis membangun kehadiran digital yang menarik dan profesional.
             </p>
             <div className="flex space-x-4">
               <a 

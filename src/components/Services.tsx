@@ -66,7 +66,7 @@ const Services = () => {
             Layanan <span className="gradient-text bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 bg-clip-text text-transparent">Kami</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Solusi lengkap untuk transformasi digital UMKM Indonesia dengan layanan profesional yang terpercaya
+            Solusi lengkap untuk transformasi digital bisnis dengan layanan profesional yang terpercaya
           </p>
         </div>
 

@@ -39,7 +39,7 @@ const About = () => {
                 Kontenih adalah tim kreatif yang membantu bisnis kecil tampil menonjol lewat strategi konten, desain visual, foto produk, dan video sosial media.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Fokus kami adalah UMKM Indonesia yang belum maksimal di Instagram dan TikTok. Kami percaya setiap bisnis kecil memiliki potensi besar untuk berkembang dengan strategi digital yang tepat.
+                Fokus kami adalah bisnis yang ingin memaksimalkan potensi di Instagram dan TikTok. Kami percaya setiap bisnis memiliki potensi besar untuk berkembang dengan strategi digital yang tepat.
               </p>
             </div>
 
@@ -67,7 +67,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Visi Kami</h3>
                 <p className="text-center text-gray-600 text-sm leading-relaxed">
-                  Menjadi partner terpercaya dalam transformasi digital UMKM Indonesia menuju kesuksesan yang berkelanjutan
+                  Menjadi partner terpercaya dalam transformasi digital bisnis menuju kesuksesan yang berkelanjutan
                 </p>
               </div>
             </div>
