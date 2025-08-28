@@ -6,6 +6,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 const Pricing = () => {
   const servicePackages = [
     {
+      name: 'AI System Creation',
+      description: 'Solusi AI dan otomatisasi untuk transformasi digital',
+      services: [
+        { item: 'Create AI System', price: '10rb' },
+        { item: 'AI Consultant', price: '300rb/bulan' },
+        { item: 'Custom Automation', price: 'Custom quote' },
+        { item: 'Bot Development', price: 'Custom quote' },
+        { item: 'AI Integration', price: 'Custom quote' },
+        { item: 'Training & Support', price: 'Custom quote' }
+      ],
+      color: 'border-purple-500',
+      headerColor: 'bg-purple-500',
+      buttonColor: 'bg-purple-600 hover:bg-purple-700'
+    },
+    {
       name: 'Graphic Design',
       description: 'Solusi visual untuk identitas brand UMKM',
       services: [
@@ -47,9 +62,9 @@ const Pricing = () => {
         { item: 'Package Endorsement', price: 'Mulai dari 500rb' },
         { item: 'Campaign Management', price: 'Custom quote' }
       ],
-      color: 'border-purple-500',
-      headerColor: 'bg-purple-500',
-      buttonColor: 'bg-purple-600 hover:bg-purple-700'
+      color: 'border-green-500',
+      headerColor: 'bg-green-500',
+      buttonColor: 'bg-green-600 hover:bg-green-700'
     }
   ];
 
@@ -65,7 +80,7 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {servicePackages.map((servicePackage, index) => (
             <Card 
               key={index} 

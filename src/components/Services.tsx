@@ -1,9 +1,23 @@
 
-import { Instagram, Video, Camera, Palette } from 'lucide-react';
+import { Instagram, Video, Camera, Palette, Bot } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Services = () => {
   const services = [
+    {
+      icon: Bot,
+      title: 'AI System Creation',
+      subtitle: 'Automation & Intelligence',
+      description: 'Sistem AI custom untuk otomatisasi bisnis, chatbot, dan solusi cerdas yang meningkatkan efisiensi operasional.',
+      features: [
+        'Custom AI System Development',
+        'Business Process Automation',
+        'Intelligent Chatbot Creation',
+        'AI Consultation & Strategy'
+      ],
+      color: 'from-purple-500 to-purple-600',
+      bgColor: 'from-purple-50 to-purple-100'
+    },
     {
       icon: Palette,
       title: 'Graphic Design',
@@ -70,7 +84,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <Card 
               key={index} 
