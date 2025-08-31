@@ -24,13 +24,13 @@ const Hero = () => {
               
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
                 <span className="gradient-text bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 bg-clip-text text-transparent animate-gradient">
-                  Konten Bikin Cuan?
+                  Content Drives Sales?
                 </span>
                 <br />
-                <span className="text-gray-900">Kontenih Jawabannya.</span>
+                <span className="text-gray-900">Kontenih is the Answer.</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                Mendorong pertumbuhan bisnis dengan solusi AI dan strategi pemasaran digital yang terintegrasi untuk semua jenis bisnis.
+                Driving business growth with AI solutions and integrated digital marketing strategies for all types of businesses.
               </p>
             </div>
 
@@ -40,7 +40,7 @@ const Hero = () => {
                 className="bg-gradient-to-r from-brand-blue-600 to-brand-blue-700 hover:from-brand-blue-700 hover:to-brand-blue-800 text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Mulai Sekarang
+                Get Started Now
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button 
@@ -50,39 +50,39 @@ const Hero = () => {
                 onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                Lihat Portfolio
+                View Portfolio
               </Button>
             </div>
 
             {/* About Kontenih */}
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
               <div className="flex items-center gap-2 mb-3">
-                <h3 className="text-lg font-bold text-gray-900">Tentang Kontenih</h3>
+                <h3 className="text-lg font-bold text-gray-900">About Kontenih</h3>
                 <div className="px-3 py-1 bg-gradient-to-r from-brand-blue-500 to-brand-orange-500 text-white text-xs font-semibold rounded-full">
                   First AI Automation Agency & SMMA
                 </div>
               </div>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Mendorong pertumbuhan bisnis dengan solusi AI dan strategi pemasaran digital yang terintegrasi. 
-                Kami menggabungkan teknologi terdepan dengan kreativitas untuk menghasilkan konten yang 
-                tidak hanya menarik, tetapi juga efektif dalam meningkatkan engagement dan konversi.
+                Driving business growth with AI solutions and integrated digital marketing strategies. 
+                We combine cutting-edge technology with creativity to produce content that 
+                is not only engaging, but also effective in increasing engagement and conversions.
               </p>
               
               {/* Tujuan Kontenih */}
               <div className="space-y-3 mb-4">
-                <h4 className="text-sm font-semibold text-gray-900">Tujuan Kontenih:</h4>
+                <h4 className="text-sm font-semibold text-gray-900">Kontenih Goals:</h4>
                 <div className="grid gap-2 text-sm text-gray-600">
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 bg-brand-blue-500 rounded-full"></div>
-                    <span>Membantu brand mencapai potensi maksimal melalui konten berkualitas</span>
+                    <span>Help brands reach maximum potential through quality content</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 bg-brand-orange-500 rounded-full"></div>
-                    <span>Mengintegrasikan AI untuk efisiensi dan konsistensi konten</span>
+                    <span>Integrate AI for content efficiency and consistency</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 bg-brand-blue-500 rounded-full"></div>
-                    <span>Menciptakan strategi digital yang terukur dan berkelanjutan</span>
+                    <span>Create measurable and sustainable digital strategies</span>
                   </div>
                 </div>
               </div>
@@ -90,11 +90,11 @@ const Hero = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-brand-blue-600">3+</div>
-                  <div className="text-xs text-gray-600">Tahun Pengalaman</div>
+                  <div className="text-xs text-gray-600">Years Experience</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-brand-orange-500">50+</div>
-                  <div className="text-xs text-gray-600">Project Selesai</div>
+                  <div className="text-xs text-gray-600">Projects Completed</div>
                 </div>
               </div>
             </div>
@@ -113,14 +113,14 @@ const Hero = () => {
                   <div className="text-3xl font-bold text-brand-orange-500 group-hover:scale-110 transition-transform">500+</div>
                   <div className="absolute -inset-2 bg-brand-orange-100 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
-                <div className="text-sm text-gray-600 mt-1">Konten Dibuat</div>
+                <div className="text-sm text-gray-600 mt-1">Content Created</div>
               </div>
               <div className="text-center group">
                 <div className="relative">
                   <div className="text-3xl font-bold text-brand-blue-600 group-hover:scale-110 transition-transform">95%</div>
                   <div className="absolute -inset-2 bg-brand-blue-100 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
-                <div className="text-sm text-gray-600 mt-1">Kepuasan Klien</div>
+                <div className="text-sm text-gray-600 mt-1">Client Satisfaction</div>
               </div>
             </div>
           </div>

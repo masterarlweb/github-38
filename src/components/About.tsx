@@ -5,23 +5,23 @@ const About = () => {
   const features = [
     {
       icon: Target,
-      title: 'Fokus UMKM',
-      description: 'Spesialisasi dalam membantu bisnis kecil dan menengah tampil profesional di platform digital'
+      title: 'SME Focus',
+      description: 'Specializing in helping small and medium businesses appear professional on digital platforms'
     },
     {
       icon: Users,
-      title: 'Tim Kreatif',
-      description: 'Tim ahli dengan pengalaman luas dalam strategi konten dan desain visual yang menarik'
+      title: 'Creative Team',
+      description: 'Expert team with extensive experience in content strategy and engaging visual design'
     },
     {
       icon: TrendingUp,
-      title: 'Hasil Terukur',
-      description: 'Strategi berbasis data untuk meningkatkan engagement dan konversi penjualan'
+      title: 'Measurable Results',
+      description: 'Data-driven strategies to increase engagement and sales conversions'
     },
     {
       icon: Award,
-      title: 'Kualitas Terjamin',
-      description: 'Komitmen memberikan layanan berkualitas tinggi dengan kepuasan klien 95%'
+      title: 'Guaranteed Quality',
+      description: 'Commitment to providing high-quality services with 95% client satisfaction'
     }
   ];
 
@@ -33,13 +33,13 @@ const About = () => {
           <div className="space-y-8">
             <div className="space-y-4">
               <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-                Tentang <span className="gradient-text">Kontenih</span>
+                About <span className="gradient-text">Kontenih</span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Kontenih adalah tim kreatif yang membantu bisnis kecil tampil menonjol lewat strategi konten, desain visual, foto produk, dan video sosial media.
+                Kontenih is a creative team that helps small businesses stand out through content strategy, visual design, product photography, and social media videos.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Fokus kami adalah bisnis yang ingin memaksimalkan potensi di Instagram dan TikTok. Kami percaya setiap bisnis memiliki potensi besar untuk berkembang dengan strategi digital yang tepat.
+                Our focus is on businesses that want to maximize their potential on Instagram and TikTok. We believe every business has great potential to grow with the right digital strategy.
               </p>
             </div>
 
@@ -65,9 +65,9 @@ const About = () => {
                 <div className="w-24 h-24 bg-gradient-to-br from-brand-blue-500 to-brand-orange-500 rounded-full flex items-center justify-center mb-6">
                   <span className="text-3xl">🚀</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Visi Kami</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Our Vision</h3>
                 <p className="text-center text-gray-600 text-sm leading-relaxed">
-                  Menjadi partner terpercaya dalam transformasi digital bisnis menuju kesuksesan yang berkelanjutan
+                  To become a trusted partner in digital business transformation towards sustainable success
                 </p>
               </div>
             </div>

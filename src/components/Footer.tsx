@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Logo size="md" showTagline={true} />
             <p className="text-gray-400 leading-relaxed">
-              Agensi kreatif yang membantu bisnis membangun kehadiran digital yang menarik dan profesional.
+              Creative agency that helps businesses build engaging and professional digital presence.
             </p>
             <div className="flex space-x-4">
               <a 
@@ -35,12 +35,12 @@ const Footer = () => {
 
           {/* Services */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Layanan Kami</h4>
+            <h4 className="text-lg font-semibold">Our Services</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#services" className="hover:text-brand-orange-500 transition-colors">Manajemen Sosial Media</a></li>
-              <li><a href="#services" className="hover:text-brand-orange-500 transition-colors">Desain Feed & Story</a></li>
-              <li><a href="#services" className="hover:text-brand-orange-500 transition-colors">Video & Foto Produk</a></li>
-              <li><a href="#services" className="hover:text-brand-orange-500 transition-colors">Branding Visual</a></li>
+              <li><a href="#services" className="hover:text-brand-orange-500 transition-colors">Social Media Management</a></li>
+              <li><a href="#services" className="hover:text-brand-orange-500 transition-colors">Feed & Story Design</a></li>
+              <li><a href="#services" className="hover:text-brand-orange-500 transition-colors">Video & Product Photos</a></li>
+              <li><a href="#services" className="hover:text-brand-orange-500 transition-colors">Visual Branding</a></li>
             </ul>
           </div>
 
@@ -48,17 +48,17 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">Menu</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#home" className="hover:text-brand-blue-500 transition-colors">Beranda</a></li>
-              <li><a href="#about" className="hover:text-brand-blue-500 transition-colors">Tentang Kami</a></li>
-              <li><a href="#pricing" className="hover:text-brand-blue-500 transition-colors">Paket Harga</a></li>
+              <li><a href="#home" className="hover:text-brand-blue-500 transition-colors">Home</a></li>
+              <li><a href="#about" className="hover:text-brand-blue-500 transition-colors">About Us</a></li>
+              <li><a href="#pricing" className="hover:text-brand-blue-500 transition-colors">Pricing Packages</a></li>
               <li><a href="#gallery" className="hover:text-brand-blue-500 transition-colors">Portfolio</a></li>
-              <li><a href="#contact" className="hover:text-brand-blue-500 transition-colors">Kontak</a></li>
+              <li><a href="#contact" className="hover:text-brand-blue-500 transition-colors">Contact</a></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Kontak</h4>
+            <h4 className="text-lg font-semibold">Contact</h4>
             <div className="space-y-3 text-gray-400">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-brand-blue-500" />
@@ -84,11 +84,11 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © {currentYear} Kontenih. Semua hak cipta dilindungi.
+              © {currentYear} Kontenih. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-brand-orange-500 transition-colors">Kebijakan Privasi</a>
-              <a href="#" className="hover:text-brand-orange-500 transition-colors">Syarat & Ketentuan</a>
+              <a href="#" className="hover:text-brand-orange-500 transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-brand-orange-500 transition-colors">Terms & Conditions</a>
             </div>
           </div>
         </div>

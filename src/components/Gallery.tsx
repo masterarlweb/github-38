@@ -10,7 +10,7 @@ const Gallery = () => {
       title: 'Coming Soon',
       category: 'Logo Design',
       image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop',
-      description: 'Portfolio graphic design akan segera ditambahkan'
+      description: 'Graphic design portfolio will be added soon'
     }
   ];
 
@@ -20,7 +20,7 @@ const Gallery = () => {
       title: 'Coming Soon',
       category: 'Video Content',
       image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=300&fit=crop',
-      description: 'Portfolio content creation akan segera ditambahkan'
+      description: 'Content creation portfolio will be added soon'
     }
   ];
 
@@ -29,39 +29,39 @@ const Gallery = () => {
       title: 'Endorsement Rate Card',
       category: 'Rate Card Professional',
       image: '/lovable-uploads/7363e89c-9acb-4aa0-a03e-599d2fbd5a5d.png',
-      description: 'Rate card professional untuk layanan endorsement dengan talent berpengalaman Gabrielle Rora'
+      description: 'Professional rate card for endorsement services with experienced talent Gabrielle Rora'
     },
     {
       title: 'Instagram Insights & Analytics',
       category: 'Social Media Performance',
       image: '/lovable-uploads/383a3c2f-7973-4169-9848-5227567fd945.png',
-      description: 'Performa Instagram dengan 64.8K account reached, 459 account engaged, dan 3.3K total followers'
+      description: 'Instagram performance with 64.8K account reached, 459 account engaged, and 3.3K total followers'
     },
     {
       title: 'Food Review & Endorsement Portfolio',
-      category: 'Kuliner Content',
+      category: 'Culinary Content',
       image: '/lovable-uploads/e67cb47d-660e-44fa-a92a-b1f6a99ba625.png',
-      description: 'Portfolio review kuliner dan endorsement sebagai talent KulinerGresik dengan berbagai konten makanan dan review tempat makan'
+      description: 'Culinary review and endorsement portfolio as KulinerGresik talent with various food content and restaurant reviews'
     }
   ];
 
   const testimonials = [
     {
-      name: 'Ibu Sari',
-      business: 'Warung Nasi Ibu Sari',
-      content: 'Sejak menggunakan jasa Kontenih, penjualan warung saya naik 3x lipat! Tim mereka sangat profesional dan memahami kebutuhan UMKM.',
+      name: 'Mrs. Sari',
+      business: 'Mrs. Sari Rice Stall',
+      content: 'Since using Kontenih services, my stall sales have increased 3x! Their team is very professional and understands SME needs.',
       rating: 5
     },
     {
       name: 'Andi Pratama',
-      business: 'Kedai Kopi Lokal',
-      content: 'Video TikTok yang dibuat Kontenih viral dan membuat kedai kopi saya jadi ramai pengunjung. Highly recommended!',
+      business: 'Local Coffee Shop',
+      content: 'The TikTok video created by Kontenih went viral and made my coffee shop busy with visitors. Highly recommended!',
       rating: 5
     },
     {
       name: 'Maya Sinta',
-      business: 'Skincare Alami',
-      content: 'Feed Instagram saya sekarang terlihat sangat profesional. Banyak customer yang bilang tertarik karena visualnya menarik.',
+      business: 'Natural Skincare',
+      content: 'My Instagram feed now looks very professional. Many customers say they are interested because of the attractive visuals.',
       rating: 5
     }
   ];
@@ -72,12 +72,12 @@ const Gallery = () => {
         {/* Portfolio Section */}
         <div className="mb-20">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-              Portfolio <span className="gradient-text">Kami</span>
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Lihat berbagai project yang telah kami kerjakan untuk berbagai klien
-            </p>
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
+            Our <span className="gradient-text">Portfolio</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            View various projects we have worked on for various clients
+          </p>
           </div>
 
           <Tabs defaultValue="graphic-design" className="w-full">
@@ -186,10 +186,10 @@ const Gallery = () => {
         <div>
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-              Testimoni <span className="gradient-text">Klien</span>
+              Client <span className="gradient-text">Testimonials</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Apa kata klien yang telah merasakan dampak positif layanan kami
+              What clients say who have experienced the positive impact of our services
             </p>
           </div>
 

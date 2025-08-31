@@ -10,12 +10,12 @@ const Header = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const navItems = [
-    { name: 'Beranda', href: '#home' },
-    { name: 'Tentang', href: '#about' },
-    { name: 'Layanan', href: '#services' },
-    { name: 'Harga', href: '#pricing' },
-    { name: 'Galeri', href: '#gallery' },
-    { name: 'Kontak', href: '#contact' }
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Pricing', href: '#pricing' },
+    { name: 'Gallery', href: '#gallery' },
+    { name: 'Contact', href: '#contact' }
   ];
 
   return (
@@ -44,7 +44,7 @@ const Header = () => {
               className="bg-brand-orange-500 hover:bg-brand-orange-600 text-white font-medium px-6"
               onClick={() => window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank')}
             >
-              Konsultasi Sekarang
+              Consult Now
             </Button>
           </div>
 
@@ -79,7 +79,7 @@ const Header = () => {
                   setIsMenuOpen(false);
                 }}
               >
-                Konsultasi Sekarang
+                Consult Now
               </Button>
             </nav>
           </div>

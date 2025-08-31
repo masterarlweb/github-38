@@ -8,7 +8,7 @@ const Services = () => {
       icon: Bot,
       title: 'AI System Creation',
       subtitle: 'Automation & Intelligence',
-      description: 'Sistem AI custom untuk otomatisasi bisnis, chatbot, dan solusi cerdas yang meningkatkan efisiensi operasional.',
+      description: 'Custom AI systems for business automation, chatbots, and intelligent solutions that improve operational efficiency.',
       features: [
         'Custom AI System Development',
         'Business Process Automation',
@@ -22,12 +22,12 @@ const Services = () => {
       icon: Palette,
       title: 'Graphic Design',
       subtitle: 'Visual Identity',
-      description: 'Logo, feed template, packaging, dan identitas visual produk/jasa untuk membangun brand yang kuat dan memorable.',
+      description: 'Logo, feed templates, packaging, and visual identity for products/services to build a strong and memorable brand.',
       features: [
         'Logo Design',
         'Feed Template',
         'Packaging Design',
-        'Identitas Visual Produk/Jasa'
+        'Product/Service Visual Identity'
       ],
       color: 'from-brand-blue-500 to-brand-blue-600',
       bgColor: 'from-brand-blue-50 to-brand-blue-100'
@@ -36,11 +36,11 @@ const Services = () => {
       icon: Video,
       title: 'Content Creation',
       subtitle: 'Visual Storytelling',
-      description: 'Video reels, sinematografi produk, fotografi katalog, behind-the-scenes, dan storytelling visual berkualitas tinggi.',
+      description: 'Video reels, product cinematography, catalog photography, behind-the-scenes, and high-quality visual storytelling.',
       features: [
         'Video Reels',
-        'Sinematografi Produk',
-        'Fotografi Katalog',
+        'Product Cinematography',
+        'Catalog Photography',
         'Behind-the-scenes & Storytelling'
       ],
       color: 'from-brand-orange-500 to-brand-orange-600',
@@ -50,7 +50,7 @@ const Services = () => {
       icon: Instagram,
       title: 'Endorsement/Influencer Marketing',
       subtitle: 'Strategic Partnership',
-      description: 'Strategi kerja sama dengan micro dan nano influencer untuk promosi UMKM secara natural dan efektif.',
+      description: 'Partnership strategies with micro and nano influencers for natural and effective SME promotion.',
       features: [
         'Micro Influencer Partnership',
         'Nano Influencer Strategy',
@@ -74,13 +74,13 @@ const Services = () => {
       <div className="container-custom relative z-10">
         <div className="text-center space-y-6 mb-20">
           <div className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
-            <span className="text-brand-blue-600 font-semibold">🎯 Layanan Profesional</span>
+            <span className="text-brand-blue-600 font-semibold">🎯 Professional Services</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
-            Layanan <span className="gradient-text bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 bg-clip-text text-transparent">Kami</span>
+            Our <span className="gradient-text bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 bg-clip-text text-transparent">Services</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Solusi lengkap untuk transformasi digital bisnis dengan layanan profesional yang terpercaya
+            Complete solutions for digital business transformation with trusted professional services
           </p>
         </div>
 

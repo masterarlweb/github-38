@@ -7,7 +7,7 @@ const Pricing = () => {
   const servicePackages = [
     {
       name: 'AI System Creation',
-      description: 'Solusi AI dan otomatisasi untuk transformasi digital',
+      description: 'AI solutions and automation for digital transformation',
       services: [
         { item: 'Create AI System', price: '100rb' },
         { item: 'AI Consultant', price: '300rb/bulan' },
@@ -22,7 +22,7 @@ const Pricing = () => {
     },
     {
       name: 'Graphic Design',
-      description: 'Solusi visual untuk identitas brand UMKM',
+      description: 'Visual solutions for SME brand identity',
       services: [
         { item: 'Logo Design', price: '-' },
         { item: 'Feed Template (10 design)', price: '-' },
@@ -37,13 +37,13 @@ const Pricing = () => {
     },
     {
       name: 'Content Creation',
-      description: 'Konten visual dan video untuk media sosial',
+      description: 'Visual content and videos for social media',
       services: [
         { item: 'Reels/Feed Post', price: '300rb/post' },
         { item: 'Instagram Story', price: '150rb/story' },
         { item: 'Fee Visit/Review', price: '150rb/visit' },
         { item: 'Talent Fee (Shooting)', price: '250rb/3 jam' },
-        { item: 'Package Content Creation', price: 'Mulai dari 500rb' },
+        { item: 'Package Content Creation', price: 'Starting from 500k' },
         { item: 'Campaign Management', price: 'Custom quote' }
       ],
       color: 'border-brand-orange-500',
@@ -53,13 +53,13 @@ const Pricing = () => {
     },
     {
       name: 'Endorsement',
-      description: 'Rate card influencer marketing dengan talent berpengalaman',
+      description: 'Influencer marketing rate card with experienced talent',
       services: [
         { item: 'Reels/Feed Post', price: '300rb/post' },
         { item: 'Instagram Story', price: '150rb/story' },
         { item: 'Fee Visit/Review', price: '150rb/visit' },
         { item: 'Talent Fee (Shooting)', price: '250rb/3 jam' },
-        { item: 'Package Endorsement', price: 'Mulai dari 500rb' },
+        { item: 'Package Endorsement', price: 'Starting from 500k' },
         { item: 'Campaign Management', price: 'Custom quote' }
       ],
       color: 'border-green-500',
@@ -73,10 +73,10 @@ const Pricing = () => {
       <div className="container-custom">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-            Paket <span className="gradient-text">Harga</span>
+            <span className="gradient-text">Pricing</span> Packages
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Pilih paket yang sesuai dengan kebutuhan dan budget UMKM Anda. Semua paket sudah termasuk konsultasi gratis!
+            Choose the package that suits your SME needs and budget. All packages include free consultation!
           </p>
         </div>
 
@@ -90,7 +90,7 @@ const Pricing = () => {
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <div className="bg-brand-orange-500 text-white px-4 py-1 rounded-full text-sm font-medium flex items-center">
                     <Star className="w-4 h-4 mr-1" />
-                    Terpopuler
+                    Most Popular
                   </div>
                 </div>
               )}
@@ -114,7 +114,7 @@ const Pricing = () => {
                   className={`w-full ${servicePackage.buttonColor} text-white font-medium py-3 hover-scale`}
                   onClick={() => window.open(`https://wa.me/6281234567890?text=Halo%20Kontenih%2C%20saya%20tertarik%20dengan%20layanan%20${servicePackage.name}%20dan%20ingin%20konsultasi%20lebih%20lanjut`, '_blank')}
                 >
-                  Konsultasi {servicePackage.name}
+                  Consult {servicePackage.name}
                 </Button>
               </CardContent>
             </Card>
@@ -122,13 +122,13 @@ const Pricing = () => {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-gray-600 mb-4">Butuh paket custom? Kami siap membantu!</p>
+          <p className="text-gray-600 mb-4">Need a custom package? We're ready to help!</p>
           <Button 
             variant="outline" 
             className="border-brand-blue-500 text-brand-blue-500 hover:bg-brand-blue-50"
             onClick={() => window.open('https://wa.me/6281234567890?text=Halo%20Kontenih%2C%20saya%20ingin%20diskusi%20tentang%20paket%20custom', '_blank')}
           >
-            Konsultasi Custom Package
+            Consult Custom Package
           </Button>
         </div>
       </div>

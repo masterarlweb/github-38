@@ -21,27 +21,27 @@ const Contact = () => {
     
     if (!formData.name || !formData.phone || !formData.package) {
       toast({
-        title: "Form tidak lengkap",
-        description: "Mohon isi semua field yang diperlukan",
+        title: "Form incomplete",
+        description: "Please fill in all required fields",
         variant: "destructive"
       });
       return;
     }
 
-    const message = `Halo Kontenih! Saya tertarik dengan layanan Anda.
+    const message = `Hello Kontenih! I'm interested in your services.
 
-Nama: ${formData.name}
-No. HP: ${formData.phone}
-Paket: ${formData.package}
+Name: ${formData.name}
+Phone: ${formData.phone}
+Package: ${formData.package}
 
-Mohon informasi lebih lanjut. Terima kasih!`;
+Please provide more information. Thank you!`;
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/62081336135036?text=${encodedMessage}`, '_blank');
     
     toast({
-      title: "Pesan terkirim!",
-      description: "Anda akan diarahkan ke WhatsApp untuk melanjutkan konsultasi"
+      title: "Message sent!",
+      description: "You will be redirected to WhatsApp to continue consultation"
     });
 
     setFormData({ name: '', phone: '', package: '' });
@@ -71,7 +71,7 @@ Mohon informasi lebih lanjut. Terima kasih!`;
     },
     {
       icon: MapPin,
-      title: 'Lokasi',
+      title: 'Location',
       details: 'Surabaya, Indonesia',
       action: () => {},
       color: 'from-red-500 to-red-600'
@@ -90,13 +90,13 @@ Mohon informasi lebih lanjut. Terima kasih!`;
         <div className="text-center space-y-6 mb-20">
           <div className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
             <MessageCircle className="w-5 h-5 text-brand-orange-500 mr-2" />
-            <span className="text-brand-blue-600 font-semibold">Hubungi Kami</span>
+            <span className="text-brand-blue-600 font-semibold">Contact Us</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
-            Hubungi <span className="gradient-text bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 bg-clip-text text-transparent">Kami</span>
+            Contact <span className="gradient-text bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 bg-clip-text text-transparent">Us</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Siap memulai transformasi digital UMKM Anda? Konsultasi gratis sekarang juga!
+            Ready to start your SME digital transformation? Get free consultation now!
           </p>
         </div>
 
@@ -109,9 +109,9 @@ Mohon informasi lebih lanjut. Terima kasih!`;
                   <Zap className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl font-bold text-gray-900">Form Pemesanan</CardTitle>
+                  <CardTitle className="text-2xl font-bold text-gray-900">Order Form</CardTitle>
                   <CardDescription className="text-gray-600 mt-1">
-                    Isi form di bawah ini dan kami akan menghubungi Anda segera
+                    Fill out the form below and we will contact you immediately
                   </CardDescription>
                 </div>
               </div>
@@ -119,11 +119,11 @@ Mohon informasi lebih lanjut. Terima kasih!`;
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="space-y-3">
-                  <Label htmlFor="name" className="text-sm font-semibold text-gray-700">Nama Lengkap *</Label>
+                  <Label htmlFor="name" className="text-sm font-semibold text-gray-700">Full Name *</Label>
                   <Input
                     id="name"
                     type="text"
-                    placeholder="Masukkan nama lengkap Anda"
+                    placeholder="Enter your full name"
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                     className="h-14 rounded-xl border-2 border-gray-200 focus:border-brand-blue-500 transition-all duration-300 text-base"
@@ -131,7 +131,7 @@ Mohon informasi lebih lanjut. Terima kasih!`;
                 </div>
 
                 <div className="space-y-3">
-                  <Label htmlFor="phone" className="text-sm font-semibold text-gray-700">Nomor WhatsApp *</Label>
+                  <Label htmlFor="phone" className="text-sm font-semibold text-gray-700">WhatsApp Number *</Label>
                   <Input
                     id="phone"
                     type="tel"
@@ -143,15 +143,15 @@ Mohon informasi lebih lanjut. Terima kasih!`;
                 </div>
 
                 <div className="space-y-3">
-                  <Label htmlFor="package" className="text-sm font-semibold text-gray-700">Pilih Paket *</Label>
+                  <Label htmlFor="package" className="text-sm font-semibold text-gray-700">Select Package *</Label>
                   <Select onValueChange={(value) => setFormData(prev => ({ ...prev, package: value }))}>
                     <SelectTrigger className="h-14 rounded-xl border-2 border-gray-200 focus:border-brand-blue-500 transition-all duration-300 text-base">
-                      <SelectValue placeholder="Pilih paket yang diinginkan" />
+                      <SelectValue placeholder="Choose desired package" />
                     </SelectTrigger>
                     <SelectContent className="rounded-xl">
-                      <SelectItem value="basic">Basic - Rp 1.5 Juta/bulan</SelectItem>
-                      <SelectItem value="pro">Pro - Rp 2.8 Juta/bulan</SelectItem>
-                      <SelectItem value="ultimate">Ultimate - Rp 4.5 Juta/bulan</SelectItem>
+                      <SelectItem value="basic">Basic - Rp 1.5 Million/month</SelectItem>
+                      <SelectItem value="pro">Pro - Rp 2.8 Million/month</SelectItem>
+                      <SelectItem value="ultimate">Ultimate - Rp 4.5 Million/month</SelectItem>
                       <SelectItem value="custom">Custom Package</SelectItem>
                     </SelectContent>
                   </Select>
@@ -162,7 +162,7 @@ Mohon informasi lebih lanjut. Terima kasih!`;
                   className="w-full bg-gradient-to-r from-brand-orange-500 to-brand-orange-600 hover:from-brand-orange-600 hover:to-brand-orange-700 text-white font-semibold h-14 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  Kirim & Konsultasi via WhatsApp
+                  Send & Consult via WhatsApp
                 </Button>
               </form>
             </CardContent>
@@ -171,7 +171,7 @@ Mohon informasi lebih lanjut. Terima kasih!`;
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-8">Informasi Kontak</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-8">Contact Information</h3>
               <div className="grid gap-6">
                 {contactInfo.map((info, index) => (
                   <div 
@@ -205,15 +205,15 @@ Mohon informasi lebih lanjut. Terima kasih!`;
                 <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                   <MessageCircle className="w-8 h-8 text-white" />
                 </div>
-                <h4 className="text-2xl font-bold mb-3">Butuh Konsultasi Cepat?</h4>
+                <h4 className="text-2xl font-bold mb-3">Need Quick Consultation?</h4>
                 <p className="mb-6 opacity-90 text-lg">
-                  Langsung chat via WhatsApp untuk konsultasi gratis!
+                  Chat directly via WhatsApp for free consultation!
                 </p>
                 <Button 
                   className="bg-white text-green-600 hover:bg-gray-100 font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                  onClick={() => window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20gratis!', '_blank')}
+                  onClick={() => window.open('https://wa.me/62081336135036?text=Hello%20Kontenih%2C%20I%20want%20free%20consultation!', '_blank')}
                 >
-                  💬 Chat WhatsApp Sekarang
+                  💬 Chat WhatsApp Now
                 </Button>
               </CardContent>
             </Card>
