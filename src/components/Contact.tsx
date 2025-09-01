@@ -56,13 +56,6 @@ Please provide more information. Thank you!`;
       color: 'from-green-500 to-green-600'
     },
     {
-      icon: Mail,
-      title: 'Email',
-      details: 'hellokontenih@gmail.com',
-      action: () => window.open('mailto:hellokontenih@gmail.com', '_blank'),
-      color: 'from-blue-500 to-blue-600'
-    },
-    {
       icon: Instagram,
       title: 'Instagram',
       details: '@masterarol_cc',

@@ -24,12 +24,6 @@ const Footer = () => {
               >
                 <Instagram className="h-5 w-5" />
               </a>
-              <a 
-                href="mailto:hellokontenih@gmail.com"
-                className="w-10 h-10 bg-brand-orange-500 rounded-full flex items-center justify-center hover:bg-brand-orange-600 transition-colors"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
             </div>
           </div>
 
@@ -63,10 +57,6 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-brand-blue-500" />
                 <span>+62 813-3613-5036</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-brand-orange-500" />
-                <span>hellokontenih@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Instagram className="h-5 w-5 text-brand-blue-500" />
