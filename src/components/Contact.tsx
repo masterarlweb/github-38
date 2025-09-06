@@ -59,8 +59,8 @@ Please provide more information. Thank you!`;
     {
       icon: Instagram,
       title: 'Instagram',
-      details: '@masterarol_cc',
-      action: () => window.open('https://instagram.com/masterarol_cc', '_blank'),
+      details: '@kontenih',
+      action: () => window.open('https://instagram.com/kontenih', '_blank'),
       color: 'from-pink-500 to-purple-600'
     },
     {
