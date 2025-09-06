@@ -28,7 +28,8 @@ const Contact = () => {
       return;
     }
 
-    const message = `Hello Kontenih! I'm interested in your services.
+    const subject = "Service Order Inquiry - Kontenih";
+    const body = `Hello Kontenih! I'm interested in your services.
 
 Name: ${formData.name}
 Phone: ${formData.phone}
@@ -36,12 +37,12 @@ Package: ${formData.package}
 
 Please provide more information. Thank you!`;
 
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/62081336135036?text=${encodedMessage}`, '_blank');
+    const mailtoLink = `mailto:hellokontenih@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink, '_blank');
     
     toast({
-      title: "Message sent!",
-      description: "You will be redirected to WhatsApp to continue consultation"
+      title: "Email client opened!",
+      description: "Please send the email to complete your order inquiry"
     });
 
     setFormData({ name: '', phone: '', package: '' });
