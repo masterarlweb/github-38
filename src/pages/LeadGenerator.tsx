@@ -4,11 +4,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Download, Users, Target, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Download, Users, Target, TrendingUp, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
 
 const LeadGenerator = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     jobTitle: '',
     location: '',
@@ -22,9 +25,43 @@ const LeadGenerator = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const generateLeads = () => {
-    // Lead generation logic would go here
-    console.log('Generating leads with:', formData);
+  const generateLeads = async () => {
+    setIsLoading(true);
+    
+    try {
+      console.log('Sending lead generation data to n8n webhook:', formData);
+      
+      const webhookUrl = 'https://n8n-rphgibnj.us-east-1.clawcloudrun.com/webhook-test/ff28eb36-c32d-4989-954c-b932bee7b495';
+      
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'no-cors',
+        body: JSON.stringify({
+          ...formData,
+          timestamp: new Date().toISOString(),
+          source: 'AI Lead Generator',
+          triggered_from: window.location.origin,
+        }),
+      });
+
+      toast({
+        title: "Lead Generation Started",
+        description: "Your lead generation request has been sent successfully. Check your n8n workflow for results.",
+      });
+      
+    } catch (error) {
+      console.error('Error sending data to webhook:', error);
+      toast({
+        title: "Error",
+        description: "Failed to start lead generation. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -164,16 +201,25 @@ const LeadGenerator = () => {
                 <Button 
                   onClick={generateLeads}
                   className="w-full relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
-                  disabled={!formData.jobTitle || !formData.industry || !formData.numberOfLeads}
+                  disabled={!formData.jobTitle || !formData.industry || !formData.numberOfLeads || isLoading}
                   size="lg"
                 >
                   {/* Button glow effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   <span className="relative z-10 flex items-center justify-center text-lg">
-                    <Users className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform" />
-                    Generate AI-Powered Leads
-                    <div className="ml-3 w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-3 h-5 w-5 animate-spin" />
+                        Processing Request...
+                      </>
+                    ) : (
+                      <>
+                        <Users className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform" />
+                        Generate AI-Powered Leads
+                        <div className="ml-3 w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                      </>
+                    )}
                   </span>
                 </Button>
               </CardContent>
