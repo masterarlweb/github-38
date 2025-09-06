@@ -54,6 +54,23 @@ const Hero = () => {
               </Button>
             </div>
 
+            {/* Lead Generator CTA */}
+            <div className="pt-8">
+              <div className="bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 p-1 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <div className="bg-white rounded-xl p-6 text-center">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">🚀 AI Lead Generator</h3>
+                  <p className="text-sm text-gray-600 mb-4">Generate qualified leads with our AI-powered tool</p>
+                  <Button 
+                    onClick={() => window.location.href = '/lead-generator'}
+                    className="bg-gradient-to-r from-brand-orange-500 to-brand-orange-600 hover:from-brand-orange-600 hover:to-brand-orange-700 text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+                  >
+                    Try Lead Generator
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+
             {/* About Kontenih */}
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
               <div className="flex items-center gap-2 mb-3">
