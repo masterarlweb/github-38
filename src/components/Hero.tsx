@@ -1,8 +1,10 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section id="home" className="pt-20 section-padding gradient-bg relative overflow-hidden">
       {/* Background Elements */}
@@ -94,7 +96,7 @@ const Hero = () => {
                     {/* CTA Button */}
                     <div className="relative">
                       <Button 
-                        onClick={() => window.location.href = '/lead-generator'}
+                        onClick={() => navigate('/lead-generator')}
                         className="relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 group/btn overflow-hidden text-lg"
                         size="lg"
                       >
