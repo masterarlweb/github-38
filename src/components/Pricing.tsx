@@ -126,7 +126,7 @@ const Pricing = () => {
           <Button 
             variant="outline" 
             className="border-brand-blue-500 text-brand-blue-500 hover:bg-brand-blue-50"
-            onClick={() => window.open('https://wa.me/6281234567890?text=Halo%20Kontenih%2C%20saya%20ingin%20diskusi%20tentang%20paket%20custom', '_blank')}
+            onClick={() => window.open('https://wa.me/6281336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20diskusi%20tentang%20paket%20custom', '_blank')}
           >
             Consult Custom Package
           </Button>
