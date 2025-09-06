@@ -96,8 +96,12 @@ const Hero = () => {
                     {/* CTA Button */}
                     <div className="relative">
                       <Button 
-                        onClick={() => navigate('/lead-generator')}
-                        className="relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 group/btn overflow-hidden text-lg"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          console.log('Button clicked!');
+                          navigate('/lead-generator');
+                        }}
+                        className="relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 group/btn overflow-hidden text-lg z-10"
                         size="lg"
                       >
                         {/* Button glow effect */}
@@ -109,9 +113,7 @@ const Hero = () => {
                         </span>
                       </Button>
                       
-                      {/* Pulse rings */}
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 opacity-20 animate-ping"></div>
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 opacity-10 animate-ping delay-75"></div>
+                      {/* Removed pulse rings that might interfere with button click */}
                     </div>
                   </div>
                 </div>
