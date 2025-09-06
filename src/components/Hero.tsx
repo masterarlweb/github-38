@@ -54,19 +54,64 @@ const Hero = () => {
               </Button>
             </div>
 
-            {/* Lead Generator CTA */}
+            {/* Lead Generator CTA - Enhanced Modern Design */}
             <div className="pt-8">
-              <div className="bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 p-1 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div className="bg-white rounded-xl p-6 text-center">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">🚀 AI Lead Generator</h3>
-                  <p className="text-sm text-gray-600 mb-4">Generate qualified leads with our AI-powered tool</p>
-                  <Button 
-                    onClick={() => window.location.href = '/lead-generator'}
-                    className="bg-gradient-to-r from-brand-orange-500 to-brand-orange-600 hover:from-brand-orange-600 hover:to-brand-orange-700 text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
-                  >
-                    Try Lead Generator
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+              <div className="relative group">
+                {/* Glow effect background */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 rounded-3xl opacity-75 group-hover:opacity-100 transition-all duration-500 blur-sm group-hover:blur-none animate-gradient"></div>
+                
+                {/* Main card */}
+                <div className="relative bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl p-8 shadow-2xl backdrop-blur-sm border border-white/30 group-hover:shadow-3xl transition-all duration-500">
+                  {/* Floating icons */}
+                  <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-brand-orange-500 to-brand-orange-600 rounded-2xl flex items-center justify-center shadow-xl rotate-12 group-hover:rotate-0 transition-all duration-500">
+                    <span className="text-xl">🎯</span>
+                  </div>
+                  <div className="absolute -top-2 -left-2 w-8 h-8 bg-gradient-to-br from-brand-blue-500 to-brand-blue-600 rounded-full flex items-center justify-center shadow-lg -rotate-12 group-hover:rotate-0 transition-all duration-500">
+                    <span className="text-sm">⚡</span>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="text-center space-y-6 relative z-10">
+                    <div className="space-y-3">
+                      <h3 className="text-2xl font-bold bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 bg-clip-text text-transparent animate-gradient">
+                        AI Lead Generator Pro
+                      </h3>
+                      <p className="text-gray-600 font-medium">Generate qualified prospects with advanced AI targeting</p>
+                      
+                      {/* Feature highlights */}
+                      <div className="flex items-center justify-center gap-6 pt-2">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-2 h-2 bg-brand-blue-500 rounded-full animate-pulse"></div>
+                          <span className="font-medium">Smart Targeting</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-2 h-2 bg-brand-orange-500 rounded-full animate-pulse delay-300"></div>
+                          <span className="font-medium">Real-time Data</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* CTA Button */}
+                    <div className="relative">
+                      <Button 
+                        onClick={() => window.location.href = '/lead-generator'}
+                        className="relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 group/btn overflow-hidden text-lg"
+                        size="lg"
+                      >
+                        {/* Button glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <span className="relative z-10 flex items-center">
+                          Launch Lead Generator
+                          <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-2 transition-transform duration-300" />
+                        </span>
+                      </Button>
+                      
+                      {/* Pulse rings */}
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 opacity-20 animate-ping"></div>
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 opacity-10 animate-ping delay-75"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

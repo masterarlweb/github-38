@@ -10,11 +10,12 @@ import { useNavigate } from 'react-router-dom';
 const LeadGenerator = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    businessName: '',
+    jobTitle: '',
+    location: '',
+    employeeSize: '',
+    emailStatus: '',
     industry: '',
-    targetAudience: '',
-    budget: '',
-    goals: ''
+    numberOfLeads: ''
   });
 
   const handleInputChange = (field: string, value: string) => {
@@ -68,79 +69,112 @@ const LeadGenerator = () => {
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="businessName">Business Name</Label>
+                  <Label htmlFor="jobTitle" className="text-gray-800 font-semibold">Job Title</Label>
                   <Input
-                    id="businessName"
-                    placeholder="Enter your business name"
-                    value={formData.businessName}
-                    onChange={(e) => handleInputChange('businessName', e.target.value)}
-                    className="bg-white/80"
+                    id="jobTitle"
+                    placeholder="e.g., CEO, Marketing Manager, Sales Director"
+                    value={formData.jobTitle}
+                    onChange={(e) => handleInputChange('jobTitle', e.target.value)}
+                    className="bg-white/90 border-gray-200 focus:border-brand-blue-500 focus:ring-brand-blue-500"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="industry">Industry</Label>
-                  <Select onValueChange={(value) => handleInputChange('industry', value)}>
-                    <SelectTrigger className="bg-white/80">
-                      <SelectValue placeholder="Select your industry" />
+                  <Label htmlFor="location" className="text-gray-800 font-semibold">Location</Label>
+                  <Input
+                    id="location"
+                    placeholder="e.g., New York, USA or Global"
+                    value={formData.location}
+                    onChange={(e) => handleInputChange('location', e.target.value)}
+                    className="bg-white/90 border-gray-200 focus:border-brand-blue-500 focus:ring-brand-blue-500"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="employeeSize" className="text-gray-800 font-semibold">Employee Size</Label>
+                  <Select onValueChange={(value) => handleInputChange('employeeSize', value)}>
+                    <SelectTrigger className="bg-white/90 border-gray-200 focus:border-brand-blue-500">
+                      <SelectValue placeholder="Select company size" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="ecommerce">E-commerce</SelectItem>
-                      <SelectItem value="saas">SaaS</SelectItem>
-                      <SelectItem value="consulting">Consulting</SelectItem>
+                    <SelectContent className="bg-white border-gray-200">
+                      <SelectItem value="1-10">1-10 employees</SelectItem>
+                      <SelectItem value="11-50">11-50 employees</SelectItem>
+                      <SelectItem value="51-200">51-200 employees</SelectItem>
+                      <SelectItem value="201-500">201-500 employees</SelectItem>
+                      <SelectItem value="501-1000">501-1,000 employees</SelectItem>
+                      <SelectItem value="1000+">1,000+ employees</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="emailStatus" className="text-gray-800 font-semibold">Email Status</Label>
+                  <Select onValueChange={(value) => handleInputChange('emailStatus', value)}>
+                    <SelectTrigger className="bg-white/90 border-gray-200 focus:border-brand-blue-500">
+                      <SelectValue placeholder="Select email preference" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white border-gray-200">
+                      <SelectItem value="verified">Verified emails only</SelectItem>
+                      <SelectItem value="all">All email types</SelectItem>
+                      <SelectItem value="business">Business emails only</SelectItem>
+                      <SelectItem value="personal">Personal emails included</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="industry" className="text-gray-800 font-semibold">Industry</Label>
+                  <Select onValueChange={(value) => handleInputChange('industry', value)}>
+                    <SelectTrigger className="bg-white/90 border-gray-200 focus:border-brand-blue-500">
+                      <SelectValue placeholder="Select target industry" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white border-gray-200">
+                      <SelectItem value="technology">Technology</SelectItem>
                       <SelectItem value="healthcare">Healthcare</SelectItem>
-                      <SelectItem value="education">Education</SelectItem>
                       <SelectItem value="finance">Finance</SelectItem>
+                      <SelectItem value="education">Education</SelectItem>
+                      <SelectItem value="ecommerce">E-commerce</SelectItem>
+                      <SelectItem value="manufacturing">Manufacturing</SelectItem>
                       <SelectItem value="real-estate">Real Estate</SelectItem>
+                      <SelectItem value="consulting">Consulting</SelectItem>
+                      <SelectItem value="marketing">Marketing & Advertising</SelectItem>
+                      <SelectItem value="retail">Retail</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="targetAudience">Target Audience</Label>
-                  <Input
-                    id="targetAudience"
-                    placeholder="e.g., Small business owners, millennials, etc."
-                    value={formData.targetAudience}
-                    onChange={(e) => handleInputChange('targetAudience', e.target.value)}
-                    className="bg-white/80"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="budget">Monthly Budget (USD)</Label>
-                  <Select onValueChange={(value) => handleInputChange('budget', value)}>
-                    <SelectTrigger className="bg-white/80">
-                      <SelectValue placeholder="Select your budget range" />
+                  <Label htmlFor="numberOfLeads" className="text-gray-800 font-semibold">Number of Leads</Label>
+                  <Select onValueChange={(value) => handleInputChange('numberOfLeads', value)}>
+                    <SelectTrigger className="bg-white/90 border-gray-200 focus:border-brand-blue-500">
+                      <SelectValue placeholder="How many leads do you need?" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="1000-5000">$1,000 - $5,000</SelectItem>
-                      <SelectItem value="5000-10000">$5,000 - $10,000</SelectItem>
-                      <SelectItem value="10000-25000">$10,000 - $25,000</SelectItem>
-                      <SelectItem value="25000+">$25,000+</SelectItem>
+                    <SelectContent className="bg-white border-gray-200">
+                      <SelectItem value="50">50 leads</SelectItem>
+                      <SelectItem value="100">100 leads</SelectItem>
+                      <SelectItem value="250">250 leads</SelectItem>
+                      <SelectItem value="500">500 leads</SelectItem>
+                      <SelectItem value="1000">1,000 leads</SelectItem>
+                      <SelectItem value="custom">Custom amount</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="goals">Primary Goals</Label>
-                  <Input
-                    id="goals"
-                    placeholder="e.g., Increase sales, brand awareness, etc."
-                    value={formData.goals}
-                    onChange={(e) => handleInputChange('goals', e.target.value)}
-                    className="bg-white/80"
-                  />
-                </div>
-
                 <Button 
                   onClick={generateLeads}
-                  className="w-full bg-gradient-to-r from-brand-blue-600 to-brand-blue-700 hover:from-brand-blue-700 hover:to-brand-blue-800 text-white font-medium py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  disabled={!formData.businessName || !formData.industry}
+                  className="w-full relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
+                  disabled={!formData.jobTitle || !formData.industry || !formData.numberOfLeads}
+                  size="lg"
                 >
-                  <Users className="mr-2 h-4 w-4" />
-                  Generate AI-Powered Leads
+                  {/* Button glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  <span className="relative z-10 flex items-center justify-center text-lg">
+                    <Users className="mr-3 h-5 w-5 group-hover:scale-110 transition-transform" />
+                    Generate AI-Powered Leads
+                    <div className="ml-3 w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                  </span>
                 </Button>
               </CardContent>
             </Card>
@@ -189,16 +223,16 @@ const LeadGenerator = () => {
               <Card className="bg-gradient-to-br from-brand-blue-600 to-brand-orange-500 text-white shadow-xl">
                 <CardContent className="pt-6">
                   <div className="text-center space-y-4">
-                    <h3 className="text-2xl font-bold">{formData.businessName || 'Your Business'}</h3>
-                    <p className="text-blue-100">Ready to scale with AI-generated leads</p>
+                    <h3 className="text-2xl font-bold">{formData.jobTitle ? `${formData.jobTitle} Prospects` : 'Lead Generation'}</h3>
+                    <p className="text-blue-100">AI-powered prospect generation ready to launch</p>
                     <div className="grid grid-cols-2 gap-4 pt-4">
                       <div className="text-center">
-                        <div className="text-2xl font-bold">500+</div>
-                        <div className="text-xs text-blue-100">Leads per month</div>
+                        <div className="text-2xl font-bold">{formData.numberOfLeads || '500'}+</div>
+                        <div className="text-xs text-blue-100">Target leads</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold">85%</div>
-                        <div className="text-xs text-blue-100">Accuracy rate</div>
+                        <div className="text-2xl font-bold">95%</div>
+                        <div className="text-xs text-blue-100">Data accuracy</div>
                       </div>
                     </div>
                   </div>
