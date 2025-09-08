@@ -98,7 +98,7 @@ const Services = () => {
       glowColor: 'shadow-emerald-500/20',
       hasButton: true,
       buttonText: 'Generate Leads',
-      route: '/lead-generator'
+      route: 'coming-soon'
     }
   ];
 
@@ -134,6 +134,8 @@ const Services = () => {
                   if (service.route.startsWith('#')) {
                     const element = document.querySelector(service.route);
                     element?.scrollIntoView({ behavior: 'smooth' });
+                  } else if (service.route === 'coming-soon') {
+                    // Show coming soon message - do nothing for now
                   } else if (service.route !== '#') {
                     navigate(service.route);
                   }
@@ -187,12 +189,20 @@ const Services = () => {
                         if (service.route.startsWith('#')) {
                           const element = document.querySelector(service.route);
                           element?.scrollIntoView({ behavior: 'smooth' });
+                        } else if (service.route === 'coming-soon') {
+                          // Show coming soon toast
+                          import('@/hooks/use-toast').then(({ toast }) => {
+                            toast({
+                              title: "Coming Soon! 🚀",
+                              description: "Fitur Lead Generator sedang dalam pengembangan dan akan segera tersedia.",
+                            });
+                          });
                         } else if (service.route !== '#') {
                           navigate(service.route);
                         }
                       }}
                       className={`w-full bg-gradient-to-r ${service.color} hover:opacity-90 text-white font-semibold text-sm py-2.5 px-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border-0 relative overflow-hidden group/btn`}
-                      disabled={service.route === '#'}
+                      disabled={service.route === '#' || service.route === 'coming-soon'}
                     >
                       {/* Button Glow Effect */}
                       <div className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
