@@ -11,80 +11,91 @@ const Services = () => {
     {
       icon: Bot,
       title: 'AI System Creation',
-      subtitle: 'AI Marketing Agent',
+      subtitle: 'AI Marketing Agent Team',
       description: 'Complete AI marketing agent workflow that effectively replaces a full content team at a fraction of the cost through intelligent automation.',
       features: [
-        'Daily AI Industry Newsletter Writing',
-        'Custom Brand-Aligned Image Generation',
-        'Twitter Thread Content Repurposing',
-        'Viral Short-Form Video Script Creation',
-        'Avatar-Style Talking Head Video Production',
-        'Deep Content Research & Email Reports'
+        'Penulisan Newsletter Harian Industri AI',
+        'Pembuatan Gambar Custom Sesuai Brand',
+        'Repurpose Konten ke Twitter Thread',
+        'Script Video Viral untuk TikTok & Reels',
+        'Video Avatar-Style untuk Promosi',
+        'Riset Konten Mendalam + Laporan Email'
       ],
-      color: 'from-purple-500 to-purple-600',
-      bgColor: 'from-purple-50 to-purple-100',
+      color: 'from-purple-500 via-purple-600 to-indigo-600',
+      bgColor: 'from-purple-50 to-indigo-100',
+      glowColor: 'shadow-purple-500/20',
       hasButton: true,
-      buttonText: 'Get AI Agent',
-      route: '#' // Placeholder for now
+      buttonText: 'Buat AI Agent',
+      route: '/ai-marketing-agent'
     },
     {
       icon: Palette,
       title: 'Graphic Design',
       subtitle: 'Visual Identity',
-      description: 'Logo, feed templates, packaging, and visual identity for products/services to build a strong and memorable brand.',
+      description: 'Logo, feed templates, packaging, dan identitas visual untuk produk/layanan guna membangun brand yang kuat dan berkesan.',
       features: [
-        'Logo Design',
-        'Feed Template',
-        'Packaging Design',
-        'Product/Service Visual Identity'
+        'Desain Logo Profesional',
+        'Template Feed Media Sosial',
+        'Desain Kemasan Produk',
+        'Identitas Visual Produk/Layanan'
       ],
-      color: 'from-brand-blue-500 to-brand-blue-600',
-      bgColor: 'from-brand-blue-50 to-brand-blue-100',
-      hasButton: false
+      color: 'from-blue-500 via-blue-600 to-cyan-600',
+      bgColor: 'from-blue-50 to-cyan-100',
+      glowColor: 'shadow-blue-500/20',
+      hasButton: true,
+      buttonText: 'Mulai Desain',
+      route: '/graphic-design'
     },
     {
       icon: Video,
       title: 'Content Creation',
       subtitle: 'Visual Storytelling',
-      description: 'Video reels, product cinematography, catalog photography, behind-the-scenes, and high-quality visual storytelling.',
+      description: 'Video reels, sinematografi produk, fotografi katalog, behind-the-scenes, dan storytelling visual berkualitas tinggi.',
       features: [
-        'Video Reels',
-        'Product Cinematography',
-        'Catalog Photography',
+        'Video Reels Profesional',
+        'Sinematografi Produk',
+        'Fotografi Katalog',
         'Behind-the-scenes & Storytelling'
       ],
-      color: 'from-brand-orange-500 to-brand-orange-600',
-      bgColor: 'from-brand-orange-50 to-brand-orange-100',
-      hasButton: false
+      color: 'from-orange-500 via-red-500 to-pink-600',
+      bgColor: 'from-orange-50 to-pink-100',
+      glowColor: 'shadow-orange-500/20',
+      hasButton: true,
+      buttonText: 'Buat Konten',
+      route: '/content-creation'
     },
     {
       icon: Instagram,
-      title: 'Endorsement/Influencer Marketing',
+      title: 'Endorsement Marketing',
       subtitle: 'Strategic Partnership',
-      description: 'Partnership strategies with micro and nano influencers for natural and effective SME promotion.',
+      description: 'Strategi kemitraan dengan micro dan nano influencer untuk promosi UMKM yang natural dan efektif.',
       features: [
-        'Micro Influencer Partnership',
-        'Nano Influencer Strategy',
-        'Natural Promotion Campaign',
-        'UMKM-focused Marketing'
+        'Kemitraan Micro Influencer',
+        'Strategi Nano Influencer',
+        'Kampanye Promosi Natural',
+        'Marketing Fokus UMKM'
       ],
-      color: 'from-brand-blue-500 to-brand-orange-500',
-      bgColor: 'from-purple-50 to-pink-50',
-      hasButton: false
+      color: 'from-pink-500 via-rose-500 to-red-600',
+      bgColor: 'from-pink-50 to-rose-100',
+      glowColor: 'shadow-pink-500/20',
+      hasButton: true,
+      buttonText: 'Mulai Endorsement',
+      route: '/endorsement'
     },
     {
       icon: Target,
       title: 'Lead Generator',
       subtitle: 'Lead & Subscription',
-      description: 'Advanced lead generation system to find and convert high-quality prospects into subscribers and customers.',
+      description: 'Sistem lead generation canggih untuk menemukan dan mengkonversi prospek berkualitas tinggi menjadi subscriber dan customer.',
       features: [
         'AI-Powered Lead Discovery',
-        'Targeted Audience Research',
-        'Subscription Management',
-        'Conversion Optimization'
+        'Riset Audience Tertarget',
+        'Manajemen Subscription',
+        'Optimasi Konversi'
       ],
-      color: 'from-green-500 to-green-600',
-      bgColor: 'from-green-50 to-green-100',
+      color: 'from-emerald-500 via-green-500 to-teal-600',
+      bgColor: 'from-emerald-50 to-teal-100',
+      glowColor: 'shadow-emerald-500/20',
       hasButton: true,
       buttonText: 'Generate Leads',
       route: '/lead-generator'
@@ -113,63 +124,71 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {services.map((service, index) => (
             <Card 
               key={index} 
-              className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 border-0 bg-white/90 backdrop-blur-sm hover:bg-white"
+              className={`group relative overflow-hidden hover:shadow-2xl ${service.glowColor} transition-all duration-500 hover:-translate-y-2 border-0 bg-white/95 backdrop-blur-sm hover:bg-white cursor-pointer`}
               style={{ animationDelay: `${index * 100}ms` }}
+              onClick={() => service.route !== '#' && navigate(service.route)}
             >
               {/* Background Gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${service.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
               
+              {/* Floating Icon Background */}
+              <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"></div>
+              
               {/* Content */}
               <div className="relative z-10">
-                <CardHeader className="text-center pb-6">
-                  <div className="relative mb-6">
-                    <div className={`w-20 h-20 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg`}>
-                      <service.icon className="h-10 w-10 text-white" />
+                <CardHeader className="text-center pb-4">
+                  <div className="relative mb-4">
+                    <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg group-hover:shadow-2xl`}>
+                      <service.icon className="h-8 w-8 text-white drop-shadow-lg" />
                     </div>
-                    {/* Decorative rings */}
-                    <div className="absolute inset-0 w-20 h-20 mx-auto rounded-2xl border-2 border-gray-200 group-hover:scale-125 group-hover:border-transparent transition-all duration-500"></div>
-                    <div className="absolute inset-0 w-20 h-20 mx-auto rounded-2xl border border-gray-100 group-hover:scale-150 group-hover:border-transparent transition-all duration-700"></div>
+                    {/* Glow Effect */}
+                    <div className={`absolute inset-0 w-16 h-16 mx-auto rounded-xl bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500`}></div>
                   </div>
-                  <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-gray-800 transition-colors">
+                  <CardTitle className="text-lg font-bold text-gray-900 group-hover:text-gray-800 transition-colors leading-tight">
                     {service.title}
                   </CardTitle>
-                  <CardDescription className="text-brand-orange-500 font-semibold text-sm">
+                  <CardDescription className={`bg-gradient-to-r ${service.color} bg-clip-text text-transparent font-semibold text-sm`}>
                     {service.subtitle}
                   </CardDescription>
                 </CardHeader>
                 
-                <CardContent className="space-y-6">
-                  <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors">
+                <CardContent className="space-y-4 px-4 pb-6">
+                  <p className="text-gray-600 text-xs leading-relaxed group-hover:text-gray-700 transition-colors line-clamp-3">
                     {service.description}
                   </p>
-                  <ul className="space-y-3">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-700 group-hover:text-gray-800 transition-colors">
-                        <div className="w-2 h-2 bg-brand-blue-500 rounded-full mr-3 flex-shrink-0 group-hover:scale-125 transition-transform"></div>
-                        {feature}
+                  <ul className="space-y-2">
+                    {service.features.slice(0, 3).map((feature, idx) => (
+                      <li key={idx} className="flex items-center text-xs text-gray-700 group-hover:text-gray-800 transition-colors">
+                        <div className={`w-1.5 h-1.5 bg-gradient-to-r ${service.color} rounded-full mr-2 flex-shrink-0 group-hover:scale-125 transition-transform`}></div>
+                        <span className="line-clamp-1">{feature}</span>
                       </li>
                     ))}
+                    {service.features.length > 3 && (
+                      <li className="text-xs text-gray-500 italic">+{service.features.length - 3} fitur lainnya</li>
+                    )}
                   </ul>
                   
-                  {/* Action Button or Hover Effect */}
-                  <div className="pt-4">
-                    {service.hasButton ? (
-                      <Button 
-                        onClick={() => service.route !== '#' && navigate(service.route)}
-                        className={`w-full bg-gradient-to-r ${service.color} hover:opacity-90 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105`}
-                        disabled={service.route === '#'}
-                      >
+                  {/* Modern Navigation Button */}
+                  <div className="pt-3">
+                    <Button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        service.route !== '#' && navigate(service.route);
+                      }}
+                      className={`w-full bg-gradient-to-r ${service.color} hover:opacity-90 text-white font-semibold text-sm py-2.5 px-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border-0 relative overflow-hidden group/btn`}
+                      disabled={service.route === '#'}
+                    >
+                      {/* Button Glow Effect */}
+                      <div className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                      <span className="relative z-10 flex items-center justify-center gap-2">
                         {service.buttonText}
-                      </Button>
-                    ) : (
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="w-full h-1 bg-gradient-to-r from-brand-blue-500 to-brand-orange-500 rounded-full"></div>
-                      </div>
-                    )}
+                        <service.icon className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                      </span>
+                    </Button>
                   </div>
                 </CardContent>
               </div>
