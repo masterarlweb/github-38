@@ -26,7 +26,7 @@ const Services = () => {
       glowColor: 'shadow-purple-500/20',
       hasButton: true,
       buttonText: 'Order Sekarang',
-      route: '/order-ai-agent'
+      route: '/order-agent'
     },
     {
       icon: Palette,
@@ -44,7 +44,7 @@ const Services = () => {
       glowColor: 'shadow-blue-500/20',
       hasButton: true,
       buttonText: 'Lihat Paket',
-      route: '/pricing-graphic-design'
+      route: '#pricing'
     },
     {
       icon: Video,
@@ -62,7 +62,7 @@ const Services = () => {
       glowColor: 'shadow-orange-500/20',
       hasButton: true,
       buttonText: 'Lihat Paket',
-      route: '/pricing-content-creation'
+      route: '#pricing'
     },
     {
       icon: Instagram,
@@ -80,7 +80,7 @@ const Services = () => {
       glowColor: 'shadow-pink-500/20',
       hasButton: true,
       buttonText: 'Lihat Paket',
-      route: '/pricing-endorsement'
+      route: '#pricing'
     },
     {
       icon: Target,
@@ -130,7 +130,14 @@ const Services = () => {
               key={index} 
               className={`group relative overflow-hidden hover:shadow-2xl ${service.glowColor} transition-all duration-500 hover:-translate-y-2 border-0 bg-white/95 backdrop-blur-sm hover:bg-white cursor-pointer`}
               style={{ animationDelay: `${index * 100}ms` }}
-              onClick={() => service.route !== '#' && navigate(service.route)}
+                onClick={() => {
+                  if (service.route.startsWith('#')) {
+                    const element = document.querySelector(service.route);
+                    element?.scrollIntoView({ behavior: 'smooth' });
+                  } else if (service.route !== '#') {
+                    navigate(service.route);
+                  }
+                }}
             >
               {/* Background Gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${service.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
@@ -177,7 +184,12 @@ const Services = () => {
                     <Button 
                       onClick={(e) => {
                         e.stopPropagation();
-                        service.route !== '#' && navigate(service.route);
+                        if (service.route.startsWith('#')) {
+                          const element = document.querySelector(service.route);
+                          element?.scrollIntoView({ behavior: 'smooth' });
+                        } else if (service.route !== '#') {
+                          navigate(service.route);
+                        }
                       }}
                       className={`w-full bg-gradient-to-r ${service.color} hover:opacity-90 text-white font-semibold text-sm py-2.5 px-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border-0 relative overflow-hidden group/btn`}
                       disabled={service.route === '#'}
