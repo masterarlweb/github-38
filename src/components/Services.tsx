@@ -25,8 +25,8 @@ const Services = () => {
       bgColor: 'from-purple-50 to-indigo-100',
       glowColor: 'shadow-purple-500/20',
       hasButton: true,
-      buttonText: 'Buat AI Agent',
-      route: '/ai-marketing-agent'
+      buttonText: 'Order Sekarang',
+      route: '/order-ai-agent'
     },
     {
       icon: Palette,
@@ -43,8 +43,8 @@ const Services = () => {
       bgColor: 'from-blue-50 to-cyan-100',
       glowColor: 'shadow-blue-500/20',
       hasButton: true,
-      buttonText: 'Mulai Desain',
-      route: '/graphic-design'
+      buttonText: 'Lihat Paket',
+      route: '/pricing-graphic-design'
     },
     {
       icon: Video,
@@ -61,8 +61,8 @@ const Services = () => {
       bgColor: 'from-orange-50 to-pink-100',
       glowColor: 'shadow-orange-500/20',
       hasButton: true,
-      buttonText: 'Buat Konten',
-      route: '/content-creation'
+      buttonText: 'Lihat Paket',
+      route: '/pricing-content-creation'
     },
     {
       icon: Instagram,
@@ -79,8 +79,8 @@ const Services = () => {
       bgColor: 'from-pink-50 to-rose-100',
       glowColor: 'shadow-pink-500/20',
       hasButton: true,
-      buttonText: 'Mulai Endorsement',
-      route: '/endorsement'
+      buttonText: 'Lihat Paket',
+      route: '/pricing-endorsement'
     },
     {
       icon: Target,
