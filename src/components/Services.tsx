@@ -7,13 +7,15 @@ const Services = () => {
     {
       icon: Bot,
       title: 'AI System Creation',
-      subtitle: 'Automation & Intelligence',
-      description: 'Custom AI systems for business automation, chatbots, and intelligent solutions that improve operational efficiency.',
+      subtitle: 'AI Marketing Agent',
+      description: 'Complete AI marketing agent workflow that effectively replaces a full content team at a fraction of the cost through intelligent automation.',
       features: [
-        'Custom AI System Development',
-        'Business Process Automation',
-        'Intelligent Chatbot Creation',
-        'AI Consultation & Strategy'
+        'Daily AI Industry Newsletter Writing',
+        'Custom Brand-Aligned Image Generation',
+        'Twitter Thread Content Repurposing',
+        'Viral Short-Form Video Script Creation',
+        'Avatar-Style Talking Head Video Production',
+        'Deep Content Research & Email Reports'
       ],
       color: 'from-purple-500 to-purple-600',
       bgColor: 'from-purple-50 to-purple-100'
