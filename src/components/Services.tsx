@@ -1,8 +1,12 @@
 
-import { Instagram, Video, Camera, Palette, Bot } from 'lucide-react';
+import { Instagram, Video, Camera, Palette, Bot, Target } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
+  const navigate = useNavigate();
+
   const services = [
     {
       icon: Bot,
@@ -18,7 +22,10 @@ const Services = () => {
         'Deep Content Research & Email Reports'
       ],
       color: 'from-purple-500 to-purple-600',
-      bgColor: 'from-purple-50 to-purple-100'
+      bgColor: 'from-purple-50 to-purple-100',
+      hasButton: true,
+      buttonText: 'Get AI Agent',
+      route: '#' // Placeholder for now
     },
     {
       icon: Palette,
@@ -32,7 +39,8 @@ const Services = () => {
         'Product/Service Visual Identity'
       ],
       color: 'from-brand-blue-500 to-brand-blue-600',
-      bgColor: 'from-brand-blue-50 to-brand-blue-100'
+      bgColor: 'from-brand-blue-50 to-brand-blue-100',
+      hasButton: false
     },
     {
       icon: Video,
@@ -46,7 +54,8 @@ const Services = () => {
         'Behind-the-scenes & Storytelling'
       ],
       color: 'from-brand-orange-500 to-brand-orange-600',
-      bgColor: 'from-brand-orange-50 to-brand-orange-100'
+      bgColor: 'from-brand-orange-50 to-brand-orange-100',
+      hasButton: false
     },
     {
       icon: Instagram,
@@ -60,7 +69,25 @@ const Services = () => {
         'UMKM-focused Marketing'
       ],
       color: 'from-brand-blue-500 to-brand-orange-500',
-      bgColor: 'from-purple-50 to-pink-50'
+      bgColor: 'from-purple-50 to-pink-50',
+      hasButton: false
+    },
+    {
+      icon: Target,
+      title: 'Lead Generator',
+      subtitle: 'Lead & Subscription',
+      description: 'Advanced lead generation system to find and convert high-quality prospects into subscribers and customers.',
+      features: [
+        'AI-Powered Lead Discovery',
+        'Targeted Audience Research',
+        'Subscription Management',
+        'Conversion Optimization'
+      ],
+      color: 'from-green-500 to-green-600',
+      bgColor: 'from-green-50 to-green-100',
+      hasButton: true,
+      buttonText: 'Generate Leads',
+      route: '/lead-generator'
     }
   ];
 
@@ -128,9 +155,21 @@ const Services = () => {
                     ))}
                   </ul>
                   
-                  {/* Hover effect button */}
-                  <div className="pt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-full h-1 bg-gradient-to-r from-brand-blue-500 to-brand-orange-500 rounded-full"></div>
+                  {/* Action Button or Hover Effect */}
+                  <div className="pt-4">
+                    {service.hasButton ? (
+                      <Button 
+                        onClick={() => service.route !== '#' && navigate(service.route)}
+                        className={`w-full bg-gradient-to-r ${service.color} hover:opacity-90 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105`}
+                        disabled={service.route === '#'}
+                      >
+                        {service.buttonText}
+                      </Button>
+                    ) : (
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="w-full h-1 bg-gradient-to-r from-brand-blue-500 to-brand-orange-500 rounded-full"></div>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </div>
