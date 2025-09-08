@@ -99,7 +99,13 @@ const Hero = () => {
                         onClick={(e) => {
                           e.preventDefault();
                           console.log('Button clicked!');
-                          navigate('/lead-generator');
+                          // Show coming soon toast instead of navigating
+                          import('@/hooks/use-toast').then(({ toast }) => {
+                            toast({
+                              title: "Coming Soon! 🚀",
+                              description: "Fitur Lead Generator sedang dalam pengembangan dan akan segera tersedia.",
+                            });
+                          });
                         }}
                         className="relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 group/btn overflow-hidden text-lg z-10"
                         size="lg"
