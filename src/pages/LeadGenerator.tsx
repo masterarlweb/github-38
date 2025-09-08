@@ -48,8 +48,8 @@ const LeadGenerator = () => {
       });
 
       toast({
-        title: "Lead Generation Started",
-        description: "Your lead generation request has been sent successfully. Check your n8n workflow for results.",
+        title: "Subscription Required",
+        description: "Untuk mengakses hasil prospek yang dihasilkan, silakan subscribe ke layanan Kontenih terlebih dahulu.",
       });
       
     } catch (error) {
@@ -83,8 +83,13 @@ const LeadGenerator = () => {
               <span className="gradient-text">AI Lead Generator</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Generate qualified leads for your business using our AI-powered lead generation tool
+              Powerful lead magnet tool untuk menarik calon customer berkualitas tinggi menggunakan AI
             </p>
+            <div className="mt-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl max-w-lg mx-auto">
+              <p className="text-sm text-amber-800 text-center font-medium">
+                ⚠️ Subscription ke Kontenih diperlukan untuk mengakses hasil prospek yang dihasilkan
+              </p>
+            </div>
           </div>
         </div>
       </header>
@@ -101,7 +106,7 @@ const LeadGenerator = () => {
                   Lead Generation Setup
                 </CardTitle>
                 <CardDescription>
-                  Fill in your business details to generate targeted leads
+                  Isi detail bisnis Anda untuk menghasilkan prospek yang tepat sasaran
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -211,7 +216,7 @@ const LeadGenerator = () => {
                     {isLoading ? (
                       <>
                         <Loader2 className="mr-3 h-5 w-5 animate-spin" />
-                        Processing Request...
+                        Memproses permintaan subscription...
                       </>
                     ) : (
                       <>
@@ -222,6 +227,10 @@ const LeadGenerator = () => {
                     )}
                   </span>
                 </Button>
+                
+                <p className="text-xs text-gray-500 text-center mt-2 font-medium">
+                  🔒 Subscription required to unlock generated leads
+                </p>
               </CardContent>
             </Card>
 

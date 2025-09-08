@@ -85,13 +85,13 @@ const Services = () => {
     {
       icon: Target,
       title: 'Lead Generator',
-      subtitle: 'Lead & Subscription',
-      description: 'Sistem lead generation canggih untuk menemukan dan mengkonversi prospek berkualitas tinggi menjadi subscriber dan customer.',
+      subtitle: 'Lead Magnet Tool',
+      description: 'Powerful lead magnet untuk menarik calon customer berkualitas tinggi. Tool AI ini membantu bisnis menemukan prospek tepat sasaran dengan data akurat.',
       features: [
         'AI-Powered Lead Discovery',
         'Riset Audience Tertarget',
-        'Manajemen Subscription',
-        'Optimasi Konversi'
+        'Data Prospek Berkualitas',
+        'Export Siap Pakai'
       ],
       color: 'from-emerald-500 via-green-500 to-teal-600',
       bgColor: 'from-emerald-50 to-teal-100',
