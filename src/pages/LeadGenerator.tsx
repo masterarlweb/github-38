@@ -48,8 +48,8 @@ const LeadGenerator = () => {
       });
 
       toast({
-        title: "Subscription Required",
-        description: "Untuk mengakses hasil prospek yang dihasilkan, silakan subscribe ke layanan Kontenih terlebih dahulu.",
+        title: "Lead Generation Started! 🚀",
+        description: "Your lead generation request has been sent successfully. Processing your criteria now.",
       });
       
     } catch (error) {
@@ -85,9 +85,9 @@ const LeadGenerator = () => {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Powerful lead magnet tool untuk menarik calon customer berkualitas tinggi menggunakan AI
             </p>
-            <div className="mt-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl max-w-lg mx-auto">
-              <p className="text-sm text-amber-800 text-center font-medium">
-                ⚠️ Subscription ke Kontenih diperlukan untuk mengakses hasil prospek yang dihasilkan
+            <div className="mt-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl max-w-lg mx-auto">
+              <p className="text-sm text-green-800 text-center font-medium">
+                ✅ Ready to generate high-quality leads with AI targeting
               </p>
             </div>
           </div>
@@ -216,7 +216,7 @@ const LeadGenerator = () => {
                     {isLoading ? (
                       <>
                         <Loader2 className="mr-3 h-5 w-5 animate-spin" />
-                        Memproses permintaan subscription...
+                        Processing lead generation...
                       </>
                     ) : (
                       <>
@@ -229,7 +229,7 @@ const LeadGenerator = () => {
                 </Button>
                 
                 <p className="text-xs text-gray-500 text-center mt-2 font-medium">
-                  🔒 Subscription required to unlock generated leads
+                  🎯 AI-powered lead generation ready to launch
                 </p>
               </CardContent>
             </Card>
