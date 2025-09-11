@@ -40,7 +40,12 @@ const LeadGenerator = () => {
         },
         mode: 'no-cors',
         body: JSON.stringify({
-          ...formData,
+          jobTitle: formData.jobTitle,
+          location: formData.location,
+          employeeSize: formData.employeeSize,
+          emailStatus: formData.emailStatus,
+          industryKeyword: formData.industry,
+          numberOfLeads: formData.numberOfLeads,
           timestamp: new Date().toISOString(),
           source: 'AI Lead Generator',
           triggered_from: window.location.origin,
