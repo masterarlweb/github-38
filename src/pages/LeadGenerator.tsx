@@ -4,7 +4,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Download, Users, Target, TrendingUp, Loader2 } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { ArrowLeft, Download, Users, Target, TrendingUp, Loader2, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 
@@ -12,6 +13,7 @@ const LeadGenerator = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [plainText, setPlainText] = useState('');
   const [formData, setFormData] = useState({
     jobTitle: '',
     location: '',
@@ -20,6 +22,109 @@ const LeadGenerator = () => {
     industry: '',
     numberOfLeads: ''
   });
+
+  const parsePlainText = () => {
+    if (!plainText.trim()) {
+      toast({
+        title: "No text to parse",
+        description: "Please enter some text to parse lead criteria from.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const text = plainText.toLowerCase();
+    const parsed = { ...formData };
+
+    // Parse job titles
+    const jobTitlePatterns = [
+      /job title[:\s]+([^\n,]+)/i,
+      /position[:\s]+([^\n,]+)/i,
+      /role[:\s]+([^\n,]+)/i,
+      /(ceo|cto|cfo|manager|director|lead|head|vp|president|founder|owner)/i
+    ];
+    
+    for (const pattern of jobTitlePatterns) {
+      const match = plainText.match(pattern);
+      if (match) {
+        parsed.jobTitle = match[1]?.trim() || match[0]?.trim();
+        break;
+      }
+    }
+
+    // Parse location
+    const locationPatterns = [
+      /location[:\s]+([^\n,]+)/i,
+      /based in[:\s]+([^\n,]+)/i,
+      /from[:\s]+([^\n,]+)/i
+    ];
+    
+    for (const pattern of locationPatterns) {
+      const match = plainText.match(pattern);
+      if (match) {
+        parsed.location = match[1]?.trim();
+        break;
+      }
+    }
+
+    // Parse employee size
+    if (text.includes('1-10') || text.includes('startup') || text.includes('small')) {
+      parsed.employeeSize = '1-10';
+    } else if (text.includes('11-50') || text.includes('medium')) {
+      parsed.employeeSize = '11-50';
+    } else if (text.includes('51-200')) {
+      parsed.employeeSize = '51-200';
+    } else if (text.includes('201-500')) {
+      parsed.employeeSize = '201-500';
+    } else if (text.includes('501-1000') || text.includes('large')) {
+      parsed.employeeSize = '501-1000';
+    } else if (text.includes('1000+') || text.includes('enterprise')) {
+      parsed.employeeSize = '1000+';
+    }
+
+    // Parse email status
+    if (text.includes('verified email') || text.includes('verified only')) {
+      parsed.emailStatus = 'verified';
+    } else if (text.includes('business email')) {
+      parsed.emailStatus = 'business';
+    } else if (text.includes('personal email')) {
+      parsed.emailStatus = 'personal';
+    } else {
+      parsed.emailStatus = 'all';
+    }
+
+    // Parse industry
+    const industries = [
+      'technology', 'healthcare', 'finance', 'education', 'ecommerce', 
+      'manufacturing', 'real-estate', 'consulting', 'marketing', 'retail'
+    ];
+    
+    for (const industry of industries) {
+      if (text.includes(industry) || text.includes(industry.replace('-', ' '))) {
+        parsed.industry = industry;
+        break;
+      }
+    }
+
+    // Parse number of leads
+    const numberMatch = plainText.match(/(\d+)\s*(leads?|prospects?|contacts?)/i);
+    if (numberMatch) {
+      const number = numberMatch[1];
+      if (number <= '50') parsed.numberOfLeads = '50';
+      else if (number <= '100') parsed.numberOfLeads = '100';
+      else if (number <= '250') parsed.numberOfLeads = '250';
+      else if (number <= '500') parsed.numberOfLeads = '500';
+      else if (number <= '1000') parsed.numberOfLeads = '1000';
+      else parsed.numberOfLeads = 'custom';
+    }
+
+    setFormData(parsed);
+    
+    toast({
+      title: "Text parsed successfully! 🎯",
+      description: "Lead criteria have been extracted and filled in the form fields.",
+    });
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -115,6 +220,44 @@ const LeadGenerator = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
+                {/* Plain Text Parser */}
+                <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-blue-800">
+                      <FileText className="h-4 w-4" />
+                      Plain Text Parser
+                    </CardTitle>
+                    <CardDescription className="text-blue-600 text-sm">
+                      Paste text containing lead criteria and let AI extract the information automatically
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <Textarea
+                      placeholder="Example: Looking for CEOs in technology companies with 50-200 employees based in New York. Need 500 verified business email leads..."
+                      value={plainText}
+                      onChange={(e) => setPlainText(e.target.value)}
+                      className="min-h-[80px] bg-white/80 border-blue-200 focus:border-blue-400 focus:ring-blue-400"
+                    />
+                    <Button 
+                      onClick={parsePlainText}
+                      variant="outline"
+                      className="w-full border-blue-300 text-blue-700 hover:bg-blue-50"
+                      disabled={!plainText.trim()}
+                    >
+                      <FileText className="mr-2 h-4 w-4" />
+                      Parse Lead Criteria
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t border-gray-200" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-white px-2 text-gray-500">Or fill manually</span>
+                  </div>
+                </div>
                 <div className="space-y-2">
                   <Label htmlFor="jobTitle" className="text-gray-800 font-semibold">Job Title</Label>
                   <Input
