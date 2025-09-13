@@ -218,38 +218,65 @@ const LeadGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-blue-50 to-brand-orange-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="pt-8 pb-4 px-4 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <Button 
             variant="ghost" 
             onClick={() => navigate('/')}
-            className="mb-4 hover:bg-white/80"
+            className="mb-4"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Button>
           
           <div className="text-center space-y-4">
-            <h1 className="text-4xl lg:text-5xl font-bold">
-              <span className="gradient-text">AI Lead Generator</span>
+            <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
+              AI Lead Generator
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Powerful lead magnet tool untuk menarik calon customer berkualitas tinggi menggunakan AI
             </p>
-            <div className="mt-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl max-w-lg mx-auto">
-              <p className="text-sm text-green-800 text-center font-medium">
-                ✅ Ready to generate high-quality leads with AI targeting
-              </p>
-            </div>
           </div>
         </div>
       </header>
 
+      {/* Stats Section */}
+      <section className="px-4 lg:px-8 pb-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <Card className="text-center p-6">
+              <CardContent className="pt-0">
+                <div className="text-2xl font-bold text-primary">2,847</div>
+                <div className="text-sm text-muted-foreground">Total Leads Generated</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center p-6">
+              <CardContent className="pt-0">
+                <div className="text-2xl font-bold text-primary">15%</div>
+                <div className="text-sm text-muted-foreground">Conversion Rate</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center p-6">
+              <CardContent className="pt-0">
+                <div className="text-2xl font-bold text-primary">24h</div>
+                <div className="text-sm text-muted-foreground">Avg Response Time</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center p-6">
+              <CardContent className="pt-0">
+                <div className="text-2xl font-bold text-primary">98%</div>
+                <div className="text-sm text-muted-foreground">Email Accuracy</div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content */}
       <main className="px-4 lg:px-8 pb-20">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Lead Generation Form */}
             <Card className="bg-white/80 backdrop-blur-sm border-white/20 shadow-xl">
