@@ -130,7 +130,36 @@ const LeadGenerator = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const validateForm = () => {
+    const errors = [];
+    
+    if (!formData.jobTitle.trim()) {
+      errors.push("Job Title is required");
+    }
+    
+    if (!formData.location.trim()) {
+      errors.push("Location is required");
+    }
+    
+    if (!formData.numberOfLeads) {
+      errors.push("Number of Leads is required");
+    }
+    
+    return errors;
+  };
+
   const generateLeads = async () => {
+    // Validate required fields
+    const validationErrors = validateForm();
+    if (validationErrors.length > 0) {
+      toast({
+        title: "Form Validation Error",
+        description: validationErrors.join(", "),
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
     
     try {
@@ -157,16 +186,28 @@ const LeadGenerator = () => {
         }),
       });
 
+      // Success notification
       toast({
         title: "Lead Generation Started! 🚀",
         description: "Your lead generation request has been sent successfully. Processing your criteria now.",
       });
+
+      // Reset form after successful submission
+      setFormData({
+        jobTitle: '',
+        location: '',
+        employeeSize: '',
+        emailStatus: '',
+        industry: '',
+        numberOfLeads: ''
+      });
+      setPlainText('');
       
     } catch (error) {
       console.error('Error sending data to webhook:', error);
       toast({
-        title: "Error",
-        description: "Failed to start lead generation. Please try again.",
+        title: "Error occurred",
+        description: "Failed to start lead generation. Please check your connection and try again.",
         variant: "destructive",
       });
     } finally {
@@ -353,8 +394,8 @@ const LeadGenerator = () => {
 
                 <Button 
                   onClick={generateLeads}
-                  className="w-full relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden"
-                  disabled={!formData.jobTitle || !formData.industry || !formData.numberOfLeads || isLoading}
+                  className="w-full relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-1 group overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  disabled={isLoading}
                   size="lg"
                 >
                   {/* Button glow effect */}
