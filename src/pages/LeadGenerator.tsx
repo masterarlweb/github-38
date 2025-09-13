@@ -172,7 +172,6 @@ const LeadGenerator = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        mode: 'no-cors',
         body: JSON.stringify({
           leadCriteria: {
             jobTitle: formData.jobTitle,
