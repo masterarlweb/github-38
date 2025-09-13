@@ -174,7 +174,7 @@ const LeadGenerator = () => {
         },
         mode: 'no-cors',
         body: JSON.stringify({
-          leadcriteria: {
+          leadCriteria: {
             jobTitle: formData.jobTitle,
             location: formData.location,
             employeeSize: formData.employeeSize,
