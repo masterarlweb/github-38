@@ -138,15 +138,6 @@ const LeadGenerator = () => {
       
       const webhookUrl = 'https://n8n-rphgibnj.us-east-1.clawcloudrun.com/webhook-test/ff28eb36-c32d-4989-954c-b932bee7b495';
       
-      const leadCriteria = {
-        jobTitle: formData.jobTitle,
-        location: formData.location,
-        employeeSize: formData.employeeSize,
-        emailStatus: formData.emailStatus,
-        industryKeyword: formData.industry,
-        numberOfLeads: formData.numberOfLeads
-      };
-
       const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: {
@@ -154,8 +145,12 @@ const LeadGenerator = () => {
         },
         mode: 'no-cors',
         body: JSON.stringify({
-          ...leadCriteria,
-          leadcriteria: leadCriteria,
+          jobTitle: formData.jobTitle,
+          location: formData.location,
+          employeeSize: formData.employeeSize,
+          emailStatus: formData.emailStatus,
+          industryKeyword: formData.industry,
+          numberOfLeads: formData.numberOfLeads,
           timestamp: new Date().toISOString(),
           source: 'AI Lead Generator',
           triggered_from: window.location.origin,
