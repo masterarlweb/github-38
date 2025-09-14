@@ -320,7 +320,7 @@ const OrderAgent = () => {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-4">
-                  {agentFeatures[agentType].map((feature, index) => (
+                  {(agentFeatures[agentType] || []).map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
                       <span className="text-purple-800 font-medium">{feature}</span>
