@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Bot, Send, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Bot, Send, CheckCircle, Phone, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -12,6 +12,7 @@ const OrderAgent = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [agentType, setAgentType] = useState<'marketing' | 'receptionist'>('marketing');
   const [formData, setFormData] = useState({
     companyName: '',
     contactName: '',
@@ -69,14 +70,24 @@ const OrderAgent = () => {
     }
   };
 
-  const agentFeatures = [
-    'Penulisan newsletter harian industri AI',
-    'Pembuatan gambar custom sesuai brand',
-    'Repurpose konten ke Twitter thread',
-    'Script video viral untuk TikTok & Reels',
-    'Video avatar-style untuk promosi',
-    'Riset konten mendalam + laporan email'
-  ];
+  const agentFeatures = {
+    marketing: [
+      'Penulisan newsletter harian industri AI',
+      'Pembuatan gambar custom sesuai brand',
+      'Repurpose konten ke Twitter thread',
+      'Script video viral untuk TikTok & Reels',
+      'Video avatar-style untuk promosi',
+      'Riset konten mendalam + laporan email'
+    ],
+    receptionist: [
+      'Penjawaban telepon otomatis 24/7',
+      'Penjadwalan appointment dan meeting',
+      'Screening panggilan dan routing calls',
+      'Informasi produk dan layanan perusahaan',
+      'Follow-up leads dan customer service',
+      'Integrasi dengan CRM dan calendar'
+    ]
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-purple-50/30">
@@ -98,7 +109,7 @@ const OrderAgent = () => {
                 <Bot className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Order AI Marketing Agent</h1>
+                <h1 className="text-xl font-bold text-gray-900">Order AI Agent</h1>
                 <p className="text-sm text-gray-600">Transformasi Digital dengan AI</p>
               </div>
             </div>
@@ -121,6 +132,44 @@ const OrderAgent = () => {
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Agent Type Selection */}
+                <div className="space-y-4">
+                  <Label className="text-base font-semibold">Pilih Jenis AI Agent *</Label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setAgentType('marketing')}
+                      className={`p-4 border-2 rounded-xl text-left transition-all ${
+                        agentType === 'marketing'
+                          ? 'border-purple-500 bg-purple-50'
+                          : 'border-gray-200 hover:border-purple-300'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <MessageSquare className="h-5 w-5 text-purple-600" />
+                        <span className="font-semibold">Marketing Agent</span>
+                      </div>
+                      <p className="text-sm text-gray-600">Otomatisasi konten dan kampanye marketing</p>
+                    </button>
+                    
+                    <button
+                      type="button"
+                      onClick={() => setAgentType('receptionist')}
+                      className={`p-4 border-2 rounded-xl text-left transition-all ${
+                        agentType === 'receptionist'
+                          ? 'border-purple-500 bg-purple-50'
+                          : 'border-gray-200 hover:border-purple-300'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <Phone className="h-5 w-5 text-purple-600" />
+                        <span className="font-semibold">Voice Receptionist</span>
+                      </div>
+                      <p className="text-sm text-gray-600">Penjawab telepon otomatis 24/7</p>
+                    </button>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="companyName">Nama Perusahaan *</Label>
@@ -259,16 +308,19 @@ const OrderAgent = () => {
             <Card className="shadow-xl bg-gradient-to-br from-purple-50 to-indigo-100 border-0">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-purple-900">
-                  <Bot className="h-8 w-8" />
-                  AI Marketing Agent Features
+                  {agentType === 'marketing' ? <MessageSquare className="h-8 w-8" /> : <Phone className="h-8 w-8" />}
+                  {agentType === 'marketing' ? 'AI Marketing Agent' : 'AI Voice Receptionist'} Features
                 </CardTitle>
                 <CardDescription className="text-purple-700">
-                  Workflow lengkap yang menggantikan tim konten dengan otomatisasi cerdas
+                  {agentType === 'marketing' 
+                    ? 'Workflow lengkap yang menggantikan tim konten dengan otomatisasi cerdas'
+                    : 'Sistem penjawab telepon cerdas yang melayani pelanggan 24/7'
+                  }
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-4">
-                  {agentFeatures.map((feature, index) => (
+                  {agentFeatures[agentType].map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <CheckCircle className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
                       <span className="text-purple-800 font-medium">{feature}</span>
