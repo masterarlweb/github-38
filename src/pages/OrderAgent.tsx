@@ -80,7 +80,7 @@ const OrderAgent = () => {
       'Riset konten mendalam + laporan email'
     ],
     receptionist: [
-      'Penjawaban telepon otomatis 24/7',
+      'Penjawaban telepon otomatis 24/7 dan penjadwalan Booking dll',
       'Penjadwalan appointment dan meeting',
       'Screening panggilan dan routing calls',
       'Informasi produk dan layanan perusahaan',
