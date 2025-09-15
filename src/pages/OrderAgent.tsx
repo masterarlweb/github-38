@@ -229,23 +229,33 @@ const OrderAgent = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="currentChallenges">Tantangan Marketing Saat Ini</Label>
+                  <Label htmlFor="currentChallenges">
+                    {agentType === 'marketing' ? 'Tantangan Marketing Saat Ini' : 'Tantangan Customer Service Saat Ini'}
+                  </Label>
                   <Textarea
                     id="currentChallenges"
                     value={formData.currentChallenges}
                     onChange={(e) => handleInputChange('currentChallenges', e.target.value)}
-                    placeholder="Ceritakan tantangan marketing yang sedang Anda hadapi..."
+                    placeholder={agentType === 'marketing' 
+                      ? "Ceritakan tantangan marketing yang sedang Anda hadapi..." 
+                      : "Ceritakan tantangan dalam menangani panggilan telepon dan customer service..."
+                    }
                     rows={3}
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="desiredFeatures">Fitur yang Diinginkan</Label>
+                  <Label htmlFor="desiredFeatures">
+                    {agentType === 'marketing' ? 'Fitur yang Diinginkan' : 'Kebutuhan Receptionist AI'}
+                  </Label>
                   <Textarea
                     id="desiredFeatures"
                     value={formData.desiredFeatures}
                     onChange={(e) => handleInputChange('desiredFeatures', e.target.value)}
-                    placeholder="Fitur AI agent mana yang paling Anda butuhkan?"
+                    placeholder={agentType === 'marketing'
+                      ? "Fitur AI agent mana yang paling Anda butuhkan?"
+                      : "Fitur receptionist AI apa yang paling Anda butuhkan? (penjadwalan, screening calls, dll.)"
+                    }
                     rows={3}
                   />
                 </div>
