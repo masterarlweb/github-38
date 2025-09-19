@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { MapPin, Phone, Mail, Instagram, MessageCircle, Zap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import GradientBlinds from '@/components/GradientBlinds';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -73,11 +74,25 @@ Please provide more information. Thank you!`;
   ];
 
   return (
-    <section id="contact" className="section-padding bg-gradient-to-br from-gray-50 via-white to-brand-blue-50/30 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.3),transparent_70%)]"></div>
-        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,rgba(249,115,22,0.3),transparent_70%)]"></div>
+    <section id="contact" className="section-padding relative overflow-hidden">
+      {/* GradientBlinds Background */}
+      <div className="absolute inset-0">
+        <GradientBlinds
+          className=""
+          dpr={undefined}
+          gradientColors={['#FF9FFC', '#5227FF']}
+          angle={90}
+          noise={0.1}
+          blindCount={20}
+          blindMinWidth={30}
+          spotlightRadius={0.4}
+          spotlightSoftness={2}
+          spotlightOpacity={0.5}
+          mouseDampening={0.25}
+          distortAmount={0.05}
+          shineDirection="right"
+          mixBlendMode="soft-light"
+        />
       </div>
 
       <div className="container-custom relative z-10">
