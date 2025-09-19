@@ -2,7 +2,6 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Palette, Video, Instagram } from 'lucide-react';
-import GradientBlinds from '@/components/GradientBlinds';
 
 const Gallery = () => {
   const graphicDesignPortfolio = [
@@ -68,28 +67,8 @@ const Gallery = () => {
   ];
 
   return (
-    <section id="gallery" className="section-padding relative overflow-hidden">
-      {/* GradientBlinds Background */}
-      <div className="absolute inset-0">
-        <GradientBlinds
-          className=""
-          dpr={undefined}
-          gradientColors={['#5227FF', '#FF9FFC']}
-          angle={120}
-          noise={0.25}
-          blindCount={10}
-          blindMinWidth={60}
-          spotlightRadius={0.6}
-          spotlightSoftness={1.2}
-          spotlightOpacity={0.7}
-          mouseDampening={0.3}
-          distortAmount={0.02}
-          shineDirection="left"
-          mixBlendMode="color-dodge"
-        />
-      </div>
-      
-      <div className="container-custom relative z-10">
+    <section id="gallery" className="section-padding gradient-bg">
+      <div className="container-custom">
         {/* Portfolio Section */}
         <div className="mb-20">
           <div className="text-center space-y-4 mb-16">

@@ -3,7 +3,6 @@ import { Instagram, Video, Camera, Palette, Bot, Target } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import GradientBlinds from '@/components/GradientBlinds';
 
 const Services = () => {
   const navigate = useNavigate();
@@ -105,28 +104,11 @@ const Services = () => {
 
   return (
     <section id="services" className="section-padding relative overflow-hidden">
-      {/* GradientBlinds Background */}
-      <div className="absolute inset-0">
-        <GradientBlinds
-          className=""
-          dpr={undefined}
-          gradientColors={['#5227FF', '#FF9FFC']}
-          angle={-30}
-          noise={0.4}
-          blindCount={16}
-          blindMinWidth={40}
-          spotlightRadius={0.7}
-          spotlightSoftness={0.8}
-          spotlightOpacity={0.6}
-          mouseDampening={0.1}
-          distortAmount={0.1}
-          shineDirection="left"
-          mixBlendMode="overlay"
-          animationPreset="wave"
-          autoRotate={false}
-          pulseEffect={true}
-          performanceMode={true}
-        />
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-brand-blue-50/30"></div>
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-brand-blue-500 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-brand-orange-500 rounded-full filter blur-3xl"></div>
       </div>
 
       <div className="container-custom relative z-10">

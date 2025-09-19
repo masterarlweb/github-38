@@ -5,55 +5,35 @@
 
 @layer base {
   :root {
-    /* Dark theme colors to match the reference */
-    --background: 222 15% 6%;  /* Very dark background */
-    --foreground: 0 0% 100%;   /* White text */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-    --card: 222 15% 8%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 222 15% 8%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 262 95% 55%;     /* Purple primary */
-    --primary-foreground: 0 0% 100%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 222 15% 12%;
-    --secondary-foreground: 0 0% 90%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 222 15% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 262 95% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 222 15% 15%;
-    --input: 222 15% 12%;
-    --ring: 262 95% 55%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
 
-    --radius: 0.75rem;
-
-    /* New twisted gradient theme colors */
-    --gradient-purple-start: 262 95% 55%;    /* Deep purple */
-    --gradient-purple-mid: 283 90% 65%;      /* Mid purple */
-    --gradient-purple-end: 309 85% 75%;      /* Light purple-pink */
-    --gradient-blue: 249 100% 58%;           /* Blue accent */
-    
-    /* Main theme gradients */
-    --twisted-gradient: linear-gradient(135deg, 
-      hsl(var(--gradient-purple-start)) 0%,
-      hsl(var(--gradient-purple-mid)) 40%,
-      hsl(var(--gradient-purple-end)) 100%);
-    
-    --ribbon-gradient: linear-gradient(145deg,
-      hsl(var(--gradient-purple-start)) 0%,
-      hsl(var(--gradient-blue)) 50%,
-      hsl(var(--gradient-purple-end)) 100%);
-    
-    --glow-purple: 0 0 40px hsl(var(--gradient-purple-start) / 0.4);
+    --radius: 0.5rem;
   }
 
   * {
@@ -71,49 +51,11 @@
 
 @layer components {
   .gradient-text {
-    background: var(--twisted-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 bg-clip-text text-transparent;
   }
 
   .gradient-bg {
-    background: var(--twisted-gradient);
-  }
-
-  /* Twisted ribbon effect */
-  .twisted-gradient {
-    background: var(--ribbon-gradient);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .twisted-gradient::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 150%;
-    height: 200%;
-    background: var(--ribbon-gradient);
-    transform: rotate(15deg) skewY(-5deg);
-    opacity: 0.8;
-    pointer-events: none;
-  }
-
-  .twisted-gradient::after {
-    content: '';
-    position: absolute;
-    top: -30%;
-    right: -30%;
-    width: 120%;
-    height: 160%;
-    background: linear-gradient(155deg,
-      hsl(var(--gradient-purple-mid)) 0%,
-      hsl(var(--gradient-purple-end)) 100%);
-    transform: rotate(25deg) skewY(-8deg);
-    opacity: 0.6;
-    pointer-events: none;
+    @apply bg-gradient-to-br from-brand-blue-50 to-brand-orange-50;
   }
 
   .section-padding {
@@ -128,17 +70,13 @@
     @apply transition-transform duration-300 hover:scale-105;
   }
 
-  /* Gradient Blinds Glass Effect */
+  /* Modern glass effect */
   .glass {
-    background: hsl(var(--blinds-primary) / 0.1);
-    backdrop-filter: blur(20px);
-    border: 1px solid hsl(var(--blinds-primary) / 0.2);
-    box-shadow: var(--blinds-glow);
+    @apply bg-white/20 backdrop-blur-lg border border-white/30;
   }
 
-  /* Enhanced gradient animation with blinds colors */
+  /* Enhanced gradient animation */
   .animate-gradient {
-    background: linear-gradient(135deg, hsl(var(--blinds-primary)), hsl(var(--blinds-secondary)), hsl(var(--blinds-accent)));
     background-size: 200% 200%;
     animation: gradient-shift 3s ease-in-out infinite;
   }
@@ -166,17 +104,17 @@
     }
   }
 
-  /* Blinds Glow Effect */
-  .blinds-glow {
-    animation: blinds-glow 2s ease-in-out infinite;
+  /* Pulse glow effect */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
   }
 
-  @keyframes blinds-glow {
+  @keyframes pulse-glow {
     0%, 100% {
-      box-shadow: 0 0 20px hsl(var(--blinds-primary) / 0.4);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
     }
     50% {
-      box-shadow: 0 0 40px hsl(var(--blinds-primary) / 0.8);
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
     }
   }
 

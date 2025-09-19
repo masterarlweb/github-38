@@ -1,6 +1,5 @@
 
 import { Target, Users, TrendingUp, Award } from 'lucide-react';
-import GradientBlinds from '@/components/GradientBlinds';
 
 const About = () => {
   const features = [
@@ -27,28 +26,8 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="section-padding relative overflow-hidden">
-      {/* GradientBlinds Background */}
-      <div className="absolute inset-0">
-        <GradientBlinds
-          className=""
-          dpr={undefined}
-          gradientColors={['#FF9FFC', '#5227FF']}
-          angle={45}
-          noise={0.2}
-          blindCount={8}
-          blindMinWidth={80}
-          spotlightRadius={0.3}
-          spotlightSoftness={1.5}
-          spotlightOpacity={0.8}
-          mouseDampening={0.2}
-          distortAmount={0}
-          shineDirection="right"
-          mixBlendMode="multiply"
-        />
-      </div>
-      
-      <div className="container-custom relative z-10">
+    <section id="about" className="section-padding bg-white">
+      <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
           <div className="space-y-8">

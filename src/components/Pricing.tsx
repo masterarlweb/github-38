@@ -2,7 +2,6 @@
 import { Check, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import GradientBlinds from '@/components/GradientBlinds';
 
 const Pricing = () => {
   const servicePackages = [
@@ -70,28 +69,8 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="section-padding relative overflow-hidden">
-      {/* GradientBlinds Background */}
-      <div className="absolute inset-0">
-        <GradientBlinds
-          className=""
-          dpr={undefined}
-          gradientColors={['#FF9FFC', '#5227FF']}
-          angle={-45}
-          noise={0.15}
-          blindCount={14}
-          blindMinWidth={70}
-          spotlightRadius={0.8}
-          spotlightSoftness={0.6}
-          spotlightOpacity={0.4}
-          mouseDampening={0.35}
-          distortAmount={0}
-          shineDirection="right"
-          mixBlendMode="screen"
-        />
-      </div>
-      
-      <div className="container-custom relative z-10">
+    <section id="pricing" className="section-padding bg-white">
+      <div className="container-custom">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
             <span className="gradient-text">Pricing</span> Packages
