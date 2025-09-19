@@ -122,6 +122,10 @@ const Services = () => {
           distortAmount={0.1}
           shineDirection="left"
           mixBlendMode="overlay"
+          animationPreset="wave"
+          autoRotate={false}
+          pulseEffect={true}
+          performanceMode={true}
         />
       </div>
 

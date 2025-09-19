@@ -25,6 +25,10 @@ const Hero = () => {
           distortAmount={0}
           shineDirection="left"
           mixBlendMode="lighten"
+          animationPreset="breathe"
+          autoRotate={true}
+          pulseEffect={true}
+          performanceMode={false}
         />
       </div>
 
@@ -230,8 +234,12 @@ const Hero = () => {
                       <span className="text-3xl font-bold text-white">K</span>
                     </div>
                     <div className="space-y-3">
-                      <h3 className="font-bold text-xl text-gray-900">Kontenih Agency</h3>
-                      <p className="text-sm text-gray-600 font-medium">Your Digital Growth Partner</p>
+                      <h3 className="font-bold text-xl text-gray-900">Enhanced GradientBlinds</h3>
+                      <p className="text-sm text-gray-600 font-medium">
+                        ✨ Optimized Performance<br/>
+                        🎨 New Animation Presets<br/>
+                        ⚡ TypeScript Support
+                      </p>
                       <div className="flex justify-center space-x-2">
                         <div className="w-2 h-2 bg-brand-blue-500 rounded-full animate-pulse"></div>
                         <div className="w-2 h-2 bg-brand-orange-500 rounded-full animate-pulse delay-300"></div>
