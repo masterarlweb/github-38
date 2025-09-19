@@ -2,16 +2,30 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import GradientBlinds from '@/components/GradientBlinds';
 
 const Hero = () => {
   const navigate = useNavigate();
   return (
-    <section id="home" className="pt-20 section-padding gradient-bg relative overflow-hidden">
-      {/* Background Elements */}
+    <section id="home" className="pt-20 section-padding relative overflow-hidden min-h-screen">
+      {/* GradientBlinds Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-brand-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-brand-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-1000"></div>
-        <div className="absolute -bottom-32 left-20 w-80 h-80 bg-brand-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-50"></div>
+        <GradientBlinds
+          className=""
+          dpr={undefined}
+          gradientColors={['#FF9FFC', '#5227FF']}
+          angle={0}
+          noise={0.3}
+          blindCount={12}
+          blindMinWidth={50}
+          spotlightRadius={0.5}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+        />
       </div>
 
       <div className="container-custom relative z-10">
