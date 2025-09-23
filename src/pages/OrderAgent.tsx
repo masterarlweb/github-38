@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
+import OrderChatbot from '@/components/OrderChatbot';
 
 const OrderAgent = () => {
   const navigate = useNavigate();
@@ -371,6 +372,9 @@ const OrderAgent = () => {
           </div>
         </div>
       </main>
+
+      {/* AI Chatbot */}
+      <OrderChatbot onAgentTypeSelect={setAgentType} />
     </div>
   );
 };
