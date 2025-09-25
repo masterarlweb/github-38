@@ -7,6 +7,7 @@ import Pricing from '@/components/Pricing';
 import Gallery from '@/components/Gallery';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import HomeChatbot from '@/components/HomeChatbot';
 
 const Index = () => {
   return (
@@ -19,6 +20,7 @@ const Index = () => {
       <Gallery />
       <Contact />
       <Footer />
+      <HomeChatbot />
     </div>
   );
 };
