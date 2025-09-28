@@ -126,23 +126,25 @@ export default function ShaderDemo() {
         
         {/* Glowing Split Text Section */}
         <div className="text-center mb-8 relative z-30">
-          <div className="mb-6">
-            <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight max-w-5xl mx-auto animated-gradient-text">
-              {mainText}
-            </h1>
-          </div>
-          
-          {/* Subtitle */}
-          <div className="animate-fade-in delay-1000">
-            <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto px-4 font-medium">
-              <span className="bg-gradient-to-r from-orange-300 via-amber-300 to-yellow-300 bg-clip-text text-transparent">
-                Driving business growth
-              </span>{" "}
-              <span className="text-white">
-                with AI solutions and integrated digital marketing strategies
-              </span>
-            </p>
-          </div>
+          <GlowCard glowColor="orange" customSize className="w-auto h-auto p-8 bg-gradient-to-br from-black/40 via-orange-900/20 to-amber-900/20 backdrop-blur-md border border-orange-400/20">
+            <div className="mb-6">
+              <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight max-w-5xl mx-auto animated-gradient-text">
+                {mainText}
+              </h1>
+            </div>
+            
+            {/* Subtitle */}
+            <div className="animate-fade-in delay-1000">
+              <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto px-4 font-medium">
+                <span className="bg-gradient-to-r from-orange-300 via-amber-300 to-yellow-300 bg-clip-text text-transparent">
+                  Driving business growth
+                </span>{" "}
+                <span className="text-white">
+                  with AI solutions and integrated digital marketing strategies
+                </span>
+              </p>
+            </div>
+          </GlowCard>
         </div>
         
         <style dangerouslySetInnerHTML={{
