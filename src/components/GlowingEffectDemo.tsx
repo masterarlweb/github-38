@@ -73,7 +73,7 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
         />
         <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl bg-black/50 backdrop-blur-sm p-6 shadow-2xl">
           <div className="relative flex flex-1 flex-col justify-between gap-4">
-            <div className="w-fit rounded-lg border border-white/20 bg-gradient-to-r from-purple-500/20 to-blue-500/20 p-3 backdrop-blur-sm">
+            <div className="w-fit rounded-lg border border-white/20 bg-gradient-to-r from-purple-500/20 to-blue-500/20 p-3 backdrop-blur-sm text-white">
               {icon}
             </div>
             <div className="space-y-4">
