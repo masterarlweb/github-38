@@ -34,7 +34,7 @@ export default function ShaderDemo() {
     { name: 'Contact', href: '#contact' }
   ];
 
-  const mainText = "HELLO KONTENIH - Content Drives Sales? Kontenih is the Answer";
+  const mainText = "KONTENIH - Content Drives Sales? Kontenih is the Answer";
 
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-black">
@@ -153,19 +153,14 @@ export default function ShaderDemo() {
                 #ff6b35,
                 #f7931e,
                 #ffd700,
-                #ffeb3b,
-                #4caf50,
-                #2196f3,
-                #9c27b0,
-                #e91e63
+                #ffab00
               );
-              background-size: 400% 400%;
+              background-size: 300% 300%;
               -webkit-background-clip: text;
               background-clip: text;
               -webkit-text-fill-color: transparent;
-              animation: gradientShift 4s ease-in-out infinite;
-              filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.3));
-              text-shadow: 0 0 30px rgba(255, 107, 53, 0.5), 0 0 60px rgba(247, 147, 30, 0.3);
+              animation: gradientShift 3s ease-in-out infinite;
+              filter: drop-shadow(0 0 15px rgba(255, 107, 53, 0.2));
             }
             
             @keyframes gradientShift {
