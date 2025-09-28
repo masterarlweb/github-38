@@ -3,11 +3,13 @@ import { SplitText } from "@/components/ui/split-text";
 import { RainbowButton } from "@/components/ui/rainbow-borders-button";
 import { GlowCard } from "@/components/ui/spotlight-card";
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Play, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Play, Sparkles, Zap, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import Logo from './Logo';
 
 export default function ShaderDemo() {
   const [activeButtons, setActiveButtons] = useState<Set<string>>(new Set());
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   const toggleButtonGlow = (buttonId: string) => {
     setActiveButtons(prev => {
@@ -21,6 +23,17 @@ export default function ShaderDemo() {
     });
   };
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const navItems = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Services', href: '#services' },
+    { name: 'Pricing', href: '#pricing' },
+    { name: 'Gallery', href: '#gallery' },
+    { name: 'Contact', href: '#contact' }
+  ];
+
   const mainText = "HELLO KONTENIH - Content Drives Sales? Kontenih is the Answer";
 
   return (
@@ -31,8 +44,77 @@ export default function ShaderDemo() {
         <ShaderAnimation/>
       </div>
       
+      {/* Header Navigation */}
+      <header className="fixed top-0 w-full bg-black/80 backdrop-blur-sm z-50 border-b border-white/10">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Logo size="md" />
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-8">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-300 hover:text-orange-400 transition-colors duration-200 font-medium"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </nav>
+
+            {/* CTA Button */}
+            <div className="hidden md:block">
+              <Button 
+                className="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-medium px-6 border-0"
+                onClick={() => window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank')}
+              >
+                Consult Now
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 text-white"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="md:hidden absolute top-16 left-0 w-full bg-black/95 border-b border-white/10 shadow-lg backdrop-blur-md">
+              <nav className="flex flex-col space-y-4 p-4">
+                {navItems.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="text-gray-300 hover:text-orange-400 transition-colors duration-200 font-medium py-2"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+                <Button 
+                  className="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white font-medium mt-4"
+                  onClick={() => {
+                    window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank');
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Consult Now
+                </Button>
+              </nav>
+            </div>
+          )}
+        </div>
+      </header>
+      
       {/* Badge - Top */}
-      <div className="relative z-20 pt-6 flex justify-center">
+      <div className="relative z-20 pt-24 flex justify-center">
         <div className="inline-flex items-center px-4 py-2 bg-orange-500/20 backdrop-blur-sm rounded-full shadow-lg border border-orange-400/30 animate-fade-in">
           <div className="w-2 h-2 bg-orange-400 rounded-full mr-3 animate-pulse"></div>
           <span className="text-sm font-medium text-white">🚀 First AI Digital Marketing Agency</span>
@@ -42,26 +124,28 @@ export default function ShaderDemo() {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col justify-center items-center relative z-10 px-4">
         
-        {/* Split Text Section */}
+        {/* Glowing Split Text Section */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-6">
-            <SplitText
-              text={mainText}
-              className="font-bold text-3xl md:text-5xl lg:text-6xl text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent max-w-4xl leading-tight"
-              delay={30}
-              animationFrom={{ opacity: 0, transform: 'translate3d(0, 50px, 0)' }}
-              animationTo={{ opacity: 1, transform: 'translate3d(0, 0, 0)' }}
-              threshold={0.1}
-              rootMargin="-50px"
-            />
-          </div>
-          
-          {/* Subtitle */}
-          <div className="animate-fade-in delay-1000">
-            <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto px-4">
-              Driving business growth with AI solutions and integrated digital marketing strategies
-            </p>
-          </div>
+          <GlowCard glowColor="orange" customSize className="w-auto h-auto p-8 bg-black/20 backdrop-blur-md">
+            <div className="flex items-center justify-center mb-6">
+              <SplitText
+                text={mainText}
+                className="font-bold text-3xl md:text-5xl lg:text-6xl text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent max-w-4xl leading-tight"
+                delay={30}
+                animationFrom={{ opacity: 0, transform: 'translate3d(0, 50px, 0)' }}
+                animationTo={{ opacity: 1, transform: 'translate3d(0, 0, 0)' }}
+                threshold={0.1}
+                rootMargin="-50px"
+              />
+            </div>
+            
+            {/* Subtitle */}
+            <div className="animate-fade-in delay-1000">
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto px-4">
+                Driving business growth with AI solutions and integrated digital marketing strategies
+              </p>
+            </div>
+          </GlowCard>
         </div>
         
         {/* CTA Buttons */}
