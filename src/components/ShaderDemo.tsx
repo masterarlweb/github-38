@@ -13,66 +13,74 @@ export default function ShaderDemo() {
   ];
 
   return (
-    <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black">
+    <div className="relative flex h-screen w-full flex-col overflow-hidden bg-black">
       
-      {/* Main Shader Animation - Always Visible with Orange/Gold Glow */}
+      {/* Main Shader Animation Background */}
       <div className="absolute inset-0 z-0">
         <ShaderAnimation/>
       </div>
       
-      {/* Gooey Text Morphing - Fixed spacing */}
-      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-        <div className="text-center space-y-6">
-          <div className="h-24 flex items-center justify-center">
+      {/* Badge - Top */}
+      <div className="relative z-20 pt-6 flex justify-center">
+        <div className="inline-flex items-center px-4 py-2 bg-orange-500/20 backdrop-blur-sm rounded-full shadow-lg border border-orange-400/30 animate-fade-in">
+          <div className="w-2 h-2 bg-orange-400 rounded-full mr-3 animate-pulse"></div>
+          <span className="text-sm font-medium text-white">🚀 First AI Digital Marketing Agency</span>
+        </div>
+      </div>
+      
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col justify-center items-center relative z-10 px-4">
+        
+        {/* Gooey Text Section */}
+        <div className="text-center mb-8">
+          <div className="h-20 flex items-center justify-center mb-6">
             <GooeyText
               texts={kontenihWords}
               morphTime={1.5}
               cooldownTime={2}
               className="font-bold"
-              textClassName="text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent text-4xl md:text-6xl lg:text-7xl"
+              textClassName="text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent text-3xl md:text-5xl lg:text-6xl"
             />
           </div>
           
-          {/* Subtitle - Fixed positioning */}
-          <div className="animate-fade-in delay-1000 mt-8">
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto px-4">
+          {/* Subtitle */}
+          <div className="animate-fade-in delay-1000">
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto px-4">
               Driving business growth with AI solutions and integrated digital marketing strategies
             </p>
           </div>
         </div>
-      </div>
-      
-      {/* CTA Buttons - repositioned for better spacing */}
-      <div className="absolute bottom-40 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-2000">
-          <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-orange-600/80 to-amber-600/80 hover:from-orange-700/90 hover:to-amber-700/90 text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group border-0 backdrop-blur-sm shadow-orange-500/20"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Get Started Now
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="border-2 border-orange-400/50 text-white hover:bg-orange-400/10 hover:text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group backdrop-blur-sm bg-orange-500/10"
-            onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-            View Portfolio
-          </Button>
+        
+        {/* CTA Buttons */}
+        <div className="mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-2000">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-orange-600/80 to-amber-600/80 hover:from-orange-700/90 hover:to-amber-700/90 text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group border-0 backdrop-blur-sm shadow-orange-500/20"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Get Started Now
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-2 border-orange-400/50 text-white hover:bg-orange-400/10 hover:text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group backdrop-blur-sm bg-orange-500/10"
+              onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <Play className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+              View Portfolio
+            </Button>
+          </div>
         </div>
-      </div>
-      
-      {/* Rainbow Button UI Section */}
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex flex-col items-center space-y-4 animate-fade-in delay-3000">
+        
+        {/* Rainbow Buttons Section */}
+        <div className="animate-fade-in delay-3000">
           <div className="text-center mb-4">
-            <p className="text-sm text-gray-400 mb-2">Special Limited Offer</p>
+            <p className="text-xs text-gray-400">Special Limited Offer</p>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 items-center">
+          <div className="flex flex-col sm:flex-row gap-3 items-center">
             <RainbowButton 
               onClick={() => {
                 import('@/hooks/use-toast').then(({ toast }) => {
@@ -82,32 +90,29 @@ export default function ShaderDemo() {
                   });
                 });
               }}
-              className="w-48"
+              className="w-44 h-10"
             >
-              <Sparkles className="mr-2 h-4 w-4" />
-              Special Offer
+              <Sparkles className="mr-2 h-3 w-3" />
+              <span className="text-sm">Special Offer</span>
             </RainbowButton>
             
             <RainbowButton 
               onClick={() => {
                 window.open('https://wa.me/62081336135036?text=Hello%20Kontenih%2C%20I%20want%20instant%20consultation!', '_blank');
               }}
-              className="w-48"
+              className="w-44 h-10"
             >
-              <Zap className="mr-2 h-4 w-4" />
-              Instant Chat
+              <Zap className="mr-2 h-3 w-3" />
+              <span className="text-sm">Instant Chat</span>
             </RainbowButton>
           </div>
         </div>
+        
       </div>
       
-      {/* Badge - positioned at top */}
-      <div className="absolute top-10 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="inline-flex items-center px-4 py-2 bg-orange-500/20 backdrop-blur-sm rounded-full shadow-lg border border-orange-400/30 animate-fade-in">
-          <div className="w-2 h-2 bg-orange-400 rounded-full mr-3 animate-pulse"></div>
-          <span className="text-sm font-medium text-white">🚀 First AI Digital Marketing Agency</span>
-        </div>
-      </div>
+      {/* Bottom Spacing */}
+      <div className="h-8"></div>
+      
     </div>
   )
 }

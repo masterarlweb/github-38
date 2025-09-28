@@ -17,7 +17,7 @@ export const RainbowButton = ({ children, className, ...props }: RainbowButtonPr
             position: absolute;
             left: -2px;
             top: -2px;
-            border-radius: 12px;
+            border-radius: 8px;
             background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000);
             background-size: 400%;
             width: calc(100% + 4px);
@@ -26,7 +26,7 @@ export const RainbowButton = ({ children, className, ...props }: RainbowButtonPr
             animation: rainbow 20s linear infinite;
           }
           .rainbow-border::after {
-            filter: blur(50px);
+            filter: blur(30px);
           }
           @keyframes rainbow {
             0% { background-position: 0 0; }
@@ -37,7 +37,7 @@ export const RainbowButton = ({ children, className, ...props }: RainbowButtonPr
       }} />
       <button 
         className={cn(
-          "rainbow-border relative w-[200px] h-12 flex items-center justify-center gap-2.5 px-4 bg-black rounded-xl border-none text-white cursor-pointer font-semibold transition-all duration-200 hover:scale-105",
+          "rainbow-border relative flex items-center justify-center gap-2 px-3 py-2 bg-black rounded-lg border-none text-white cursor-pointer font-medium transition-all duration-200 hover:scale-105 text-xs",
           className
         )}
         {...props}
