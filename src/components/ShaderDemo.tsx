@@ -14,37 +14,26 @@ export default function ShaderDemo() {
   return (
     <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black">
       
-      {/* Integrated Particle Text with Shader Effects */}
+      {/* Main Shader Animation - Always Visible */}
+      <div className="absolute inset-0 z-0">
+        <ShaderAnimation/>
+      </div>
+      
+      {/* Particle Text with Transparent Background */}
       <div className="absolute inset-0 z-10 flex items-center justify-center">
         <div className="relative w-full max-w-6xl px-4">
-          {/* Shader animation as text overlay/mask */}
-          <div className="absolute inset-0 opacity-30 mix-blend-overlay">
-            <ShaderAnimation/>
-          </div>
-          
-          {/* Main Particle Text */}
-          <div className="relative z-20">
+          <div className="relative z-10" style={{ background: 'transparent' }}>
             <ParticleTextEffect words={kontenihWords} />
-          </div>
-          
-          {/* Additional shader glow effects around text */}
-          <div className="absolute inset-0 opacity-20 blur-sm mix-blend-plus-lighter">
-            <ShaderAnimation/>
           </div>
         </div>
       </div>
       
-      {/* Background shader animation with reduced opacity */}
-      <div className="absolute inset-0 opacity-15">
-        <ShaderAnimation/>
-      </div>
-      
       {/* CTA Buttons - positioned at bottom */}
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-30">
+      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20">
         <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
           <Button 
             size="lg" 
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group border-0"
+            className="bg-gradient-to-r from-blue-600/80 to-purple-600/80 hover:from-blue-700/90 hover:to-purple-700/90 text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group border-0 backdrop-blur-sm"
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Get Started Now
@@ -63,7 +52,7 @@ export default function ShaderDemo() {
       </div>
       
       {/* Badge - positioned at top */}
-      <div className="absolute top-10 left-1/2 transform -translate-x-1/2 z-30">
+      <div className="absolute top-10 left-1/2 transform -translate-x-1/2 z-20">
         <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full shadow-lg border border-white/20 animate-fade-in">
           <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
           <span className="text-sm font-medium text-white">🚀 First AI Digital Marketing Agency</span>
