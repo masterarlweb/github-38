@@ -366,11 +366,11 @@ export function ParticleTextEffect({ words = DEFAULT_WORDS }: ParticleTextEffect
   }, [])
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent p-0">
       <canvas
         ref={canvasRef}
-        className="border-0 rounded-lg shadow-2xl bg-transparent"
-        style={{ maxWidth: "100%", height: "auto", background: "transparent" }}
+        className="bg-transparent"
+        style={{ maxWidth: "100%", height: "auto", background: "transparent", border: "none", outline: "none" }}
       />
     </div>
   )
