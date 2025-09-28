@@ -127,8 +127,8 @@ export default function ShaderDemo() {
         {/* Glowing Split Text Section */}
         <div className="text-center mb-8 relative z-30">
           <GlowCard glowColor="orange" customSize className="w-auto h-auto p-8 bg-gradient-to-br from-black/40 via-orange-900/20 to-amber-900/20 backdrop-blur-md border border-orange-400/20">
-            <div className="mb-6">
-              <h1 className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight max-w-5xl mx-auto animated-gradient-text">
+            <div className="mb-6 animate-fade-in">
+              <h1 className="font-black text-4xl md:text-6xl lg:text-7xl leading-tight max-w-5xl mx-auto animated-gradient-text tracking-wide font-serif">
                 {mainText}
               </h1>
             </div>
