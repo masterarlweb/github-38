@@ -114,10 +114,10 @@ export default function ShaderDemo() {
       </header>
       
       {/* Badge - Top */}
-      <div className="relative z-20 pt-24 flex justify-center">
-        <div className="inline-flex items-center px-4 py-2 bg-orange-500/20 backdrop-blur-sm rounded-full shadow-lg border border-orange-400/30 animate-fade-in">
-          <div className="w-2 h-2 bg-orange-400 rounded-full mr-3 animate-pulse"></div>
-          <span className="text-sm font-medium text-white">🚀 First AI Digital Marketing Agency</span>
+      <div className="relative z-20 pt-24 pb-12 flex justify-center">
+        <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500/30 to-amber-500/30 backdrop-blur-sm rounded-full shadow-2xl border border-orange-400/50 animate-fade-in shadow-orange-500/25">
+          <div className="w-3 h-3 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full mr-3 animate-pulse shadow-lg shadow-orange-400/50"></div>
+          <span className="text-sm font-bold text-white tracking-wide">🚀 First AI Digital Marketing Agency</span>
         </div>
       </div>
       
@@ -126,11 +126,11 @@ export default function ShaderDemo() {
         
         {/* Glowing Split Text Section */}
         <div className="text-center mb-8">
-          <GlowCard glowColor="orange" customSize className="w-auto h-auto p-8 bg-black/20 backdrop-blur-md">
+          <GlowCard glowColor="orange" customSize className="w-auto h-auto p-8 bg-gradient-to-br from-black/40 via-orange-900/20 to-amber-900/20 backdrop-blur-md border border-orange-400/20">
             <div className="flex items-center justify-center mb-6">
               <SplitText
                 text={mainText}
-                className="font-bold text-3xl md:text-5xl lg:text-6xl text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent max-w-4xl leading-tight"
+                className="font-bold text-4xl md:text-6xl lg:text-7xl leading-tight max-w-5xl animated-gradient-text"
                 delay={30}
                 animationFrom={{ opacity: 0, transform: 'translate3d(0, 50px, 0)' }}
                 animationTo={{ opacity: 1, transform: 'translate3d(0, 0, 0)' }}
@@ -141,12 +141,51 @@ export default function ShaderDemo() {
             
             {/* Subtitle */}
             <div className="animate-fade-in delay-1000">
-              <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto px-4">
-                Driving business growth with AI solutions and integrated digital marketing strategies
+              <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto px-4 font-medium">
+                <span className="bg-gradient-to-r from-orange-300 via-amber-300 to-yellow-300 bg-clip-text text-transparent">
+                  Driving business growth
+                </span>{" "}
+                <span className="text-white">
+                  with AI solutions and integrated digital marketing strategies
+                </span>
               </p>
             </div>
           </GlowCard>
         </div>
+        
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            .animated-gradient-text {
+              background: linear-gradient(
+                45deg,
+                #ff6b35,
+                #f7931e,
+                #ffd700,
+                #ffeb3b,
+                #4caf50,
+                #2196f3,
+                #9c27b0,
+                #e91e63
+              );
+              background-size: 400% 400%;
+              -webkit-background-clip: text;
+              background-clip: text;
+              -webkit-text-fill-color: transparent;
+              animation: gradientShift 4s ease-in-out infinite;
+              filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.3));
+              text-shadow: 0 0 30px rgba(255, 107, 53, 0.5), 0 0 60px rgba(247, 147, 30, 0.3);
+            }
+            
+            @keyframes gradientShift {
+              0%, 100% {
+                background-position: 0% 50%;
+              }
+              50% {
+                background-position: 100% 50%;
+              }
+            }
+          `
+        }} />
         
         {/* CTA Buttons */}
         <div className="mb-8">
