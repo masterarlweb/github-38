@@ -1,7 +1,7 @@
 import { ShaderAnimation } from "@/components/ui/shader-animation";
-import { HeroGeometric } from "@/components/ui/shape-landing-hero";
-import { GlowCard } from "@/components/ui/spotlight-card";
+import { GooeyText } from "@/components/ui/gooey-text-morphing";
 import { RainbowButton } from "@/components/ui/rainbow-borders-button";
+import { GlowCard } from "@/components/ui/spotlight-card";
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play, Sparkles, Zap } from 'lucide-react';
 import { useState } from 'react';
@@ -21,6 +21,13 @@ export default function ShaderDemo() {
     });
   };
 
+  const kontenihWords = [
+    "HELLO",
+    "KONTENIH", 
+    "Content Drives Sales?",
+    "Kontenih is the Answer"
+  ];
+
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-black">
       
@@ -29,18 +36,39 @@ export default function ShaderDemo() {
         <ShaderAnimation/>
       </div>
       
+      {/* Badge - Top */}
+      <div className="relative z-20 pt-6 flex justify-center">
+        <div className="inline-flex items-center px-4 py-2 bg-orange-500/20 backdrop-blur-sm rounded-full shadow-lg border border-orange-400/30 animate-fade-in">
+          <div className="w-2 h-2 bg-orange-400 rounded-full mr-3 animate-pulse"></div>
+          <span className="text-sm font-medium text-white">🚀 First AI Digital Marketing Agency</span>
+        </div>
+      </div>
+      
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col justify-center items-center relative z-10 px-4">
         
-        {/* Hero Content */}
-        <HeroGeometric 
-          badge="🚀 First AI Digital Marketing Agency"
-          title1="Content Drives Sales?"
-          title2="Kontenih is the Answer"
-        />
+        {/* Gooey Text Section */}
+        <div className="text-center mb-8">
+          <div className="h-20 flex items-center justify-center mb-6">
+            <GooeyText
+              texts={kontenihWords}
+              morphTime={1.5}
+              cooldownTime={2}
+              className="font-bold"
+              textClassName="text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent text-3xl md:text-5xl lg:text-6xl"
+            />
+          </div>
+          
+          {/* Subtitle */}
+          <div className="animate-fade-in delay-1000">
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto px-4">
+              Driving business growth with AI solutions and integrated digital marketing strategies
+            </p>
+          </div>
+        </div>
         
         {/* CTA Buttons */}
-        <div className="mb-8 relative z-20">
+        <div className="mb-8">
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-2000">
             {activeButtons.has('get-started') ? (
               <GlowCard glowColor="orange" customSize className="w-auto h-auto p-0">
@@ -103,7 +131,7 @@ export default function ShaderDemo() {
         </div>
         
         {/* Rainbow Buttons Section */}
-        <div className="animate-fade-in delay-3000 relative z-20">
+        <div className="animate-fade-in delay-3000">
           <div className="text-center mb-4">
             <p className="text-xs text-gray-400">Special Limited Offer</p>
           </div>
