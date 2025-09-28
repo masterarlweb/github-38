@@ -128,8 +128,12 @@ export default function ShaderDemo() {
         <div className="text-center mb-8 relative z-30">
           <GlowCard glowColor="orange" customSize className="w-auto h-auto p-8 bg-gradient-to-br from-black/40 via-orange-900/20 to-amber-900/20 backdrop-blur-md border border-orange-400/20">
             <div className="mb-6 animate-fade-in">
-              <h1 className="font-black text-4xl md:text-6xl lg:text-7xl leading-tight max-w-5xl mx-auto animated-gradient-text tracking-wide font-inter">
-                {mainText}
+              <h1 className="font-jakarta font-extrabold text-4xl md:text-6xl lg:text-8xl leading-tight max-w-5xl mx-auto tracking-tight">
+                <span className="text-white">Content Drives Sales?</span>
+                <br />
+                <span className="bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                  Kontenih is the Answer
+                </span>
               </h1>
             </div>
             
