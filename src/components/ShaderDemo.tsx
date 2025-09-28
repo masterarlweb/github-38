@@ -1,10 +1,26 @@
 import { ShaderAnimation } from "@/components/ui/shader-animation";
 import { GooeyText } from "@/components/ui/gooey-text-morphing";
 import { RainbowButton } from "@/components/ui/rainbow-borders-button";
+import { GlowCard } from "@/components/ui/spotlight-card";
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play, Sparkles, Zap } from 'lucide-react';
+import { useState } from 'react';
 
 export default function ShaderDemo() {
+  const [activeButtons, setActiveButtons] = useState<Set<string>>(new Set());
+  
+  const toggleButtonGlow = (buttonId: string) => {
+    setActiveButtons(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(buttonId)) {
+        newSet.delete(buttonId);
+      } else {
+        newSet.add(buttonId);
+      }
+      return newSet;
+    });
+  };
+
   const kontenihWords = [
     "HELLO",
     "KONTENIH", 
@@ -54,23 +70,63 @@ export default function ShaderDemo() {
         {/* CTA Buttons */}
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-2000">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-orange-600/80 to-amber-600/80 hover:from-orange-700/90 hover:to-amber-700/90 text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group border-0 backdrop-blur-sm shadow-orange-500/20"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Get Started Now
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="border-2 border-orange-400/50 text-white hover:bg-orange-400/10 hover:text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group backdrop-blur-sm bg-orange-500/10"
-              onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <Play className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
-              View Portfolio
-            </Button>
+            {activeButtons.has('get-started') ? (
+              <GlowCard glowColor="orange" customSize className="w-auto h-auto p-0">
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-orange-600/80 to-amber-600/80 hover:from-orange-700/90 hover:to-amber-700/90 text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group border-0 backdrop-blur-sm shadow-orange-500/20"
+                  onClick={() => {
+                    toggleButtonGlow('get-started');
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Get Started Now
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </GlowCard>
+            ) : (
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-orange-600/80 to-amber-600/80 hover:from-orange-700/90 hover:to-amber-700/90 text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group border-0 backdrop-blur-sm shadow-orange-500/20"
+                onClick={() => {
+                  toggleButtonGlow('get-started');
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Get Started Now
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            )}
+            
+            {activeButtons.has('portfolio') ? (
+              <GlowCard glowColor="blue" customSize className="w-auto h-auto p-0">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="border-2 border-orange-400/50 text-white hover:bg-orange-400/10 hover:text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group backdrop-blur-sm bg-orange-500/10"
+                  onClick={() => {
+                    toggleButtonGlow('portfolio');
+                    document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  <Play className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                  View Portfolio
+                </Button>
+              </GlowCard>
+            ) : (
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-2 border-orange-400/50 text-white hover:bg-orange-400/10 hover:text-white font-medium px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group backdrop-blur-sm bg-orange-500/10"
+                onClick={() => {
+                  toggleButtonGlow('portfolio');
+                  document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                <Play className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                View Portfolio
+              </Button>
+            )}
           </div>
         </div>
         
@@ -81,30 +137,67 @@ export default function ShaderDemo() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-3 items-center">
-            <RainbowButton 
-              onClick={() => {
-                import('@/hooks/use-toast').then(({ toast }) => {
-                  toast({
-                    title: "🎉 Special Offer!",
-                    description: "Get 50% off your first month! Contact us now.",
+            {activeButtons.has('special-offer') ? (
+              <GlowCard glowColor="purple" customSize className="w-auto h-auto p-0">
+                <RainbowButton 
+                  onClick={() => {
+                    toggleButtonGlow('special-offer');
+                    import('@/hooks/use-toast').then(({ toast }) => {
+                      toast({
+                        title: "🎉 Special Offer!",
+                        description: "Get 50% off your first month! Contact us now.",
+                      });
+                    });
+                  }}
+                  className="w-44 h-10"
+                >
+                  <Sparkles className="mr-2 h-3 w-3" />
+                  <span className="text-sm">Special Offer</span>
+                </RainbowButton>
+              </GlowCard>
+            ) : (
+              <RainbowButton 
+                onClick={() => {
+                  toggleButtonGlow('special-offer');
+                  import('@/hooks/use-toast').then(({ toast }) => {
+                    toast({
+                      title: "🎉 Special Offer!",
+                      description: "Get 50% off your first month! Contact us now.",
+                    });
                   });
-                });
-              }}
-              className="w-44 h-10"
-            >
-              <Sparkles className="mr-2 h-3 w-3" />
-              <span className="text-sm">Special Offer</span>
-            </RainbowButton>
+                }}
+                className="w-44 h-10"
+              >
+                <Sparkles className="mr-2 h-3 w-3" />
+                <span className="text-sm">Special Offer</span>
+              </RainbowButton>
+            )}
             
-            <RainbowButton 
-              onClick={() => {
-                window.open('https://wa.me/62081336135036?text=Hello%20Kontenih%2C%20I%20want%20instant%20consultation!', '_blank');
-              }}
-              className="w-44 h-10"
-            >
-              <Zap className="mr-2 h-3 w-3" />
-              <span className="text-sm">Instant Chat</span>
-            </RainbowButton>
+            {activeButtons.has('instant-chat') ? (
+              <GlowCard glowColor="green" customSize className="w-auto h-auto p-0">
+                <RainbowButton 
+                  onClick={() => {
+                    toggleButtonGlow('instant-chat');
+                    window.open('https://wa.me/62081336135036?text=Hello%20Kontenih%2C%20I%20want%20instant%20consultation!', '_blank');
+                  }}
+                  className="w-44 h-10"
+                >
+                  <Zap className="mr-2 h-3 w-3" />
+                  <span className="text-sm">Instant Chat</span>
+                </RainbowButton>
+              </GlowCard>
+            ) : (
+              <RainbowButton 
+                onClick={() => {
+                  toggleButtonGlow('instant-chat');
+                  window.open('https://wa.me/62081336135036?text=Hello%20Kontenih%2C%20I%20want%20instant%20consultation!', '_blank');
+                }}
+                className="w-44 h-10"
+              >
+                <Zap className="mr-2 h-3 w-3" />
+                <span className="text-sm">Instant Chat</span>
+              </RainbowButton>
+            )}
           </div>
         </div>
         
