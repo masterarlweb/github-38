@@ -21,7 +21,7 @@ export default function ShaderDemo() {
     });
   };
 
-  const mainText = "You are given a task to integrate an existing React component in the codebase. The codebase should support shadcn project structure, Tailwind CSS, and Typescript.";
+  const mainText = "HELLO KONTENIH - Content Drives Sales? Kontenih is the Answer";
 
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-black">
@@ -47,7 +47,7 @@ export default function ShaderDemo() {
           <div className="flex items-center justify-center mb-6">
             <SplitText
               text={mainText}
-              className="font-bold text-4xl md:text-6xl lg:text-8xl text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent max-w-5xl leading-tight"
+              className="font-bold text-3xl md:text-5xl lg:text-6xl text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent max-w-4xl leading-tight"
               delay={30}
               animationFrom={{ opacity: 0, transform: 'translate3d(0, 50px, 0)' }}
               animationTo={{ opacity: 1, transform: 'translate3d(0, 0, 0)' }}
@@ -58,8 +58,8 @@ export default function ShaderDemo() {
           
           {/* Subtitle */}
           <div className="animate-fade-in delay-1000">
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto px-4">
-              Determine the default path for components and styles. If default path for components is not /components/ui, provide instructions on why it's important to create this folder.
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto px-4">
+              Driving business growth with AI solutions and integrated digital marketing strategies
             </p>
           </div>
         </div>
