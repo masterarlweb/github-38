@@ -1,5 +1,5 @@
 import { ShaderAnimation } from "@/components/ui/shader-animation";
-import { GooeyText } from "@/components/ui/gooey-text-morphing";
+import { SplitText } from "@/components/ui/split-text";
 import { RainbowButton } from "@/components/ui/rainbow-borders-button";
 import { GlowCard } from "@/components/ui/spotlight-card";
 import { Button } from '@/components/ui/button';
@@ -21,12 +21,7 @@ export default function ShaderDemo() {
     });
   };
 
-  const kontenihWords = [
-    "HELLO",
-    "KONTENIH", 
-    "Content Drives Sales?",
-    "Kontenih is the Answer"
-  ];
+  const mainText = "You are given a task to integrate an existing React component in the codebase. The codebase should support shadcn project structure, Tailwind CSS, and Typescript.";
 
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-black">
@@ -47,22 +42,24 @@ export default function ShaderDemo() {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col justify-center items-center relative z-10 px-4">
         
-        {/* Gooey Text Section */}
+        {/* Split Text Section */}
         <div className="text-center mb-8">
-          <div className="h-20 flex items-center justify-center mb-6">
-            <GooeyText
-              texts={kontenihWords}
-              morphTime={1.5}
-              cooldownTime={2}
-              className="font-bold"
-              textClassName="text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent text-3xl md:text-5xl lg:text-6xl"
+          <div className="flex items-center justify-center mb-6">
+            <SplitText
+              text={mainText}
+              className="font-bold text-4xl md:text-6xl lg:text-8xl text-white drop-shadow-2xl bg-gradient-to-r from-orange-400 via-yellow-400 to-amber-400 bg-clip-text text-transparent max-w-5xl leading-tight"
+              delay={30}
+              animationFrom={{ opacity: 0, transform: 'translate3d(0, 50px, 0)' }}
+              animationTo={{ opacity: 1, transform: 'translate3d(0, 0, 0)' }}
+              threshold={0.1}
+              rootMargin="-50px"
             />
           </div>
           
           {/* Subtitle */}
           <div className="animate-fade-in delay-1000">
-            <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-xl mx-auto px-4">
-              Driving business growth with AI solutions and integrated digital marketing strategies
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto px-4">
+              Determine the default path for components and styles. If default path for components is not /components/ui, provide instructions on why it's important to create this folder.
             </p>
           </div>
         </div>
