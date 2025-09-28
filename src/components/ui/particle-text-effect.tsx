@@ -267,9 +267,8 @@ export function ParticleTextEffect({ words = DEFAULT_WORDS }: ParticleTextEffect
     const ctx = canvas.getContext("2d")!
     const particles = particlesRef.current
 
-    // Background with motion blur - reduced opacity for transparency
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)"
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    // No background fill - completely transparent
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     // Update and draw particles
     for (let i = particles.length - 1; i >= 0; i--) {
@@ -319,6 +318,10 @@ export function ParticleTextEffect({ words = DEFAULT_WORDS }: ParticleTextEffect
     canvas.width = 1000
     canvas.height = 500
 
+    // Make canvas completely transparent
+    const ctx = canvas.getContext("2d")!
+    ctx.globalCompositeOperation = "source-over"
+
     // Initialize with first word
     nextWord(words[0], canvas)
 
@@ -366,12 +369,19 @@ export function ParticleTextEffect({ words = DEFAULT_WORDS }: ParticleTextEffect
   }, [])
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent p-0">
-      <canvas
-        ref={canvasRef}
-        className="bg-transparent"
-        style={{ maxWidth: "100%", height: "auto", background: "transparent", border: "none", outline: "none" }}
-      />
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="w-full h-full"
+      style={{ 
+        background: "transparent", 
+        border: "none", 
+        outline: "none",
+        display: "block",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 10
+      }}
+    />
   )
 }

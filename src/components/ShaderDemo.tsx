@@ -19,13 +19,9 @@ export default function ShaderDemo() {
         <ShaderAnimation/>
       </div>
       
-      {/* Particle Text with Transparent Background */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center">
-        <div className="relative w-full max-w-6xl px-4">
-          <div className="relative z-10" style={{ background: 'transparent' }}>
-            <ParticleTextEffect words={kontenihWords} />
-          </div>
-        </div>
+      {/* Particle Text with No Container */}
+      <div className="absolute inset-0 z-10">
+        <ParticleTextEffect words={kontenihWords} />
       </div>
       
       {/* CTA Buttons - positioned at bottom */}
