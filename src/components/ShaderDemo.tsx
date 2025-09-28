@@ -34,7 +34,7 @@ export default function ShaderDemo() {
     { name: 'Contact', href: '#contact' }
   ];
 
-  const mainText = "KONTENIH - Content Drives Sales? Kontenih is the Answer";
+  const mainText = "Content Drives Sales? Kontenih is the Answer";
 
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden bg-black">
@@ -128,7 +128,7 @@ export default function ShaderDemo() {
         <div className="text-center mb-8 relative z-30">
           <GlowCard glowColor="orange" customSize className="w-auto h-auto p-8 bg-gradient-to-br from-black/40 via-orange-900/20 to-amber-900/20 backdrop-blur-md border border-orange-400/20">
             <div className="mb-6 animate-fade-in">
-              <h1 className="font-black text-4xl md:text-6xl lg:text-7xl leading-tight max-w-5xl mx-auto animated-gradient-text tracking-wide font-serif">
+              <h1 className="font-black text-4xl md:text-6xl lg:text-7xl leading-tight max-w-5xl mx-auto animated-gradient-text tracking-wide font-inter">
                 {mainText}
               </h1>
             </div>
