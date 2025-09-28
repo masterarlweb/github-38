@@ -19,7 +19,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+    <header className="fixed top-0 w-full bg-black/80 backdrop-blur-sm z-50 border-b border-white/10">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -31,7 +31,7 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-600 hover:text-brand-blue-600 transition-colors duration-200 font-medium"
+                className="text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium"
               >
                 {item.name}
               </a>
@@ -41,7 +41,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button 
-              className="bg-brand-orange-500 hover:bg-brand-orange-600 text-white font-medium px-6"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium px-6 border-0"
               onClick={() => window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank')}
             >
               Consult Now
@@ -60,13 +60,13 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-lg">
+          <div className="md:hidden absolute top-16 left-0 w-full bg-black/95 border-b border-white/10 shadow-lg backdrop-blur-md">
             <nav className="flex flex-col space-y-4 p-4">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-600 hover:text-brand-blue-600 transition-colors duration-200 font-medium py-2"
+                  className="text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}

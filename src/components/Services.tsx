@@ -103,23 +103,23 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="section-padding relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-brand-blue-50/30"></div>
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-brand-blue-500 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-brand-orange-500 rounded-full filter blur-3xl"></div>
+    <section id="services" className="section-padding relative overflow-hidden bg-black">
+      {/* Shader Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-full filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full filter blur-3xl animate-pulse delay-500"></div>
       </div>
 
       <div className="container-custom relative z-10">
-        <div className="text-center space-y-6 mb-20">
-          <div className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
-            <span className="text-brand-blue-600 font-semibold">🎯 Professional Services</span>
+        <div className="text-center space-y-6 mb-20 relative z-10">
+          <div className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full shadow-lg border border-white/20">
+            <span className="text-blue-400 font-semibold">🎯 Professional Services</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900">
-            Our <span className="gradient-text bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 bg-clip-text text-transparent">Services</span>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white">
+            Our <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Services</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Complete solutions for digital business transformation with trusted professional services
           </p>
         </div>
@@ -128,7 +128,7 @@ const Services = () => {
           {services.map((service, index) => (
             <Card 
               key={index} 
-              className={`group relative overflow-hidden hover:shadow-2xl ${service.glowColor} transition-all duration-500 hover:-translate-y-2 border-0 bg-white/95 backdrop-blur-sm hover:bg-white cursor-pointer`}
+              className={`group relative overflow-hidden hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 hover:-translate-y-2 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-black/70 cursor-pointer`}
               style={{ animationDelay: `${index * 100}ms` }}
                 onClick={() => {
                   if (service.route.startsWith('#')) {
@@ -142,7 +142,7 @@ const Services = () => {
                 }}
             >
               {/* Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+              <div className={`absolute inset-0 bg-gradient-to-br from-purple-900/20 to-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
               
               {/* Floating Icon Background */}
               <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"></div>
@@ -157,7 +157,7 @@ const Services = () => {
                     {/* Glow Effect */}
                     <div className={`absolute inset-0 w-16 h-16 mx-auto rounded-xl bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500`}></div>
                   </div>
-                  <CardTitle className="text-lg font-bold text-gray-900 group-hover:text-gray-800 transition-colors leading-tight">
+                  <CardTitle className="text-lg font-bold text-white group-hover:text-gray-100 transition-colors leading-tight">
                     {service.title}
                   </CardTitle>
                   <CardDescription className={`bg-gradient-to-r ${service.color} bg-clip-text text-transparent font-semibold text-sm`}>
@@ -166,18 +166,18 @@ const Services = () => {
                 </CardHeader>
                 
                 <CardContent className="space-y-4 px-4 pb-6">
-                  <p className="text-gray-600 text-xs leading-relaxed group-hover:text-gray-700 transition-colors line-clamp-3">
+                  <p className="text-gray-300 text-xs leading-relaxed group-hover:text-gray-200 transition-colors line-clamp-3">
                     {service.description}
                   </p>
                   <ul className="space-y-2">
                     {service.features.slice(0, 3).map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-xs text-gray-700 group-hover:text-gray-800 transition-colors">
+                      <li key={idx} className="flex items-center text-xs text-gray-300 group-hover:text-gray-200 transition-colors">
                         <div className={`w-1.5 h-1.5 bg-gradient-to-r ${service.color} rounded-full mr-2 flex-shrink-0 group-hover:scale-125 transition-transform`}></div>
                         <span className="line-clamp-1">{feature}</span>
                       </li>
                     ))}
                     {service.features.length > 3 && (
-                      <li className="text-xs text-gray-500 italic">+{service.features.length - 3} fitur lainnya</li>
+                      <li className="text-xs text-gray-400 italic">+{service.features.length - 3} fitur lainnya</li>
                     )}
                   </ul>
                   

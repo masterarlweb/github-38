@@ -67,38 +67,44 @@ const Gallery = () => {
   ];
 
   return (
-    <section id="gallery" className="section-padding gradient-bg">
-      <div className="container-custom">
+    <section id="gallery" className="section-padding bg-black relative overflow-hidden">
+      {/* Shader Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+      
+      <div className="container-custom relative z-10">
         {/* Portfolio Section */}
         <div className="mb-20">
           <div className="text-center space-y-4 mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-            Our <span className="gradient-text">Portfolio</span>
+          <h2 className="text-3xl lg:text-4xl font-bold text-white">
+            Our <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Portfolio</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             View various projects we have worked on for various clients
           </p>
           </div>
 
           <Tabs defaultValue="graphic-design" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-12 bg-white/80 backdrop-blur-sm p-1 rounded-2xl shadow-lg">
+            <TabsList className="grid w-full grid-cols-3 mb-12 bg-black/50 backdrop-blur-sm p-1 rounded-2xl shadow-lg border border-white/10">
               <TabsTrigger 
                 value="graphic-design" 
-                className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-brand-blue-500 data-[state=active]:text-white"
+                className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-blue-500 data-[state=active]:text-white text-gray-300"
               >
                 <Palette className="w-4 h-4" />
                 Graphic Design
               </TabsTrigger>
               <TabsTrigger 
                 value="content-creation"
-                className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-brand-orange-500 data-[state=active]:text-white"
+                className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-purple-500 data-[state=active]:text-white text-gray-300"
               >
                 <Video className="w-4 h-4" />
                 Content Creation
               </TabsTrigger>
               <TabsTrigger 
                 value="endorsement"
-                className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-blue-500 data-[state=active]:to-brand-orange-500 data-[state=active]:text-white"
+                className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white text-gray-300"
               >
                 <Instagram className="w-4 h-4" />
                 Endorsement
@@ -108,7 +114,7 @@ const Gallery = () => {
             <TabsContent value="graphic-design" className="mt-0">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {graphicDesignPortfolio.map((item, index) => (
-                  <Card key={index} className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                  <Card key={index} className="group overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
                     <div className="aspect-video overflow-hidden">
                       <img 
                         src={item.image} 
@@ -118,11 +124,11 @@ const Gallery = () => {
                     </div>
                     <CardContent className="p-6">
                       <div className="space-y-2">
-                        <span className="text-xs font-medium text-brand-blue-500 uppercase tracking-wide">
+                        <span className="text-xs font-medium text-blue-400 uppercase tracking-wide">
                           {item.category}
                         </span>
-                        <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
-                        <p className="text-gray-600 text-sm">{item.description}</p>
+                        <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                        <p className="text-gray-300 text-sm">{item.description}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -133,7 +139,7 @@ const Gallery = () => {
             <TabsContent value="content-creation" className="mt-0">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {contentCreationPortfolio.map((item, index) => (
-                  <Card key={index} className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                  <Card key={index} className="group overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
                     <div className="aspect-video overflow-hidden">
                       <img 
                         src={item.image} 
@@ -143,11 +149,11 @@ const Gallery = () => {
                     </div>
                     <CardContent className="p-6">
                       <div className="space-y-2">
-                        <span className="text-xs font-medium text-brand-orange-500 uppercase tracking-wide">
+                        <span className="text-xs font-medium text-purple-400 uppercase tracking-wide">
                           {item.category}
                         </span>
-                        <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
-                        <p className="text-gray-600 text-sm">{item.description}</p>
+                        <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                        <p className="text-gray-300 text-sm">{item.description}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -158,7 +164,7 @@ const Gallery = () => {
             <TabsContent value="endorsement" className="mt-0">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {endorsementPortfolio.map((item, index) => (
-                  <Card key={index} className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                  <Card key={index} className="group overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
                     <div className="aspect-video overflow-hidden">
                       <img 
                         src={item.image} 
@@ -168,11 +174,11 @@ const Gallery = () => {
                     </div>
                     <CardContent className="p-6">
                       <div className="space-y-2">
-                        <span className="text-xs font-medium text-purple-500 uppercase tracking-wide">
+                        <span className="text-xs font-medium text-pink-400 uppercase tracking-wide">
                           {item.category}
                         </span>
-                        <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
-                        <p className="text-gray-600 text-sm">{item.description}</p>
+                        <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                        <p className="text-gray-300 text-sm">{item.description}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -185,27 +191,27 @@ const Gallery = () => {
         {/* Testimonials Section */}
         <div>
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-              Client <span className="gradient-text">Testimonials</span>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">
+              Client <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Testimonials</span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
               What clients say who have experienced the positive impact of our services
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow duration-300">
+              <Card key={index} className="p-6 hover:shadow-lg hover:shadow-purple-500/20 transition-shadow duration-300 bg-black/50 border-white/10 backdrop-blur-sm">
                 <CardContent className="p-0 space-y-4">
                   <div className="flex items-center space-x-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <span key={i} className="text-yellow-400 text-lg">⭐</span>
                     ))}
                   </div>
-                  <p className="text-gray-700 italic leading-relaxed">"{testimonial.content}"</p>
-                  <div className="border-t pt-4">
-                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-sm text-brand-blue-600">{testimonial.business}</div>
+                  <p className="text-gray-300 italic leading-relaxed">"{testimonial.content}"</p>
+                  <div className="border-t border-white/10 pt-4">
+                    <div className="font-semibold text-white">{testimonial.name}</div>
+                    <div className="text-sm text-blue-400">{testimonial.business}</div>
                   </div>
                 </CardContent>
               </Card>
