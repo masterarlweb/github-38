@@ -3,6 +3,7 @@ import { Instagram, Video, Camera, Palette, Bot, Target } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 const Services = () => {
   const navigate = useNavigate();
@@ -141,6 +142,14 @@ const Services = () => {
                   }
                 }}
             >
+              <GlowingEffect
+                spread={30}
+                glow={true}
+                disabled={false}
+                proximity={50}
+                inactiveZone={0.01}
+                borderWidth={1}
+              />
               {/* Background Gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br from-purple-900/20 to-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
               

@@ -2,6 +2,7 @@
 import { Check, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 const Pricing = () => {
   const servicePackages = [
@@ -90,8 +91,16 @@ const Pricing = () => {
           {servicePackages.map((servicePackage, index) => (
             <Card 
               key={index} 
-              className={`relative border bg-black/50 backdrop-blur-sm ${servicePackage.popular ? 'ring-2 ring-purple-500 shadow-xl shadow-purple-500/20 scale-105' : 'shadow-lg border-white/10'} hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300`}
+              className={`relative border bg-black/50 backdrop-blur-sm ${servicePackage.popular ? 'ring-2 ring-purple-500 shadow-xl shadow-purple-500/20 scale-105' : 'shadow-lg border-white/10'} hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 overflow-hidden`}
             >
+              <GlowingEffect
+                spread={35}
+                glow={true}
+                disabled={false}
+                proximity={60}
+                inactiveZone={0.01}
+                borderWidth={servicePackage.popular ? 3 : 2}
+              />
               {servicePackage.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-medium flex items-center">

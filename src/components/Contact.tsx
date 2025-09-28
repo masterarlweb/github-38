@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { MapPin, Phone, Mail, Instagram, MessageCircle, Zap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -98,7 +99,15 @@ Please provide more information. Thank you!`;
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <Card className="shadow-2xl border border-white/10 bg-black/50 backdrop-blur-sm hover:shadow-3xl hover:shadow-purple-500/20 transition-all duration-500">
+          <Card className="shadow-2xl border border-white/10 bg-black/50 backdrop-blur-sm hover:shadow-3xl hover:shadow-purple-500/20 transition-all duration-500 relative overflow-hidden">
+            <GlowingEffect
+              spread={40}
+              glow={true}
+              disabled={false}
+              proximity={64}
+              inactiveZone={0.01}
+              borderWidth={2}
+            />
             <CardHeader className="pb-8">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/50">
