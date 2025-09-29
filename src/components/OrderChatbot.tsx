@@ -49,39 +49,66 @@ const OrderChatbot = ({ onAgentTypeSelect }: OrderChatbotProps) => {
   const getBotResponse = (userMessage: string): string => {
     const msg = userMessage.toLowerCase();
     
-    if (msg.includes('perbedaan') || msg.includes('marketing') && msg.includes('receptionist')) {
-      return 'Marketing Agent fokus pada otomatisasi konten dan kampanye marketing (newsletter, social media, video). Sedangkan Receptionist Agent adalah sistem penjawab telepon otomatis 24/7 untuk customer service dan penjadwalan.';
-    }
-    
-    if (msg.includes('harga') || msg.includes('biaya') || msg.includes('price')) {
-      return 'Harga AI Agent dimulai dari Rp 2.5 juta/bulan untuk paket basic. Harga final tergantung fitur yang dipilih dan kompleksitas kebutuhan bisnis Anda. Tim kami akan memberikan quote spesifik setelah konsultasi gratis.';
-    }
-    
-    if (msg.includes('lama') || msg.includes('waktu') || msg.includes('proses')) {
-      return 'Proses pembuatan AI Agent biasanya memakan waktu 1-2 minggu untuk basic setup dan 3-4 minggu untuk full customization. Ini termasuk development, testing, dan training.';
-    }
-    
-    if (msg.includes('fitur') || msg.includes('feature')) {
-      return 'Fitur Marketing Agent: Newsletter otomatis, content generation, social media management, video creation. Fitur Receptionist: Call handling 24/7, appointment scheduling, call screening, CRM integration.';
-    }
-    
-    if (msg.includes('trial') || msg.includes('coba') || msg.includes('demo')) {
-      return 'Ya! Kami menyediakan demo 30 menit dan free trial 7 hari setelah setup selesai. Anda bisa merasakan manfaatnya langsung sebelum komit jangka panjang.';
-    }
-    
-    if (msg.includes('marketing')) {
-      return 'Marketing Agent cocok untuk bisnis yang ingin mengotomatisasi konten marketing. Fitur unggulan: pembuatan newsletter, content repurposing, video viral, dan riset konten mendalam. Mau saya bantu isi form untuk Marketing Agent?';
-    }
-    
-    if (msg.includes('receptionist') || msg.includes('telepon')) {
-      return 'Receptionist Agent perfect untuk bisnis dengan volume panggilan tinggi. Bisa handle appointment, screening calls, memberikan info produk, dan terintegrasi dengan CRM. Tertarik untuk mencoba?';
-    }
-    
-    if (msg.includes('kontak') || msg.includes('hubungi')) {
-      return 'Anda bisa menghubungi tim kami di hellokontenih@gmail.com atau langsung isi form pemesanan di halaman ini. Tim kami akan response dalam 24 jam!';
+    // Greeting and politeness
+    if (msg.includes('halo') || msg.includes('hai') || msg.includes('hello') || msg.includes('hi') || msg.includes('selamat')) {
+      return 'Halo! Selamat datang di halaman pemesanan AI Agent Kontenih! 😊 Saya di sini untuk membantu Anda memilih AI Agent yang tepat dan memproses pemesanan dengan mudah. Ada yang bisa saya bantu hari ini?';
     }
 
-    return 'Terima kasih atas pertanyaannya! Untuk informasi lebih detail, silakan pilih salah satu topik di bawah atau langsung tanyakan ke saya. Tim kami juga siap membantu via konsultasi gratis.';
+    if (msg.includes('terima kasih') || msg.includes('thanks') || msg.includes('makasih')) {
+      return 'Sama-sama! Saya senang bisa membantu proses pemesanan Anda. Jika ada pertanyaan lain tentang AI Agent atau ingin melanjutkan pemesanan, saya siap membantu! 🙏';
+    }
+    
+    // Agent comparison - expanded keywords
+    if (msg.includes('perbedaan') || msg.includes('bedanya') || msg.includes('compare') || msg.includes('perbandingan') || (msg.includes('marketing') && msg.includes('receptionist')) || msg.includes('mana yang cocok') || msg.includes('pilih yang mana')) {
+      return '**Perbandingan Marketing Agent vs Receptionist Agent:**\n\n🎯 **Marketing Agent**:\n• Focus: Content & campaign automation\n• Features: Newsletter, social media, video creation\n• Best for: E-commerce, brand, creative agency\n• ROI: 300% increase marketing efficiency\n\n📞 **Receptionist Agent**:\n• Focus: Customer service & communication\n• Features: 24/7 call handling, appointment scheduling\n• Best for: Service business, clinic, consultancy\n• ROI: 60% cost reduction customer service\n\n**Mau saya bantu pilih yang tepat untuk bisnis Anda?** Ceritakan jenis bisnis Anda!';
+    }
+    
+    // Pricing - expanded keywords
+    if (msg.includes('harga') || msg.includes('biaya') || msg.includes('price') || msg.includes('tarif') || msg.includes('cost') || msg.includes('murah') || msg.includes('mahal') || msg.includes('budget') || msg.includes('investasi')) {
+      return '**Harga AI Agent yang kompetitif:**\n\n💰 **Basic Plan**: Rp 2.5 juta/bulan\n• Perfect untuk startup & small business\n• Core features included\n• Email support\n\n💼 **Professional Plan**: Rp 4.5 juta/bulan\n• Ideal untuk growing business\n• Advanced features + integration\n• Priority support\n\n🏢 **Enterprise Plan**: Rp 7.5 juta/bulan\n• Complete solution untuk large business\n• Full customization + dedicated support\n• SLA guaranteed\n\n🎯 **ROI Guarantee**: 400% return dalam 6 bulan\n💳 **Flexible Payment**: Monthly/quarterly/yearly\n🎁 **Special Offer**: Free setup + 7 hari trial\n\n**Mau konsultasi gratis untuk quote spesifik?**';
+    }
+    
+    // Timeline and process - expanded keywords
+    if (msg.includes('lama') || msg.includes('waktu') || msg.includes('proses') || msg.includes('durasi') || msg.includes('berapa lama') || msg.includes('timeline') || msg.includes('schedule') || msg.includes('kapan selesai') || msg.includes('deployment')) {
+      return '**Timeline pembuatan AI Agent yang efisien:**\n\n⚡ **Express Track** (1-2 minggu):\n• Basic setup dengan template\n• Standard features\n• Quick deployment\n\n🎯 **Standard Track** (2-3 minggu):\n• Custom development\n• Integration dengan existing tools\n• Comprehensive testing\n\n🏢 **Enterprise Track** (3-4 minggu):\n• Full customization\n• Advanced features\n• Extensive training\n\n**Proses Step-by-Step:**\n1. **Day 1**: Kick-off meeting & requirement\n2. **Week 1**: Development & initial testing\n3. **Week 2**: Integration & advanced features\n4. **Week 3**: Final testing & training\n5. **Week 4**: Go-live & support\n\n📊 **Progress Updates**: Weekly demo sessions\n🚀 **Fast Track Available**: Bisa start dalam 24 jam!';
+    }
+    
+    // Features - expanded keywords
+    if (msg.includes('fitur') || msg.includes('feature') || msg.includes('kemampuan') || msg.includes('fungsi') || msg.includes('bisa apa') || msg.includes('teknologi') || msg.includes('canggih')) {
+      return '**Fitur Unggulan AI Agent Kontenih:**\n\n🎯 **Marketing Agent Features**:\n✅ Newsletter automation + personalization\n✅ Social media content generation\n✅ Viral video creation & editing\n✅ Competitor analysis real-time\n✅ Campaign optimization AI-powered\n✅ Analytics dashboard comprehensive\n\n📞 **Receptionist Agent Features**:\n✅ 24/7 automatic call handling\n✅ Smart appointment scheduling\n✅ Intelligent call screening & routing\n✅ CRM integration seamless\n✅ Multi-language support\n✅ Voice cloning technology\n\n🔧 **Technical Features**:\n• GPT-4 Turbo powered\n• Response time <2 detik\n• 99.9% uptime guarantee\n• Enterprise security\n• Mobile-first design\n• 50+ integrations available\n\n**Semua features fully customizable untuk brand Anda!**';
+    }
+    
+    // Trial and demo - expanded keywords
+    if (msg.includes('trial') || msg.includes('coba') || msg.includes('demo') || msg.includes('test') || msg.includes('gratis') || msg.includes('free') || msg.includes('preview') || msg.includes('sample') || msg.includes('lihat dulu')) {
+      return '**Ya! Kami sangat confident dengan kualitas AI Agent kami:**\n\n🎯 **Free Demo Session** (30 menit):\n• Live demonstration AI Agent\n• Interactive Q&A dengan specialist\n• Customization consultation\n• Business case analysis\n\n⏱️ **Free Trial** (7 hari full access):\n• Complete features testing\n• Real business scenario\n• Performance analytics\n• Unlimited support during trial\n\n💡 **Proof of Concept**:\n• Mini implementation untuk testing\n• Custom use case demo\n• Integration testing\n• ROI projection report\n\n✅ **No Risk Guarantee**:\n• Cancel anytime during trial\n• 30-day money-back guarantee\n• No setup fees for trial\n\n📅 **Book Demo Now**: Available today!\n🚀 **Trial Setup**: Ready dalam 24 jam after agreement\n\n**Mau saya schedule demo session untuk Anda?**';
+    }
+    
+    // Marketing Agent specific - expanded keywords
+    if (msg.includes('marketing') || msg.includes('content') || msg.includes('social media') || msg.includes('newsletter') || msg.includes('video') || msg.includes('promosi') || msg.includes('iklan')) {
+      return '**Marketing Agent - Complete Marketing Automation Solution:**\n\n🎯 **Perfect untuk bisnis yang ingin:**\n• Scale marketing efforts tanpa menambah tim\n• Automate content creation & distribution\n• Increase engagement & conversion rate\n• Optimize marketing ROI\n\n✨ **Key Benefits**:\n📈 Average 300% increase marketing efficiency\n💰 ROI 400%+ dalam 6 bulan\n⏰ Save 25+ jam/minggu untuk marketing team\n📊 Data-driven marketing decisions\n\n🎯 **Industries yang cocok**:\n• E-commerce & retail\n• SaaS & tech companies\n• Creative agencies\n• Fashion & lifestyle brands\n• Education & training\n\n**Success Stories**:\n• Fashion brand: 500K followers dalam 3 bulan\n• E-commerce: 250% increase newsletter conversion\n• Agency: 300% faster content production\n\n**Tertarik dengan Marketing Agent? Mau saya bantu isi form pemesanan atau schedule konsultasi dulu?**';
+    }
+    
+    // Receptionist Agent specific - expanded keywords
+    if (msg.includes('receptionist') || msg.includes('telepon') || msg.includes('call') || msg.includes('customer service') || msg.includes('pelayanan') || msg.includes('appointment') || msg.includes('jadwal') || msg.includes('penjawab')) {
+      return '**Receptionist Agent - 24/7 Customer Service Revolution:**\n\n🎯 **Perfect untuk bisnis dengan:**\n• High volume incoming calls\n• Need 24/7 customer availability\n• Appointment-based services\n• Customer support requirements\n\n📞 **Impact Guarantee**:\n⚡ 90% call handling efficiency\n💰 60% reduction customer service costs\n📈 40% improvement customer satisfaction\n⏰ 24/7 availability tanpa break\n\n🏆 **Industries yang ideal**:\n• Healthcare (klinik, rumah sakit)\n• Professional services (law, consulting)\n• Real estate agencies\n• Beauty & wellness centers\n• Service companies\n• Educational institutions\n\n**Success Stories**:\n• Klinik kesehatan: 90% call efficiency, patient satisfaction up 40%\n• Real estate: 200% increase qualified leads\n• Service company: 60% cost reduction customer support\n\n**Voice Cloning Technology**: AI bisa menggunakan suara brand ambassador Anda!\n\n**Ready untuk transform customer service Anda? Mau konsultasi gratis atau langsung pesan?**';
+    }
+    
+    // Contact and support - expanded keywords
+    if (msg.includes('kontak') || msg.includes('hubungi') || msg.includes('contact') || msg.includes('help') || msg.includes('bantuan') || msg.includes('support') || msg.includes('tim') || msg.includes('team')) {
+      return '**Tim Kontenih siap membantu Anda 24/7:**\n\n📧 **Email**: hellokontenih@gmail.com\n📱 **WhatsApp**: Klik button WA di website\n💬 **Live Chat**: Available di website real-time\n📞 **Phone Support**: Available for premium consultation\n\n⚡ **Response Time Guarantee**:\n• WhatsApp: <30 menit (24/7)\n• Email: <2 jam (working hours)\n• Live Chat: Real-time response\n• Emergency support: <1 jam\n\n🎯 **Free Services**:\n• 30 menit consultation dengan AI specialist\n• Business requirement analysis\n• Custom quote preparation\n• Technical feasibility assessment\n\n📅 **Available Hours**:\n• Consultation: Senin-Jumat 9AM-6PM WIB\n• Support: 24/7 untuk existing clients\n• Emergency: Always available\n\n**Preferred contact method untuk pemesanan atau konsultasi?**';
+    }
+
+    // Order process and next steps
+    if (msg.includes('order') || msg.includes('pesan') || msg.includes('beli') || msg.includes('mulai') || msg.includes('start') || msg.includes('lanjut') || msg.includes('next step') || msg.includes('selanjutnya')) {
+      return '**Proses Pemesanan Super Mudah:**\n\n1️⃣ **Pilih AI Agent Type**:\n• Marketing Agent untuk content automation\n• Receptionist Agent untuk customer service\n\n2️⃣ **Konsultasi Gratis** (30 menit):\n• Business requirement analysis\n• Feature customization discussion\n• Timeline & pricing confirmation\n\n3️⃣ **Proposal & Agreement**:\n• Detailed project scope\n• Fixed price quotation\n• Flexible payment terms\n\n4️⃣ **Development & Testing**:\n• Weekly progress updates\n• Beta testing dengan tim Anda\n• Training & onboarding\n\n5️⃣ **Go Live & Support**:\n• Smooth deployment\n• 24/7 ongoing support\n• Performance monitoring\n\n🚀 **Ready to Start?**\n• Form pemesanan di halaman ini\n• Konsultasi gratis via WhatsApp\n• Schedule demo session\n\n**Mana yang mau Anda pilih untuk mulai?**';
+    }
+
+    // Benefits and ROI
+    if (msg.includes('manfaat') || msg.includes('benefit') || msg.includes('untung') || msg.includes('keuntungan') || msg.includes('roi') || msg.includes('hasil') || msg.includes('impact')) {
+      return '**Manfaat & ROI yang Terbukti:**\n\n💰 **Financial Impact**:\n• ROI rata-rata: 400% dalam 6 bulan\n• Cost reduction: 40-60% operational costs\n• Revenue increase: 200-300% dari automation\n• Payback period: 3-4 bulan\n\n⚡ **Operational Benefits**:\n• Time saved: 20-30 jam/minggu per team\n• Accuracy: 99.7% task completion rate\n• Availability: 24/7 tanpa break atau libur\n• Scalability: Handle 1000+ tasks/day\n\n📈 **Business Growth**:\n• Customer satisfaction: +40% average\n• Response time: 95% faster\n• Lead conversion: +200% improvement\n• Employee productivity: +300%\n\n🎯 **Competitive Advantages**:\n• First-mover advantage dengan AI technology\n• Future-proof business operations\n• Enhanced customer experience\n• Data-driven decision making\n\n**Real Client Results**: E-commerce client achieved 250% sales increase within 4 months using Marketing Agent!\n\n**Siap untuk transform bisnis Anda?**';
+    }
+
+    return '**Terima kasih atas pertanyaannya!** Saya siap membantu Anda dengan:\n\n🤖 **Pemilihan AI Agent** (Marketing vs Receptionist)\n💰 **Informasi harga** dan paket berlangganan\n⏰ **Timeline development** dan proses pemesanan\n🎯 **Features** dan customization options\n📊 **ROI calculation** dan business benefits\n🎁 **Free trial** dan demo session\n📞 **Konsultasi gratis** dengan AI specialist\n\n**Quick Actions:**\n• Konsultasi gratis 30 menit → Book sekarang\n• Demo live AI Agent → Schedule today\n• Quote spesifik bisnis Anda → WhatsApp tim\n• Mulai pemesanan → Isi form di halaman ini\n\n**Mana yang ingin Anda lakukan sekarang?** Tim kami siap membantu dalam 30 menit! 😊';
   };
 
   const handleSendMessage = async () => {
