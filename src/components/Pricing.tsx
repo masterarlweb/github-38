@@ -91,7 +91,7 @@ const Pricing = () => {
           {servicePackages.map((servicePackage, index) => (
             <Card 
               key={index} 
-              className={`relative border bg-black/50 backdrop-blur-sm ${servicePackage.popular ? 'ring-2 ring-purple-500 shadow-xl shadow-purple-500/20 scale-105' : 'shadow-lg border-white/10'} hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 overflow-hidden`}
+              className={`relative border bg-black/50 backdrop-blur-sm ${servicePackage.popular ? 'ring-2 ring-purple-500 scale-105' : 'border-white/10'} hover:border-purple-500/40 transition-all duration-300 overflow-hidden`}
             >
               <GlowingEffect
                 spread={35}
