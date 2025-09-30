@@ -32,7 +32,7 @@ const Logo: React.FC<LogoProps> = ({
       <div className={`${iconSizeClasses[size]} relative`}>
         <div className="absolute inset-0 bg-gradient-to-br from-brand-blue-500 to-brand-orange-500 rounded-lg transform rotate-12 opacity-80"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-brand-orange-500 to-brand-blue-500 rounded-lg transform -rotate-12"></div>
-        <div className="relative w-full h-full bg-white rounded-lg flex items-center justify-center shadow-sm">
+        <div className="relative w-full h-full bg-white dark:bg-gray-900 rounded-lg flex items-center justify-center shadow-sm">
           <span className={`font-bold bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 bg-clip-text text-transparent ${size === 'sm' ? 'text-xs' : size === 'md' ? 'text-sm' : size === 'lg' ? 'text-base' : 'text-lg'}`}>
             K
           </span>
@@ -45,7 +45,7 @@ const Logo: React.FC<LogoProps> = ({
           Kontenih
         </h1>
         {showTagline && (
-          <p className={`text-gray-600 font-medium ${size === 'sm' ? 'text-xs' : size === 'md' ? 'text-sm' : 'text-base'}`}>
+          <p className={`text-gray-600 dark:text-gray-400 font-medium ${size === 'sm' ? 'text-xs' : size === 'md' ? 'text-sm' : 'text-base'}`}>
             Konten Bikin Cuan
           </p>
         )}
