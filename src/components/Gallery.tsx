@@ -87,7 +87,7 @@ const Gallery = () => {
           </div>
 
           <Tabs defaultValue="graphic-design" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-12 bg-black/50 backdrop-blur-sm p-1 rounded-2xl shadow-lg border border-white/10">
+            <TabsList className="grid w-full grid-cols-3 mb-12 bg-black/50 backdrop-blur-sm p-1 rounded-2xl border border-white/10">
               <TabsTrigger 
                 value="graphic-design" 
                 className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-blue-500 data-[state=active]:text-white text-gray-300"
@@ -114,7 +114,7 @@ const Gallery = () => {
             <TabsContent value="graphic-design" className="mt-0">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {graphicDesignPortfolio.map((item, index) => (
-                  <Card key={index} className="group overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
+                  <Card key={index} className="group overflow-hidden hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
                     <div className="aspect-video overflow-hidden">
                       <img 
                         src={item.image} 
@@ -139,7 +139,7 @@ const Gallery = () => {
             <TabsContent value="content-creation" className="mt-0">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {contentCreationPortfolio.map((item, index) => (
-                  <Card key={index} className="group overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
+                  <Card key={index} className="group overflow-hidden hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
                     <div className="aspect-video overflow-hidden">
                       <img 
                         src={item.image} 
@@ -164,7 +164,7 @@ const Gallery = () => {
             <TabsContent value="endorsement" className="mt-0">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {endorsementPortfolio.map((item, index) => (
-                  <Card key={index} className="group overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
+                  <Card key={index} className="group overflow-hidden hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
                     <div className="aspect-video overflow-hidden">
                       <img 
                         src={item.image} 
@@ -201,7 +201,7 @@ const Gallery = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg hover:shadow-purple-500/20 transition-shadow duration-300 bg-black/50 border-white/10 backdrop-blur-sm">
+              <Card key={index} className="p-6 hover:border-purple-500/40 transition-all duration-300 bg-black/50 border-white/10 backdrop-blur-sm">
                 <CardContent className="p-0 space-y-4">
                   <div className="flex items-center space-x-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
