@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +20,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full bg-black/80 backdrop-blur-sm z-50 border-b border-white/10">
+    <header className="fixed top-0 w-full bg-background/80 backdrop-blur-sm z-50 border-b border-border">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -31,15 +32,16 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
               >
                 {item.name}
               </a>
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* CTA Button & Theme Toggle */}
+          <div className="hidden md:flex items-center gap-4">
+            <ThemeToggle />
             <Button 
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium px-6 border-0"
               onClick={() => window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank')}
@@ -48,25 +50,28 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Menu Button & Theme Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              className="p-2 text-foreground"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 w-full bg-black/95 border-b border-white/10 shadow-lg backdrop-blur-md">
+          <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 border-b border-border shadow-lg backdrop-blur-md">
             <nav className="flex flex-col space-y-4 p-4">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium py-2"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
