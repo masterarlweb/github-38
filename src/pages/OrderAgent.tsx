@@ -13,7 +13,7 @@ const OrderAgent = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [agentType, setAgentType] = useState<'marketing' | 'receptionist'>('marketing');
+  const [agentType, setAgentType] = useState<'marketing' | 'receptionist' | 'chatbot'>('marketing');
   const [formData, setFormData] = useState({
     companyName: '',
     contactName: '',
@@ -87,6 +87,14 @@ const OrderAgent = () => {
       'Informasi produk dan layanan perusahaan',
       'Follow-up leads dan customer service',
       'Integrasi dengan CRM dan calendar'
+    ],
+    chatbot: [
+      'Chatbot customer service 24/7 di website',
+      'Menjawab pertanyaan pelanggan secara otomatis',
+      'Integrasi dengan WhatsApp dan media sosial',
+      'Lead generation dan data collection',
+      'Dukungan multibahasa untuk pelanggan global',
+      'Analytics dan laporan interaksi pelanggan'
     ]
   };
 
@@ -136,7 +144,7 @@ const OrderAgent = () => {
                 {/* Agent Type Selection */}
                 <div className="space-y-4">
                   <Label className="text-base font-semibold">Pilih Jenis AI Agent *</Label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <button
                       type="button"
                       onClick={() => setAgentType('marketing')}
@@ -167,6 +175,22 @@ const OrderAgent = () => {
                         <span className="font-semibold">Voice Receptionist</span>
                       </div>
                       <p className="text-sm text-gray-600">Penjawab telepon otomatis 24/7</p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setAgentType('chatbot')}
+                      className={`p-4 border-2 rounded-xl text-left transition-all ${
+                        agentType === 'chatbot'
+                          ? 'border-purple-500 bg-purple-50'
+                          : 'border-gray-200 hover:border-purple-300'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <Bot className="h-5 w-5 text-purple-600" />
+                        <span className="font-semibold">AI Chatbot</span>
+                      </div>
+                      <p className="text-sm text-gray-600">Chatbot cerdas untuk website dan sosial media</p>
                     </button>
                   </div>
                 </div>
@@ -231,7 +255,12 @@ const OrderAgent = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="currentChallenges">
-                    {agentType === 'marketing' ? 'Tantangan Marketing Saat Ini' : 'Tantangan Customer Service Saat Ini'}
+                    {agentType === 'marketing' 
+                      ? 'Tantangan Marketing Saat Ini' 
+                      : agentType === 'receptionist' 
+                      ? 'Tantangan Customer Service Saat Ini'
+                      : 'Tantangan Komunikasi Pelanggan Saat Ini'
+                    }
                   </Label>
                   <Textarea
                     id="currentChallenges"
@@ -239,7 +268,9 @@ const OrderAgent = () => {
                     onChange={(e) => handleInputChange('currentChallenges', e.target.value)}
                     placeholder={agentType === 'marketing' 
                       ? "Ceritakan tantangan marketing yang sedang Anda hadapi..." 
-                      : "Ceritakan tantangan dalam menangani panggilan telepon dan customer service..."
+                      : agentType === 'receptionist'
+                      ? "Ceritakan tantangan dalam menangani panggilan telepon dan customer service..."
+                      : "Ceritakan tantangan dalam melayani pertanyaan pelanggan di website atau media sosial..."
                     }
                     rows={3}
                   />
@@ -247,7 +278,12 @@ const OrderAgent = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="desiredFeatures">
-                    {agentType === 'marketing' ? 'Fitur yang Diinginkan' : 'Kebutuhan Receptionist AI'}
+                    {agentType === 'marketing' 
+                      ? 'Fitur yang Diinginkan' 
+                      : agentType === 'receptionist'
+                      ? 'Kebutuhan Receptionist AI'
+                      : 'Kebutuhan AI Chatbot'
+                    }
                   </Label>
                   <Textarea
                     id="desiredFeatures"
@@ -255,7 +291,9 @@ const OrderAgent = () => {
                     onChange={(e) => handleInputChange('desiredFeatures', e.target.value)}
                     placeholder={agentType === 'marketing'
                       ? "Fitur AI agent mana yang paling Anda butuhkan?"
-                      : "Fitur receptionist AI apa yang paling Anda butuhkan? (penjadwalan, screening calls, dll.)"
+                      : agentType === 'receptionist'
+                      ? "Fitur receptionist AI apa yang paling Anda butuhkan? (penjadwalan, screening calls, dll.)"
+                      : "Fitur chatbot apa yang paling Anda butuhkan? (integrasi WhatsApp, multibahasa, dll.)"
                     }
                     rows={3}
                   />
@@ -319,13 +357,15 @@ const OrderAgent = () => {
             <Card className="shadow-xl bg-gradient-to-br from-purple-50 to-indigo-100 border-0">
               <CardHeader>
                 <CardTitle className="flex items-center gap-3 text-purple-900">
-                  {agentType === 'marketing' ? <MessageSquare className="h-8 w-8" /> : <Phone className="h-8 w-8" />}
-                  {agentType === 'marketing' ? 'AI Marketing Agent' : 'AI Voice Receptionist'} Features
+                  {agentType === 'marketing' ? <MessageSquare className="h-8 w-8" /> : agentType === 'receptionist' ? <Phone className="h-8 w-8" /> : <Bot className="h-8 w-8" />}
+                  {agentType === 'marketing' ? 'AI Marketing Agent' : agentType === 'receptionist' ? 'AI Voice Receptionist' : 'AI Chatbot'} Features
                 </CardTitle>
                 <CardDescription className="text-purple-700">
                   {agentType === 'marketing' 
                     ? 'Workflow lengkap yang menggantikan tim konten dengan otomatisasi cerdas'
-                    : 'Sistem penjawab telepon cerdas yang melayani pelanggan 24/7'
+                    : agentType === 'receptionist'
+                    ? 'Sistem penjawab telepon cerdas yang melayani pelanggan 24/7'
+                    : 'Chatbot cerdas yang merespons pelanggan secara real-time di berbagai platform'
                   }
                 </CardDescription>
               </CardHeader>
