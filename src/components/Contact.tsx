@@ -85,7 +85,7 @@ Please provide more information. Thank you!`;
 
       <div className="container-custom relative z-10">
         <div className="text-center space-y-6 mb-20">
-          <div className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+          <div className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full shadow-lg border border-white/20">
             <MessageCircle className="w-5 h-5 text-purple-400 mr-2" />
             <span className="text-blue-400 font-semibold">Contact Us</span>
           </div>
@@ -99,7 +99,7 @@ Please provide more information. Thank you!`;
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <Card className="border border-white/10 bg-black/50 backdrop-blur-sm hover:border-purple-500/40 transition-all duration-500 relative overflow-hidden">
+          <Card className="shadow-2xl border border-white/10 bg-black/50 backdrop-blur-sm hover:shadow-3xl hover:shadow-purple-500/20 transition-all duration-500 relative overflow-hidden">
             <GlowingEffect
               spread={40}
               glow={true}
@@ -110,7 +110,7 @@ Please provide more information. Thank you!`;
             />
             <CardHeader className="pb-8">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/50">
                   <Zap className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -164,7 +164,7 @@ Please provide more information. Thank you!`;
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold h-14 text-lg rounded-xl transition-all duration-300 hover:-translate-y-1 border-0"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold h-14 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0"
                 >
                   <Mail className="w-5 h-5 mr-2" />
                   Send Email Inquiry
@@ -181,11 +181,11 @@ Please provide more information. Thank you!`;
                 {contactInfo.map((info, index) => (
                   <div 
                     key={index} 
-                    className="group relative overflow-hidden p-6 bg-black/50 backdrop-blur-sm rounded-2xl hover:border-purple-500/40 transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-white/10"
+                    className="group relative overflow-hidden p-6 bg-black/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-white/10"
                     onClick={info.action}
                   >
                     <div className="flex items-center space-x-4">
-                      <div className={`w-14 h-14 bg-gradient-to-r ${info.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <div className={`w-14 h-14 bg-gradient-to-r ${info.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                         <info.icon className="h-7 w-7 text-white" />
                       </div>
                       <div className="flex-1">
@@ -204,7 +204,7 @@ Please provide more information. Thank you!`;
             </div>
 
             {/* Quick WhatsApp Button */}
-            <Card className="relative overflow-hidden bg-gradient-to-r from-green-500 to-green-600 text-white border-0 transition-all duration-300 hover:scale-105">
+            <Card className="relative overflow-hidden bg-gradient-to-r from-green-500 to-green-600 text-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
               <CardContent className="p-8 text-center relative z-10">
                 <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
@@ -215,7 +215,7 @@ Please provide more information. Thank you!`;
                   Chat directly via WhatsApp for free consultation!
                 </p>
                 <Button 
-                  className="bg-white text-green-600 hover:bg-gray-100 font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:-translate-y-1"
+                  className="bg-white text-green-600 hover:bg-gray-100 font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                   onClick={() => window.open('https://wa.me/62081336135036?text=Hello%20Kontenih%2C%20I%20want%20free%20consultation!', '_blank')}
                 >
                   💬 Chat WhatsApp Now

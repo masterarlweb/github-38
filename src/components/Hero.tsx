@@ -19,7 +19,7 @@ const Hero = () => {
           {/* Text Content */}
           <div className="space-y-8 animate-fade-in">
             <div className="space-y-6">
-              <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200">
+              <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
                 <span className="text-sm font-medium text-gray-700">🚀 First AI Digital Marketing Agency</span>
               </div>
@@ -39,7 +39,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-brand-blue-600 to-brand-blue-700 hover:from-brand-blue-700 hover:to-brand-blue-800 text-white font-medium px-8 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 group"
+                className="bg-gradient-to-r from-brand-blue-600 to-brand-blue-700 hover:from-brand-blue-700 hover:to-brand-blue-800 text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Get Started Now
@@ -48,7 +48,7 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-2 border-brand-orange-500 text-brand-orange-500 hover:bg-brand-orange-500 hover:text-white font-medium px-8 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 group backdrop-blur-sm bg-white/80"
+                className="border-2 border-brand-orange-500 text-brand-orange-500 hover:bg-brand-orange-500 hover:text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group backdrop-blur-sm bg-white/80"
                 onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
@@ -63,12 +63,12 @@ const Hero = () => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 rounded-3xl opacity-75 group-hover:opacity-100 transition-all duration-500 blur-sm group-hover:blur-none animate-gradient"></div>
                 
                 {/* Main card */}
-                <div className="relative bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl p-8 backdrop-blur-sm border border-white/30 transition-all duration-500">
+                <div className="relative bg-gradient-to-br from-white via-gray-50 to-white rounded-2xl p-8 shadow-2xl backdrop-blur-sm border border-white/30 group-hover:shadow-3xl transition-all duration-500">
                   {/* Floating icons */}
-                  <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-brand-orange-500 to-brand-orange-600 rounded-2xl flex items-center justify-center rotate-12 group-hover:rotate-0 transition-all duration-500">
+                  <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-brand-orange-500 to-brand-orange-600 rounded-2xl flex items-center justify-center shadow-xl rotate-12 group-hover:rotate-0 transition-all duration-500">
                     <span className="text-xl">🎯</span>
                   </div>
-                  <div className="absolute -top-2 -left-2 w-8 h-8 bg-gradient-to-br from-brand-blue-500 to-brand-blue-600 rounded-full flex items-center justify-center -rotate-12 group-hover:rotate-0 transition-all duration-500">
+                  <div className="absolute -top-2 -left-2 w-8 h-8 bg-gradient-to-br from-brand-blue-500 to-brand-blue-600 rounded-full flex items-center justify-center shadow-lg -rotate-12 group-hover:rotate-0 transition-all duration-500">
                     <span className="text-sm">⚡</span>
                   </div>
                   
@@ -107,7 +107,7 @@ const Hero = () => {
                             });
                           });
                         }}
-                        className="relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold px-8 py-4 rounded-2xl transition-all duration-500 hover:-translate-y-2 group/btn overflow-hidden text-lg z-10"
+                        className="relative bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 hover:from-brand-blue-700 hover:via-brand-orange-600 hover:to-brand-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2 group/btn overflow-hidden text-lg z-10"
                         size="lg"
                       >
                         {/* Button glow effect */}
@@ -127,7 +127,7 @@ const Hero = () => {
             </div>
 
             {/* About Kontenih */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
               <div className="flex items-center gap-2 mb-3">
                 <h3 className="text-lg font-bold text-gray-900">About Kontenih</h3>
                 <div className="px-3 py-1 bg-gradient-to-r from-brand-blue-500 to-brand-orange-500 text-white text-xs font-semibold rounded-full">
@@ -201,8 +201,8 @@ const Hero = () => {
           <div className="relative animate-scale-in">
             <div className="relative">
               {/* Main Card */}
-              <div className="aspect-square bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl p-8 backdrop-blur-sm border border-white/20">
-                <div className="w-full h-full bg-gradient-to-br from-brand-blue-50 to-brand-orange-50 rounded-2xl flex items-center justify-center relative overflow-hidden">
+              <div className="aspect-square bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/20">
+                <div className="w-full h-full bg-gradient-to-br from-brand-blue-50 to-brand-orange-50 rounded-2xl shadow-inner flex items-center justify-center relative overflow-hidden">
                   {/* Animated Background Pattern */}
                   <div className="absolute inset-0 opacity-10">
                     <div className="absolute top-4 left-4 w-8 h-8 bg-brand-blue-500 rounded-full animate-bounce"></div>
@@ -212,7 +212,7 @@ const Hero = () => {
                   </div>
                   
                   <div className="text-center space-y-6 relative z-10">
-                    <div className="w-24 h-24 bg-gradient-to-br from-brand-blue-500 to-brand-orange-500 rounded-2xl mx-auto flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3">
+                    <div className="w-24 h-24 bg-gradient-to-br from-brand-blue-500 to-brand-orange-500 rounded-2xl mx-auto flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-3">
                       <span className="text-3xl font-bold text-white">K</span>
                     </div>
                     <div className="space-y-3">
@@ -229,10 +229,10 @@ const Hero = () => {
               </div>
               
               {/* Floating Elements */}
-              <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-br from-brand-orange-500 to-brand-orange-600 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-rotate-6 cursor-pointer">
+              <div className="absolute -top-6 -right-6 w-20 h-20 bg-gradient-to-br from-brand-orange-500 to-brand-orange-600 rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-rotate-6 cursor-pointer">
                 <span className="text-2xl">📱</span>
               </div>
-              <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-br from-brand-blue-500 to-brand-blue-600 rounded-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-6 cursor-pointer">
+              <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-gradient-to-br from-brand-blue-500 to-brand-blue-600 rounded-2xl flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:rotate-6 cursor-pointer">
                 <span className="text-xl">💡</span>
               </div>
               

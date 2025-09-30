@@ -114,7 +114,7 @@ const Services = () => {
 
       <div className="container-custom relative z-10">
         <div className="text-center space-y-6 mb-20 relative z-10">
-          <div className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+          <div className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full shadow-lg border border-white/20">
             <span className="text-blue-400 font-semibold">🎯 Professional Services</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-white">
@@ -129,7 +129,7 @@ const Services = () => {
           {services.map((service, index) => (
             <Card 
               key={index} 
-              className={`group relative overflow-hidden hover:border-purple-500/40 transition-all duration-500 hover:-translate-y-2 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-black/70 cursor-pointer`}
+              className={`group relative overflow-hidden hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 hover:-translate-y-2 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-black/70 cursor-pointer`}
               style={{ animationDelay: `${index * 100}ms` }}
                 onClick={() => {
                   if (service.route.startsWith('#')) {
@@ -160,7 +160,7 @@ const Services = () => {
               <div className="relative z-10">
                 <CardHeader className="text-center pb-4">
                   <div className="relative mb-4">
-                    <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                    <div className={`w-16 h-16 bg-gradient-to-r ${service.color} rounded-xl flex items-center justify-center mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-lg group-hover:shadow-2xl`}>
                       <service.icon className="h-8 w-8 text-white drop-shadow-lg" />
                     </div>
                     {/* Glow Effect */}
@@ -210,7 +210,7 @@ const Services = () => {
                           navigate(service.route);
                         }
                       }}
-                      className={`w-full bg-gradient-to-r ${service.color} hover:opacity-90 text-white font-semibold text-sm py-2.5 px-4 rounded-xl transition-all duration-300 transform hover:scale-105 border-0 relative overflow-hidden group/btn`}
+                      className={`w-full bg-gradient-to-r ${service.color} hover:opacity-90 text-white font-semibold text-sm py-2.5 px-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border-0 relative overflow-hidden group/btn`}
                       disabled={service.route === '#' || service.route === 'coming-soon'}
                     >
                       {/* Button Glow Effect */}

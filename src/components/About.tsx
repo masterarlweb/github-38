@@ -66,9 +66,9 @@ const About = () => {
 
           {/* Visual Content */}
           <div className="relative">
-            <div className="aspect-video bg-gradient-to-br from-black/50 to-purple-900/30 border border-purple-500/30 rounded-2xl p-8 backdrop-blur-sm">
-              <div className="w-full h-full bg-black/40 border border-blue-400/30 rounded-xl p-6 flex flex-col justify-center items-center backdrop-blur-sm">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mb-6">
+            <div className="aspect-video bg-gradient-to-br from-black/50 to-purple-900/30 border border-purple-500/30 rounded-2xl p-8 shadow-2xl backdrop-blur-sm">
+              <div className="w-full h-full bg-black/40 border border-blue-400/30 rounded-xl shadow-lg p-6 flex flex-col justify-center items-center backdrop-blur-sm">
+                <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mb-6 shadow-lg shadow-purple-500/50">
                   <span className="text-3xl">🚀</span>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-2">Our Vision</h3>

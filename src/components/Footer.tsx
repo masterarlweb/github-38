@@ -26,7 +26,7 @@ const Footer = () => {
                 href="https://instagram.com/kontenih" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center hover:from-purple-700 hover:to-blue-700 transition-colors"
+                className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center hover:from-purple-700 hover:to-blue-700 transition-colors shadow-lg"
               >
                 <Instagram className="h-5 w-5" />
               </a>
