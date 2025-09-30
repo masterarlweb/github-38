@@ -29,7 +29,7 @@ const Logo: React.FC<LogoProps> = ({
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
       {/* Logo Icon */}
-      <div className={`${iconSizeClasses[size]} flex items-center justify-center`}>
+      <div className={`${iconSizeClasses[size]} bg-background border border-border rounded-lg flex items-center justify-center`}>
         <span className={`font-bold bg-gradient-to-r from-brand-blue-600 to-brand-orange-500 bg-clip-text text-transparent ${size === 'sm' ? 'text-xs' : size === 'md' ? 'text-sm' : size === 'lg' ? 'text-base' : 'text-lg'}`}>
           K
         </span>

@@ -43,7 +43,7 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-4">
             <ThemeToggle />
             <Button 
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium px-6 border-0"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6"
               onClick={() => window.open('https://wa.me/62081336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank')}
             >
               Consult Now
@@ -65,7 +65,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 border-b border-border shadow-lg backdrop-blur-md">
+          <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 border-b border-border backdrop-blur-md">
             <nav className="flex flex-col space-y-4 p-4">
               {navItems.map((item) => (
                 <a
