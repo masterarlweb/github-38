@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 import LeadGenerator from "./pages/LeadGenerator";
 import OrderAgent from "./pages/OrderAgent";
+import VoiceReceptionistPage from "./pages/VoiceReceptionistPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/lead-generator" element={<LeadGenerator />} />
             <Route path="/order-agent" element={<OrderAgent />} />
+            <Route path="/voice-receptionist" element={<VoiceReceptionistPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
