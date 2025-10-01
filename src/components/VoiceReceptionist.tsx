@@ -69,7 +69,7 @@ const VoiceReceptionist = () => {
 
       // Start the conversation
       const id = await conversation.startSession({
-        url: data.signed_url,
+        signedUrl: data.signed_url,
       });
 
       setConversationId(id);
