@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import OrderChatbot from '@/components/OrderChatbot';
@@ -20,6 +21,7 @@ const OrderAgent = () => {
     email: '',
     phone: '',
     businessType: '',
+    package: '',
     currentChallenges: '',
     desiredFeatures: '',
     timeline: '',
@@ -54,6 +56,7 @@ const OrderAgent = () => {
         email: '',
         phone: '',
         businessType: '',
+        package: '',
         currentChallenges: '',
         desiredFeatures: '',
         timeline: '',
@@ -251,6 +254,28 @@ const OrderAgent = () => {
                     placeholder="E-commerce, SaaS, Konsultan, dll."
                     required
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="package">Pilih Paket Layanan *</Label>
+                  <Select 
+                    value={formData.package} 
+                    onValueChange={(value) => handleInputChange('package', value)}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Pilih paket yang sesuai..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="ai-system">AI System Creation</SelectItem>
+                      <SelectItem value="graphic-design">Graphic Design</SelectItem>
+                      <SelectItem value="content-creation">Content Creation</SelectItem>
+                      <SelectItem value="endorsement">Endorsement</SelectItem>
+                      <SelectItem value="custom">Custom Package</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-sm text-gray-500">
+                    Pilih paket layanan yang sesuai dengan kebutuhan bisnis Anda
+                  </p>
                 </div>
 
                 <div className="space-y-2">
