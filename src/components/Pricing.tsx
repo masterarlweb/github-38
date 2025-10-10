@@ -87,11 +87,11 @@ const Pricing = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto pt-6">
           {servicePackages.map((servicePackage, index) => (
             <Card 
               key={index} 
-              className={`relative border bg-black/50 backdrop-blur-sm ${servicePackage.popular ? 'ring-2 ring-purple-500 scale-105' : 'border-white/10'} hover:border-purple-500/40 transition-all duration-300 overflow-hidden`}
+              className={`relative border bg-black/50 backdrop-blur-sm ${servicePackage.popular ? 'ring-2 ring-purple-500 scale-105' : 'border-white/10'} hover:border-purple-500/40 transition-all duration-300`}
             >
               <GlowingEffect
                 spread={35}
@@ -102,9 +102,9 @@ const Pricing = () => {
                 borderWidth={servicePackage.popular ? 3 : 2}
               />
               {servicePackage.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-medium flex items-center">
-                    <Star className="w-4 h-4 mr-1" />
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+                  <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-medium flex items-center shadow-lg">
+                    <Star className="w-4 h-4 mr-1 fill-current" />
                     Most Popular
                   </div>
                 </div>
