@@ -1,6 +1,6 @@
 "use client";
 
-import { Palette, Video, Instagram, Bot, Target } from "lucide-react";
+import { Palette, Video, Instagram, Bot } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +16,7 @@ export function GlowingEffectDemo() {
         </p>
       </div>
       
-      <ul className="grid grid-cols-1 grid-rows-none gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <ul className="grid grid-cols-1 grid-rows-none gap-6 md:grid-cols-2 lg:grid-cols-4">
         <GridItem
           area="col-span-1"
           icon={<Bot className="h-6 w-6" />}
@@ -40,12 +40,6 @@ export function GlowingEffectDemo() {
           icon={<Instagram className="h-6 w-6" />}
           title="Endorsement Marketing"
           description="Strategic partnerships with micro and nano influencers for natural and effective SME promotion."
-        />
-        <GridItem
-          area="col-span-1"
-          icon={<Target className="h-6 w-6" />}
-          title="Lead Generator"
-          description="Powerful lead magnet to attract high-quality potential customers with accurate, targeted data."
         />
       </ul>
     </div>

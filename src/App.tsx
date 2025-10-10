@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
-import LeadGenerator from "./pages/LeadGenerator";
 import OrderAgent from "./pages/OrderAgent";
 import VoiceReceptionistPage from "./pages/VoiceReceptionistPage";
 import NotFound from "./pages/NotFound";
@@ -21,7 +20,6 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/lead-generator" element={<LeadGenerator />} />
             <Route path="/order-agent" element={<OrderAgent />} />
             <Route path="/voice-receptionist" element={<VoiceReceptionistPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

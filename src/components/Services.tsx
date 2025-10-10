@@ -1,5 +1,5 @@
 
-import { Instagram, Video, Camera, Palette, Bot, Target } from 'lucide-react';
+import { Instagram, Video, Camera, Palette, Bot } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
@@ -82,24 +82,6 @@ const Services = () => {
       hasButton: true,
       buttonText: 'Lihat Paket',
       route: '#pricing'
-    },
-    {
-      icon: Target,
-      title: 'Lead Generator',
-      subtitle: 'Lead Magnet Tool',
-      description: 'Powerful lead magnet untuk menarik calon customer berkualitas tinggi. Tool AI ini membantu bisnis menemukan prospek tepat sasaran dengan data akurat.',
-      features: [
-        'AI-Powered Lead Discovery',
-        'Riset Audience Tertarget',
-        'Data Prospek Berkualitas',
-        'Export Siap Pakai'
-      ],
-      color: 'from-emerald-500 via-green-500 to-teal-600',
-      bgColor: 'from-emerald-50 to-teal-100',
-      glowColor: 'shadow-emerald-500/20',
-      hasButton: true,
-      buttonText: 'Generate Leads',
-      route: 'coming-soon'
     }
   ];
 
@@ -125,7 +107,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <Card 
               key={index} 
