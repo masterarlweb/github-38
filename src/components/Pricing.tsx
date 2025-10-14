@@ -127,7 +127,7 @@ const Pricing = () => {
                 
                 <Button 
                   className={`w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-3 hover-scale border-0`}
-                  onClick={() => window.open(`https://wa.me/6281234567890?text=Halo%20Kontenih%2C%20saya%20tertarik%20dengan%20layanan%20${servicePackage.name}%20dan%20ingin%20konsultasi%20lebih%20lanjut`, '_blank')}
+                  onClick={() => window.open(`https://wa.me/62895329475989?text=Halo%20Kontenih%2C%20saya%20tertarik%20dengan%20layanan%20${servicePackage.name}%20dan%20ingin%20konsultasi%20lebih%20lanjut`, '_blank')}
                 >
                   Consult {servicePackage.name}
                 </Button>
@@ -141,7 +141,7 @@ const Pricing = () => {
           <Button 
             variant="outline" 
             className="border-blue-400 text-blue-400 hover:bg-blue-400/10 bg-transparent"
-            onClick={() => window.open('https://wa.me/6281336135036?text=Halo%20Kontenih%2C%20saya%20ingin%20diskusi%20tentang%20paket%20custom', '_blank')}
+            onClick={() => window.open('https://wa.me/62895329475989?text=Halo%20Kontenih%2C%20saya%20ingin%20diskusi%20tentang%20paket%20custom', '_blank')}
           >
             Consult Custom Package
           </Button>

@@ -53,8 +53,8 @@ Please provide more information. Thank you!`;
     {
       icon: Phone,
       title: 'WhatsApp',
-      details: '+62 813-3613-5036',
-      action: () => window.open('https://wa.me/62081336135036', '_blank'),
+      details: '+62 895-3294-75989',
+      action: () => window.open('https://wa.me/62895329475989', '_blank'),
       color: 'from-green-500 to-green-600'
     },
     {
@@ -216,7 +216,7 @@ Please provide more information. Thank you!`;
                 </p>
                 <Button 
                   className="bg-white text-green-600 hover:bg-gray-100 font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                  onClick={() => window.open('https://wa.me/62081336135036?text=Hello%20Kontenih%2C%20I%20want%20free%20consultation!', '_blank')}
+                  onClick={() => window.open('https://wa.me/62895329475989?text=Hello%20Kontenih%2C%20I%20want%20free%20consultation!', '_blank')}
                 >
                   💬 Chat WhatsApp Now
                 </Button>
