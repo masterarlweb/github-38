@@ -53,7 +53,6 @@ const OrderAgent = () => {
         `Telepon: ${formData.phone}\n` +
         `Jenis Bisnis: ${formData.businessType}\n\n` +
         `*DETAIL PESANAN*\n` +
-        `Paket Layanan: ${formData.package}\n` +
         `Timeline: ${formData.timeline || '-'}\n` +
         `Budget: ${formData.budget || '-'}\n\n` +
         `*TANTANGAN SAAT INI*\n${formData.currentChallenges || '-'}\n\n` +
@@ -281,27 +280,6 @@ const OrderAgent = () => {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="package">Pilih Paket Layanan *</Label>
-                  <Select 
-                    value={formData.package} 
-                    onValueChange={(value) => handleInputChange('package', value)}
-                  >
-                    <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Pilih paket yang sesuai..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="ai-system">AI System Creation</SelectItem>
-                      <SelectItem value="graphic-design">Graphic Design</SelectItem>
-                      <SelectItem value="content-creation">Content Creation</SelectItem>
-                      <SelectItem value="endorsement">Endorsement</SelectItem>
-                      <SelectItem value="custom">Custom Package</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <p className="text-sm text-gray-500">
-                    Pilih paket layanan yang sesuai dengan kebutuhan bisnis Anda
-                  </p>
-                </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="currentChallenges">
