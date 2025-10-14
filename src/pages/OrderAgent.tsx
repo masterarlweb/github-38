@@ -41,32 +41,57 @@ const OrderAgent = () => {
     setIsLoading(true);
 
     try {
-      // Simulate form submission - In real implementation, you would send this to hellokontenih@gmail.com
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Format message for WhatsApp
+      const agentTypeName = agentType === 'marketing' ? 'Marketing Agent' : agentType === 'receptionist' ? 'Voice Receptionist' : 'AI Chatbot';
+      
+      const message = `*PESANAN AI AGENT BARU*\n\n` +
+        `*Jenis Agent:* ${agentTypeName}\n\n` +
+        `*INFORMASI PERUSAHAAN*\n` +
+        `Nama Perusahaan: ${formData.companyName}\n` +
+        `Nama Kontak: ${formData.contactName}\n` +
+        `Email: ${formData.email}\n` +
+        `Telepon: ${formData.phone}\n` +
+        `Jenis Bisnis: ${formData.businessType}\n\n` +
+        `*DETAIL PESANAN*\n` +
+        `Paket Layanan: ${formData.package}\n` +
+        `Timeline: ${formData.timeline || '-'}\n` +
+        `Budget: ${formData.budget || '-'}\n\n` +
+        `*TANTANGAN SAAT INI*\n${formData.currentChallenges || '-'}\n\n` +
+        `*FITUR YANG DIINGINKAN*\n${formData.desiredFeatures || '-'}\n\n` +
+        `*CATATAN TAMBAHAN*\n${formData.additionalNotes || '-'}`;
+
+      // Send to WhatsApp
+      const whatsappNumber = '62895329475989';
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      
+      window.open(whatsappUrl, '_blank');
       
       toast({
-        title: "Pesanan Berhasil Dikirim!",
-        description: "Tim kami akan menghubungi Anda dalam 24 jam untuk konsultasi lebih lanjut.",
+        title: "Membuka WhatsApp...",
+        description: "Silakan kirim pesan yang sudah disiapkan untuk menyelesaikan pesanan Anda.",
       });
 
-      // Reset form
-      setFormData({
-        companyName: '',
-        contactName: '',
-        email: '',
-        phone: '',
-        businessType: '',
-        package: '',
-        currentChallenges: '',
-        desiredFeatures: '',
-        timeline: '',
-        budget: '',
-        additionalNotes: ''
-      });
+      // Reset form after opening WhatsApp
+      setTimeout(() => {
+        setFormData({
+          companyName: '',
+          contactName: '',
+          email: '',
+          phone: '',
+          businessType: '',
+          package: '',
+          currentChallenges: '',
+          desiredFeatures: '',
+          timeline: '',
+          budget: '',
+          additionalNotes: ''
+        });
+      }, 1000);
     } catch (error) {
       toast({
         title: "Error",
-        description: "Terjadi kesalahan saat mengirim pesanan. Silakan coba lagi.",
+        description: "Terjadi kesalahan. Silakan coba lagi.",
         variant: "destructive"
       });
     } finally {
