@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import OrderChatbot from '@/components/OrderChatbot';
+import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 
 const OrderAgent = () => {
   const navigate = useNavigate();
@@ -153,9 +154,21 @@ const OrderAgent = () => {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-2 gap-8">
+      {/* Main Content with Scroll Animation */}
+      <ContainerScroll
+        titleComponent={
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              Transformasi Bisnis dengan AI
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              Otomatiskan marketing, customer service, dan komunikasi pelanggan dengan teknologi AI terdepan
+            </p>
+          </div>
+        }
+      >
+        <div className="w-full h-full overflow-auto p-4 md:p-8">
+          <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {/* Left Column - Form */}
           <Card className="shadow-xl">
             <CardHeader>
@@ -439,7 +452,8 @@ const OrderAgent = () => {
             </Card>
           </div>
         </div>
-      </main>
+        </div>
+      </ContainerScroll>
 
       {/* AI Chatbot */}
       <OrderChatbot onAgentTypeSelect={setAgentType} />
