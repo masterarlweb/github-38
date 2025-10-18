@@ -117,7 +117,7 @@ export default function ShaderDemo() {
       <div className="relative z-20 pt-24 pb-12 flex justify-center">
         <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-orange-500/30 to-amber-500/30 backdrop-blur-sm rounded-full shadow-2xl border border-orange-400/50 animate-fade-in shadow-orange-500/25">
           <div className="w-3 h-3 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full mr-3 animate-pulse shadow-lg shadow-orange-400/50"></div>
-          <span className="text-sm font-bold text-white tracking-wide">🚀 AI Digital Marketing Agency</span>
+          <span className="text-sm font-bold text-white tracking-wide">🚀 AI Digital Agency</span>
         </div>
       </div>
       
@@ -144,7 +144,7 @@ export default function ShaderDemo() {
                   Driving business growth
                 </span>{" "}
                 <span className="text-white">
-                  with AI solutions and integrated digital marketing strategies
+                  with AI solutions and integrated digital transformation strategies
                 </span>
               </p>
             </div>
