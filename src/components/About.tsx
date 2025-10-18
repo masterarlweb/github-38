@@ -1,6 +1,5 @@
 
 import { Target, Users, TrendingUp, Award } from 'lucide-react';
-import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 
 const About = () => {
   const features = [
@@ -27,30 +26,21 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="bg-black relative overflow-hidden">
+    <section id="about" className="section-padding bg-black relative overflow-hidden">
       {/* Shader background effects */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
       
-      <ContainerScroll
-        titleComponent={
-          <div className="space-y-4">
-            <h2 className="text-4xl md:text-6xl font-bold text-white">
-              About <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Kontenih</span>
-            </h2>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              Creative team helping small businesses shine through content strategy and visual design
-            </p>
-          </div>
-        }
-      >
-        <div className="w-full h-full overflow-auto p-4 md:p-8 bg-black">
-          <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+      <div className="container-custom relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
           <div className="space-y-8">
             <div className="space-y-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white">
+                About <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Kontenih</span>
+              </h2>
               <p className="text-lg text-gray-300 leading-relaxed">
                 Kontenih is a creative team that helps small businesses stand out through content strategy, visual design, product photography, and social media videos.
               </p>
@@ -93,8 +83,7 @@ const About = () => {
             <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full blur-xl"></div>
           </div>
         </div>
-        </div>
-      </ContainerScroll>
+      </div>
     </section>
   );
 };
