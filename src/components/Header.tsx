@@ -3,7 +3,6 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,9 +21,9 @@ const Header = () => {
   return (
     <header className="fixed top-0 w-full bg-black/40 backdrop-blur-md z-50 border-b border-white/10">
       <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 px-4">
           {/* Logo */}
-          <Logo size="md" />
+          <Logo size="sm" />
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -39,9 +38,8 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button & Theme Toggle */}
+          {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
-            <ThemeToggle />
             <Button 
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6"
               onClick={() => window.open('https://wa.me/62895329475989?text=Halo%20Kontenih%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20sosial%20media%20marketing', '_blank')}
@@ -50,9 +48,8 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button & Theme Toggle */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle />
             <button
               className="p-2 text-white"
               onClick={toggleMenu}
