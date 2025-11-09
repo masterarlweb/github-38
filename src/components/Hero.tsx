@@ -1,13 +1,14 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play } from 'lucide-react';
-import { HeroGeometric } from '@/components/ui/shape-landing-hero';
+import { WebGLShader } from '@/components/ui/web-gl-shader';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative overflow-hidden">
-      <HeroGeometric>
-        <div className="container-custom relative z-10 py-12 lg:py-16">
+    <section id="home" className="relative overflow-hidden min-h-screen">
+      <WebGLShader />
+      <div className="container-custom relative z-10 pt-20 pb-12 min-h-screen flex items-center">
+        <div className="w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <div className="space-y-8 animate-fade-in">
@@ -166,7 +167,7 @@ const Hero = () => {
           </div>
         </div>
         </div>
-      </HeroGeometric>
+      </div>
     </section>
   );
 };
