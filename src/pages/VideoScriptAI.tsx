@@ -28,6 +28,30 @@ const VideoScriptAI = () => {
     scrollToBottom();
   }, [messages]);
 
+  const sendToN8nWebhook = async (userMessage: string, aiResponse: string) => {
+    try {
+      await fetch('https://n8n-rphgibnj.us-east-1.clawcloudrun.com/webhook-test/0294b1eb-08b7-42ee-9cd5-1715d177cb9a', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userMessage,
+          aiResponse,
+          timestamp: new Date().toISOString(),
+          platform: 'video-script-ai',
+        }),
+      });
+    } catch (error) {
+      console.error('Webhook error:', error);
+      toast({
+        title: 'Warning',
+        description: 'Failed to sync with automation system, but your chat is working fine.',
+        variant: 'default',
+      });
+    }
+  };
+
   const streamChat = async (userMessage: string) => {
     const newMessages = [...messages, { role: 'user' as const, content: userMessage }];
     setMessages(newMessages);
@@ -103,6 +127,11 @@ const VideoScriptAI = () => {
             break;
           }
         }
+      }
+
+      // Send to n8n webhook after successful streaming
+      if (assistantMessage) {
+        await sendToN8nWebhook(userMessage, assistantMessage);
       }
     } catch (error) {
       console.error('Chat error:', error);
