@@ -2,8 +2,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Brain, Image, MessageSquare, Video, Sparkles, Zap, Wand2, PenTool } from 'lucide-react';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
+import { useNavigate } from 'react-router-dom';
 
 const KontenihAI = () => {
+  const navigate = useNavigate();
+  
   const aiFeatures = [
     {
       icon: <Brain className="w-8 h-8" />,
@@ -71,7 +74,12 @@ const KontenihAI = () => {
           {aiFeatures.map((feature, index) => (
             <Card 
               key={index}
-              className="group bg-black/40 backdrop-blur-md border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
+              onClick={() => {
+                if (feature.title === "Video Script AI") {
+                  navigate('/video-script-ai');
+                }
+              }}
+              className="group bg-black/40 backdrop-blur-md border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer"
             >
               <CardHeader>
                 <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
