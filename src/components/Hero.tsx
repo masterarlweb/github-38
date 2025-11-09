@@ -13,20 +13,20 @@ const Hero = () => {
           {/* Text Content */}
           <div className="space-y-8 animate-fade-in">
             <div className="space-y-6">
-              <div className="inline-flex items-center px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
+              <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full shadow-lg border border-white/20">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                <span className="text-sm font-medium text-gray-700">🚀 AI Digital Agency</span>
+                <span className="text-sm font-medium text-white">🚀 AI Digital Agency</span>
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                <span className="gradient-text bg-gradient-to-r from-brand-blue-600 via-brand-orange-500 to-brand-blue-600 bg-clip-text text-transparent animate-gradient">
+                <span className="gradient-text bg-gradient-to-r from-brand-blue-300 via-brand-orange-300 to-brand-blue-300 bg-clip-text text-transparent animate-gradient">
                   Content Drives Sales?
                 </span>
                 <br />
-                <span className="text-gray-900">Kontenih is the Answer.</span>
+                <span className="text-white">Kontenih is the Answer.</span>
               </h1>
-              <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                Driving business growth with AI solutions and integrated digital marketing strategies for all types of businesses.
+              <p className="text-xl text-white/80 leading-relaxed max-w-lg">
+                Driving business growth with AI solutions and integrated digital transformation strategies for all types of businesses.
               </p>
             </div>
 
@@ -51,14 +51,14 @@ const Hero = () => {
             </div>
 
             {/* About Kontenih */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
+            <div className="bg-black/20 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10">
               <div className="flex items-center gap-2 mb-3">
-                <h3 className="text-lg font-bold text-gray-900">About Kontenih</h3>
+                <h3 className="text-lg font-bold text-white">About Kontenih</h3>
                 <div className="px-3 py-1 bg-gradient-to-r from-brand-blue-500 to-brand-orange-500 text-white text-xs font-semibold rounded-full">
                   AI Digital Agency
                 </div>
               </div>
-              <p className="text-gray-600 leading-relaxed mb-4">
+              <p className="text-white/70 leading-relaxed mb-4">
                 Driving business growth with AI solutions and integrated digital transformation strategies. 
                 We combine cutting-edge technology with creativity to produce content that 
                 is not only engaging, but also effective in increasing engagement and conversions.
@@ -66,18 +66,18 @@ const Hero = () => {
               
               {/* Tujuan Kontenih */}
               <div className="space-y-3 mb-4">
-                <h4 className="text-sm font-semibold text-gray-900">Kontenih Goals:</h4>
-                <div className="grid gap-2 text-sm text-gray-600">
+                <h4 className="text-sm font-semibold text-white">Kontenih Goals:</h4>
+                <div className="grid gap-2 text-sm text-white/70">
                   <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-brand-blue-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-brand-blue-300 rounded-full"></div>
                     <span>Help brands reach maximum potential through quality content</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-brand-orange-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-brand-orange-300 rounded-full"></div>
                     <span>Integrate AI for content efficiency and consistency</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-brand-blue-500 rounded-full"></div>
+                    <div className="w-1.5 h-1.5 bg-brand-blue-300 rounded-full"></div>
                     <span>Create measurable and sustainable digital strategies</span>
                   </div>
                 </div>
@@ -85,12 +85,12 @@ const Hero = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-brand-blue-600">3+</div>
-                  <div className="text-xs text-gray-600">Years Experience</div>
+                  <div className="text-2xl font-bold text-brand-blue-300">3+</div>
+                  <div className="text-xs text-white/60">Years Experience</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-brand-orange-500">50+</div>
-                  <div className="text-xs text-gray-600">Projects Completed</div>
+                  <div className="text-2xl font-bold text-brand-orange-300">50+</div>
+                  <div className="text-xs text-white/60">Projects Completed</div>
                 </div>
               </div>
             </div>
@@ -99,24 +99,24 @@ const Hero = () => {
             <div className="grid grid-cols-3 gap-8 pt-8">
               <div className="text-center group">
                 <div className="relative">
-                  <div className="text-3xl font-bold text-brand-blue-600 group-hover:scale-110 transition-transform">100+</div>
-                  <div className="absolute -inset-2 bg-brand-blue-100 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                  <div className="text-3xl font-bold text-brand-blue-300 group-hover:scale-110 transition-transform">100+</div>
+                  <div className="absolute -inset-2 bg-brand-blue-500/20 rounded-lg opacity-0 group-hover:opacity-50 transition-opacity"></div>
                 </div>
-                <div className="text-sm text-gray-600 mt-1">Happy Clients</div>
+                <div className="text-sm text-white/70 mt-1">Happy Clients</div>
               </div>
               <div className="text-center group">
                 <div className="relative">
-                  <div className="text-3xl font-bold text-brand-orange-500 group-hover:scale-110 transition-transform">500+</div>
-                  <div className="absolute -inset-2 bg-brand-orange-100 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                  <div className="text-3xl font-bold text-brand-orange-300 group-hover:scale-110 transition-transform">500+</div>
+                  <div className="absolute -inset-2 bg-brand-orange-500/20 rounded-lg opacity-0 group-hover:opacity-50 transition-opacity"></div>
                 </div>
-                <div className="text-sm text-gray-600 mt-1">Content Created</div>
+                <div className="text-sm text-white/70 mt-1">Content Created</div>
               </div>
               <div className="text-center group">
                 <div className="relative">
-                  <div className="text-3xl font-bold text-brand-blue-600 group-hover:scale-110 transition-transform">95%</div>
-                  <div className="absolute -inset-2 bg-brand-blue-100 rounded-lg opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                  <div className="text-3xl font-bold text-brand-blue-300 group-hover:scale-110 transition-transform">95%</div>
+                  <div className="absolute -inset-2 bg-brand-blue-500/20 rounded-lg opacity-0 group-hover:opacity-50 transition-opacity"></div>
                 </div>
-                <div className="text-sm text-gray-600 mt-1">Client Satisfaction</div>
+                <div className="text-sm text-white/70 mt-1">Client Satisfaction</div>
               </div>
             </div>
           </div>
@@ -125,14 +125,14 @@ const Hero = () => {
           <div className="relative animate-scale-in">
             <div className="relative">
               {/* Main Card */}
-              <div className="aspect-square bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl p-8 shadow-2xl backdrop-blur-sm border border-white/20">
-                <div className="w-full h-full bg-gradient-to-br from-brand-blue-50 to-brand-orange-50 rounded-2xl shadow-inner flex items-center justify-center relative overflow-hidden">
+              <div className="aspect-square bg-gradient-to-br from-black/20 via-black/10 to-black/20 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/10">
+                <div className="w-full h-full bg-gradient-to-br from-brand-blue-500/20 to-brand-orange-500/20 rounded-2xl shadow-inner flex items-center justify-center relative overflow-hidden">
                   {/* Animated Background Pattern */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute top-4 left-4 w-8 h-8 bg-brand-blue-500 rounded-full animate-bounce"></div>
-                    <div className="absolute top-8 right-8 w-6 h-6 bg-brand-orange-500 rounded-full animate-bounce delay-300"></div>
-                    <div className="absolute bottom-8 left-8 w-4 h-4 bg-brand-blue-500 rounded-full animate-bounce delay-700"></div>
-                    <div className="absolute bottom-4 right-4 w-5 h-5 bg-brand-orange-500 rounded-full animate-bounce delay-1000"></div>
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-4 left-4 w-8 h-8 bg-brand-blue-300 rounded-full animate-bounce"></div>
+                    <div className="absolute top-8 right-8 w-6 h-6 bg-brand-orange-300 rounded-full animate-bounce delay-300"></div>
+                    <div className="absolute bottom-8 left-8 w-4 h-4 bg-brand-blue-300 rounded-full animate-bounce delay-700"></div>
+                    <div className="absolute bottom-4 right-4 w-5 h-5 bg-brand-orange-300 rounded-full animate-bounce delay-1000"></div>
                   </div>
                   
                   <div className="text-center space-y-6 relative z-10">
@@ -140,12 +140,12 @@ const Hero = () => {
                       <span className="text-3xl font-bold text-white">K</span>
                     </div>
                     <div className="space-y-3">
-                      <h3 className="font-bold text-xl text-gray-900">Kontenih Agency</h3>
-                      <p className="text-sm text-gray-600 font-medium">Your Digital Growth Partner</p>
+                      <h3 className="font-bold text-xl text-white">Kontenih Agency</h3>
+                      <p className="text-sm text-white/70 font-medium">Your Digital Growth Partner</p>
                       <div className="flex justify-center space-x-2">
-                        <div className="w-2 h-2 bg-brand-blue-500 rounded-full animate-pulse"></div>
-                        <div className="w-2 h-2 bg-brand-orange-500 rounded-full animate-pulse delay-300"></div>
-                        <div className="w-2 h-2 bg-brand-blue-500 rounded-full animate-pulse delay-600"></div>
+                        <div className="w-2 h-2 bg-brand-blue-300 rounded-full animate-pulse"></div>
+                        <div className="w-2 h-2 bg-brand-orange-300 rounded-full animate-pulse delay-300"></div>
+                        <div className="w-2 h-2 bg-brand-blue-300 rounded-full animate-pulse delay-600"></div>
                       </div>
                     </div>
                   </div>
