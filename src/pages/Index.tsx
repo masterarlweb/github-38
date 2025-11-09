@@ -1,6 +1,6 @@
 
 import Header from '@/components/Header';
-import ShaderDemo from '@/components/ShaderDemo';
+import Hero from '@/components/Hero';
 import { GlowingEffectDemo } from '@/components/GlowingEffectDemo';
 import About from '@/components/About';
 import Services from '@/components/Services';
@@ -14,7 +14,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <ShaderDemo />
+      <Hero />
       <section className="bg-black relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
