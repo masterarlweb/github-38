@@ -20,7 +20,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full bg-background/80 backdrop-blur-sm z-50 border-b border-border">
+    <header className="fixed top-0 w-full bg-black/40 backdrop-blur-md z-50 border-b border-white/10">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -32,7 +32,7 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
+                className="text-white/80 hover:text-white transition-colors duration-200 font-medium"
               >
                 {item.name}
               </a>
@@ -54,7 +54,7 @@ const Header = () => {
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle />
             <button
-              className="p-2 text-foreground"
+              className="p-2 text-white"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
@@ -65,13 +65,13 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 border-b border-border backdrop-blur-md">
+          <div className="md:hidden absolute top-16 left-0 w-full bg-black/90 border-b border-white/10 backdrop-blur-md">
             <nav className="flex flex-col space-y-4 p-4">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
+                  className="text-white/80 hover:text-white transition-colors duration-200 font-medium py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
