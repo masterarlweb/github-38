@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { MapPin, Phone, Mail, Instagram, MessageCircle, Zap } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
+import { WebGLShader } from '@/components/ui/web-gl-shader';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -74,13 +75,10 @@ Please provide more information. Thank you!`;
   ];
 
   return (
-    <section id="contact" className="section-padding bg-black relative overflow-hidden">
-      {/* Shader Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(147,51,234,0.3),transparent_70%)]"></div>
-        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.3),transparent_70%)]"></div>
-        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <section id="contact" className="section-padding relative overflow-hidden">
+      {/* WebGL Shader Background */}
+      <div className="absolute inset-0 z-0">
+        <WebGLShader />
       </div>
 
       <div className="container-custom relative z-10">

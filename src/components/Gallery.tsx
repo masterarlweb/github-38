@@ -2,6 +2,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Palette, Video, Instagram } from 'lucide-react';
+import { WebGLShader } from '@/components/ui/web-gl-shader';
 
 const Gallery = () => {
   const graphicDesignPortfolio = [
@@ -67,11 +68,10 @@ const Gallery = () => {
   ];
 
   return (
-    <section id="gallery" className="section-padding bg-black relative overflow-hidden">
-      {/* Shader Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <section id="gallery" className="section-padding relative overflow-hidden">
+      {/* WebGL Shader Background */}
+      <div className="absolute inset-0 z-0">
+        <WebGLShader />
       </div>
       
       <div className="container-custom relative z-10">

@@ -1,16 +1,16 @@
 
 import { Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import Logo from './Logo';
+import { WebGLShader } from './ui/web-gl-shader';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black border-t border-white/10 relative overflow-hidden text-white">
-      {/* Shader effects */}
-      <div className="absolute inset-0">
-        <div className="absolute bottom-0 left-20 w-96 h-96 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-20 w-96 h-96 bg-gradient-to-r from-pink-600/10 to-purple-600/10 rounded-full blur-3xl"></div>
+    <footer className="border-t border-white/10 relative overflow-hidden text-white">
+      {/* WebGL Shader Background */}
+      <div className="absolute inset-0 z-0">
+        <WebGLShader />
       </div>
       
       <div className="container-custom section-padding relative z-10">
