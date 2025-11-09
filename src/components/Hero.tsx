@@ -1,20 +1,13 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Play } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { HeroGeometric } from '@/components/ui/shape-landing-hero';
 
 const Hero = () => {
-  const navigate = useNavigate();
   return (
-    <section id="home" className="pt-20 section-padding gradient-bg relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-brand-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-brand-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse delay-1000"></div>
-        <div className="absolute -bottom-32 left-20 w-80 h-80 bg-brand-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-50"></div>
-      </div>
-
-      <div className="container-custom relative z-10">
+    <section id="home" className="relative overflow-hidden">
+      <HeroGeometric>
+        <div className="container-custom relative z-10 py-12 lg:py-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <div className="space-y-8 animate-fade-in">
@@ -172,7 +165,8 @@ const Hero = () => {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </HeroGeometric>
     </section>
   );
 };
