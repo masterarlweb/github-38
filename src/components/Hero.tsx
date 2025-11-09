@@ -7,11 +7,11 @@ const Hero = () => {
   return (
     <section id="home" className="relative overflow-hidden min-h-screen">
       <WebGLShader />
-      <div className="container-custom relative z-10 pt-20 pb-12 min-h-screen flex items-center">
+      <div className="container-custom relative z-10 pt-20 pb-12 min-h-screen flex items-center px-6 lg:px-12">
         <div className="w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
-          <div className="space-y-8 animate-fade-in">
+          <div className="space-y-8 animate-fade-in pl-4 lg:pl-0">
             <div className="space-y-6">
               <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full shadow-lg border border-white/20">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
