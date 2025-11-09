@@ -15,7 +15,7 @@ const Hero = () => {
             <div className="space-y-6">
               <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full shadow-lg border border-white/20">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                <span className="text-sm font-medium text-white">🚀 AI Digital Agency</span>
+                <span className="text-sm font-medium text-white">🚀 AI Marketing Agency</span>
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
@@ -55,7 +55,7 @@ const Hero = () => {
               <div className="flex items-center gap-2 mb-3">
                 <h3 className="text-lg font-bold text-white">About Kontenih</h3>
                 <div className="px-3 py-1 bg-gradient-to-r from-brand-blue-500 to-brand-orange-500 text-white text-xs font-semibold rounded-full">
-                  AI Digital Agency
+                  AI Marketing Agency
                 </div>
               </div>
               <p className="text-white/70 leading-relaxed mb-4">
