@@ -122,7 +122,7 @@ const Hero = () => {
           </div>
 
           {/* Visual Content */}
-          <div className="relative animate-scale-in">
+          <div className="relative animate-scale-in pr-4 lg:pr-0">
             <div className="relative">
               {/* Main Card */}
               <div className="aspect-square bg-gradient-to-br from-black/20 via-black/10 to-black/20 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/10">
