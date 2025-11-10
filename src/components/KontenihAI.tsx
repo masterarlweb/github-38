@@ -109,6 +109,7 @@ const KontenihAI = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               size="lg"
+              onClick={() => navigate('/kontenih-ai')}
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 shadow-lg shadow-purple-500/30"
             >
               Try Kontenih AI Free
@@ -116,6 +117,7 @@ const KontenihAI = () => {
             <Button 
               size="lg"
               variant="outline"
+              onClick={() => navigate('/kontenih-ai')}
               className="border-white/20 text-white hover:bg-white/10"
             >
               See AI in Action
