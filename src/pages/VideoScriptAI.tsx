@@ -24,6 +24,8 @@ const VideoScriptAI = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const removeAsterisks = (text: string) => text.replace(/\*/g, '');
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -107,20 +109,20 @@ const VideoScriptAI = () => {
             break;
           }
 
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content;
-            if (content) {
-              assistantMessage += content;
-              setMessages((prev) => {
-                const newMessages = [...prev];
-                newMessages[newMessages.length - 1] = {
-                  role: 'assistant',
-                  content: assistantMessage,
-                };
-                return newMessages;
-              });
-            }
+            try {
+              const parsed = JSON.parse(jsonStr);
+              const content = parsed.choices?.[0]?.delta?.content;
+              if (content) {
+                assistantMessage += content;
+                setMessages((prev) => {
+                  const newMessages = [...prev];
+                  newMessages[newMessages.length - 1] = {
+                    role: 'assistant',
+                    content: removeAsterisks(assistantMessage),
+                  };
+                  return newMessages;
+                });
+              }
           } catch {
             // Incomplete JSON, put back in buffer
             textBuffer = line + '\n' + textBuffer;
