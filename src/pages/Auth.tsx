@@ -88,16 +88,16 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
       <WebGLShader />
       
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-        <Card className="w-full max-w-md bg-background/80 backdrop-blur-lg border-border/50">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-center">
+      <div className="relative z-10 w-full flex items-center justify-center px-4 py-8 sm:px-6">
+        <Card className="w-full max-w-md bg-background/80 backdrop-blur-lg border-border/50 mx-auto">
+          <CardHeader className="space-y-2 text-center">
+            <CardTitle className="text-2xl sm:text-3xl font-bold">
               {isLogin ? 'Masuk' : 'Daftar'}
             </CardTitle>
-            <CardDescription className="text-center">
+            <CardDescription className="text-sm sm:text-base">
               {isLogin 
                 ? 'Masuk untuk mengakses Kontenih AI' 
                 : 'Buat akun untuk mulai menggunakan Kontenih AI'}
@@ -155,11 +155,11 @@ const Auth = () => {
                 {loading ? 'Memproses...' : (isLogin ? 'Masuk' : 'Daftar')}
               </Button>
 
-              <div className="text-center text-sm">
+              <div className="text-center text-sm sm:text-base pt-2">
                 <button
                   type="button"
                   onClick={() => setIsLogin(!isLogin)}
-                  className="text-primary hover:underline"
+                  className="text-primary hover:underline font-medium"
                   disabled={loading}
                 >
                   {isLogin 
