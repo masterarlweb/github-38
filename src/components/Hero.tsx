@@ -35,35 +35,37 @@ const Hero = () => {
 
             {/* Try Kontenih AI Button */}
             <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition duration-300 animate-gradient"></div>
+              <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-xl sm:rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-300 animate-gradient"></div>
               <Button
-                size="lg"
                 onClick={() => navigate('/auth')}
-                className="relative w-full sm:w-auto bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white font-bold px-10 py-6 rounded-2xl shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 group border-0"
+                className="relative w-full sm:w-auto bg-gradient-to-r from-purple-600/90 via-pink-600/90 to-purple-600/90 backdrop-blur-md hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white font-bold text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 group border border-white/20"
               >
-                <Sparkles className="mr-2 h-6 w-6 animate-pulse" />
-                <span className="text-lg">Try Kontenih AI Now - Free!</span>
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/0 via-white/20 to-purple-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <Sparkles className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-pulse" />
+                <span>Try Kontenih AI - Free!</span>
+                <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-purple-400/0 via-white/10 to-purple-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Button>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-brand-blue-600 to-brand-blue-700 hover:from-brand-blue-700 hover:to-brand-blue-800 text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+                className="relative overflow-hidden bg-gradient-to-r from-brand-blue-600/80 to-brand-blue-700/80 hover:from-brand-blue-700 hover:to-brand-blue-800 backdrop-blur-md text-white font-medium text-sm sm:text-base px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl shadow-lg hover:shadow-brand-blue-500/50 transition-all duration-300 hover:scale-105 group border border-brand-blue-400/30"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Get Started Now
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10 flex items-center justify-center">
+                  Get Started Now
+                  <ArrowRight className="ml-1.5 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-400/0 via-white/10 to-brand-blue-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Button>
               <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-2 border-brand-orange-500 text-brand-orange-500 hover:bg-brand-orange-500 hover:text-white font-medium px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group backdrop-blur-sm bg-white/80"
+                className="relative overflow-hidden bg-black/30 backdrop-blur-md border border-brand-orange-500/50 text-brand-orange-400 hover:bg-brand-orange-500/90 hover:text-white hover:border-brand-orange-400 font-medium text-sm sm:text-base px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl shadow-lg hover:shadow-brand-orange-500/50 transition-all duration-300 hover:scale-105 group"
                 onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                View Portfolio
+                <span className="relative z-10 flex items-center justify-center">
+                  <Play className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:scale-110 transition-transform" />
+                  View Portfolio
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-orange-400/0 via-white/10 to-brand-orange-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Button>
             </div>
 
