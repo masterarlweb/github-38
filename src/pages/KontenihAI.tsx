@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { ArrowUp, Paperclip, Video, Image, FileText, Sparkles, Wand2, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { WebGLShader } from '@/components/ui/web-gl-shader';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -189,7 +190,10 @@ const KontenihAI = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 flex flex-col">
+    <div className="min-h-screen relative overflow-hidden">
+      <WebGLShader />
+      
+      <div className="relative z-10 min-h-screen flex flex-col">
       {/* Header */}
       <div className="border-b border-white/10 bg-black/20 backdrop-blur-md sticky top-0 z-50">
         <div className="container-custom py-4 flex items-center justify-between">
@@ -347,6 +351,7 @@ const KontenihAI = () => {
           </div>
         </Card>
       </div>
+    </div>
     </div>
   );
 };
