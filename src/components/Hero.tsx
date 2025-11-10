@@ -1,9 +1,12 @@
 
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play, Sparkles } from 'lucide-react';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+  
   return (
     <section id="home" className="relative overflow-hidden min-h-screen">
       <WebGLShader />
@@ -28,6 +31,20 @@ const Hero = () => {
               <p className="text-xl text-white/80 leading-relaxed max-w-lg">
                 Driving business growth with AI solutions and integrated digital transformation strategies for all types of businesses.
               </p>
+            </div>
+
+            {/* Try Kontenih AI Button */}
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition duration-300 animate-gradient"></div>
+              <Button
+                size="lg"
+                onClick={() => navigate('/kontenih-ai')}
+                className="relative w-full sm:w-auto bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white font-bold px-10 py-6 rounded-2xl shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 group border-0"
+              >
+                <Sparkles className="mr-2 h-6 w-6 animate-pulse" />
+                <span className="text-lg">Try Kontenih AI Now - Free!</span>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/0 via-white/20 to-purple-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Button>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
