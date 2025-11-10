@@ -2,10 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { ArrowUp, Paperclip, Video, Image, FileText, Sparkles, Wand2, MessageSquare } from 'lucide-react';
+import { ArrowUp, Paperclip, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
+import { supabase } from '@/integrations/supabase/client';
+import { User, Session } from '@supabase/supabase-js';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -26,7 +28,13 @@ const KontenihAI = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
   const [showTools, setShowTools] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [usageCount, setUsageCount] = useState<number>(0);
+  const [loadingAuth, setLoadingAuth] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const MAX_USAGE = 2;
 
   const aiTools: AITool[] = [
     {
@@ -67,6 +75,92 @@ const KontenihAI = () => {
     }
   ];
 
+  useEffect(() => {
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        setLoadingAuth(false);
+        
+        if (!session?.user) {
+          navigate('/auth');
+        }
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      setLoadingAuth(false);
+      
+      if (!session?.user) {
+        navigate('/auth');
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
+  // Fetch user usage count
+  useEffect(() => {
+    if (user) {
+      fetchUsageCount();
+    }
+  }, [user]);
+
+  const fetchUsageCount = async () => {
+    if (!user) return;
+
+    try {
+      const { data, error } = await supabase
+        .from('usage_tracking')
+        .select('usage_count')
+        .eq('user_id', user.id)
+        .single();
+
+      if (error) throw error;
+      setUsageCount(data?.usage_count || 0);
+    } catch (error) {
+      console.error('Error fetching usage:', error);
+    }
+  };
+
+  const updateUsageCount = async () => {
+    if (!user) return;
+
+    try {
+      const newCount = usageCount + 1;
+      
+      const { error } = await supabase
+        .from('usage_tracking')
+        .upsert({
+          user_id: user.id,
+          usage_count: newCount,
+          last_used_at: new Date().toISOString()
+        });
+
+      if (error) throw error;
+      setUsageCount(newCount);
+
+      if (newCount >= MAX_USAGE) {
+        toast.error('Batas penggunaan gratis habis!');
+        setTimeout(() => {
+          navigate('/#pricing');
+        }, 2000);
+      }
+    } catch (error) {
+      console.error('Error updating usage:', error);
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
+    toast.success('Berhasil logout');
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -85,10 +179,21 @@ const KontenihAI = () => {
       return;
     }
 
+    if (usageCount >= MAX_USAGE) {
+      toast.error('Batas penggunaan gratis habis! Berlangganan untuk melanjutkan.');
+      setTimeout(() => {
+        navigate('/#pricing');
+      }, 1500);
+      return;
+    }
+
     const userMessage: Message = { role: 'user', content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+
+    // Update usage count when sending first message
+    await updateUsageCount();
 
     // For now, only Video Script is fully implemented
     if (selectedTool === 'video-script') {
@@ -189,6 +294,14 @@ const KontenihAI = () => {
     }
   };
 
+  if (loadingAuth) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-white">Memuat...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       <WebGLShader />
@@ -215,9 +328,24 @@ const KontenihAI = () => {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/20 border border-green-500/30">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-            <span className="text-xs text-green-300">AI Ready</span>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/30">
+              <span className="text-xs text-blue-300">
+                Sisa: {MAX_USAGE - usageCount} dari {MAX_USAGE}
+              </span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/20 border border-green-500/30">
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+              <span className="text-xs text-green-300">AI Ready</span>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="text-white/60 hover:text-white hover:bg-white/10"
+            >
+              <LogOut className="w-4 h-4" />
+            </Button>
           </div>
         </div>
       </div>
@@ -236,7 +364,7 @@ const KontenihAI = () => {
               </h2>
               <p className="text-white/60 max-w-md mx-auto">
                 Pilih tool AI di bawah dan mulai chat untuk membuat konten yang
-                menakjubkan
+                menakjubkan. Anda memiliki {MAX_USAGE - usageCount} penggunaan gratis tersisa.
               </p>
             </div>
           ) : (
@@ -286,7 +414,7 @@ const KontenihAI = () => {
                   : 'Pilih tool AI terlebih dahulu...'
               }
               className="min-h-[80px] bg-transparent border-0 text-white placeholder:text-white/40 resize-none focus-visible:ring-0"
-              disabled={isLoading || !selectedTool}
+              disabled={isLoading || !selectedTool || usageCount >= MAX_USAGE}
             />
 
             <div className="flex items-center justify-between">
@@ -296,6 +424,7 @@ const KontenihAI = () => {
                   size="sm"
                   onClick={() => setShowTools(!showTools)}
                   className="text-white/60 hover:text-white hover:bg-white/10"
+                  disabled={usageCount >= MAX_USAGE}
                 >
                   <Paperclip className="w-4 h-4 mr-2" />
                   Tools
@@ -341,7 +470,7 @@ const KontenihAI = () => {
 
               <Button
                 onClick={handleSendMessage}
-                disabled={isLoading || !input.trim() || !selectedTool}
+                disabled={isLoading || !input.trim() || !selectedTool || usageCount >= MAX_USAGE}
                 size="icon"
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full"
               >

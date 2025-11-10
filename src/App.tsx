@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import OrderAgent from "./pages/OrderAgent";
 import VoiceReceptionistPage from "./pages/VoiceReceptionistPage";
 import KontenihAI from "./pages/KontenihAI";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/order-agent" element={<OrderAgent />} />
             <Route path="/voice-receptionist" element={<VoiceReceptionistPage />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/kontenih-ai" element={<KontenihAI />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

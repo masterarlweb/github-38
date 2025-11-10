@@ -38,7 +38,7 @@ const Hero = () => {
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition duration-300 animate-gradient"></div>
               <Button
                 size="lg"
-                onClick={() => navigate('/kontenih-ai')}
+                onClick={() => navigate('/auth')}
                 className="relative w-full sm:w-auto bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white font-bold px-10 py-6 rounded-2xl shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 group border-0"
               >
                 <Sparkles className="mr-2 h-6 w-6 animate-pulse" />
