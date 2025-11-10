@@ -74,11 +74,7 @@ const KontenihAI = () => {
           {aiFeatures.map((feature, index) => (
             <Card 
               key={index}
-              onClick={() => {
-                if (feature.title === "Video Script AI") {
-                  navigate('/video-script-ai');
-                }
-              }}
+              onClick={() => navigate('/kontenih-ai')}
               className="group bg-black/40 backdrop-blur-md border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer"
             >
               <CardHeader>
