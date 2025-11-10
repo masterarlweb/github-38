@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 import OrderAgent from "./pages/OrderAgent";
 import VoiceReceptionistPage from "./pages/VoiceReceptionistPage";
-import VideoScriptAI from "./pages/VideoScriptAI";
+
 import KontenihAI from "./pages/KontenihAI";
 import NotFound from "./pages/NotFound";
 
@@ -24,7 +24,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/order-agent" element={<OrderAgent />} />
             <Route path="/voice-receptionist" element={<VoiceReceptionistPage />} />
-            <Route path="/video-script-ai" element={<VideoScriptAI />} />
+            
             <Route path="/kontenih-ai" element={<KontenihAI />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
