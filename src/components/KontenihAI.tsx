@@ -1,11 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Brain, Image, MessageSquare, Video, Sparkles, Zap, Wand2, PenTool } from 'lucide-react';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
-import { useNavigate } from 'react-router-dom';
 
 const KontenihAI = () => {
-  const navigate = useNavigate();
   
   const aiFeatures = [
     {
@@ -74,8 +71,7 @@ const KontenihAI = () => {
           {aiFeatures.map((feature, index) => (
             <Card 
               key={index}
-              onClick={() => navigate('/kontenih-ai')}
-              className="group bg-black/40 backdrop-blur-md border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 cursor-pointer"
+              className="group bg-black/40 backdrop-blur-md border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
             >
               <CardHeader>
                 <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -100,24 +96,6 @@ const KontenihAI = () => {
           <div className="flex items-center justify-center gap-2 text-sm text-white/40">
             <Zap className="w-4 h-4" />
             <span>Integrated with GPT-4, DALL-E, Stable Diffusion, and more</span>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              size="lg"
-              onClick={() => navigate('/kontenih-ai')}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 shadow-lg shadow-purple-500/30"
-            >
-              Try Kontenih AI Free
-            </Button>
-            <Button 
-              size="lg"
-              variant="outline"
-              onClick={() => navigate('/kontenih-ai')}
-              className="border-white/20 text-white hover:bg-white/10"
-            >
-              See AI in Action
-            </Button>
           </div>
 
           <div className="flex items-center justify-center gap-8 text-sm text-white/60 pt-4">
