@@ -308,44 +308,52 @@ const KontenihAI = () => {
       
       <div className="relative z-10 min-h-screen flex flex-col">
       {/* Header */}
-      <div className="border-b border-white/10 bg-black/20 backdrop-blur-md sticky top-0 z-50">
-        <div className="container-custom py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate('/')}
-              className="text-white/60 hover:text-white hover:bg-white/10"
-            >
-              ← Kembali
-            </Button>
-            <div>
-              <h1 className="text-xl font-bold text-white">Kontenih AI</h1>
-              <p className="text-sm text-white/60">
-                {selectedTool
-                  ? aiTools.find((t) => t.id === selectedTool)?.name
-                  : 'Pilih tool AI untuk memulai'}
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/30">
-              <span className="text-xs text-blue-300">
-                Sisa: {MAX_USAGE - usageCount} dari {MAX_USAGE}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/20 border border-green-500/30">
-              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-              <span className="text-xs text-green-300">AI Ready</span>
+      <div className="border-b border-white/10 bg-black/30 backdrop-blur-lg sticky top-0 z-50 shadow-lg">
+        <div className="container-custom px-3 sm:px-6 py-3 sm:py-4">
+          {/* Top Row - Always Horizontal */}
+          <div className="flex items-center justify-between gap-2 mb-2 sm:mb-0">
+            <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/')}
+                className="text-white/60 hover:text-white hover:bg-white/10 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2 h-auto flex-shrink-0"
+              >
+                ← <span className="hidden sm:inline ml-1">Kembali</span>
+              </Button>
+              <div className="flex-1 min-w-0">
+                <h1 className="text-base sm:text-xl font-bold text-white truncate">Kontenih AI</h1>
+              </div>
             </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={handleLogout}
-              className="text-white/60 hover:text-white hover:bg-white/10"
+              className="text-white/60 hover:text-white hover:bg-white/10 p-1.5 sm:p-2 h-auto flex-shrink-0"
+              title="Logout"
             >
               <LogOut className="w-4 h-4" />
             </Button>
+          </div>
+          
+          {/* Bottom Row - Status Badges */}
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <p className="text-xs sm:text-sm text-white/60 truncate flex-shrink min-w-0">
+              {selectedTool
+                ? aiTools.find((t) => t.id === selectedTool)?.name
+                : 'Pilih tool AI'}
+            </p>
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 backdrop-blur-sm">
+                <span className="text-[10px] sm:text-xs text-blue-300 font-medium whitespace-nowrap">
+                  {MAX_USAGE - usageCount}/{MAX_USAGE}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full bg-green-500/20 border border-green-500/30 backdrop-blur-sm">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400 animate-pulse"></div>
+                <span className="text-[10px] sm:text-xs text-green-300 font-medium">AI</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
