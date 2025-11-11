@@ -229,8 +229,13 @@ const KontenihAI = () => {
           }
         );
 
-        if (!response.ok || !response.body) {
-          throw new Error('Failed to get response');
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Terjadi kesalahan' }));
+          throw new Error(errorData.error || 'Gagal mendapatkan respons');
+        }
+
+        if (!response.body) {
+          throw new Error('Tidak ada data respons');
         }
 
         setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
@@ -284,7 +289,8 @@ const KontenihAI = () => {
         }
       } catch (error) {
         console.error('Error:', error);
-        toast.error('Terjadi kesalahan saat memproses permintaan');
+        const errorMessage = error instanceof Error ? error.message : 'Terjadi kesalahan saat memproses permintaan';
+        toast.error(errorMessage);
         setMessages((prev) => prev.slice(0, -1));
       } finally {
         setIsLoading(false);
