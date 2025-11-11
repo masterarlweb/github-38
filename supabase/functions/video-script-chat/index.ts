@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -11,6 +12,47 @@ serve(async (req) => {
   }
 
   try {
+    // Verify authentication
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const supabaseClient = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      { global: { headers: { Authorization: authHeader } } }
+    );
+
+    const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+    if (userError || !user) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Check usage limits server-side
+    const { data: usage, error: usageError } = await supabaseClient
+      .from('usage_tracking')
+      .select('usage_count')
+      .eq('user_id', user.id)
+      .single();
+
+    const MAX_USAGE = 2;
+    if (usage && usage.usage_count >= MAX_USAGE) {
+      return new Response(
+        JSON.stringify({ error: 'Usage limit exceeded. Please upgrade your plan.' }),
+        { 
+          status: 429,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
     const { messages } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
@@ -52,6 +94,17 @@ Be creative, professional, and focus on helping users create content that conver
         stream: true,
       }),
     });
+
+    // Increment usage count after successful AI gateway response
+    await supabaseClient
+      .from('usage_tracking')
+      .upsert({
+        user_id: user.id,
+        usage_count: (usage?.usage_count || 0) + 1,
+        last_used_at: new Date().toISOString()
+      }, {
+        onConflict: 'user_id'
+      });
 
     if (!response.ok) {
       if (response.status === 429) {
