@@ -8,6 +8,15 @@ import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
+import { z } from 'zod';
+
+// Validation schema for chat messages
+const messageSchema = z.object({
+  message: z.string()
+    .trim()
+    .min(1, { message: 'Pesan tidak boleh kosong' })
+    .max(4000, { message: 'Pesan maksimal 4000 karakter' })
+});
 
 type Message = {
   role: 'user' | 'assistant';
@@ -172,7 +181,15 @@ const KontenihAI = () => {
   const removeAsterisks = (text: string) => text.replace(/\*/g, '');
 
   const handleSendMessage = async () => {
-    if (!input.trim()) return;
+    // Validate input
+    try {
+      messageSchema.parse({ message: input });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.errors[0].message);
+        return;
+      }
+    }
 
     if (!selectedTool) {
       toast.error('Pilih tool AI terlebih dahulu');

@@ -8,6 +8,26 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
 import { User, Session } from '@supabase/supabase-js';
+import { z } from 'zod';
+
+// Validation schema for authentication
+const authSchema = z.object({
+  email: z.string()
+    .trim()
+    .email({ message: 'Email tidak valid' })
+    .max(255, { message: 'Email terlalu panjang' }),
+  password: z.string()
+    .min(8, { message: 'Password minimal 8 karakter' })
+    .max(128, { message: 'Password terlalu panjang' })
+    .regex(/[A-Z]/, 'Password harus mengandung huruf besar')
+    .regex(/[a-z]/, 'Password harus mengandung huruf kecil')
+    .regex(/[0-9]/, 'Password harus mengandung angka'),
+  fullName: z.string()
+    .trim()
+    .min(2, { message: 'Nama minimal 2 karakter' })
+    .max(100, { message: 'Nama terlalu panjang' })
+    .optional()
+});
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -50,6 +70,12 @@ const Auth = () => {
     setLoading(true);
 
     try {
+      // Validate input before authentication
+      authSchema.parse({ 
+        email, 
+        password, 
+        fullName: isLogin ? undefined : fullName 
+      });
       if (isLogin) {
         const { error } = await supabase.auth.signInWithPassword({
           email,
@@ -75,7 +101,9 @@ const Auth = () => {
         setIsLogin(true);
       }
     } catch (error: any) {
-      if (error.message.includes('User already registered')) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.errors[0].message);
+      } else if (error.message.includes('User already registered')) {
         toast.error('Email sudah terdaftar. Silakan login.');
       } else if (error.message.includes('Invalid login credentials')) {
         toast.error('Email atau password salah.');
