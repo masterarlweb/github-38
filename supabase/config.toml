@@ -1,7 +1,4 @@
 project_id = "uvujmcltsqtqgreehwsh"
 
-[functions.get-elevenlabs-token]
-verify_jwt = false
-
 [functions.video-script-chat]
 # JWT verification enabled for security - requires authentication
