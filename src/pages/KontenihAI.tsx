@@ -212,101 +212,57 @@ const KontenihAI = () => {
     // Update usage count when sending first message
     await updateUsageCount();
 
-    // For now, only Video Script is fully implemented
-    if (selectedTool === 'video-script') {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/video-script-chat`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-            },
-            body: JSON.stringify({
-              messages: [...messages, userMessage],
-            }),
-          }
-        );
+    // Send message to n8n webhook
+    try {
+      const n8nWebhookUrl = 'https://n8n-rphgibnj.us-east-1.clawcloudrun.com/webhook-test/0294b1eb-08b7-42ee-9cd5-1715d177cb9a';
+      
+      const response = await fetch(n8nWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: input,
+          messages: [...messages, userMessage],
+          tool: selectedTool,
+          timestamp: new Date().toISOString(),
+        }),
+      });
 
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({ error: 'Terjadi kesalahan' }));
-          throw new Error(errorData.error || 'Gagal mendapatkan respons');
-        }
-
-        if (!response.body) {
-          throw new Error('Tidak ada data respons');
-        }
-
-        setMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
-
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let textBuffer = '';
-        let assistantMessage = '';
-        let streamDone = false;
-
-        while (!streamDone) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          textBuffer += decoder.decode(value, { stream: true });
-          let newlineIndex: number;
-
-          while ((newlineIndex = textBuffer.indexOf('\n')) !== -1) {
-            let line = textBuffer.slice(0, newlineIndex);
-            textBuffer = textBuffer.slice(newlineIndex + 1);
-
-            if (line.endsWith('\r')) line = line.slice(0, -1);
-            if (line.startsWith(':') || line.trim() === '') continue;
-            if (!line.startsWith('data: ')) continue;
-
-            const jsonStr = line.slice(6).trim();
-            if (jsonStr === '[DONE]') {
-              streamDone = true;
-              break;
-            }
-
-            try {
-              const parsed = JSON.parse(jsonStr);
-              const content = parsed.choices?.[0]?.delta?.content;
-              if (content) {
-                assistantMessage += content;
-                setMessages((prev) => {
-                  const newMessages = [...prev];
-                  newMessages[newMessages.length - 1] = {
-                    role: 'assistant',
-                    content: removeAsterisks(assistantMessage),
-                  };
-                  return newMessages;
-                });
-              }
-            } catch {
-              textBuffer = line + '\n' + textBuffer;
-              break;
-            }
-          }
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        const errorMessage = error instanceof Error ? error.message : 'Terjadi kesalahan saat memproses permintaan';
-        toast.error(errorMessage);
-        setMessages((prev) => prev.slice(0, -1));
-      } finally {
-        setIsLoading(false);
+      if (!response.ok) {
+        throw new Error('Gagal mendapatkan respons dari webhook');
       }
-    } else {
-      // For other tools, show coming soon message
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: 'assistant',
-            content: `Fitur ${aiTools.find(t => t.id === selectedTool)?.name} sedang dalam pengembangan. Saat ini hanya Video Script yang tersedia.`,
-          },
-        ]);
-        setIsLoading(false);
-      }, 1000);
+
+      const data = await response.json();
+      console.log('Response dari n8n:', data);
+
+      // Extract response content - adjust based on n8n webhook response structure
+      let responseContent = '';
+      if (typeof data === 'string') {
+        responseContent = data;
+      } else if (data.response) {
+        responseContent = data.response;
+      } else if (data.message) {
+        responseContent = data.message;
+      } else if (data.output) {
+        responseContent = data.output;
+      } else {
+        responseContent = JSON.stringify(data, null, 2);
+      }
+
+      const assistantMessage: Message = {
+        role: 'assistant',
+        content: removeAsterisks(responseContent),
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Terjadi kesalahan saat memproses permintaan';
+      toast.error(errorMessage);
+      setMessages((prev) => prev.slice(0, -1));
+    } finally {
+      setIsLoading(false);
     }
   };
 
