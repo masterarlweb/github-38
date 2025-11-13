@@ -196,21 +196,22 @@ const KontenihAI = () => {
       return;
     }
 
-    if (usageCount >= MAX_USAGE) {
-      toast.error('Batas penggunaan gratis habis! Berlangganan untuk melanjutkan.');
-      setTimeout(() => {
-        navigate('/#pricing');
-      }, 1500);
-      return;
-    }
+    // Temporarily disabled credit limit
+    // if (usageCount >= MAX_USAGE) {
+    //   toast.error('Batas penggunaan gratis habis! Berlangganan untuk melanjutkan.');
+    //   setTimeout(() => {
+    //     navigate('/#pricing');
+    //   }, 1500);
+    //   return;
+    // }
 
     const userMessage: Message = { role: 'user', content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
-    // Update usage count when sending first message
-    await updateUsageCount();
+    // Temporarily disabled usage tracking
+    // await updateUsageCount();
 
     // Send message to n8n webhook via GET
     try {
