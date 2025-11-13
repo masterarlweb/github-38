@@ -144,11 +144,11 @@ const KontenihAI = () => {
       
       const { error } = await supabase
         .from('usage_tracking')
-        .upsert({
-          user_id: user.id,
+        .update({
           usage_count: newCount,
           last_used_at: new Date().toISOString()
-        });
+        })
+        .eq('user_id', user.id);
 
       if (error) throw error;
       setUsageCount(newCount);
@@ -212,21 +212,22 @@ const KontenihAI = () => {
     // Update usage count when sending first message
     await updateUsageCount();
 
-    // Send message to n8n webhook
+    // Send message to n8n webhook via GET
     try {
       const n8nWebhookUrl = 'https://n8n-rphgibnj.us-east-1.clawcloudrun.com/webhook-test/0294b1eb-08b7-42ee-9cd5-1715d177cb9a';
       
-      const response = await fetch(n8nWebhookUrl, {
-        method: 'POST',
+      // Encode data as query parameters for GET request
+      const params = new URLSearchParams({
+        message: input,
+        tool: selectedTool || '',
+        timestamp: new Date().toISOString(),
+      });
+      
+      const response = await fetch(`${n8nWebhookUrl}?${params.toString()}`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          message: input,
-          messages: [...messages, userMessage],
-          tool: selectedTool,
-          timestamp: new Date().toISOString(),
-        }),
       });
 
       if (!response.ok) {
