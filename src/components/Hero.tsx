@@ -34,17 +34,13 @@ const Hero = () => {
             </div>
 
             {/* Try Kontenih AI Button */}
-            <div className="relative group">
-              <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 rounded-xl sm:rounded-2xl blur opacity-50 group-hover:opacity-75 transition duration-300 animate-gradient"></div>
-              <Button
-                onClick={() => navigate('/auth')}
-                className="relative w-full sm:w-auto bg-gradient-to-r from-purple-600/90 via-pink-600/90 to-purple-600/90 backdrop-blur-md hover:from-purple-700 hover:via-pink-700 hover:to-purple-700 text-white font-bold text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105 group border border-white/20"
-              >
-                <Sparkles className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-pulse" />
-                <span>Try Kontenih AI - Free!</span>
-                <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-r from-purple-400/0 via-white/10 to-purple-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </Button>
-            </div>
+            <Button
+              onClick={() => navigate('/auth')}
+              className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 border border-white/10"
+            >
+              <Sparkles className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+              <span>Try Kontenih AI - Free!</span>
+            </Button>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <Button 
