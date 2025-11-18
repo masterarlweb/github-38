@@ -2,13 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { ArrowUp, Paperclip, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut } from 'lucide-react';
+import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
 import { z } from 'zod';
+import { ConversationSidebar } from '@/components/ConversationSidebar';
 
 // Validation schema for chat messages
 const messageSchema = z.object({
@@ -41,6 +42,7 @@ const KontenihAI = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [usageCount, setUsageCount] = useState<number>(0);
   const [loadingAuth, setLoadingAuth] = useState(true);
+  const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const MAX_USAGE = 2;
@@ -132,7 +134,7 @@ const KontenihAI = () => {
       if (error) throw error;
       setUsageCount(data?.usage_count || 0);
     } catch (error) {
-      console.error('Error fetching usage:', error);
+      console.error('Error fetching usage count:', error);
     }
   };
 
@@ -141,7 +143,7 @@ const KontenihAI = () => {
 
     try {
       const newCount = usageCount + 1;
-      
+
       const { error } = await supabase
         .from('usage_tracking')
         .update({
@@ -151,23 +153,116 @@ const KontenihAI = () => {
         .eq('user_id', user.id);
 
       if (error) throw error;
+
       setUsageCount(newCount);
 
       if (newCount >= MAX_USAGE) {
-        toast.error('Batas penggunaan gratis habis!');
+        toast.error('Batas penggunaan gratis habis! Berlangganan untuk melanjutkan.');
         setTimeout(() => {
           navigate('/#pricing');
-        }, 2000);
+        }, 1500);
       }
     } catch (error) {
-      console.error('Error updating usage:', error);
+      console.error('Error updating usage count:', error);
+      toast.error('Gagal memperbarui usage count');
     }
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate('/');
-    toast.success('Berhasil logout');
+    try {
+      await supabase.auth.signOut();
+      toast.success('Berhasil logout');
+      navigate('/');
+    } catch (error) {
+      console.error('Error logging out:', error);
+      toast.error('Gagal logout');
+    }
+  };
+
+  const createNewConversation = async () => {
+    if (!user) return null;
+
+    try {
+      const { data, error } = await supabase
+        .from('conversations')
+        .insert({
+          user_id: user.id,
+          title: 'New Chat'
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+      return data.id;
+    } catch (error) {
+      console.error('Error creating conversation:', error);
+      toast.error('Gagal membuat percakapan baru');
+      return null;
+    }
+  };
+
+  const loadConversationMessages = async (conversationId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('chat_messages')
+        .select('*')
+        .eq('conversation_id', conversationId)
+        .order('created_at', { ascending: true });
+
+      if (error) throw error;
+
+      const loadedMessages: Message[] = (data || []).map(msg => ({
+        role: msg.role as 'user' | 'assistant',
+        content: msg.content
+      }));
+
+      setMessages(loadedMessages);
+    } catch (error) {
+      console.error('Error loading messages:', error);
+      toast.error('Gagal memuat pesan');
+    }
+  };
+
+  const saveMessage = async (conversationId: string, role: 'user' | 'assistant', content: string) => {
+    try {
+      const { error } = await supabase
+        .from('chat_messages')
+        .insert({
+          conversation_id: conversationId,
+          role,
+          content
+        });
+
+      if (error) throw error;
+
+      // Update conversation updated_at
+      await supabase
+        .from('conversations')
+        .update({ updated_at: new Date().toISOString() })
+        .eq('id', conversationId);
+
+      // Update title if it's the first message
+      if (role === 'user' && messages.length === 0) {
+        const title = content.substring(0, 50) + (content.length > 50 ? '...' : '');
+        await supabase
+          .from('conversations')
+          .update({ title })
+          .eq('id', conversationId);
+      }
+    } catch (error) {
+      console.error('Error saving message:', error);
+    }
+  };
+
+  const handleNewConversation = () => {
+    setCurrentConversationId(null);
+    setMessages([]);
+    setSelectedTool(null);
+  };
+
+  const handleSelectConversation = async (conversationId: string) => {
+    setCurrentConversationId(conversationId);
+    await loadConversationMessages(conversationId);
   };
 
   const scrollToBottom = () => {
@@ -178,48 +273,44 @@ const KontenihAI = () => {
     scrollToBottom();
   }, [messages]);
 
-  const removeAsterisks = (text: string) => text.replace(/\*/g, '');
+  const removeAsterisks = (text: string): string => {
+    return text.replace(/\*\*/g, '');
+  };
 
   const handleSendMessage = async () => {
-    // Validate input
-    try {
-      messageSchema.parse({ message: input });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        toast.error(error.errors[0].message);
-        return;
-      }
-    }
-
-    if (!selectedTool) {
-      toast.error('Pilih tool AI terlebih dahulu');
+    if (!input.trim()) {
+      toast.error('Pesan tidak boleh kosong');
       return;
     }
 
-    // Temporarily disabled credit limit
-    // if (usageCount >= MAX_USAGE) {
-    //   toast.error('Batas penggunaan gratis habis! Berlangganan untuk melanjutkan.');
-    //   setTimeout(() => {
-    //     navigate('/#pricing');
-    //   }, 1500);
-    //   return;
-    // }
+    if (!selectedTool) {
+      toast.error('Pilih AI tool terlebih dahulu');
+      return;
+    }
+
+    // Create new conversation if needed
+    let conversationId = currentConversationId;
+    if (!conversationId) {
+      conversationId = await createNewConversation();
+      if (!conversationId) return;
+      setCurrentConversationId(conversationId);
+    }
 
     const userMessage: Message = { role: 'user', content: input };
     setMessages((prev) => [...prev, userMessage]);
+    const currentInput = input;
     setInput('');
     setIsLoading(true);
 
-    // Temporarily disabled usage tracking
-    // await updateUsageCount();
+    // Save user message to database
+    await saveMessage(conversationId, 'user', currentInput);
 
     // Send message to n8n webhook via GET
     try {
-      const n8nWebhookUrl = 'https://n8n-rphgibnj.us-east-1.clawcloudrun.com/webhook-test/0294b1eb-08b7-42ee-9cd5-1715d177cb9a';
+      const n8nWebhookUrl = 'https://asepttt.app.n8n.cloud/webhook/kontenih-chat-ai';
       
-      // Encode data as query parameters for GET request
       const params = new URLSearchParams({
-        message: input,
+        message: currentInput,
         tool: selectedTool || '',
         timestamp: new Date().toISOString(),
       });
@@ -232,43 +323,30 @@ const KontenihAI = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Gagal mendapatkan respons dari webhook');
+        throw new Error(`Webhook error: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log('Response dari n8n:', data);
-
-      // Extract response content - adjust based on n8n webhook response structure
-      let responseContent = '';
-      if (typeof data === 'string') {
-        responseContent = data;
-      } else if (data.response) {
-        responseContent = data.response;
-      } else if (data.message) {
-        responseContent = data.message;
-      } else if (data.output) {
-        responseContent = data.output;
-      } else {
-        responseContent = JSON.stringify(data, null, 2);
-      }
+      const cleanContent = removeAsterisks(data.output || data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons.');
 
       const assistantMessage: Message = {
         role: 'assistant',
-        content: removeAsterisks(responseContent),
+        content: cleanContent,
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
+      
+      // Save assistant message to database
+      await saveMessage(conversationId, 'assistant', cleanContent);
     } catch (error) {
-      console.error('Error:', error);
-      const errorMessage = error instanceof Error ? error.message : 'Terjadi kesalahan saat memproses permintaan';
-      toast.error(errorMessage);
-      setMessages((prev) => prev.slice(0, -1));
+      console.error('Error sending message:', error);
+      toast.error('Gagal mengirim pesan');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -278,198 +356,147 @@ const KontenihAI = () => {
   if (loadingAuth) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-white">Memuat...</div>
+        <div className="animate-pulse text-lg">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <WebGLShader />
-      
-      <div className="relative z-10 min-h-screen flex flex-col">
-      {/* Header */}
-      <div className="border-b border-white/10 bg-black/30 backdrop-blur-lg sticky top-0 z-50 shadow-lg">
-        <div className="container-custom px-3 sm:px-6 py-3 sm:py-4">
-          {/* Top Row - Always Horizontal */}
-          <div className="flex items-center justify-between gap-2 mb-2 sm:mb-0">
-            <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate('/')}
-                className="text-white/60 hover:text-white hover:bg-white/10 text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2 h-auto flex-shrink-0"
-              >
-                ← <span className="hidden sm:inline ml-1">Kembali</span>
-              </Button>
-              <div className="flex-1 min-w-0">
-                <h1 className="text-base sm:text-xl font-bold text-white truncate">Kontenih AI</h1>
-              </div>
-            </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleLogout}
-              className="text-white/60 hover:text-white hover:bg-white/10 p-1.5 sm:p-2 h-auto flex-shrink-0"
-              title="Logout"
-            >
-              <LogOut className="w-4 h-4" />
-            </Button>
-          </div>
-          
-          {/* Bottom Row - Status Badges */}
-          <div className="flex items-center justify-between gap-2 flex-wrap">
-            <p className="text-xs sm:text-sm text-white/60 truncate flex-shrink min-w-0">
-              {selectedTool
-                ? aiTools.find((t) => t.id === selectedTool)?.name
-                : 'Pilih tool AI'}
-            </p>
-            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-              <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 backdrop-blur-sm">
-                <span className="text-[10px] sm:text-xs text-blue-300 font-medium whitespace-nowrap">
-                  {MAX_USAGE - usageCount}/{MAX_USAGE}
-                </span>
-              </div>
-              <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 rounded-full bg-green-500/20 border border-green-500/30 backdrop-blur-sm">
-                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-400 animate-pulse"></div>
-                <span className="text-[10px] sm:text-xs text-green-300 font-medium">AI</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="relative min-h-screen bg-background flex">
+      <div className="fixed inset-0 -z-10">
+        <WebGLShader />
       </div>
+      
+      {user && (
+        <ConversationSidebar
+          currentConversationId={currentConversationId}
+          onSelectConversation={handleSelectConversation}
+          onNewConversation={handleNewConversation}
+          userId={user.id}
+        />
+      )}
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col container-custom py-6 max-w-5xl">
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto mb-6 space-y-4">
+      <div className="flex-1 flex flex-col h-screen max-w-5xl mx-auto w-full px-4 py-6">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              {selectedTool ? aiTools.find(t => t.id === selectedTool)?.name : 'KontenihAI'}
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              Powered by AI • Credit: {usageCount}/{MAX_USAGE}
+            </p>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleLogout}
+            className="hover:bg-destructive/10"
+          >
+            <LogOut className="h-5 w-5" />
+          </Button>
+        </div>
+
+        {/* Chat Messages */}
+        <Card className="flex-1 mb-4 p-4 overflow-y-auto bg-card/30 backdrop-blur-sm">
           {messages.length === 0 ? (
-            <div className="text-center py-20 space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                <Sparkles className="w-8 h-8 text-purple-400" />
-              </div>
-              <h2 className="text-2xl font-bold text-white">
-                Mulai Percakapan dengan AI
-              </h2>
-              <p className="text-white/60 max-w-md mx-auto">
-                Pilih tool AI di bawah dan mulai chat untuk membuat konten yang
-                menakjubkan. Anda memiliki {MAX_USAGE - usageCount} penggunaan gratis tersisa.
+            <div className="h-full flex flex-col items-center justify-center text-center">
+              <Sparkles className="w-16 h-16 mb-4 text-purple-400" />
+              <h2 className="text-xl font-semibold mb-2">Mulai Percakapan Baru</h2>
+              <p className="text-muted-foreground max-w-md">
+                Pilih AI tool dan mulai chat untuk membuat konten yang amazing!
               </p>
             </div>
           ) : (
-            messages.map((message, index) => (
-              <div
-                key={index}
-                className={`flex ${
-                  message.role === 'user' ? 'justify-end' : 'justify-start'
-                }`}
-              >
-                <Card
-                  className={`max-w-[80%] p-4 ${
-                    message.role === 'user'
-                      ? 'bg-gradient-to-br from-purple-600 to-pink-600 text-white border-0'
-                      : 'bg-black/40 backdrop-blur-md border border-white/10 text-white'
-                  }`}
+            <div className="space-y-4">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <p className="whitespace-pre-wrap">{message.content}</p>
-                </Card>
-              </div>
-            ))
-          )}
-          {isLoading && (
-            <div className="flex justify-start">
-              <Card className="max-w-[80%] p-4 bg-black/40 backdrop-blur-md border border-white/10">
-                <div className="flex gap-2">
-                  <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></div>
-                  <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse delay-75"></div>
-                  <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse delay-150"></div>
+                  <div
+                    className={`max-w-[80%] p-3 rounded-lg ${
+                      message.role === 'user'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted'
+                    }`}
+                  >
+                    <p className="whitespace-pre-wrap">{message.content}</p>
+                  </div>
                 </div>
-              </Card>
+              ))}
+              {isLoading && (
+                <div className="flex justify-start">
+                  <div className="bg-muted p-3 rounded-lg">
+                    <div className="flex space-x-2">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-100"></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-200"></div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
             </div>
           )}
-          <div ref={messagesEndRef} />
-        </div>
+        </Card>
 
         {/* Input Area */}
-        <Card className="bg-black/60 backdrop-blur-md border border-white/10 p-4 sticky bottom-0">
-          <div className="space-y-3">
+        <Card className="p-4 bg-card/50 backdrop-blur-sm">
+          <div className="flex gap-2">
             <Textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder={
-                selectedTool
-                  ? `Tanyakan tentang ${aiTools.find((t) => t.id === selectedTool)?.name}...`
-                  : 'Pilih tool AI terlebih dahulu...'
-              }
-              className="min-h-[80px] bg-transparent border-0 text-white placeholder:text-white/40 resize-none focus-visible:ring-0"
-              disabled={isLoading || !selectedTool || usageCount >= MAX_USAGE}
+              placeholder="Ketik pesan Anda..."
+              className="min-h-[60px] resize-none bg-background/50"
+              disabled={isLoading}
             />
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowTools(!showTools)}
-                  className="text-white/60 hover:text-white hover:bg-white/10"
-                  disabled={usageCount >= MAX_USAGE}
-                >
-                  <Paperclip className="w-4 h-4 mr-2" />
-                  Tools
-                </Button>
-
-                {/* Tools Dropdown */}
-                {showTools && (
-                  <div className="absolute bottom-16 left-4 bg-black/90 backdrop-blur-md border border-white/10 rounded-lg p-2 shadow-xl z-50">
-                    <div className="grid grid-cols-2 gap-2">
-                      {aiTools.map((tool) => (
-                        <Button
-                          key={tool.id}
-                          variant={selectedTool === tool.id ? 'default' : 'ghost'}
-                          size="sm"
-                          onClick={() => {
-                            setSelectedTool(tool.id);
-                            setShowTools(false);
-                            toast.success(`${tool.name} dipilih`);
-                          }}
-                          className={`justify-start ${
-                            selectedTool === tool.id
-                              ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
-                              : 'text-white/80 hover:text-white hover:bg-white/10'
-                          }`}
-                        >
-                          {tool.icon}
-                          <span className="ml-2">{tool.name}</span>
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
+            <div className="flex flex-col gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setShowTools(!showTools)}
+                className="relative"
+              >
+                {selectedTool ? (
+                  aiTools.find(t => t.id === selectedTool)?.icon
+                ) : (
+                  <Sparkles className="h-4 w-4" />
                 )}
-
-                {selectedTool && (
-                  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30">
-                    {aiTools.find((t) => t.id === selectedTool)?.icon}
-                    <span className="text-xs text-purple-300">
-                      {aiTools.find((t) => t.id === selectedTool)?.name}
-                    </span>
-                  </div>
-                )}
-              </div>
-
+              </Button>
               <Button
                 onClick={handleSendMessage}
-                disabled={isLoading || !input.trim() || !selectedTool || usageCount >= MAX_USAGE}
+                disabled={!input.trim() || !selectedTool || isLoading}
                 size="icon"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-full"
               >
-                <ArrowUp className="w-4 h-4" />
+                <ArrowUp className="h-4 w-4" />
               </Button>
             </div>
           </div>
+
+          {/* AI Tools Dropdown */}
+          {showTools && (
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              {aiTools.map((tool) => (
+                <Button
+                  key={tool.id}
+                  variant={selectedTool === tool.id ? "default" : "outline"}
+                  className="justify-start"
+                  onClick={() => {
+                    setSelectedTool(tool.id);
+                    setShowTools(false);
+                  }}
+                >
+                  {tool.icon}
+                  <span className="ml-2">{tool.name}</span>
+                </Button>
+              ))}
+            </div>
+          )}
         </Card>
       </div>
-    </div>
     </div>
   );
 };
