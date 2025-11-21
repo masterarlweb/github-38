@@ -377,14 +377,14 @@ const KontenihAI = () => {
       )}
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col h-screen max-w-5xl mx-auto w-full px-4 py-6">
+      <div className="flex-1 flex flex-col h-screen max-w-4xl mx-auto w-full px-3 py-4 md:px-6 md:py-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4 md:mb-6 px-1">
           <div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <h1 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
               {selectedTool ? aiTools.find(t => t.id === selectedTool)?.name : 'KontenihAI'}
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs md:text-sm text-foreground/70">
               Powered by AI • Credit: {usageCount}/{MAX_USAGE}
             </p>
           </div>
@@ -392,34 +392,34 @@ const KontenihAI = () => {
             variant="ghost"
             size="icon"
             onClick={handleLogout}
-            className="hover:bg-destructive/10"
+            className="hover:bg-destructive/10 h-8 w-8 md:h-10 md:w-10"
           >
-            <LogOut className="h-5 w-5" />
+            <LogOut className="h-4 w-4 md:h-5 md:w-5" />
           </Button>
         </div>
 
         {/* Chat Messages */}
-        <Card className="flex-1 mb-4 p-4 overflow-y-auto bg-card/30 backdrop-blur-sm">
+        <Card className="flex-1 mb-3 md:mb-4 p-3 md:p-4 overflow-y-auto bg-background/5 backdrop-blur-sm border-border/20">
           {messages.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center">
-              <Sparkles className="w-16 h-16 mb-4 text-purple-400" />
-              <h2 className="text-xl font-semibold mb-2">Mulai Percakapan Baru</h2>
-              <p className="text-muted-foreground max-w-md">
+            <div className="h-full flex flex-col items-center justify-center text-center px-4">
+              <Sparkles className="w-12 h-12 md:w-16 md:h-16 mb-3 md:mb-4 text-primary" />
+              <h2 className="text-base md:text-xl font-semibold mb-2 text-foreground">Mulai Percakapan Baru</h2>
+              <p className="text-xs md:text-sm text-foreground/60 max-w-md">
                 Pilih AI tool dan mulai chat untuk membuat konten yang amazing!
               </p>
             </div>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               {messages.map((message, index) => (
                 <div
                   key={index}
                   className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] p-3 rounded-lg ${
+                    className={`max-w-[85%] md:max-w-[80%] p-2.5 md:p-3 rounded-lg text-sm md:text-base ${
                       message.role === 'user'
                         ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted'
+                        : 'bg-muted text-foreground'
                     }`}
                   >
                     <p className="whitespace-pre-wrap">{message.content}</p>
@@ -428,7 +428,7 @@ const KontenihAI = () => {
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="bg-muted p-3 rounded-lg">
+                  <div className="bg-muted p-2.5 md:p-3 rounded-lg">
                     <div className="flex space-x-2">
                       <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
                       <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-100"></div>
@@ -443,14 +443,14 @@ const KontenihAI = () => {
         </Card>
 
         {/* Input Area */}
-        <Card className="p-4 bg-card/50 backdrop-blur-sm">
+        <Card className="p-3 md:p-4 bg-background/10 backdrop-blur-sm border-border/20">
           <div className="flex gap-2">
             <Textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Ketik pesan Anda..."
-              className="min-h-[60px] resize-none bg-background/50"
+              className="min-h-[50px] md:min-h-[60px] resize-none bg-background/50 text-foreground text-sm md:text-base"
               disabled={isLoading}
             />
             <div className="flex flex-col gap-2">
@@ -458,39 +458,40 @@ const KontenihAI = () => {
                 variant="outline"
                 size="icon"
                 onClick={() => setShowTools(!showTools)}
-                className="relative"
+                className="relative h-8 w-8 md:h-10 md:w-10"
               >
                 {selectedTool ? (
-                  aiTools.find(t => t.id === selectedTool)?.icon
+                  <span className="scale-75 md:scale-100">{aiTools.find(t => t.id === selectedTool)?.icon}</span>
                 ) : (
-                  <Sparkles className="h-4 w-4" />
+                  <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
                 )}
               </Button>
               <Button
                 onClick={handleSendMessage}
                 disabled={!input.trim() || !selectedTool || isLoading}
                 size="icon"
+                className="h-8 w-8 md:h-10 md:w-10"
               >
-                <ArrowUp className="h-4 w-4" />
+                <ArrowUp className="h-3.5 w-3.5 md:h-4 md:w-4" />
               </Button>
             </div>
           </div>
 
           {/* AI Tools Dropdown */}
           {showTools && (
-            <div className="mt-4 grid grid-cols-2 gap-2">
+            <div className="mt-3 md:mt-4 grid grid-cols-2 gap-2">
               {aiTools.map((tool) => (
                 <Button
                   key={tool.id}
                   variant={selectedTool === tool.id ? "default" : "outline"}
-                  className="justify-start"
+                  className="justify-start text-xs md:text-sm h-auto py-2"
                   onClick={() => {
                     setSelectedTool(tool.id);
                     setShowTools(false);
                   }}
                 >
-                  {tool.icon}
-                  <span className="ml-2">{tool.name}</span>
+                  <span className="scale-75 md:scale-100">{tool.icon}</span>
+                  <span className="ml-1.5 md:ml-2">{tool.name}</span>
                 </Button>
               ))}
             </div>
