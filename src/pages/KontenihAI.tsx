@@ -307,7 +307,7 @@ const KontenihAI = () => {
 
     // Send message to n8n webhook via GET
     try {
-      const n8nWebhookUrl = 'https://asepttt.app.n8n.cloud/webhook/kontenih-chat-ai';
+      const n8nWebhookUrl = 'https://n8n-rphgibnj.us-east-1.clawcloudrun.com/webhook/0294b1eb-08b7-42ee-9cd5-1715d177cb9a';
       
       const params = new URLSearchParams({
         message: currentInput,
