@@ -95,7 +95,8 @@ const KontenihAI = () => {
         setLoadingAuth(false);
         
         if (!session?.user) {
-          navigate('/auth');
+          navigate('/');
+          toast.error('Silakan sign in untuk menggunakan Kontenih AI');
         }
       }
     );
@@ -107,7 +108,8 @@ const KontenihAI = () => {
       setLoadingAuth(false);
       
       if (!session?.user) {
-        navigate('/auth');
+        navigate('/');
+        toast.error('Silakan sign in untuk menggunakan Kontenih AI');
       }
     });
 
