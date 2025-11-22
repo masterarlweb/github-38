@@ -3,9 +3,48 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Play, Sparkles } from 'lucide-react';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { User } from '@supabase/supabase-js';
+import { useToast } from '@/hooks/use-toast';
 
 const Hero = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleTryKontenih = async () => {
+    if (user) {
+      navigate('/kontenih-ai');
+    } else {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/kontenih-ai`
+        }
+      });
+
+      if (error) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.message
+        });
+      }
+    }
+  };
   
   return (
     <section id="home" className="relative overflow-hidden min-h-screen">
@@ -35,11 +74,11 @@ const Hero = () => {
 
             {/* Try Kontenih AI Button */}
             <Button
-              onClick={() => navigate('/auth')}
+              onClick={handleTryKontenih}
               className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 border border-white/10"
             >
               <Sparkles className="mr-1.5 sm:mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-              <span>Try Kontenih AI - Free!</span>
+              <span>{user ? 'Go to Kontenih AI' : 'Try Kontenih AI - Free!'}</span>
             </Button>
 
             <div className="flex flex-col sm:flex-row gap-3">
