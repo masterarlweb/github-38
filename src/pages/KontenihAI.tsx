@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
-import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut } from 'lucide-react';
+import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
@@ -10,6 +9,8 @@ import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { ConversationSidebar } from '@/components/ConversationSidebar';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 // Validation schema for chat messages
 const messageSchema = z.object({
@@ -364,9 +365,50 @@ const KontenihAI = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-background flex">
+    <div className="relative min-h-screen bg-background flex overflow-hidden">
+      {/* Animated Background */}
       <div className="fixed inset-0 -z-10">
         <WebGLShader />
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+          <motion.div 
+            className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full mix-blend-normal filter blur-[128px]"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div 
+            className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full mix-blend-normal filter blur-[128px]"
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.7,
+            }}
+          />
+          <motion.div 
+            className="absolute top-1/4 right-1/3 w-64 h-64 bg-fuchsia-500/10 rounded-full mix-blend-normal filter blur-[96px]"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          />
+        </div>
       </div>
       
       {user && (
@@ -379,126 +421,245 @@ const KontenihAI = () => {
       )}
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col h-screen max-w-4xl mx-auto w-full px-3 py-4 md:px-6 md:py-6">
+      <div className="flex-1 flex flex-col h-screen max-w-3xl mx-auto w-full px-4 py-6 md:px-6">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4 md:mb-6 px-1">
+        <motion.div 
+          className="flex items-center justify-between mb-6 px-1"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <div>
-            <h1 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            <h1 className="text-2xl md:text-3xl font-medium tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground/90 to-foreground/40">
               {selectedTool ? aiTools.find(t => t.id === selectedTool)?.name : 'KontenihAI'}
             </h1>
-            <p className="text-xs md:text-sm text-foreground/70">
-              Powered by AI • Credit: {usageCount}/{MAX_USAGE}
+            <motion.div 
+              className="h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent mt-2 mb-1"
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            />
+            <p className="text-xs md:text-sm text-foreground/40 mt-1">
+              Powered by AI • {usageCount}/{MAX_USAGE} credits
             </p>
           </div>
           <Button
             variant="ghost"
             size="icon"
             onClick={handleLogout}
-            className="hover:bg-destructive/10 h-8 w-8 md:h-10 md:w-10"
+            className="hover:bg-foreground/5 h-9 w-9"
           >
-            <LogOut className="h-4 w-4 md:h-5 md:w-5" />
+            <LogOut className="h-4 w-4" />
           </Button>
-        </div>
+        </motion.div>
 
-        {/* Chat Messages */}
-        <Card className="flex-1 mb-3 md:mb-4 p-3 md:p-4 overflow-y-auto bg-background/5 backdrop-blur-sm border-border/20">
-          {messages.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center px-4">
-              <Sparkles className="w-12 h-12 md:w-16 md:h-16 mb-3 md:mb-4 text-primary" />
-              <h2 className="text-base md:text-xl font-semibold mb-2 text-foreground">Mulai Percakapan Baru</h2>
-              <p className="text-xs md:text-sm text-foreground/60 max-w-md">
-                Pilih AI tool dan mulai chat untuk membuat konten yang amazing!
-              </p>
+        {/* Chat Area */}
+        {messages.length === 0 ? (
+          <motion.div 
+            className="flex-1 flex flex-col items-center justify-center text-center space-y-6"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="space-y-3">
+              <motion.h2 
+                className="text-2xl md:text-3xl font-medium tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground/90 to-foreground/40"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                How can I help today?
+              </motion.h2>
+              <motion.p 
+                className="text-sm text-foreground/40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                Pilih AI tool dan mulai chat
+              </motion.p>
             </div>
-          ) : (
-            <div className="space-y-3 md:space-y-4">
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+
+            {/* AI Tool Suggestions */}
+            <motion.div 
+              className="flex flex-wrap items-center justify-center gap-2 max-w-2xl"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              {aiTools.map((tool, index) => (
+                <motion.button
+                  key={tool.id}
+                  onClick={() => setSelectedTool(tool.id)}
+                  className="flex items-center gap-2 px-4 py-2 bg-background/5 hover:bg-background/10 backdrop-blur-sm rounded-lg text-sm text-foreground/60 hover:text-foreground/90 transition-all border border-foreground/5 relative group"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <div
-                    className={`max-w-[85%] md:max-w-[80%] p-2.5 md:p-3 rounded-lg text-sm md:text-base ${
-                      message.role === 'user'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-foreground'
-                    }`}
-                  >
-                    <p className="whitespace-pre-wrap">{message.content}</p>
-                  </div>
-                </div>
+                  {tool.icon}
+                  <span>{tool.name}</span>
+                </motion.button>
               ))}
-              {isLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-muted p-2.5 md:p-3 rounded-lg">
-                    <div className="flex space-x-2">
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-100"></div>
-                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce delay-200"></div>
+            </motion.div>
+          </motion.div>
+        ) : (
+          <div className="flex-1 overflow-y-auto mb-4 space-y-4 px-1">
+            {messages.map((message, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={cn(
+                    "max-w-[85%] md:max-w-[80%] p-3 md:p-4 rounded-2xl text-sm md:text-base backdrop-blur-sm",
+                    message.role === 'user'
+                      ? 'bg-foreground/90 text-background'
+                      : 'bg-background/10 text-foreground border border-foreground/10'
+                  )}
+                >
+                  <p className="whitespace-pre-wrap">{message.content}</p>
+                </div>
+              </motion.div>
+            ))}
+            {isLoading && (
+              <motion.div 
+                className="flex justify-start"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <div className="backdrop-blur-xl bg-background/10 rounded-2xl px-4 py-3 border border-foreground/10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-7 h-7 rounded-full bg-foreground/5 flex items-center justify-center">
+                      <span className="text-xs font-medium text-foreground/90">AI</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-foreground/70">Thinking</span>
+                      <div className="flex items-center">
+                        {[1, 2, 3].map((dot) => (
+                          <motion.div
+                            key={dot}
+                            className="w-1.5 h-1.5 bg-foreground/90 rounded-full mx-0.5"
+                            initial={{ opacity: 0.3 }}
+                            animate={{ 
+                              opacity: [0.3, 0.9, 0.3],
+                              scale: [0.85, 1.1, 0.85]
+                            }}
+                            transition={{
+                              duration: 1.2,
+                              repeat: Infinity,
+                              delay: dot * 0.15,
+                              ease: "easeInOut",
+                            }}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-          )}
-        </Card>
+              </motion.div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+        )}
 
         {/* Input Area */}
-        <Card className="p-3 md:p-4 bg-background/10 backdrop-blur-sm border-border/20">
-          <div className="flex gap-2">
-            <Textarea
+        <motion.div 
+          className="relative backdrop-blur-2xl bg-background/5 rounded-2xl border border-foreground/10 shadow-2xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <AnimatePresence>
+            {showTools && (
+              <motion.div 
+                className="absolute left-4 right-4 bottom-full mb-2 backdrop-blur-xl bg-background/95 rounded-lg z-50 shadow-lg border border-foreground/10 overflow-hidden"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 5 }}
+                transition={{ duration: 0.15 }}
+              >
+                <div className="py-1">
+                  {aiTools.map((tool, index) => (
+                    <motion.div
+                      key={tool.id}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 text-sm transition-colors cursor-pointer",
+                        selectedTool === tool.id 
+                          ? "bg-foreground/10 text-foreground" 
+                          : "text-foreground/70 hover:bg-foreground/5"
+                      )}
+                      onClick={() => {
+                        setSelectedTool(tool.id);
+                        setShowTools(false);
+                      }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.03 }}
+                    >
+                      <div className="w-5 h-5 flex items-center justify-center text-foreground/60">
+                        {tool.icon}
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-medium">{tool.name}</div>
+                        <div className="text-xs text-foreground/40">{tool.description}</div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="p-4">
+            <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ketik pesan Anda..."
-              className="min-h-[50px] md:min-h-[60px] resize-none bg-background/50 text-foreground text-sm md:text-base"
+              placeholder="Ask Kontenih AI a question..."
+              className="w-full px-4 py-3 resize-none bg-transparent border-none text-foreground/90 text-sm focus:outline-none placeholder:text-foreground/20 min-h-[60px]"
+              style={{ overflow: "hidden" }}
               disabled={isLoading}
             />
-            <div className="flex flex-col gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setShowTools(!showTools)}
-                className="relative h-8 w-8 md:h-10 md:w-10"
-              >
-                {selectedTool ? (
-                  <span className="scale-75 md:scale-100">{aiTools.find(t => t.id === selectedTool)?.icon}</span>
-                ) : (
-                  <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                )}
-              </Button>
-              <Button
-                onClick={handleSendMessage}
-                disabled={!input.trim() || !selectedTool || isLoading}
-                size="icon"
-                className="h-8 w-8 md:h-10 md:w-10"
-              >
-                <ArrowUp className="h-3.5 w-3.5 md:h-4 md:w-4" />
-              </Button>
-            </div>
           </div>
 
-          {/* AI Tools Dropdown */}
-          {showTools && (
-            <div className="mt-3 md:mt-4 grid grid-cols-2 gap-2">
-              {aiTools.map((tool) => (
-                <Button
-                  key={tool.id}
-                  variant={selectedTool === tool.id ? "default" : "outline"}
-                  className="justify-start text-xs md:text-sm h-auto py-2"
-                  onClick={() => {
-                    setSelectedTool(tool.id);
-                    setShowTools(false);
-                  }}
-                >
-                  <span className="scale-75 md:scale-100">{tool.icon}</span>
-                  <span className="ml-1.5 md:ml-2">{tool.name}</span>
-                </Button>
-              ))}
+          <div className="p-4 border-t border-foreground/5 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <motion.button
+                type="button"
+                onClick={() => setShowTools(!showTools)}
+                whileTap={{ scale: 0.94 }}
+                className={cn(
+                  "p-2 text-foreground/40 hover:text-foreground/90 rounded-lg transition-colors relative group",
+                  showTools && "bg-foreground/10 text-foreground/90"
+                )}
+              >
+                <Command className="w-4 h-4" />
+              </motion.button>
             </div>
-          )}
-        </Card>
+            
+            <motion.button
+              type="button"
+              onClick={handleSendMessage}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              disabled={isLoading || !input.trim() || !selectedTool}
+              className={cn(
+                "px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2",
+                input.trim() && selectedTool
+                  ? "bg-foreground text-background shadow-lg"
+                  : "bg-foreground/5 text-foreground/40 cursor-not-allowed"
+              )}
+            >
+              <SendIcon className="w-4 h-4" />
+              <span>Send</span>
+            </motion.button>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
