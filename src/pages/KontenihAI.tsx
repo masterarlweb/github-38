@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon } from 'lucide-react';
+import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
@@ -44,6 +44,7 @@ const KontenihAI = () => {
   const [usageCount, setUsageCount] = useState<number>(0);
   const [loadingAuth, setLoadingAuth] = useState(true);
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const MAX_USAGE = 2;
@@ -411,13 +412,46 @@ const KontenihAI = () => {
         </div>
       </div>
       
+      {/* Sidebar Overlay for Mobile */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Sidebar */}
       {user && (
-        <ConversationSidebar
-          currentConversationId={currentConversationId}
-          onSelectConversation={handleSelectConversation}
-          onNewConversation={handleNewConversation}
-          userId={user.id}
-        />
+        <AnimatePresence>
+          {(isSidebarOpen || window.innerWidth >= 768) && (
+            <motion.div
+              className="fixed md:relative z-50 h-screen"
+              initial={{ x: -320 }}
+              animate={{ x: 0 }}
+              exit={{ x: -320 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            >
+              <ConversationSidebar
+                currentConversationId={currentConversationId}
+                onSelectConversation={(id) => {
+                  handleSelectConversation(id);
+                  setIsSidebarOpen(false);
+                }}
+                onNewConversation={() => {
+                  handleNewConversation();
+                  setIsSidebarOpen(false);
+                }}
+                userId={user.id}
+                onClose={() => setIsSidebarOpen(false)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       )}
 
       {/* Main Content */}
@@ -429,19 +463,29 @@ const KontenihAI = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div>
-            <h1 className="text-2xl md:text-3xl font-medium tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground/90 to-foreground/40">
-              {selectedTool ? aiTools.find(t => t.id === selectedTool)?.name : 'KontenihAI'}
-            </h1>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="md:hidden hover:bg-foreground/5 h-9 w-9"
+            >
+              {isSidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </Button>
+            <div>
+              <h1 className="text-2xl md:text-3xl font-medium tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground/90 to-foreground/40">
+                {selectedTool ? aiTools.find(t => t.id === selectedTool)?.name : 'KontenihAI'}
+              </h1>
             <motion.div 
               className="h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent mt-2 mb-1"
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ delay: 0.3, duration: 0.8 }}
             />
-            <p className="text-xs md:text-sm text-foreground/40 mt-1">
-              Powered by AI • {usageCount}/{MAX_USAGE} credits
-            </p>
+              <p className="text-xs md:text-sm text-foreground/40 mt-1">
+                Powered by AI • {usageCount}/{MAX_USAGE} credits
+              </p>
+            </div>
           </div>
           <Button
             variant="ghost"

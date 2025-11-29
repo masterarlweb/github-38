@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Plus, MessageSquare, Trash2 } from 'lucide-react';
+import { Plus, MessageSquare, Trash2, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Conversation {
@@ -17,6 +17,7 @@ interface ConversationSidebarProps {
   onSelectConversation: (id: string) => void;
   onNewConversation: () => void;
   userId: string;
+  onClose?: () => void;
 }
 
 export function ConversationSidebar({
@@ -24,6 +25,7 @@ export function ConversationSidebar({
   onSelectConversation,
   onNewConversation,
   userId,
+  onClose,
 }: ConversationSidebarProps) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -73,16 +75,26 @@ export function ConversationSidebar({
   };
 
   return (
-    <div className="w-64 border-r border-border bg-background/50 backdrop-blur-sm flex flex-col h-screen">
-      <div className="p-4 border-b border-border">
+    <div className="w-64 border-r border-border bg-background/95 backdrop-blur-md flex flex-col h-screen shadow-xl">
+      <div className="p-4 border-b border-border flex items-center justify-between gap-2">
         <Button
           onClick={onNewConversation}
-          className="w-full"
+          className="flex-1"
           variant="default"
         >
           <Plus className="mr-2 h-4 w-4" />
           Chat Baru
         </Button>
+        {onClose && (
+          <Button
+            onClick={onClose}
+            size="icon"
+            variant="ghost"
+            className="md:hidden h-9 w-9"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        )}
       </div>
 
       <ScrollArea className="flex-1">
