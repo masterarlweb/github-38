@@ -38,7 +38,7 @@ const KontenihAI = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedTool, setSelectedTool] = useState<string | null>(null);
+  const [selectedTool, setSelectedTool] = useState<string | null>('brand-consultant');
   const [showTools, setShowTools] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -53,40 +53,10 @@ const KontenihAI = () => {
 
   const aiTools: AITool[] = [
     {
-      id: 'video-script',
-      name: 'Video Script',
-      icon: <Video className="w-4 h-4" />,
-      description: 'Generate video scripts'
-    },
-    {
-      id: 'image-gen',
-      name: 'Image Creation',
-      icon: <Image className="w-4 h-4" />,
-      description: 'Create AI images'
-    },
-    {
-      id: 'copywriting',
-      name: 'Copywriting',
-      icon: <FileText className="w-4 h-4" />,
-      description: 'Smart copy generation'
-    },
-    {
-      id: 'content-gen',
-      name: 'Content Generator',
-      icon: <Sparkles className="w-4 h-4" />,
-      description: 'Generate content'
-    },
-    {
-      id: 'design-assist',
-      name: 'Design Assistant',
-      icon: <Wand2 className="w-4 h-4" />,
-      description: 'Get design suggestions'
-    },
-    {
-      id: 'brand-voice',
-      name: 'Brand Voice',
+      id: 'brand-consultant',
+      name: 'Brand Consultant',
       icon: <MessageSquare className="w-4 h-4" />,
-      description: 'Maintain brand consistency'
+      description: 'AI consultant for your brand strategy'
     }
   ];
 
