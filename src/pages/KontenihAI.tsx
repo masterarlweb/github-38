@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { ConversationSidebar } from '@/components/ConversationSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import Logo from '@/components/Logo';
 
 // Validation schema for chat messages
 const messageSchema = z.object({
@@ -486,15 +487,23 @@ const KontenihAI = () => {
               {isSidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
             <div>
-              <h1 className="text-2xl md:text-3xl font-medium tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground/90 to-foreground/40">
-                {selectedTool ? aiTools.find(t => t.id === selectedTool)?.name : 'KontenihAI'}
-              </h1>
-            <motion.div 
-              className="h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent mt-2 mb-1"
-              initial={{ width: 0 }}
-              animate={{ width: "100%" }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            />
+              <div className="flex items-center gap-2">
+                <Logo size="sm" />
+                {selectedTool && (
+                  <>
+                    <span className="text-foreground/40">/</span>
+                    <span className="text-lg md:text-xl font-medium text-foreground/80">
+                      {aiTools.find(t => t.id === selectedTool)?.name}
+                    </span>
+                  </>
+                )}
+              </div>
+              <motion.div 
+                className="h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent mt-2 mb-1"
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              />
               <p className="text-xs md:text-sm text-foreground/40 mt-1">
                 Powered by AI • {usageCount}/{MAX_USAGE} credits
               </p>
