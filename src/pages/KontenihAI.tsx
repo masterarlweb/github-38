@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X } from 'lucide-react';
+import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X, Copy, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
@@ -45,6 +45,7 @@ const KontenihAI = () => {
   const [loadingAuth, setLoadingAuth] = useState(true);
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const MAX_USAGE = 2;
@@ -350,6 +351,18 @@ const KontenihAI = () => {
     }
   };
 
+  const handleCopyMessage = async (content: string, index: number) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopiedIndex(index);
+      toast.success('Teks berhasil disalin');
+      setTimeout(() => setCopiedIndex(null), 2000);
+    } catch (error) {
+      console.error('Error copying text:', error);
+      toast.error('Gagal menyalin teks');
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -556,17 +569,32 @@ const KontenihAI = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} group`}
               >
                 <div
                   className={cn(
-                    "max-w-[85%] md:max-w-[80%] p-3 md:p-4 rounded-2xl text-sm md:text-base backdrop-blur-sm",
+                    "max-w-[85%] md:max-w-[80%] p-3 md:p-4 rounded-2xl text-sm md:text-base backdrop-blur-sm relative",
                     message.role === 'user'
                       ? 'bg-foreground/90 text-background'
                       : 'bg-background/10 text-foreground border border-foreground/10'
                   )}
                 >
                   <p className="whitespace-pre-wrap">{message.content}</p>
+                  {message.role === 'assistant' && (
+                    <motion.button
+                      onClick={() => handleCopyMessage(message.content, index)}
+                      className="absolute -top-2 -right-2 p-1.5 bg-background/95 hover:bg-background border border-foreground/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      title="Salin teks"
+                    >
+                      {copiedIndex === index ? (
+                        <Check className="w-3.5 h-3.5 text-green-500" />
+                      ) : (
+                        <Copy className="w-3.5 h-3.5 text-foreground/60" />
+                      )}
+                    </motion.button>
+                  )}
                 </div>
               </motion.div>
             ))}
