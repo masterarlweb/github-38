@@ -12,6 +12,7 @@ import { ConversationSidebar } from '@/components/ConversationSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import Logo from '@/components/Logo';
+import R3FBlob from '@/components/ui/r3f-blob';
 
 // Validation schema for chat messages
 const messageSchema = z.object({
@@ -351,6 +352,21 @@ const KontenihAI = () => {
 
   return (
     <div className="relative min-h-screen bg-background flex overflow-hidden">
+      {/* 3D Blob Orb - Shows when AI is processing */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-24 h-24"
+            initial={{ opacity: 0, y: -20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+          >
+            <R3FBlob />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Animated Background */}
       <div className="fixed inset-0 -z-10">
         <WebGLShader />
