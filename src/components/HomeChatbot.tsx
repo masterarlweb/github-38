@@ -35,11 +35,11 @@ const HomeChatbot = () => {
   }, [messages]);
 
   const quickReplies = [
-    'Apa itu Kontenih?',
-    'Jenis AI Agent apa saja?',
+    'Cara akses Kontenih AI?',
+    'Apa itu Brand Consultant?',
+    'Cara sign in Google?',
+    'Fitur AI Suite?',
     'Berapa harga layanan?',
-    'Bagaimana cara pemesanan?',
-    'Portfolio hasil kerja?',
     'Kontak tim Kontenih'
   ];
 
@@ -48,7 +48,32 @@ const HomeChatbot = () => {
     
     // Greeting variations
     if (msg.includes('halo') || msg.includes('hai') || msg.includes('hello') || msg.includes('hi') || msg.includes('selamat')) {
-      return 'Halo! Selamat datang di Kontenih! 😊 Saya di sini untuk membantu Anda memahami bagaimana AI Agent kami dapat mentransformasi bisnis Anda. Ada yang ingin Anda ketahui tentang solusi AI kami?';
+      return 'Halo! Selamat datang di Kontenih! 😊 Saya di sini untuk membantu Anda memahami bagaimana AI Agent kami dapat mentransformasi bisnis Anda. Sekarang Anda juga bisa mencoba Kontenih AI langsung di website ini! Ada yang ingin Anda ketahui?';
+    }
+    
+    // Kontenih AI Page - NEW
+    if (msg.includes('kontenih ai') || msg.includes('coba ai') || msg.includes('akses ai') || msg.includes('gunakan ai') || msg.includes('chat ai') || msg.includes('try ai')) {
+      return 'Kontenih AI adalah fitur chatbot AI interaktif yang bisa Anda coba langsung! 🤖\n\n**Cara Akses**:\n1. Klik tombol "Coba Kontenih AI" di halaman utama\n2. Sign in dengan akun Google Anda\n3. Mulai chat dengan Brand Consultant AI\n\n**Fitur Kontenih AI**:\n• 💬 Chat real-time dengan AI\n• 📚 Riwayat percakapan tersimpan\n• ✏️ Edit nama percakapan\n• 🔄 Buat percakapan baru kapan saja\n\nAkses langsung di menu atau klik "Coba Kontenih AI" di halaman Hero!';
+    }
+    
+    // Sign in / Login with Google - NEW
+    if (msg.includes('sign in') || msg.includes('login') || msg.includes('masuk') || msg.includes('google') || msg.includes('akun') || msg.includes('daftar')) {
+      return 'Untuk menggunakan Kontenih AI, Anda perlu sign in dengan Google:\n\n**Cara Sign In**:\n1. Klik tombol "Sign in dengan Google" di header atau Hero\n2. Pilih akun Google Anda\n3. Izinkan akses (aman & terenkripsi)\n4. Selesai! Anda bisa langsung gunakan Kontenih AI\n\n**Keuntungan Sign In**:\n• 💾 Percakapan tersimpan otomatis\n• 📝 Riwayat chat bisa dilihat kapan saja\n• 🔒 Data Anda aman & privat\n• ⚡ Akses cepat tanpa registrasi manual\n\nSatu klik dengan Google, langsung bisa chat dengan AI!';
+    }
+    
+    // AI Suite Features - NEW
+    if (msg.includes('ai suite') || msg.includes('fitur ai') || msg.includes('ai tool') || msg.includes('generator') || msg.includes('image creation') || msg.includes('copywriting')) {
+      return 'Kontenih AI Suite menyediakan berbagai tools AI canggih:\n\n🧠 **AI Content Generator**: Generate konten berkualitas untuk social media, blog, dan marketing\n\n🖼️ **AI Image Creation**: Buat visual stunning dengan teknologi AI image generation\n\n✍️ **Smart Copywriting**: Craft copy yang convert dengan AI writing assistant\n\n🎬 **Video Script AI**: Generate script video dan storyboard engaging\n\n🎨 **AI Design Assistant**: Dapatkan saran desain dan optimasi visual\n\n🎯 **Brand Voice AI**: Maintain konsistensi brand voice di semua konten\n\n💡 Terintegrasi dengan GPT-4, DALL-E, Stable Diffusion, dan 100+ AI models!';
+    }
+    
+    // Brand Consultant - NEW
+    if (msg.includes('brand consultant') || msg.includes('konsultan') || msg.includes('branding') || msg.includes('strategi brand')) {
+      return 'Brand Consultant AI adalah fitur andalan Kontenih AI! 🎯\n\n**Apa itu Brand Consultant AI?**\nAI assistant yang membantu Anda dengan strategi branding, positioning, dan identity bisnis.\n\n**Yang Bisa Dibantu**:\n• 📊 Analisis positioning brand\n• 🎨 Rekomendasi visual identity\n• 💬 Tone of voice & messaging\n• 🎯 Target audience strategy\n• 📈 Brand growth roadmap\n• 🔍 Competitor analysis\n\n**Cara Akses**:\n1. Sign in dengan Google\n2. Buka halaman Kontenih AI\n3. Pilih Brand Consultant tool\n4. Mulai konsultasi!\n\nGratis untuk dicoba, langsung dapat insights valuable!';
+    }
+    
+    // Chat History Feature - NEW
+    if (msg.includes('history') || msg.includes('riwayat') || msg.includes('percakapan lama') || msg.includes('simpan chat') || msg.includes('chat tersimpan')) {
+      return 'Kontenih AI memiliki fitur riwayat percakapan lengkap! 📚\n\n**Fitur History**:\n• 💾 Auto-save semua percakapan\n• 📂 Sidebar dengan daftar chat\n• ✏️ Edit nama percakapan\n• 🗑️ Hapus chat yang tidak perlu\n• 🔄 Lanjutkan chat kapan saja\n\n**Cara Menggunakan**:\n1. Buka sidebar di kiri layar\n2. Lihat semua riwayat chat Anda\n3. Klik untuk melanjutkan percakapan\n4. Klik ikon pensil untuk edit nama\n5. Klik "Chat Baru" untuk mulai fresh\n\nSemua percakapan tersimpan di akun Anda!';
     }
 
     // Appreciation and politeness
@@ -131,7 +156,7 @@ const HomeChatbot = () => {
       return 'Solusi AI Agent untuk berbagai industri:\n\n🏥 **Healthcare**: Appointment AI, patient screening, medical info\n🏪 **Retail/E-commerce**: Sales automation, customer support, inventory\n🏢 **Real Estate**: Lead qualification, property info, viewing schedule\n🎓 **Education**: Student support, course info, enrollment assistance\n🍽️ **F&B**: Reservation system, menu recommendations, order taking\n💼 **Professional Services**: Client screening, consultation booking\n🏭 **Manufacturing**: Order processing, support automation\n💰 **Financial Services**: Customer onboarding, product info\n\n**Customization untuk setiap industri**:\n• Industry-specific knowledge base\n• Compliance dengan regulasi sektor\n• Integration dengan tools industri\n• Terminology dan workflow sesuai bidang\n\nCeritakan industri Anda, kami berikan solusi yang tepat!';
     }
 
-    return 'Terima kasih atas pertanyaannya! Saya siap membantu Anda dengan informasi lengkap tentang:\n\n• 🤖 Layanan AI Agent (Marketing & Receptionist)\n• 💰 Harga dan paket berlangganan\n• ⏰ Proses development dan timeline\n• 📊 Portfolio dan success stories\n• 📞 Kontak tim Kontenih\n• 🎯 ROI dan business benefits\n• 🛡️ Security dan reliability\n• 🔧 Support dan maintenance\n\nSilakan tanya apa yang ingin Anda ketahui lebih lanjut, atau pilih topik di atas untuk informasi detail! Tim kami juga siap memberikan konsultasi gratis 30 menit untuk bisnis Anda. 😊';
+    return 'Terima kasih atas pertanyaannya! Saya siap membantu Anda dengan informasi lengkap tentang:\n\n**🆕 Fitur Baru**:\n• 🤖 Kontenih AI - Coba langsung chat dengan AI\n• 🎯 Brand Consultant AI\n• 🔐 Sign in dengan Google\n\n**Layanan Kami**:\n• 📱 AI Agent (Marketing & Receptionist)\n• 💰 Harga dan paket\n• 📊 Portfolio & success stories\n• 📞 Kontak tim Kontenih\n\nSilakan tanya atau pilih quick reply di bawah! 😊';
   };
 
   const handleSendMessage = async () => {
