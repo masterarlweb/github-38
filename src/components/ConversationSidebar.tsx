@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Plus, MessageSquare, Trash2, X } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Plus, MessageSquare, Trash2, X, Pencil, Check } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Conversation {
@@ -29,6 +30,8 @@ export function ConversationSidebar({
 }: ConversationSidebarProps) {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState('');
 
   useEffect(() => {
     fetchConversations();
@@ -74,6 +77,47 @@ export function ConversationSidebar({
     }
   };
 
+  const startEditing = (conversation: Conversation, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setEditingId(conversation.id);
+    setEditTitle(conversation.title);
+  };
+
+  const saveTitle = async (id: string, e?: React.MouseEvent | React.KeyboardEvent) => {
+    e?.stopPropagation();
+    
+    if (!editTitle.trim()) {
+      toast.error('Nama tidak boleh kosong');
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('conversations')
+        .update({ title: editTitle.trim() })
+        .eq('id', id);
+
+      if (error) throw error;
+      
+      setConversations(prev => 
+        prev.map(c => c.id === id ? { ...c, title: editTitle.trim() } : c)
+      );
+      setEditingId(null);
+      toast.success('Nama berhasil diubah');
+    } catch (error) {
+      console.error('Error updating title:', error);
+      toast.error('Gagal mengubah nama');
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent, id: string) => {
+    if (e.key === 'Enter') {
+      saveTitle(id, e);
+    } else if (e.key === 'Escape') {
+      setEditingId(null);
+    }
+  };
+
   return (
     <div className="w-64 border-r border-border bg-background/95 backdrop-blur-md flex flex-col h-screen shadow-xl">
       <div className="p-4 border-b border-border flex items-center justify-between gap-2">
@@ -111,7 +155,7 @@ export function ConversationSidebar({
             conversations.map((conversation) => (
               <div
                 key={conversation.id}
-                onClick={() => onSelectConversation(conversation.id)}
+                onClick={() => editingId !== conversation.id && onSelectConversation(conversation.id)}
                 className={`
                   group relative flex items-center gap-2 p-3 rounded-lg cursor-pointer
                   transition-all hover:bg-accent
@@ -119,17 +163,50 @@ export function ConversationSidebar({
                 `}
               >
                 <MessageSquare className="h-4 w-4 flex-shrink-0" />
-                <span className="flex-1 truncate text-sm">
-                  {conversation.title}
-                </span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
-                  onClick={(e) => deleteConversation(conversation.id, e)}
-                >
-                  <Trash2 className="h-3 w-3" />
-                </Button>
+                
+                {editingId === conversation.id ? (
+                  <div className="flex-1 flex items-center gap-1" onClick={e => e.stopPropagation()}>
+                    <Input
+                      value={editTitle}
+                      onChange={(e) => setEditTitle(e.target.value)}
+                      onKeyDown={(e) => handleKeyDown(e, conversation.id)}
+                      className="h-6 text-sm py-0 px-1"
+                      autoFocus
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-6 w-6"
+                      onClick={(e) => saveTitle(conversation.id, e)}
+                    >
+                      <Check className="h-3 w-3" />
+                    </Button>
+                  </div>
+                ) : (
+                  <>
+                    <span className="flex-1 truncate text-sm">
+                      {conversation.title}
+                    </span>
+                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6"
+                        onClick={(e) => startEditing(conversation, e)}
+                      >
+                        <Pencil className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6"
+                        onClick={(e) => deleteConversation(conversation.id, e)}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </>
+                )}
               </div>
             ))
           )}
