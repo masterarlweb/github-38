@@ -217,15 +217,6 @@ const KontenihAI = () => {
         .from('conversations')
         .update({ updated_at: new Date().toISOString() })
         .eq('id', conversationId);
-
-      // Update title if it's the first message
-      if (role === 'user' && messages.length === 0) {
-        const title = content.substring(0, 50) + (content.length > 50 ? '...' : '');
-        await supabase
-          .from('conversations')
-          .update({ title })
-          .eq('id', conversationId);
-      }
     } catch (error) {
       console.error('Error saving message:', error);
     }
@@ -252,6 +243,38 @@ const KontenihAI = () => {
 
   const removeAsterisks = (text: string): string => {
     return text.replace(/\*\*/g, '');
+  };
+
+  const generateConversationTitle = (userMessage: string, aiResponse: string): string => {
+    // Common greetings to skip
+    const greetings = ['halo', 'hai', 'hi', 'hello', 'hey', 'selamat pagi', 'selamat siang', 'selamat sore', 'selamat malam', 'apa kabar', 'assalamualaikum'];
+    
+    const userLower = userMessage.toLowerCase().trim();
+    const isGreeting = greetings.some(g => userLower === g || userLower.startsWith(g + ' ') || userLower.startsWith(g + ','));
+    
+    // If user message is just a greeting, extract topic from AI response
+    if (isGreeting || userMessage.length < 10) {
+      // Try to extract first meaningful sentence from AI response
+      const sentences = aiResponse.split(/[.!?]/).filter(s => s.trim().length > 10);
+      if (sentences.length > 0) {
+        const firstSentence = sentences[0].trim();
+        // Extract key topic words
+        const topicMatch = firstSentence.match(/tentang\s+(.+)|mengenai\s+(.+)|untuk\s+(.+)|dengan\s+(.+)/i);
+        if (topicMatch) {
+          const topic = (topicMatch[1] || topicMatch[2] || topicMatch[3] || topicMatch[4]).trim();
+          return topic.length > 40 ? topic.substring(0, 40) + '...' : topic;
+        }
+        return firstSentence.length > 40 ? firstSentence.substring(0, 40) + '...' : firstSentence;
+      }
+    }
+    
+    // Otherwise use user message but make it cleaner
+    const cleanMessage = userMessage
+      .replace(/[?!.,]+$/g, '')
+      .replace(/^(tolong|bisa|mohon|mau|ingin|coba)\s+/i, '')
+      .trim();
+    
+    return cleanMessage.length > 40 ? cleanMessage.substring(0, 40) + '...' : cleanMessage;
   };
 
   const handleSendMessage = async () => {
@@ -315,6 +338,15 @@ const KontenihAI = () => {
       
       // Save assistant message to database
       await saveMessage(conversationId, 'assistant', cleanContent);
+
+      // Update conversation title based on topic (first exchange only)
+      if (messages.length === 0) {
+        const title = generateConversationTitle(currentInput, cleanContent);
+        await supabase
+          .from('conversations')
+          .update({ title })
+          .eq('id', conversationId);
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       toast.error('Gagal mengirim pesan');
