@@ -57,7 +57,7 @@ serve(async (req) => {
       );
     }
 
-    // Validate input
+    // Validate input with Zod schema
     const body = await req.json();
     const validation = requestSchema.safeParse(body);
     
@@ -98,7 +98,7 @@ serve(async (req) => {
 
     const data = await n8nResponse.json();
 
-    // Increment usage after success
+    // Increment usage count after successful response
     await supabase.from('usage_tracking').upsert({
       user_id: user.id,
       usage_count: (usage?.usage_count || 0) + 1,
