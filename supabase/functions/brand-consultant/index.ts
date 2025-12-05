@@ -13,26 +13,22 @@ const requestSchema = z.object({
   tool: z.string().optional()
 });
 
-const MAX_USAGE = 100; // Usage limit per user
+const MAX_USAGE = 100;
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    // Verify authentication
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) {
-      console.error('Missing authorization header');
       return new Response(
         JSON.stringify({ error: 'Missing authorization header' }),
         { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    // Verify the user is authenticated
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseAnonKey, {
@@ -41,14 +37,11 @@ serve(async (req) => {
 
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) {
-      console.error('Authentication failed:', authError?.message);
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
         { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
-
-    console.log(`Authenticated user: ${user.id}`);
 
     // Check usage limits
     const { data: usage } = await supabase
@@ -58,56 +51,45 @@ serve(async (req) => {
       .single();
 
     if (usage && usage.usage_count >= MAX_USAGE) {
-      console.log(`User ${user.id} exceeded usage limit`);
       return new Response(
-        JSON.stringify({ error: 'Usage limit exceeded. Please try again later.' }),
+        JSON.stringify({ error: 'Usage limit exceeded' }),
         { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    // Parse and validate request body
+    // Validate input
     const body = await req.json();
-    const validationResult = requestSchema.safeParse(body);
+    const validation = requestSchema.safeParse(body);
     
-    if (!validationResult.success) {
-      console.error('Validation error:', validationResult.error.errors);
+    if (!validation.success) {
       return new Response(
-        JSON.stringify({ error: validationResult.error.errors[0].message }),
+        JSON.stringify({ error: validation.error.errors[0].message }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    const { message, tool } = validationResult.data;
+    const { message, tool } = validation.data;
 
-    // Get the n8n webhook URL from secrets
     const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_URL');
     if (!n8nWebhookUrl) {
-      console.error('N8N_WEBHOOK_URL not configured');
       return new Response(
         JSON.stringify({ error: 'Webhook not configured' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    // Build query params for n8n
     const params = new URLSearchParams({
-      message: message,
+      message,
       tool: tool || '',
       timestamp: new Date().toISOString(),
     });
 
-    console.log(`Forwarding request to n8n for user ${user.id}`);
-
-    // Forward request to n8n webhook
     const n8nResponse = await fetch(`${n8nWebhookUrl}?${params.toString()}`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (!n8nResponse.ok) {
-      console.error(`n8n webhook error: ${n8nResponse.status}`);
       return new Response(
         JSON.stringify({ error: `Webhook error: ${n8nResponse.status}` }),
         { status: n8nResponse.status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -115,9 +97,8 @@ serve(async (req) => {
     }
 
     const data = await n8nResponse.json();
-    console.log('n8n response received successfully');
 
-    // Increment usage count after successful response
+    // Increment usage after success
     await supabase.from('usage_tracking').upsert({
       user_id: user.id,
       usage_count: (usage?.usage_count || 0) + 1,
@@ -130,9 +111,8 @@ serve(async (req) => {
     );
 
   } catch (error) {
-    console.error('Error in brand-consultant function:', error);
     return new Response(
-      JSON.stringify({ error: 'An error occurred processing your request' }),
+      JSON.stringify({ error: 'An error occurred' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
