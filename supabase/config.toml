@@ -2,3 +2,6 @@ project_id = "uvujmcltsqtqgreehwsh"
 
 [functions.video-script-chat]
 # JWT verification enabled for security - requires authentication
+
+[functions.brand-consultant]
+# JWT verification enabled for security - requires authentication
