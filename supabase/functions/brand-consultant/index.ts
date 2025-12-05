@@ -1,10 +1,19 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+// Input validation schema
+const requestSchema = z.object({
+  message: z.string().min(1, "Message is required").max(4000, "Message must be less than 4000 characters"),
+  tool: z.string().optional()
+});
+
+const MAX_USAGE = 100; // Usage limit per user
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -41,15 +50,34 @@ serve(async (req) => {
 
     console.log(`Authenticated user: ${user.id}`);
 
-    // Get request body
-    const { message, tool } = await req.json();
+    // Check usage limits
+    const { data: usage } = await supabase
+      .from('usage_tracking')
+      .select('usage_count')
+      .eq('user_id', user.id)
+      .single();
 
-    if (!message || typeof message !== 'string') {
+    if (usage && usage.usage_count >= MAX_USAGE) {
+      console.log(`User ${user.id} exceeded usage limit`);
       return new Response(
-        JSON.stringify({ error: 'Message is required' }),
+        JSON.stringify({ error: 'Usage limit exceeded. Please try again later.' }),
+        { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Parse and validate request body
+    const body = await req.json();
+    const validationResult = requestSchema.safeParse(body);
+    
+    if (!validationResult.success) {
+      console.error('Validation error:', validationResult.error.errors);
+      return new Response(
+        JSON.stringify({ error: validationResult.error.errors[0].message }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
+
+    const { message, tool } = validationResult.data;
 
     // Get the n8n webhook URL from secrets
     const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_URL');
@@ -89,6 +117,13 @@ serve(async (req) => {
     const data = await n8nResponse.json();
     console.log('n8n response received successfully');
 
+    // Increment usage count after successful response
+    await supabase.from('usage_tracking').upsert({
+      user_id: user.id,
+      usage_count: (usage?.usage_count || 0) + 1,
+      last_used_at: new Date().toISOString()
+    }, { onConflict: 'user_id' });
+
     return new Response(
       JSON.stringify(data),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -97,7 +132,7 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error in brand-consultant function:', error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ error: 'An error occurred processing your request' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
