@@ -245,6 +245,34 @@ const KontenihAI = () => {
     return text.replace(/\*\*/g, '');
   };
 
+  // Function to render text with clickable links
+  const renderMessageContent = (content: string) => {
+    // URL regex pattern
+    const urlPattern = /(https?:\/\/[^\s<>"{}|\\^`\[\]]+)/g;
+    
+    const parts = content.split(urlPattern);
+    
+    return parts.map((part, index) => {
+      if (urlPattern.test(part)) {
+        // Reset regex lastIndex
+        urlPattern.lastIndex = 0;
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors break-all"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
   const generateConversationTitle = (userMessage: string, aiResponse: string): string => {
     // Common greetings to skip
     const greetings = ['halo', 'hai', 'hi', 'hello', 'hey', 'selamat pagi', 'selamat siang', 'selamat sore', 'selamat malam', 'apa kabar', 'assalamualaikum'];
@@ -606,7 +634,7 @@ const KontenihAI = () => {
                       : 'bg-background/10 text-foreground border border-foreground/10'
                   )}
                 >
-                  <p className="whitespace-pre-wrap">{message.content}</p>
+                  <p className="whitespace-pre-wrap">{renderMessageContent(message.content)}</p>
                   {message.role === 'assistant' && (
                     <motion.button
                       onClick={() => handleCopyMessage(message.content, index)}
