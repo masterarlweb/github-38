@@ -333,21 +333,24 @@ const KontenihAI = () => {
     // Save user message to database
     await saveMessage(conversationId, 'user', currentInput);
 
-    // Send message to n8n webhook via GET
+    // Send message via secure edge function proxy
     try {
-      const n8nWebhookUrl = 'https://n8n-rphgibnj.us-east-1.clawcloudrun.com/webhook/0294b1eb-08b7-42ee-9cd5-1715d177cb9a';
-      
-      const params = new URLSearchParams({
-        message: currentInput,
-        tool: selectedTool || '',
-        timestamp: new Date().toISOString(),
-      });
-      
-      const response = await fetch(`${n8nWebhookUrl}?${params.toString()}`, {
-        method: 'GET',
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error('Sesi telah berakhir, silakan login kembali');
+        return;
+      }
+
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/brand-consultant`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
         },
+        body: JSON.stringify({
+          message: currentInput,
+          tool: selectedTool || '',
+        }),
       });
 
       if (!response.ok) {
