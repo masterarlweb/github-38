@@ -50,6 +50,7 @@ const Gallery = () => {
     {
       name: 'Hansel',
       business: 'Pemilik Match4u - matcha drink brand',
+      instagram: '@match4u._',
       content: 'Sangat membantu dari mulai penyusunan konsep dan ide konten lalu take photo dan videonya juga alatnya lengkap dan sangat membantu, untuk editing videonya dan photonya keren-keren apalagi ada bantuan AI untuk mengefisienkan kecepatan editing photo atau videonya.',
       rating: 5
     },
@@ -212,6 +213,16 @@ const Gallery = () => {
                   <div className="border-t border-white/10 pt-4">
                     <div className="font-semibold text-white">{testimonial.name}</div>
                     <div className="text-sm text-blue-400">{testimonial.business}</div>
+                    {testimonial.instagram && (
+                      <a 
+                        href={`https://instagram.com/${testimonial.instagram.replace('@', '')}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm text-pink-400 hover:text-pink-300 transition-colors"
+                      >
+                        {testimonial.instagram}
+                      </a>
+                    )}
                   </div>
                 </CardContent>
               </Card>
