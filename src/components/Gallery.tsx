@@ -4,6 +4,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Palette, Video, Instagram } from 'lucide-react';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
 
+// Import Match4u images
+import match4u1 from '@/assets/match4u-1.png';
+import match4u2 from '@/assets/match4u-2.png';
+import match4u3 from '@/assets/match4u-3.png';
+import match4u4 from '@/assets/match4u-4.png';
+
 const Gallery = () => {
   const graphicDesignPortfolio = [
     // Placeholder items - user will add real content
@@ -16,12 +22,12 @@ const Gallery = () => {
   ];
 
   const contentCreationPortfolio = [
-    // Placeholder items - user will add real content
     {
-      title: 'Coming Soon',
-      category: 'Video Content',
-      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=300&fit=crop',
-      description: 'Content creation portfolio will be added soon'
+      title: 'Social Media Handling',
+      category: '@match4u._',
+      description: 'Matcha drink brand - Full social media content management',
+      images: [match4u1, match4u2, match4u3, match4u4],
+      instagram: '@match4u._'
     }
   ];
 
@@ -140,21 +146,40 @@ const Gallery = () => {
             <TabsContent value="content-creation" className="mt-0">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {contentCreationPortfolio.map((item, index) => (
-                  <Card key={index} className="group overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm">
-                    <div className="aspect-video overflow-hidden">
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
+                  <Card key={index} className="group overflow-hidden hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-2 bg-black/50 border-white/10 backdrop-blur-sm col-span-full">
                     <CardContent className="p-6">
-                      <div className="space-y-2">
-                        <span className="text-xs font-medium text-purple-400 uppercase tracking-wide">
-                          {item.category}
-                        </span>
-                        <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                        <p className="text-gray-300 text-sm">{item.description}</p>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <span className="text-xs font-medium text-purple-400 uppercase tracking-wide">
+                              {item.category}
+                            </span>
+                            <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                            <p className="text-gray-300 text-sm">{item.description}</p>
+                          </div>
+                          {item.instagram && (
+                            <a 
+                              href={`https://instagram.com/${item.instagram.replace('@', '')}`} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 text-pink-400 hover:text-pink-300 transition-colors"
+                            >
+                              <Instagram className="w-4 h-4" />
+                              {item.instagram}
+                            </a>
+                          )}
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          {item.images.map((img, imgIndex) => (
+                            <div key={imgIndex} className="aspect-[9/16] overflow-hidden rounded-lg">
+                              <img 
+                                src={img} 
+                                alt={`${item.title} ${imgIndex + 1}`}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
