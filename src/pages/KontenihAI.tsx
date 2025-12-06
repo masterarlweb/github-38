@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X, Copy, Check } from 'lucide-react';
+import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X, Copy, Check, Square, Pencil } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
@@ -48,7 +48,10 @@ const KontenihAI = () => {
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [editingContent, setEditingContent] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const MAX_USAGE = 2;
 
@@ -305,8 +308,19 @@ const KontenihAI = () => {
     return cleanMessage.length > 40 ? cleanMessage.substring(0, 40) + '...' : cleanMessage;
   };
 
-  const handleSendMessage = async () => {
-    if (!input.trim()) {
+  const handleStopGeneration = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+      setIsLoading(false);
+      toast.info('Generasi dihentikan');
+    }
+  };
+
+  const handleSendMessage = async (overrideMessage?: string) => {
+    const messageToSend = overrideMessage || input;
+    
+    if (!messageToSend.trim()) {
       toast.error('Pesan tidak boleh kosong');
       return;
     }
@@ -324,11 +338,14 @@ const KontenihAI = () => {
       setCurrentConversationId(conversationId);
     }
 
-    const userMessage: Message = { role: 'user', content: input };
+    const userMessage: Message = { role: 'user', content: messageToSend };
     setMessages((prev) => [...prev, userMessage]);
-    const currentInput = input;
-    setInput('');
+    const currentInput = messageToSend;
+    if (!overrideMessage) setInput('');
     setIsLoading(true);
+
+    // Create abort controller for this request
+    abortControllerRef.current = new AbortController();
 
     // Save user message to database
     await saveMessage(conversationId, 'user', currentInput);
@@ -338,6 +355,7 @@ const KontenihAI = () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         toast.error('Sesi telah berakhir, silakan login kembali');
+        setIsLoading(false);
         return;
       }
 
@@ -351,6 +369,7 @@ const KontenihAI = () => {
           message: currentInput,
           tool: selectedTool || '',
         }),
+        signal: abortControllerRef.current.signal,
       });
 
       if (!response.ok) {
@@ -378,12 +397,40 @@ const KontenihAI = () => {
           .update({ title })
           .eq('id', conversationId);
       }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      toast.error('Gagal mengirim pesan');
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        console.log('Request was aborted');
+      } else {
+        console.error('Error sending message:', error);
+        toast.error('Gagal mengirim pesan');
+      }
     } finally {
       setIsLoading(false);
+      abortControllerRef.current = null;
     }
+  };
+
+  const handleEditMessage = (index: number) => {
+    setEditingIndex(index);
+    setEditingContent(messages[index].content);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingIndex(null);
+    setEditingContent('');
+  };
+
+  const handleSaveEdit = async () => {
+    if (editingIndex === null || !editingContent.trim()) return;
+    
+    // Truncate messages to before the edited message
+    const newMessages = messages.slice(0, editingIndex);
+    setMessages(newMessages);
+    setEditingIndex(null);
+    
+    // Send the edited message
+    await handleSendMessage(editingContent);
+    setEditingContent('');
   };
 
   const handleCopyMessage = async (content: string, index: number) => {
@@ -629,31 +676,73 @@ const KontenihAI = () => {
                 transition={{ duration: 0.3 }}
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} group`}
               >
-                <div
-                  className={cn(
-                    "max-w-[85%] md:max-w-[80%] p-3 md:p-4 rounded-2xl text-sm md:text-base backdrop-blur-sm relative",
-                    message.role === 'user'
-                      ? 'bg-foreground/90 text-background'
-                      : 'bg-background/10 text-foreground border border-foreground/10'
-                  )}
-                >
-                  <p className="whitespace-pre-wrap">{renderMessageContent(message.content)}</p>
-                  {message.role === 'assistant' && (
-                    <motion.button
-                      onClick={() => handleCopyMessage(message.content, index)}
-                      className="absolute -top-2 -right-2 p-1.5 bg-background/95 hover:bg-background border border-foreground/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      title="Salin teks"
-                    >
-                      {copiedIndex === index ? (
-                        <Check className="w-3.5 h-3.5 text-green-500" />
-                      ) : (
-                        <Copy className="w-3.5 h-3.5 text-foreground/60" />
-                      )}
-                    </motion.button>
-                  )}
-                </div>
+                {editingIndex === index ? (
+                  // Edit mode
+                  <div className="max-w-[85%] md:max-w-[80%] w-full">
+                    <textarea
+                      value={editingContent}
+                      onChange={(e) => setEditingContent(e.target.value)}
+                      className="w-full p-3 md:p-4 rounded-2xl text-sm md:text-base bg-foreground/90 text-background resize-none focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      rows={3}
+                      autoFocus
+                    />
+                    <div className="flex gap-2 mt-2 justify-end">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={handleCancelEdit}
+                        className="text-foreground/60 hover:text-foreground"
+                      >
+                        Batal
+                      </Button>
+                      <Button
+                        size="sm"
+                        onClick={handleSaveEdit}
+                        disabled={!editingContent.trim()}
+                        className="bg-foreground text-background hover:bg-foreground/90"
+                      >
+                        Kirim Ulang
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className={cn(
+                      "max-w-[85%] md:max-w-[80%] p-3 md:p-4 rounded-2xl text-sm md:text-base backdrop-blur-sm relative",
+                      message.role === 'user'
+                        ? 'bg-foreground/90 text-background'
+                        : 'bg-background/10 text-foreground border border-foreground/10'
+                    )}
+                  >
+                    <p className="whitespace-pre-wrap">{renderMessageContent(message.content)}</p>
+                    {message.role === 'assistant' && (
+                      <motion.button
+                        onClick={() => handleCopyMessage(message.content, index)}
+                        className="absolute -top-2 -right-2 p-1.5 bg-background/95 hover:bg-background border border-foreground/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        title="Salin teks"
+                      >
+                        {copiedIndex === index ? (
+                          <Check className="w-3.5 h-3.5 text-green-500" />
+                        ) : (
+                          <Copy className="w-3.5 h-3.5 text-foreground/60" />
+                        )}
+                      </motion.button>
+                    )}
+                    {message.role === 'user' && !isLoading && (
+                      <motion.button
+                        onClick={() => handleEditMessage(index)}
+                        className="absolute -top-2 -left-2 p-1.5 bg-background/95 hover:bg-background border border-foreground/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        title="Edit pesan"
+                      >
+                        <Pencil className="w-3.5 h-3.5 text-foreground/60" />
+                      </motion.button>
+                    )}
+                  </div>
+                )}
               </motion.div>
             ))}
             {isLoading && (
@@ -772,22 +861,35 @@ const KontenihAI = () => {
               </motion.button>
             </div>
             
-            <motion.button
-              type="button"
-              onClick={handleSendMessage}
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.98 }}
-              disabled={isLoading || !input.trim() || !selectedTool}
-              className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2",
-                input.trim() && selectedTool
-                  ? "bg-foreground text-background shadow-lg"
-                  : "bg-foreground/5 text-foreground/40 cursor-not-allowed"
-              )}
-            >
-              <SendIcon className="w-4 h-4" />
-              <span>Send</span>
-            </motion.button>
+            {isLoading ? (
+              <motion.button
+                type="button"
+                onClick={handleStopGeneration}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                className="px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30"
+              >
+                <Square className="w-4 h-4" />
+                <span>Stop</span>
+              </motion.button>
+            ) : (
+              <motion.button
+                type="button"
+                onClick={() => handleSendMessage()}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                disabled={!input.trim() || !selectedTool}
+                className={cn(
+                  "px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2",
+                  input.trim() && selectedTool
+                    ? "bg-foreground text-background shadow-lg"
+                    : "bg-foreground/5 text-foreground/40 cursor-not-allowed"
+                )}
+              >
+                <SendIcon className="w-4 h-4" />
+                <span>Send</span>
+              </motion.button>
+            )}
           </div>
         </motion.div>
       </div>
