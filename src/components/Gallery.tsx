@@ -94,7 +94,7 @@ const Gallery = () => {
           </div>
 
           <Tabs defaultValue="graphic-design" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-12 mt-[-8px] bg-black/50 backdrop-blur-sm p-1 rounded-2xl shadow-lg border border-white/10">
+            <TabsList className="grid w-full grid-cols-3 mb-12 mt-[-16px] bg-black/50 backdrop-blur-sm p-1 rounded-2xl shadow-lg border border-white/10">
               <TabsTrigger 
                 value="graphic-design" 
                 className="flex items-center gap-2 rounded-xl py-3 px-6 text-sm font-medium transition-all data-[state=active]:bg-blue-500 data-[state=active]:text-white text-gray-300"
