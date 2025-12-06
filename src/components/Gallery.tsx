@@ -48,9 +48,9 @@ const Gallery = () => {
 
   const testimonials = [
     {
-      name: 'Mrs. Sari',
-      business: 'Mrs. Sari Rice Stall',
-      content: 'Since using Kontenih services, my stall sales have increased 3x! Their team is very professional and understands SME needs.',
+      name: 'Hansel',
+      business: 'Pemilik Match4u - matcha drink brand',
+      content: 'Sangat membantu dari mulai penyusunan konsep dan ide konten lalu take photo dan videonya juga alatnya lengkap dan sangat membantu, untuk editing videonya dan photonya keren-keren apalagi ada bantuan AI untuk mengefisienkan kecepatan editing photo atau videonya.',
       rating: 5
     },
     {
