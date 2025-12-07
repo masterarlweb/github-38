@@ -71,18 +71,18 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="section-padding relative overflow-hidden">
-      {/* WebGL Shader Background */}
-      <div className="absolute inset-0 z-0">
+    <section id="pricing" className="section-padding relative overflow-hidden bg-background/80 dark:bg-transparent">
+      {/* WebGL Shader Background - only in dark mode */}
+      <div className="absolute inset-0 z-0 dark:block hidden">
         <WebGLShader />
       </div>
       
       <div className="container-custom relative z-10">
         <div className="text-center space-y-4 mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white">
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Pricing</span> Packages
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Choose the package that suits your SME needs and budget. All packages include free consultation!
           </p>
         </div>
@@ -91,7 +91,7 @@ const Pricing = () => {
           {servicePackages.map((servicePackage, index) => (
             <Card 
               key={index} 
-              className={`relative border bg-black/50 backdrop-blur-sm ${servicePackage.popular ? 'ring-2 ring-purple-500 scale-105' : 'border-white/10'} hover:border-purple-500/40 transition-all duration-300`}
+              className={`relative border bg-card/80 dark:bg-black/50 backdrop-blur-sm ${servicePackage.popular ? 'ring-2 ring-purple-500 scale-105' : 'border-border/50 dark:border-white/10'} hover:border-purple-500/40 transition-all duration-300`}
             >
               <GlowingEffect
                 spread={35}
@@ -115,12 +115,12 @@ const Pricing = () => {
                 <CardDescription className="text-white/90">{servicePackage.description}</CardDescription>
               </CardHeader>
               
-              <CardContent className="space-y-6 p-6 bg-black/30 backdrop-blur-sm">
+              <CardContent className="space-y-6 p-6 bg-card/30 dark:bg-black/30 backdrop-blur-sm">
                 <ul className="space-y-4">
                   {servicePackage.services.map((service, idx) => (
                     <li key={idx} className="flex items-center justify-between">
-                      <span className="text-gray-300 text-sm flex-1">{service.item}</span>
-                      <span className="text-white font-semibold text-sm ml-2">{service.price}</span>
+                      <span className="text-muted-foreground text-sm flex-1">{service.item}</span>
+                      <span className="text-foreground font-semibold text-sm ml-2">{service.price}</span>
                     </li>
                   ))}
                 </ul>
@@ -137,10 +137,10 @@ const Pricing = () => {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-gray-300 mb-4">Need a custom package? We're ready to help!</p>
+          <p className="text-muted-foreground mb-4">Need a custom package? We're ready to help!</p>
           <Button 
             variant="outline" 
-            className="border-blue-400 text-blue-400 hover:bg-blue-400/10 bg-transparent"
+            className="border-primary text-primary hover:bg-primary/10 bg-transparent"
             onClick={() => window.open('https://wa.me/62895329475989?text=Halo%20Kontenih%2C%20saya%20ingin%20diskusi%20tentang%20paket%20custom', '_blank')}
           >
             Consult Custom Package
