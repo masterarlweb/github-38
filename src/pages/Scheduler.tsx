@@ -8,12 +8,15 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Calendar, Clock, Instagram, Plus, Send, Trash2, Play, Pause, Sparkles, Video, Image, Link } from 'lucide-react';
+import { ArrowLeft, Calendar as CalendarIcon, Clock, Instagram, Plus, Send, Trash2, Play, Pause, Sparkles, Video, Image, Link, CalendarDays } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { format, addDays, startOfWeek, isSameDay } from 'date-fns';
 import { id } from 'date-fns/locale';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
-
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 interface ScheduledPost {
   id: string;
   content: string;
@@ -230,7 +233,7 @@ const Scheduler = () => {
           transition={{ delay: 0.1 }}
         >
           <div className="flex items-center gap-2 mb-4">
-            <Calendar className="w-5 h-5 text-blue-400" />
+            <CalendarIcon className="w-5 h-5 text-blue-400" />
             <h2 className="text-lg font-medium">Kalender Minggu Ini</h2>
           </div>
           
@@ -321,7 +324,7 @@ const Scheduler = () => {
           {posts.filter(p => isSameDay(new Date(p.scheduled_time), selectedDate)).length === 0 ? (
             <Card className="bg-background/50 border-dashed border-foreground/20">
               <CardContent className="py-12 text-center">
-                <Calendar className="w-12 h-12 mx-auto mb-4 text-foreground/20" />
+                <CalendarIcon className="w-12 h-12 mx-auto mb-4 text-foreground/20" />
                 <p className="text-foreground/40">Tidak ada jadwal untuk tanggal ini</p>
                 <Button 
                   variant="outline" 
@@ -486,12 +489,102 @@ const Scheduler = () => {
                 
                 <div>
                   <label className="text-sm text-foreground/60 mb-2 block">Waktu Posting</label>
-                  <Input
-                    type="datetime-local"
-                    value={newPost.scheduled_time}
-                    onChange={e => setNewPost({...newPost, scheduled_time: e.target.value})}
-                    className="bg-background/50"
-                  />
+                  <div className="flex gap-2">
+                    {/* Date Picker */}
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "flex-1 justify-start text-left font-normal bg-background/50",
+                            !newPost.scheduled_time && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarDays className="mr-2 h-4 w-4" />
+                          {newPost.scheduled_time 
+                            ? format(new Date(newPost.scheduled_time), "d MMMM yyyy", { locale: id })
+                            : "Pilih tanggal"
+                          }
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0 z-[100] bg-background border border-border" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={newPost.scheduled_time ? new Date(newPost.scheduled_time) : undefined}
+                          onSelect={(date) => {
+                            if (date) {
+                              const currentTime = newPost.scheduled_time 
+                                ? format(new Date(newPost.scheduled_time), "HH:mm")
+                                : "12:00";
+                              const [hours, minutes] = currentTime.split(':');
+                              const newDate = new Date(date);
+                              newDate.setHours(parseInt(hours), parseInt(minutes));
+                              setNewPost({...newPost, scheduled_time: newDate.toISOString().slice(0, 16)});
+                            }
+                          }}
+                          initialFocus
+                          className="pointer-events-auto"
+                        />
+                      </PopoverContent>
+                    </Popover>
+
+                    {/* Time Picker */}
+                    <Select
+                      value={newPost.scheduled_time ? format(new Date(newPost.scheduled_time), "HH:mm") : ""}
+                      onValueChange={(time) => {
+                        const [hours, minutes] = time.split(':');
+                        const currentDate = newPost.scheduled_time 
+                          ? new Date(newPost.scheduled_time) 
+                          : new Date();
+                        currentDate.setHours(parseInt(hours), parseInt(minutes));
+                        setNewPost({...newPost, scheduled_time: currentDate.toISOString().slice(0, 16)});
+                      }}
+                    >
+                      <SelectTrigger className="w-[120px] bg-background/50">
+                        <Clock className="mr-2 h-4 w-4" />
+                        <SelectValue placeholder="Jam" />
+                      </SelectTrigger>
+                      <SelectContent className="z-[100] bg-background border border-border max-h-60">
+                        {["06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", 
+                          "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", 
+                          "20:00", "21:00", "22:00", "23:00"].map((time) => (
+                          <SelectItem key={time} value={time}>
+                            {time}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  {/* Quick Time Selection */}
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    <span className="text-xs text-foreground/50">AI Recommended:</span>
+                    {[
+                      { time: "09:00", label: "Pagi" },
+                      { time: "12:00", label: "Siang" },
+                      { time: "19:00", label: "Prime" },
+                      { time: "21:00", label: "Malam" }
+                    ].map((slot) => (
+                      <Button
+                        key={slot.time}
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="text-xs h-7 px-2 bg-purple-500/10 border-purple-500/30 hover:bg-purple-500/20"
+                        onClick={() => {
+                          const [hours, minutes] = slot.time.split(':');
+                          const currentDate = newPost.scheduled_time 
+                            ? new Date(newPost.scheduled_time) 
+                            : new Date();
+                          currentDate.setHours(parseInt(hours), parseInt(minutes));
+                          setNewPost({...newPost, scheduled_time: currentDate.toISOString().slice(0, 16)});
+                        }}
+                      >
+                        <Sparkles className="w-3 h-3 mr-1 text-purple-400" />
+                        {slot.label}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="flex gap-3 pt-4">
