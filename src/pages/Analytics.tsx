@@ -26,6 +26,7 @@ interface ScheduledPost {
 interface DayAnalytics {
   date: string;
   day: string;
+  dayLabel: string;
   posts: number;
   reach: number;
   engagement: number;
@@ -73,15 +74,10 @@ const Analytics = () => {
   const fetchScheduledPosts = async () => {
     if (!user) return;
 
-    const weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
-    const weekEnd = addDays(weekStart, 7);
-
     const { data, error } = await supabase
       .from('scheduled_posts')
       .select('*')
       .eq('user_id', user.id)
-      .gte('scheduled_time', weekStart.toISOString())
-      .lt('scheduled_time', weekEnd.toISOString())
       .order('scheduled_time', { ascending: true });
 
     if (error) {
@@ -90,34 +86,59 @@ const Analytics = () => {
     }
 
     setPosts(data || []);
-    processWeekData(data || []);
+    processScheduleData(data || []);
   };
 
-  const processWeekData = (scheduledPosts: ScheduledPost[]) => {
-    const weekStart = startOfWeek(new Date(), { weekStartsOn: 1 });
-    const days = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+  const processScheduleData = (scheduledPosts: ScheduledPost[]) => {
+    // Group posts by unique dates and take first 7 days
+    const dateGroups = new Map<string, ScheduledPost[]>();
     
-    let daysCount = 0;
-    const weekAnalytics: DayAnalytics[] = days.map((day, index) => {
-      const currentDay = addDays(weekStart, index);
-      const dayPosts = scheduledPosts.filter(p => 
-        isSameDay(parseISO(p.scheduled_time), currentDay)
-      );
+    scheduledPosts.forEach(post => {
+      const dateKey = format(parseISO(post.scheduled_time), 'yyyy-MM-dd');
+      if (!dateGroups.has(dateKey)) {
+        dateGroups.set(dateKey, []);
+      }
+      dateGroups.get(dateKey)?.push(post);
+    });
+
+    // Convert to array sorted by date and take first 7
+    const sortedDates = Array.from(dateGroups.entries())
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .slice(0, 7);
+
+    const daysCount = sortedDates.length;
+    
+    const weekAnalytics: DayAnalytics[] = Array.from({ length: 7 }, (_, index) => {
+      const dayData = sortedDates[index];
       
-      if (dayPosts.length > 0) daysCount++;
-
-      // Generate predicted engagement based on time slots
-      const baseEngagement = dayPosts.length > 0 ? generatePredictedEngagement(dayPosts) : { reach: 0, engagement: 0, likes: 0, comments: 0, shares: 0 };
-
+      if (dayData) {
+        const [dateKey, dayPosts] = dayData;
+        const baseEngagement = generatePredictedEngagement(dayPosts);
+        const actualDate = parseISO(dateKey);
+        
+        return {
+          date: dateKey,
+          day: `Day ${index + 1}`,
+          dayLabel: format(actualDate, 'd MMM', { locale: id }),
+          posts: dayPosts.length,
+          reach: baseEngagement.reach,
+          engagement: baseEngagement.engagement,
+          likes: baseEngagement.likes,
+          comments: baseEngagement.comments,
+          shares: baseEngagement.shares
+        };
+      }
+      
       return {
-        date: format(currentDay, 'yyyy-MM-dd'),
-        day,
-        posts: dayPosts.length,
-        reach: baseEngagement.reach,
-        engagement: baseEngagement.engagement,
-        likes: baseEngagement.likes,
-        comments: baseEngagement.comments,
-        shares: baseEngagement.shares
+        date: '',
+        day: `Day ${index + 1}`,
+        dayLabel: '-',
+        posts: 0,
+        reach: 0,
+        engagement: 0,
+        likes: 0,
+        comments: 0,
+        shares: 0
       };
     });
 
@@ -535,13 +556,16 @@ ${parseFloat(avgEngagement) < 10 ? '• Gunakan lebih banyak hashtag relevan' : 
                   <tbody>
                     {weekData.map((day, index) => (
                       <motion.tr 
-                        key={day.date}
+                        key={day.day}
                         className="border-b border-foreground/5"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.5 + index * 0.05 }}
                       >
-                        <td className="py-4 font-medium">{day.day}</td>
+                        <td className="py-4">
+                          <div className="font-medium">{day.day}</div>
+                          <div className="text-xs text-foreground/50">{day.dayLabel}</div>
+                        </td>
                         <td className="py-4 text-sm">
                           {day.posts > 0 ? (
                             <span className="px-2 py-1 rounded-full bg-blue-500/20 text-blue-400">
