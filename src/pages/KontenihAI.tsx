@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X, Copy, Check, Square, Pencil } from 'lucide-react';
+import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X, Copy, Check, Square, Pencil, Calendar, BarChart3, Users, ShoppingCart, Layout } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
@@ -63,6 +63,14 @@ const KontenihAI = () => {
       icon: <MessageSquare className="w-4 h-4" />,
       description: 'AI consultant for your brand strategy'
     }
+  ];
+
+  const dashboardLinks = [
+    { path: '/scheduler', name: 'Scheduler', icon: <Calendar className="w-4 h-4" />, color: 'from-blue-500/20 to-cyan-500/20' },
+    { path: '/carousel-builder', name: 'Carousel Builder', icon: <Layout className="w-4 h-4" />, color: 'from-violet-500/20 to-purple-500/20' },
+    { path: '/analytics', name: 'Analytics', icon: <BarChart3 className="w-4 h-4" />, color: 'from-green-500/20 to-emerald-500/20' },
+    { path: '/creator-hub', name: 'Creator Hub', icon: <Users className="w-4 h-4" />, color: 'from-orange-500/20 to-amber-500/20' },
+    { path: '/ecommerce', name: 'E-commerce', icon: <ShoppingCart className="w-4 h-4" />, color: 'from-rose-500/20 to-red-500/20' },
   ];
 
   useEffect(() => {
@@ -665,6 +673,33 @@ const KontenihAI = () => {
                   <span>{tool.name}</span>
                 </motion.button>
               ))}
+            </motion.div>
+
+            {/* Dashboard Quick Links */}
+            <motion.div
+              className="mt-8 w-full max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <p className="text-xs text-foreground/40 text-center mb-4">Dashboard Tools</p>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                {dashboardLinks.map((link, index) => (
+                  <motion.button
+                    key={link.path}
+                    onClick={() => navigate(link.path)}
+                    className={`flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br ${link.color} border border-foreground/10 hover:border-foreground/20 transition-all`}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 + index * 0.1 }}
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {link.icon}
+                    <span className="text-xs font-medium">{link.name}</span>
+                  </motion.button>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
         ) : (
