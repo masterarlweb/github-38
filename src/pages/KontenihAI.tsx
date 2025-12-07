@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X, Copy, Check, Square, Pencil, Calendar, BarChart3, Users, ShoppingCart, Layout } from 'lucide-react';
+import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X, Copy, Check, Square, Pencil, Calendar, BarChart3, Users, ShoppingCart, Layout, ListChecks } from 'lucide-react';
+import SelectableAIOutput from '@/components/SelectableAIOutput';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
@@ -61,6 +62,7 @@ const KontenihAI = () => {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editingContent, setEditingContent] = useState('');
   const [aiShortcuts, setAiShortcuts] = useState<AIShortcutsData>({});
+  const [selectableOutputContent, setSelectableOutputContent] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -818,6 +820,15 @@ const KontenihAI = () => {
                     {message.role === 'assistant' && (
                       <div className="absolute -top-2 -right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         <motion.button
+                          onClick={() => setSelectableOutputContent(message.content)}
+                          className="p-1.5 bg-emerald-500/90 hover:bg-emerald-500 border border-emerald-400/30 rounded-lg shadow-lg"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          title="Pilih teks untuk Scheduler"
+                        >
+                          <ListChecks className="w-3.5 h-3.5 text-white" />
+                        </motion.button>
+                        <motion.button
                           onClick={() => {
                             const extractedData = parseAIResponseForFeatures(message.content);
                             navigate('/scheduler', { 
@@ -836,7 +847,7 @@ const KontenihAI = () => {
                           className="p-1.5 bg-blue-500/90 hover:bg-blue-500 border border-blue-400/30 rounded-lg shadow-lg"
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          title="Kirim ke Scheduler"
+                          title="Kirim semua ke Scheduler"
                         >
                           <Calendar className="w-3.5 h-3.5 text-white" />
                         </motion.button>
@@ -1036,6 +1047,16 @@ const KontenihAI = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Selectable AI Output Modal */}
+      <AnimatePresence>
+        {selectableOutputContent && (
+          <SelectableAIOutput
+            content={selectableOutputContent}
+            onClose={() => setSelectableOutputContent(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
