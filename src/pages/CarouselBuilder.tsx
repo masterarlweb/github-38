@@ -151,7 +151,7 @@ const CarouselBuilder = () => {
       .insert([{
         user_id: user.id,
         title: carouselTitle,
-        slides: slides as unknown as Record<string, unknown>[],
+        slides: JSON.parse(JSON.stringify(slides)),
         template_type: 'custom',
         is_ai_generated: false
       }]);
