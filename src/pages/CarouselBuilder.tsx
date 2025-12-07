@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Plus, Trash2, ChevronLeft, ChevronRight, Palette, Sparkles, Save, Image as ImageIcon, Type } from 'lucide-react';
 import Logo from '@/components/Logo';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 interface Slide {
   id: string;
@@ -207,6 +208,7 @@ const CarouselBuilder = () => {
             </div>
           </div>
           <div className="flex gap-2">
+            <ThemeToggle />
             <Button variant="outline" onClick={() => setShowTemplates(true)}>
               Templates
             </Button>

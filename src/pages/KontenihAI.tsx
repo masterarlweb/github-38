@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import Logo from '@/components/Logo';
 import R3FBlob from '@/components/ui/r3f-blob';
 import AIShortcutButtons from '@/components/AIShortcutButtons';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 // Validation schema for chat messages
 const messageSchema = z.object({
@@ -674,14 +675,17 @@ const KontenihAI = () => {
               </p>
             </div>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleLogout}
-            className="hover:bg-foreground/5 h-9 w-9"
-          >
-            <LogOut className="h-4 w-4" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleLogout}
+              className="hover:bg-foreground/5 h-9 w-9"
+            >
+              <LogOut className="h-4 w-4" />
+            </Button>
+          </div>
         </motion.div>
 
         {/* Chat Area */}

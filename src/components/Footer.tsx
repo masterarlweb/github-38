@@ -7,7 +7,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 relative overflow-hidden text-white">
+    <footer className="border-t border-foreground/10 relative overflow-hidden">
       {/* WebGL Shader Background */}
       <div className="absolute inset-0 z-0">
         <WebGLShader />
@@ -18,7 +18,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <Logo size="md" showTagline={true} />
-            <p className="text-gray-400 leading-relaxed">
+            <p className="text-foreground/60 leading-relaxed">
               Creative agency that helps businesses build engaging and professional digital presence.
             </p>
             <div className="flex space-x-4">
@@ -26,7 +26,7 @@ const Footer = () => {
                 href="https://instagram.com/kontenih" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center hover:from-purple-700 hover:to-blue-700 transition-colors shadow-lg"
+                className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center hover:from-purple-700 hover:to-blue-700 transition-colors shadow-lg text-white"
               >
                 <Instagram className="h-5 w-5" />
               </a>
@@ -35,8 +35,8 @@ const Footer = () => {
 
           {/* Services */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Our Services</h4>
-            <ul className="space-y-2 text-gray-400">
+            <h4 className="text-lg font-semibold text-foreground">Our Services</h4>
+            <ul className="space-y-2 text-foreground/60">
               <li><a href="#services" className="hover:text-purple-400 transition-colors">Social Media Management</a></li>
               <li><a href="#services" className="hover:text-purple-400 transition-colors">Feed & Story Design</a></li>
               <li><a href="#services" className="hover:text-purple-400 transition-colors">Video & Product Photos</a></li>
@@ -46,8 +46,8 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Menu</h4>
-            <ul className="space-y-2 text-gray-400">
+            <h4 className="text-lg font-semibold text-foreground">Menu</h4>
+            <ul className="space-y-2 text-foreground/60">
               <li><a href="#home" className="hover:text-blue-400 transition-colors">Home</a></li>
               <li><a href="#about" className="hover:text-blue-400 transition-colors">About Us</a></li>
               <li><a href="#pricing" className="hover:text-blue-400 transition-colors">Pricing Packages</a></li>
@@ -58,8 +58,8 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold">Contact</h4>
-            <div className="space-y-3 text-gray-400">
+            <h4 className="text-lg font-semibold text-foreground">Contact</h4>
+            <div className="space-y-3 text-foreground/60">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-blue-400" />
                 <span>+62 895-3294-75989</span>
@@ -77,12 +77,12 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-white/10 mt-12 pt-8">
+        <div className="border-t border-foreground/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-gray-400 text-sm">
+            <p className="text-foreground/50 text-sm">
               © {currentYear} Kontenih. All rights reserved.
             </p>
-            <div className="flex space-x-6 text-sm text-gray-400">
+            <div className="flex space-x-6 text-sm text-foreground/50">
               <a href="#" className="hover:text-purple-400 transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-purple-400 transition-colors">Terms & Conditions</a>
             </div>
