@@ -547,8 +547,8 @@ const KontenihAI = () => {
         )}
       </AnimatePresence>
 
-      {/* Animated Background */}
-      <div className="fixed inset-0 -z-10">
+      {/* Animated Background - Dark mode only */}
+      <div className="fixed inset-0 -z-10 hidden dark:block">
         <WebGLShader />
         <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
           <motion.div 

@@ -45,23 +45,23 @@ const KontenihAI = () => {
 
   return (
     <section id="kontenih-ai" className="section-padding relative overflow-hidden">
-      {/* WebGL Shader Background */}
-      <div className="absolute inset-0 z-0">
+      {/* WebGL Shader Background - Dark mode only */}
+      <div className="absolute inset-0 z-0 hidden dark:block">
         <WebGLShader />
       </div>
 
       <div className="container-custom relative z-10">
         <div className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 backdrop-blur-sm mb-4">
-            <Sparkles className="w-4 h-4 text-purple-400" />
-            <span className="text-sm font-medium text-purple-300">Powered by Advanced AI</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 dark:border-purple-500/20 backdrop-blur-sm mb-4">
+            <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+            <span className="text-sm font-medium text-purple-700 dark:text-purple-300">Powered by Advanced AI</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-            Kontenih <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">AI Suite</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+            Kontenih <span className="bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">AI Suite</span>
           </h2>
           
-          <p className="text-lg text-white/60 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Leverage cutting-edge artificial intelligence to transform your content creation process. 
             From ideation to execution, our AI tools work seamlessly to bring your vision to life.
           </p>
@@ -71,20 +71,20 @@ const KontenihAI = () => {
           {aiFeatures.map((feature, index) => (
             <Card 
               key={index}
-              className="group bg-black/40 backdrop-blur-md border border-white/10 hover:border-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
+              className="group bg-white/60 dark:bg-black/40 backdrop-blur-md border border-border hover:border-purple-500/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
             >
               <CardHeader>
                 <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <div className="text-white">
+                  <div className="text-foreground">
                     {feature.icon}
                   </div>
                 </div>
-                <CardTitle className="text-xl text-white group-hover:text-purple-300 transition-colors">
+                <CardTitle className="text-xl text-foreground group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
                   {feature.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-white/60">
+                <CardDescription className="text-muted-foreground">
                   {feature.description}
                 </CardDescription>
               </CardContent>
@@ -93,18 +93,18 @@ const KontenihAI = () => {
         </div>
 
         <div className="text-center space-y-6">
-          <div className="flex items-center justify-center gap-2 text-sm text-white/40">
+          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground/60">
             <Zap className="w-4 h-4" />
             <span>Integrated with GPT-4, DALL-E, Stable Diffusion, and more</span>
           </div>
 
-          <div className="flex items-center justify-center gap-8 text-sm text-white/60 pt-4">
+          <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground pt-4">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+              <div className="w-2 h-2 rounded-full bg-green-500 dark:bg-green-400 animate-pulse"></div>
               <span>No Credit Card Required</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
+              <div className="w-2 h-2 rounded-full bg-blue-500 dark:bg-blue-400 animate-pulse"></div>
               <span>100+ AI Models</span>
             </div>
           </div>

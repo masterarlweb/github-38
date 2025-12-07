@@ -48,7 +48,10 @@ const Hero = () => {
   
   return (
     <section id="home" className="relative overflow-hidden min-h-screen">
-      <WebGLShader />
+      {/* WebGL Shader only in dark mode */}
+      <div className="hidden dark:block">
+        <WebGLShader />
+      </div>
       <div className="container-custom relative z-10 pt-20 pb-12 min-h-screen flex items-center px-6 lg:px-12">
         <div className="w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">

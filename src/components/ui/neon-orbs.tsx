@@ -9,8 +9,9 @@ export function NeonOrbs() {
     setMounted(true)
   }, [])
 
+  // Only render in light mode
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0 dark:hidden block">
       {/* Top-left orb */}
       <div
         className={`absolute transition-all duration-1000 ease-out ${
