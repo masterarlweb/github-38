@@ -8,10 +8,10 @@ export function GlowingEffectDemo() {
   return (
     <div className="container-custom py-20">
       <div className="text-center space-y-6 mb-16">
-        <h2 className="text-4xl lg:text-5xl font-bold text-white">
-          Interactive <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Services</span>
+        <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
+          Interactive <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">Services</span>
         </h2>
-        <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
           Hover over our service cards to see the interactive glowing effects
         </p>
       </div>
@@ -56,7 +56,7 @@ interface GridItemProps {
 const GridItem = ({ area, icon, title, description }: GridItemProps) => {
   return (
     <li className={cn("min-h-[20rem] list-none", area)}>
-      <div className="relative h-full rounded-2xl border border-white/10 p-1">
+      <div className="relative h-full rounded-2xl border border-border p-1">
         <GlowingEffect
           spread={40}
           glow={true}
@@ -65,16 +65,16 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
           inactiveZone={0.01}
           borderWidth={2}
         />
-        <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl bg-black/50 backdrop-blur-sm p-6 shadow-2xl">
+        <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl bg-white/60 dark:bg-black/50 backdrop-blur-sm p-6 shadow-2xl">
           <div className="relative flex flex-1 flex-col justify-between gap-4">
-            <div className="w-fit rounded-lg border border-white/20 bg-gradient-to-r from-purple-500/20 to-blue-500/20 p-3 backdrop-blur-sm text-white">
+            <div className="w-fit rounded-lg border border-border bg-gradient-to-r from-purple-500/20 to-blue-500/20 p-3 backdrop-blur-sm text-foreground">
               {icon}
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-white leading-tight">
+              <h3 className="text-xl font-semibold text-foreground leading-tight">
                 {title}
               </h3>
-              <p className="text-sm text-gray-300 leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {description}
               </p>
             </div>

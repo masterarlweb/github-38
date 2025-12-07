@@ -17,10 +17,14 @@ const Index = () => {
       <Header />
       <Hero />
       <KontenihAI />
-      <section className="bg-black relative overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="bg-slate-100 dark:bg-black relative overflow-hidden">
+        <div className="absolute inset-0 hidden dark:block">
           <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+        <div className="absolute inset-0 dark:hidden block">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-indigo-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-indigo-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
         <div className="relative z-10">
           <GlowingEffectDemo />
