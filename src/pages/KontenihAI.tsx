@@ -35,6 +35,14 @@ type AITool = {
   description: string;
 };
 
+type AIShortcutsData = {
+  scheduler?: { caption?: string; hashtags?: string[]; recommendedTime?: string };
+  carousel?: { template?: string; topic?: string };
+  analytics?: boolean;
+  creator?: boolean;
+  ecommerce?: { productName?: string };
+};
+
 const KontenihAI = () => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
@@ -51,10 +59,57 @@ const KontenihAI = () => {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editingContent, setEditingContent] = useState('');
+  const [aiShortcuts, setAiShortcuts] = useState<AIShortcutsData>({});
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const MAX_USAGE = 2;
+
+  // Parse AI response to extract feature data
+  const parseAIResponseForFeatures = (content: string): AIShortcutsData => {
+    const shortcuts: AIShortcutsData = {};
+    const lowerContent = content.toLowerCase();
+
+    // Detect scheduler-related content
+    if (lowerContent.includes('jadwal') || lowerContent.includes('posting') || lowerContent.includes('schedule') || lowerContent.includes('waktu terbaik')) {
+      const hashtagMatch = content.match(/#\w+/g);
+      const timeMatch = content.match(/(\d{1,2}[:.]\d{2}|\d{1,2}\s*(am|pm|pagi|siang|sore|malam))/gi);
+      shortcuts.scheduler = {
+        caption: content.length > 200 ? content.substring(0, 200) + '...' : content,
+        hashtags: hashtagMatch || [],
+        recommendedTime: timeMatch?.[0] || undefined
+      };
+    }
+
+    // Detect carousel/design-related content
+    if (lowerContent.includes('carousel') || lowerContent.includes('slide') || lowerContent.includes('desain') || lowerContent.includes('konten visual') || lowerContent.includes('template')) {
+      const topicMatch = content.match(/tentang\s+["']?([^"'\n.]+)["']?/i);
+      shortcuts.carousel = {
+        topic: topicMatch?.[1] || 'Brand Content',
+        template: lowerContent.includes('minimalist') ? 'minimalist' : lowerContent.includes('bold') ? 'bold' : 'modern'
+      };
+    }
+
+    // Detect analytics-related content
+    if (lowerContent.includes('analitik') || lowerContent.includes('analytics') || lowerContent.includes('performa') || lowerContent.includes('insight') || lowerContent.includes('metrik')) {
+      shortcuts.analytics = true;
+    }
+
+    // Detect creator/collaboration-related content
+    if (lowerContent.includes('kreator') || lowerContent.includes('creator') || lowerContent.includes('kolaborasi') || lowerContent.includes('influencer') || lowerContent.includes('partnership')) {
+      shortcuts.creator = true;
+    }
+
+    // Detect e-commerce-related content
+    if (lowerContent.includes('produk') || lowerContent.includes('product') || lowerContent.includes('jual') || lowerContent.includes('toko') || lowerContent.includes('e-commerce') || lowerContent.includes('ecommerce')) {
+      const productMatch = content.match(/produk\s+["']?([^"'\n,]+)["']?/i);
+      shortcuts.ecommerce = {
+        productName: productMatch?.[1] || undefined
+      };
+    }
+
+    return shortcuts;
+  };
 
   const aiTools: AITool[] = [
     {
@@ -238,6 +293,7 @@ const KontenihAI = () => {
     setCurrentConversationId(null);
     setMessages([]);
     setSelectedTool(null);
+    setAiShortcuts({}); // Reset shortcuts for new conversation
   };
 
   const handleSelectConversation = async (conversationId: string) => {
@@ -394,6 +450,10 @@ const KontenihAI = () => {
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
+      
+      // Parse AI response and update shortcuts real-time
+      const extractedShortcuts = parseAIResponseForFeatures(cleanContent);
+      setAiShortcuts(prev => ({ ...prev, ...extractedShortcuts }));
       
       // Save assistant message to database
       await saveMessage(conversationId, 'assistant', cleanContent);
@@ -818,6 +878,24 @@ const KontenihAI = () => {
                 </div>
               </motion.div>
             )}
+            
+            {/* AI Shortcut Buttons - Always visible when there are messages */}
+            {messages.length > 0 && !isLoading && (
+              <div className="mt-4 pt-4 border-t border-foreground/10">
+                <p className="text-xs text-foreground/40 mb-2">
+                  {Object.keys(aiShortcuts).length > 0 
+                    ? '✨ AI mendeteksi fitur yang relevan:' 
+                    : 'Akses cepat ke fitur:'}
+                </p>
+                <AIShortcutButtons 
+                  shortcuts={aiShortcuts}
+                  onShortcutClick={(type, data) => {
+                    console.log('Shortcut clicked:', type, data);
+                  }}
+                />
+              </div>
+            )}
+            
             <div ref={messagesEndRef} />
           </div>
         )}
