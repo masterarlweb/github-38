@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import Logo from '@/components/Logo';
 import R3FBlob from '@/components/ui/r3f-blob';
+import AIShortcutButtons from '@/components/AIShortcutButtons';
 
 // Validation schema for chat messages
 const messageSchema = z.object({

@@ -14,6 +14,182 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_shortcuts: {
+        Row: {
+          conversation_id: string | null
+          created_at: string
+          id: string
+          shortcut_data: Json | null
+          shortcut_type: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          conversation_id?: string | null
+          created_at?: string
+          id?: string
+          shortcut_data?: Json | null
+          shortcut_type: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          conversation_id?: string | null
+          created_at?: string
+          id?: string
+          shortcut_data?: Json | null
+          shortcut_type?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_shortcuts_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      analytics_data: {
+        Row: {
+          campaign_id: string | null
+          comments: number | null
+          engagement_rate: number | null
+          id: string
+          impressions: number | null
+          likes: number | null
+          platform: string | null
+          post_id: string | null
+          reach: number | null
+          recorded_at: string
+          saves: number | null
+          shares: number | null
+          user_id: string
+        }
+        Insert: {
+          campaign_id?: string | null
+          comments?: number | null
+          engagement_rate?: number | null
+          id?: string
+          impressions?: number | null
+          likes?: number | null
+          platform?: string | null
+          post_id?: string | null
+          reach?: number | null
+          recorded_at?: string
+          saves?: number | null
+          shares?: number | null
+          user_id: string
+        }
+        Update: {
+          campaign_id?: string | null
+          comments?: number | null
+          engagement_rate?: number | null
+          id?: string
+          impressions?: number | null
+          likes?: number | null
+          platform?: string | null
+          post_id?: string | null
+          reach?: number | null
+          recorded_at?: string
+          saves?: number | null
+          shares?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analytics_data_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "analytics_data_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "scheduled_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      campaigns: {
+        Row: {
+          ai_strategy: string | null
+          created_at: string
+          description: string | null
+          end_date: string | null
+          id: string
+          platform: string | null
+          start_date: string | null
+          status: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ai_strategy?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          platform?: string | null
+          start_date?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ai_strategy?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          platform?: string | null
+          start_date?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      carousel_templates: {
+        Row: {
+          created_at: string
+          id: string
+          is_ai_generated: boolean | null
+          slides: Json
+          template_type: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_ai_generated?: boolean | null
+          slides?: Json
+          template_type?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_ai_generated?: boolean | null
+          slides?: Json
+          template_type?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           content: string
@@ -70,6 +246,90 @@ export type Database = {
         }
         Relationships: []
       }
+      creator_collaborations: {
+        Row: {
+          collaboration_type: string | null
+          created_at: string
+          creator_handle: string | null
+          creator_name: string
+          engagement_rate: number | null
+          followers_count: number | null
+          id: string
+          notes: string | null
+          platform: string | null
+          status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          collaboration_type?: string | null
+          created_at?: string
+          creator_handle?: string | null
+          creator_name: string
+          engagement_rate?: number | null
+          followers_count?: number | null
+          id?: string
+          notes?: string | null
+          platform?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          collaboration_type?: string | null
+          created_at?: string
+          creator_handle?: string | null
+          creator_name?: string
+          engagement_rate?: number | null
+          followers_count?: number | null
+          id?: string
+          notes?: string | null
+          platform?: string | null
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ecommerce_products: {
+        Row: {
+          created_at: string
+          currency: string | null
+          id: string
+          linked_posts: string[] | null
+          price: number | null
+          product_name: string
+          product_url: string | null
+          sales_count: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          currency?: string | null
+          id?: string
+          linked_posts?: string[] | null
+          price?: number | null
+          product_name: string
+          product_url?: string | null
+          sales_count?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string | null
+          id?: string
+          linked_posts?: string[] | null
+          price?: number | null
+          product_name?: string
+          product_url?: string | null
+          sales_count?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -93,6 +353,65 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      scheduled_posts: {
+        Row: {
+          ai_recommended_time: string | null
+          campaign_id: string | null
+          caption: string | null
+          content: string
+          created_at: string
+          engagement_prediction: Json | null
+          hashtags: string[] | null
+          id: string
+          media_urls: string[] | null
+          platform: string | null
+          scheduled_time: string
+          status: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ai_recommended_time?: string | null
+          campaign_id?: string | null
+          caption?: string | null
+          content: string
+          created_at?: string
+          engagement_prediction?: Json | null
+          hashtags?: string[] | null
+          id?: string
+          media_urls?: string[] | null
+          platform?: string | null
+          scheduled_time: string
+          status?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ai_recommended_time?: string | null
+          campaign_id?: string | null
+          caption?: string | null
+          content?: string
+          created_at?: string
+          engagement_prediction?: Json | null
+          hashtags?: string[] | null
+          id?: string
+          media_urls?: string[] | null
+          platform?: string | null
+          scheduled_time?: string
+          status?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scheduled_posts_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       usage_tracking: {
         Row: {
