@@ -7,9 +7,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-foreground/10 relative overflow-hidden">
-      {/* WebGL Shader Background */}
-      <div className="absolute inset-0 z-0">
+    <footer className="border-t border-border/50 dark:border-foreground/10 relative overflow-hidden bg-background/80 dark:bg-transparent">
+      {/* WebGL Shader Background - only in dark mode */}
+      <div className="absolute inset-0 z-0 dark:block hidden">
         <WebGLShader />
       </div>
       

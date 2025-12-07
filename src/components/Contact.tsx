@@ -75,29 +75,29 @@ Please provide more information. Thank you!`;
   ];
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden">
-      {/* WebGL Shader Background */}
-      <div className="absolute inset-0 z-0">
+    <section id="contact" className="section-padding relative overflow-hidden bg-background/80 dark:bg-transparent">
+      {/* WebGL Shader Background - only in dark mode */}
+      <div className="absolute inset-0 z-0 dark:block hidden">
         <WebGLShader />
       </div>
 
       <div className="container-custom relative z-10">
         <div className="text-center space-y-6 mb-20">
-          <div className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full shadow-lg border border-white/20">
-            <MessageCircle className="w-5 h-5 text-purple-400 mr-2" />
-            <span className="text-blue-400 font-semibold">Contact Us</span>
+          <div className="inline-flex items-center px-6 py-3 bg-primary/10 dark:bg-white/10 backdrop-blur-sm rounded-full shadow-lg border border-primary/20 dark:border-white/20">
+            <MessageCircle className="w-5 h-5 text-purple-500 dark:text-purple-400 mr-2" />
+            <span className="text-primary font-semibold">Contact Us</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white">
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
             Contact <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Us</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Ready to start your SME digital transformation? Get free consultation now!
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <Card className="shadow-2xl border border-white/10 bg-black/50 backdrop-blur-sm hover:shadow-3xl hover:shadow-purple-500/20 transition-all duration-500 relative overflow-hidden">
+          <Card className="shadow-2xl border border-border/50 dark:border-white/10 bg-card/80 dark:bg-black/50 backdrop-blur-sm hover:shadow-3xl hover:shadow-purple-500/20 transition-all duration-500 relative overflow-hidden">
             <GlowingEffect
               spread={40}
               glow={true}
@@ -112,8 +112,8 @@ Please provide more information. Thank you!`;
                   <Zap className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <CardTitle className="text-2xl font-bold text-white">Order Form</CardTitle>
-                  <CardDescription className="text-gray-300 mt-1">
+                  <CardTitle className="text-2xl font-bold text-foreground">Order Form</CardTitle>
+                  <CardDescription className="text-muted-foreground mt-1">
                     Fill out the form below and we will contact you immediately
                   </CardDescription>
                 </div>
@@ -122,36 +122,36 @@ Please provide more information. Thank you!`;
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="space-y-3">
-                  <Label htmlFor="name" className="text-sm font-semibold text-gray-300">Full Name *</Label>
+                  <Label htmlFor="name" className="text-sm font-semibold text-muted-foreground">Full Name *</Label>
                   <Input
                     id="name"
                     type="text"
                     placeholder="Enter your full name"
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="h-14 rounded-xl border-2 border-white/20 bg-black/20 text-white placeholder:text-gray-400 focus:border-blue-500 transition-all duration-300 text-base"
+                    className="h-14 rounded-xl border-2 border-border/50 dark:border-white/20 bg-background/20 dark:bg-black/20 text-foreground placeholder:text-muted-foreground focus:border-primary transition-all duration-300 text-base"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <Label htmlFor="phone" className="text-sm font-semibold text-gray-300">WhatsApp Number *</Label>
+                  <Label htmlFor="phone" className="text-sm font-semibold text-muted-foreground">WhatsApp Number *</Label>
                   <Input
                     id="phone"
                     type="tel"
                     placeholder="08xxxxxxxxxx"
                     value={formData.phone}
                     onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                    className="h-14 rounded-xl border-2 border-white/20 bg-black/20 text-white placeholder:text-gray-400 focus:border-blue-500 transition-all duration-300 text-base"
+                    className="h-14 rounded-xl border-2 border-border/50 dark:border-white/20 bg-background/20 dark:bg-black/20 text-foreground placeholder:text-muted-foreground focus:border-primary transition-all duration-300 text-base"
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <Label htmlFor="package" className="text-sm font-semibold text-gray-300">Select Package *</Label>
+                  <Label htmlFor="package" className="text-sm font-semibold text-muted-foreground">Select Package *</Label>
                   <Select onValueChange={(value) => setFormData(prev => ({ ...prev, package: value }))}>
-                    <SelectTrigger className="h-14 rounded-xl border-2 border-white/20 bg-black/20 text-white focus:border-blue-500 transition-all duration-300 text-base">
-                      <SelectValue placeholder="Choose desired package" className="text-gray-400" />
+                    <SelectTrigger className="h-14 rounded-xl border-2 border-border/50 dark:border-white/20 bg-background/20 dark:bg-black/20 text-foreground focus:border-primary transition-all duration-300 text-base">
+                      <SelectValue placeholder="Choose desired package" className="text-muted-foreground" />
                     </SelectTrigger>
-                    <SelectContent className="rounded-xl bg-black/90 border-white/20 text-white">
+                    <SelectContent className="rounded-xl bg-card/95 dark:bg-black/90 border-border/50 dark:border-white/20 text-foreground">
                       <SelectItem value="basic">Basic - Rp 1.5 Million/month</SelectItem>
                       <SelectItem value="pro">Pro - Rp 2.8 Million/month</SelectItem>
                       <SelectItem value="ultimate">Ultimate - Rp 4.5 Million/month</SelectItem>
@@ -174,12 +174,12 @@ Please provide more information. Thank you!`;
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-8">Contact Information</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-8">Contact Information</h3>
               <div className="grid gap-6">
                 {contactInfo.map((info, index) => (
                   <div 
                     key={index} 
-                    className="group relative overflow-hidden p-6 bg-black/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-white/10"
+                    className="group relative overflow-hidden p-6 bg-card/80 dark:bg-black/50 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-border/50 dark:border-white/10"
                     onClick={info.action}
                   >
                     <div className="flex items-center space-x-4">
@@ -187,11 +187,11 @@ Please provide more information. Thank you!`;
                         <info.icon className="h-7 w-7 text-white" />
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold text-white text-lg group-hover:text-gray-100 transition-colors">{info.title}</div>
-                        <div className="text-gray-300 group-hover:text-gray-200 transition-colors">{info.details}</div>
+                        <div className="font-semibold text-foreground text-lg group-hover:text-foreground/90 transition-colors">{info.title}</div>
+                        <div className="text-muted-foreground group-hover:text-muted-foreground/90 transition-colors">{info.details}</div>
                       </div>
                       <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-primary rounded-full"></div>
                       </div>
                     </div>
                     {/* Hover background */}

@@ -87,21 +87,21 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="section-padding relative overflow-hidden">
-      {/* WebGL Shader Background */}
-      <div className="absolute inset-0 z-0">
+    <section id="services" className="section-padding relative overflow-hidden bg-background/80 dark:bg-transparent">
+      {/* WebGL Shader Background - only in dark mode */}
+      <div className="absolute inset-0 z-0 dark:block hidden">
         <WebGLShader />
       </div>
 
       <div className="container-custom relative z-10">
         <div className="text-center space-y-6 mb-20 relative z-10">
-          <div className="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full shadow-lg border border-white/20">
-            <span className="text-blue-400 font-semibold">🎯 Professional Services</span>
+          <div className="inline-flex items-center px-6 py-3 bg-primary/10 dark:bg-white/10 backdrop-blur-sm rounded-full shadow-lg border border-primary/20 dark:border-white/20">
+            <span className="text-primary dark:text-blue-400 font-semibold">🎯 Professional Services</span>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white">
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
             Our <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Services</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Complete solutions for digital business transformation with trusted professional services
           </p>
         </div>
@@ -110,7 +110,7 @@ const Services = () => {
           {services.map((service, index) => (
             <Card 
               key={index} 
-              className={`group relative overflow-hidden hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 hover:-translate-y-2 border border-white/10 bg-black/50 backdrop-blur-sm hover:bg-black/70 cursor-pointer`}
+              className={`group relative overflow-hidden hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 hover:-translate-y-2 border border-border/50 dark:border-white/10 bg-card/80 dark:bg-black/50 backdrop-blur-sm hover:bg-card dark:hover:bg-black/70 cursor-pointer`}
               style={{ animationDelay: `${index * 100}ms` }}
                 onClick={() => {
                   if (service.route.startsWith('#')) {
@@ -135,7 +135,7 @@ const Services = () => {
               <div className={`absolute inset-0 bg-gradient-to-br from-purple-900/20 to-blue-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
               
               {/* Floating Icon Background */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"></div>
+              <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-primary/10 dark:from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110"></div>
               
               {/* Content */}
               <div className="relative z-10">
@@ -147,7 +147,7 @@ const Services = () => {
                     {/* Glow Effect */}
                     <div className={`absolute inset-0 w-16 h-16 mx-auto rounded-xl bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500`}></div>
                   </div>
-                  <CardTitle className="text-lg font-bold text-white group-hover:text-gray-100 transition-colors leading-tight">
+                  <CardTitle className="text-lg font-bold text-foreground group-hover:text-foreground/90 transition-colors leading-tight">
                     {service.title}
                   </CardTitle>
                   <CardDescription className={`bg-gradient-to-r ${service.color} bg-clip-text text-transparent font-semibold text-sm`}>
@@ -156,18 +156,18 @@ const Services = () => {
                 </CardHeader>
                 
                 <CardContent className="space-y-4 px-4 pb-6">
-                  <p className="text-gray-300 text-xs leading-relaxed group-hover:text-gray-200 transition-colors line-clamp-3">
+                  <p className="text-muted-foreground text-xs leading-relaxed group-hover:text-muted-foreground/90 transition-colors line-clamp-3">
                     {service.description}
                   </p>
                   <ul className="space-y-2">
                     {service.features.slice(0, 3).map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-xs text-gray-300 group-hover:text-gray-200 transition-colors">
+                      <li key={idx} className="flex items-center text-xs text-muted-foreground group-hover:text-muted-foreground/90 transition-colors">
                         <div className={`w-1.5 h-1.5 bg-gradient-to-r ${service.color} rounded-full mr-2 flex-shrink-0 group-hover:scale-125 transition-transform`}></div>
                         <span className="line-clamp-1">{feature}</span>
                       </li>
                     ))}
                     {service.features.length > 3 && (
-                      <li className="text-xs text-gray-400 italic">+{service.features.length - 3} fitur lainnya</li>
+                      <li className="text-xs text-muted-foreground/70 italic">+{service.features.length - 3} fitur lainnya</li>
                     )}
                   </ul>
                   
