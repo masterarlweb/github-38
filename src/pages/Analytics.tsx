@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, BarChart3, TrendingUp, TrendingDown, Eye, Heart, MessageCircle, Share2, Bookmark, Sparkles, RefreshCw } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 // Mock data for demonstration
 const mockEngagementData = [
@@ -134,10 +135,13 @@ const Analytics = () => {
               <span className="font-medium">Analytics</span>
             </div>
           </div>
-          <Button onClick={generateAIInsight} className="gap-2" disabled={loadingInsight}>
-            {loadingInsight ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-            AI Insight
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button onClick={generateAIInsight} className="gap-2" disabled={loadingInsight}>
+              {loadingInsight ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+              AI Insight
+            </Button>
+          </div>
         </div>
       </motion.header>
 

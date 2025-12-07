@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
 import { User, Session } from '@supabase/supabase-js';
 import { z } from 'zod';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 // Validation schema for login
 const loginSchema = z.object({
@@ -144,6 +145,11 @@ const Auth = () => {
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
       <WebGLShader />
+      
+      {/* Theme Toggle */}
+      <div className="absolute top-4 right-4 z-20">
+        <ThemeToggle />
+      </div>
       
       <div className="relative z-10 w-full flex items-center justify-center px-4 py-8 sm:px-6">
         <Card className="w-full max-w-md bg-background/80 backdrop-blur-lg border-border/50 mx-auto">

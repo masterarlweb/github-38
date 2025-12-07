@@ -12,6 +12,7 @@ import { ArrowLeft, Calendar, Clock, Instagram, Plus, Send, Trash2, Play, Pause,
 import Logo from '@/components/Logo';
 import { format, addDays, startOfWeek, isSameDay } from 'date-fns';
 import { id } from 'date-fns/locale';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 interface ScheduledPost {
   id: string;
@@ -190,10 +191,13 @@ const Scheduler = () => {
               <span className="font-medium">Scheduler</span>
             </div>
           </div>
-          <Button onClick={() => setShowCreateForm(true)} className="gap-2">
-            <Plus className="w-4 h-4" />
-            Jadwal Baru
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button onClick={() => setShowCreateForm(true)} className="gap-2">
+              <Plus className="w-4 h-4" />
+              Jadwal Baru
+            </Button>
+          </div>
         </div>
       </motion.header>
 

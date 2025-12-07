@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Users, Plus, Instagram, Youtube, MessageCircle, UserPlus, Trash2, ExternalLink } from 'lucide-react';
 import Logo from '@/components/Logo';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 interface Creator {
   id: string;
@@ -195,10 +196,13 @@ const CreatorHub = () => {
               <span className="font-medium">Creator Hub</span>
             </div>
           </div>
-          <Button onClick={() => setShowAddForm(true)} className="gap-2">
-            <UserPlus className="w-4 h-4" />
-            Tambah Kreator
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button onClick={() => setShowAddForm(true)} className="gap-2">
+              <UserPlus className="w-4 h-4" />
+              Tambah Kreator
+            </Button>
+          </div>
         </div>
       </motion.header>
 

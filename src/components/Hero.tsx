@@ -55,9 +55,9 @@ const Hero = () => {
           {/* Text Content */}
           <div className="space-y-8 animate-fade-in pl-4 lg:pl-0">
             <div className="space-y-6">
-              <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full shadow-lg border border-white/20">
+              <div className="inline-flex items-center px-4 py-2 bg-foreground/10 backdrop-blur-md rounded-full shadow-lg border border-foreground/20">
                 <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                <span className="text-sm font-medium text-white">🚀 AI Marketing Agency</span>
+                <span className="text-sm font-medium text-foreground">🚀 AI Marketing Agency</span>
               </div>
               
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
@@ -65,9 +65,9 @@ const Hero = () => {
                   Content Drives Sales?
                 </span>
                 <br />
-                <span className="text-white">Kontenih is the Answer.</span>
+                <span className="text-foreground">Kontenih is the Answer.</span>
               </h1>
-              <p className="text-xl text-white/80 leading-relaxed max-w-lg">
+              <p className="text-xl text-foreground/70 leading-relaxed max-w-lg">
                 Driving business growth with AI solutions and integrated digital transformation strategies for all types of businesses.
               </p>
             </div>
@@ -93,7 +93,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-400/0 via-white/10 to-brand-blue-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Button>
               <Button 
-                className="relative overflow-hidden bg-black/30 backdrop-blur-md border border-brand-orange-500/50 text-brand-orange-400 hover:bg-brand-orange-500/90 hover:text-white hover:border-brand-orange-400 font-medium text-sm sm:text-base px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl shadow-lg hover:shadow-brand-orange-500/50 transition-all duration-300 hover:scale-105 group"
+                className="relative overflow-hidden bg-background/30 backdrop-blur-md border border-brand-orange-500/50 text-brand-orange-400 hover:bg-brand-orange-500/90 hover:text-white hover:border-brand-orange-400 font-medium text-sm sm:text-base px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg sm:rounded-xl shadow-lg hover:shadow-brand-orange-500/50 transition-all duration-300 hover:scale-105 group"
                 onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 <span className="relative z-10 flex items-center justify-center">
@@ -105,14 +105,14 @@ const Hero = () => {
             </div>
 
             {/* About Kontenih */}
-            <div className="bg-black/20 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/10">
+            <div className="bg-background/20 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-foreground/10">
               <div className="flex items-center gap-2 mb-3">
-                <h3 className="text-lg font-bold text-white">About Kontenih</h3>
+                <h3 className="text-lg font-bold text-foreground">About Kontenih</h3>
                 <div className="px-3 py-1 bg-gradient-to-r from-brand-blue-500 to-brand-orange-500 text-white text-xs font-semibold rounded-full">
                   AI Marketing Agency
                 </div>
               </div>
-              <p className="text-white/70 leading-relaxed mb-4">
+              <p className="text-foreground/60 leading-relaxed mb-4">
                 Driving business growth with AI solutions and integrated digital transformation strategies. 
                 We combine cutting-edge technology with creativity to produce content that 
                 is not only engaging, but also effective in increasing engagement and conversions.
@@ -120,8 +120,8 @@ const Hero = () => {
               
               {/* Tujuan Kontenih */}
               <div className="space-y-3 mb-4">
-                <h4 className="text-sm font-semibold text-white">Kontenih Goals:</h4>
-                <div className="grid gap-2 text-sm text-white/70">
+                <h4 className="text-sm font-semibold text-foreground">Kontenih Goals:</h4>
+                <div className="grid gap-2 text-sm text-foreground/60">
                   <div className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 bg-brand-blue-300 rounded-full"></div>
                     <span>Help brands reach maximum potential through quality content</span>
@@ -140,11 +140,11 @@ const Hero = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-brand-blue-300">3+</div>
-                  <div className="text-xs text-white/60">Years Experience</div>
+                  <div className="text-xs text-foreground/50">Years Experience</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-brand-orange-300">50+</div>
-                  <div className="text-xs text-white/60">Projects Completed</div>
+                  <div className="text-xs text-foreground/50">Projects Completed</div>
                 </div>
               </div>
             </div>
@@ -156,21 +156,21 @@ const Hero = () => {
                   <div className="text-3xl font-bold text-brand-blue-300 group-hover:scale-110 transition-transform">100+</div>
                   <div className="absolute -inset-2 bg-brand-blue-500/20 rounded-lg opacity-0 group-hover:opacity-50 transition-opacity"></div>
                 </div>
-                <div className="text-sm text-white/70 mt-1">Happy Clients</div>
+                <div className="text-sm text-foreground/60 mt-1">Happy Clients</div>
               </div>
               <div className="text-center group">
                 <div className="relative">
                   <div className="text-3xl font-bold text-brand-orange-300 group-hover:scale-110 transition-transform">500+</div>
                   <div className="absolute -inset-2 bg-brand-orange-500/20 rounded-lg opacity-0 group-hover:opacity-50 transition-opacity"></div>
                 </div>
-                <div className="text-sm text-white/70 mt-1">Content Created</div>
+                <div className="text-sm text-foreground/60 mt-1">Content Created</div>
               </div>
               <div className="text-center group">
                 <div className="relative">
                   <div className="text-3xl font-bold text-brand-blue-300 group-hover:scale-110 transition-transform">95%</div>
                   <div className="absolute -inset-2 bg-brand-blue-500/20 rounded-lg opacity-0 group-hover:opacity-50 transition-opacity"></div>
                 </div>
-                <div className="text-sm text-white/70 mt-1">Client Satisfaction</div>
+                <div className="text-sm text-foreground/60 mt-1">Client Satisfaction</div>
               </div>
             </div>
           </div>
@@ -179,7 +179,7 @@ const Hero = () => {
           <div className="relative animate-scale-in pr-4 lg:pr-0">
             <div className="relative">
               {/* Main Card */}
-              <div className="aspect-square bg-gradient-to-br from-black/20 via-black/10 to-black/20 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-white/10">
+              <div className="aspect-square bg-gradient-to-br from-background/20 via-background/10 to-background/20 rounded-3xl p-8 shadow-2xl backdrop-blur-md border border-foreground/10">
                 <div className="w-full h-full bg-gradient-to-br from-brand-blue-500/20 to-brand-orange-500/20 rounded-2xl shadow-inner flex items-center justify-center relative overflow-hidden">
                   {/* Animated Background Pattern */}
                   <div className="absolute inset-0 opacity-20">
@@ -194,8 +194,8 @@ const Hero = () => {
                       <span className="text-3xl font-bold text-white">K</span>
                     </div>
                     <div className="space-y-3">
-                      <h3 className="font-bold text-xl text-white">Kontenih Agency</h3>
-                      <p className="text-sm text-white/70 font-medium">Your Digital Growth Partner</p>
+                      <h3 className="font-bold text-xl text-foreground">Kontenih Agency</h3>
+                      <p className="text-sm text-foreground/60 font-medium">Your Digital Growth Partner</p>
                       <div className="flex justify-center space-x-2">
                         <div className="w-2 h-2 bg-brand-blue-300 rounded-full animate-pulse"></div>
                         <div className="w-2 h-2 bg-brand-orange-300 rounded-full animate-pulse delay-300"></div>

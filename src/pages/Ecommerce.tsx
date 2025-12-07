@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ShoppingCart, Plus, Package, ExternalLink, Trash2, Link2, TrendingUp } from 'lucide-react';
 import Logo from '@/components/Logo';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 interface Product {
   id: string;
@@ -168,10 +169,13 @@ const Ecommerce = () => {
               <span className="font-medium">E-commerce</span>
             </div>
           </div>
-          <Button onClick={() => setShowAddForm(true)} className="gap-2">
-            <Plus className="w-4 h-4" />
-            Tambah Produk
-          </Button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <Button onClick={() => setShowAddForm(true)} className="gap-2">
+              <Plus className="w-4 h-4" />
+              Tambah Produk
+            </Button>
+          </div>
         </div>
       </motion.header>
 
