@@ -11,10 +11,7 @@ import KontenihAI from "./pages/KontenihAI";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Scheduler from "./pages/Scheduler";
-import CarouselBuilder from "./pages/CarouselBuilder";
 import Analytics from "./pages/Analytics";
-import CreatorHub from "./pages/CreatorHub";
-import Ecommerce from "./pages/Ecommerce";
 
 const queryClient = new QueryClient();
 
@@ -33,10 +30,7 @@ const App = () => (
               <Route path="/auth" element={<Auth />} />
               <Route path="/kontenih-ai" element={<KontenihAI />} />
               <Route path="/scheduler" element={<Scheduler />} />
-              <Route path="/carousel-builder" element={<CarouselBuilder />} />
               <Route path="/analytics" element={<Analytics />} />
-              <Route path="/creator-hub" element={<CreatorHub />} />
-              <Route path="/ecommerce" element={<Ecommerce />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
