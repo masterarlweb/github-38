@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Calendar, Clock, Instagram, Plus, Send, Trash2, Play, Pause, Sparkles } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Instagram, Plus, Send, Trash2, Play, Pause, Sparkles, Video, Image, Link } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { format, addDays, startOfWeek, isSameDay } from 'date-fns';
 import { id } from 'date-fns/locale';
@@ -23,6 +23,7 @@ interface ScheduledPost {
   status: string;
   ai_recommended_time?: string;
   platform: string;
+  media_urls?: string[];
 }
 
 const Scheduler = () => {
@@ -37,17 +38,28 @@ const Scheduler = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   
   const [newPost, setNewPost] = useState({
-    content: aiData?.topic || '',
-    caption: aiData?.caption || '',
-    hashtags: Array.isArray(aiData?.hashtags) ? aiData.hashtags.join(' ') : (aiData?.hashtags || ''),
-    scheduled_time: aiData?.recommendedTime || '',
-    platform: 'instagram'
+    content: '',
+    caption: '',
+    hashtags: '',
+    scheduled_time: '',
+    platform: 'instagram',
+    media_urls: [] as string[]
   });
 
-  // Auto open form if coming from AI
+  // Auto open form and populate with AI data
   useEffect(() => {
     if (location.state?.autoOpenForm && aiData) {
+      setNewPost({
+        content: aiData.topic || '',
+        caption: aiData.caption || '',
+        hashtags: Array.isArray(aiData.hashtags) ? aiData.hashtags.join(' ') : (aiData.hashtags || ''),
+        scheduled_time: aiData.recommendedTime || '',
+        platform: 'instagram',
+        media_urls: aiData.media_urls || []
+      });
       setShowCreateForm(true);
+      // Clear the state to prevent re-triggering
+      window.history.replaceState({}, document.title);
     }
   }, [location.state, aiData]);
 
@@ -119,7 +131,8 @@ const Scheduler = () => {
         hashtags: hashtagsArray,
         scheduled_time: newPost.scheduled_time,
         platform: newPost.platform,
-        status: 'scheduled'
+        status: 'scheduled',
+        media_urls: newPost.media_urls.length > 0 ? newPost.media_urls : null
       });
 
     if (error) {
@@ -130,7 +143,7 @@ const Scheduler = () => {
 
     toast.success('Jadwal posting berhasil dibuat!');
     setShowCreateForm(false);
-    setNewPost({ content: '', caption: '', hashtags: '', scheduled_time: '', platform: 'instagram' });
+    setNewPost({ content: '', caption: '', hashtags: '', scheduled_time: '', platform: 'instagram', media_urls: [] });
     fetchPosts();
   };
 
@@ -350,6 +363,16 @@ const Scheduler = () => {
                               </span>
                             </div>
                             <p className="text-sm mb-2">{post.caption || post.content}</p>
+                            {post.media_urls && post.media_urls.length > 0 && (
+                              <div className="flex items-center gap-2 mb-2 p-2 rounded-lg bg-foreground/5">
+                                {post.media_urls[0]?.match(/\.(mp4|webm|mov)$/i) ? (
+                                  <Video className="w-4 h-4 text-blue-400" />
+                                ) : (
+                                  <Image className="w-4 h-4 text-green-400" />
+                                )}
+                                <span className="text-xs text-foreground/50 truncate">{post.media_urls[0]}</span>
+                              </div>
+                            )}
                             {post.hashtags && post.hashtags.length > 0 && (
                               <div className="flex flex-wrap gap-1">
                                 {post.hashtags.map((tag, i) => (
@@ -437,6 +460,28 @@ const Scheduler = () => {
                     onChange={e => setNewPost({...newPost, hashtags: e.target.value})}
                     className="bg-background/50"
                   />
+                </div>
+                
+                <div>
+                  <label className="text-sm text-foreground/60 mb-2 block">Media URL (Video/Gambar)</label>
+                  <div className="space-y-2">
+                    <Input
+                      placeholder="https://example.com/video.mp4"
+                      value={newPost.media_urls[0] || ''}
+                      onChange={e => setNewPost({...newPost, media_urls: e.target.value ? [e.target.value] : []})}
+                      className="bg-background/50"
+                    />
+                    {newPost.media_urls.length > 0 && newPost.media_urls[0] && (
+                      <div className="p-2 rounded-lg bg-foreground/5 border border-foreground/10 flex items-center gap-2">
+                        {newPost.media_urls[0].match(/\.(mp4|webm|mov)$/i) ? (
+                          <Video className="w-4 h-4 text-blue-400" />
+                        ) : (
+                          <Image className="w-4 h-4 text-green-400" />
+                        )}
+                        <span className="text-xs text-foreground/60 truncate flex-1">{newPost.media_urls[0]}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 
                 <div>
