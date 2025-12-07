@@ -39,10 +39,17 @@ const Scheduler = () => {
   const [newPost, setNewPost] = useState({
     content: aiData?.topic || '',
     caption: aiData?.caption || '',
-    hashtags: aiData?.hashtags?.join(' ') || '',
+    hashtags: Array.isArray(aiData?.hashtags) ? aiData.hashtags.join(' ') : (aiData?.hashtags || ''),
     scheduled_time: aiData?.recommendedTime || '',
     platform: 'instagram'
   });
+
+  // Auto open form if coming from AI
+  useEffect(() => {
+    if (location.state?.autoOpenForm && aiData) {
+      setShowCreateForm(true);
+    }
+  }, [location.state, aiData]);
 
   // AI recommended times
   const recommendedTimes = [

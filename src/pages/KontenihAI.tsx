@@ -816,19 +816,44 @@ const KontenihAI = () => {
                   >
                     <p className="whitespace-pre-wrap">{renderMessageContent(message.content)}</p>
                     {message.role === 'assistant' && (
-                      <motion.button
-                        onClick={() => handleCopyMessage(message.content, index)}
-                        className="absolute -top-2 -right-2 p-1.5 bg-background/95 hover:bg-background border border-foreground/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        title="Salin teks"
-                      >
-                        {copiedIndex === index ? (
-                          <Check className="w-3.5 h-3.5 text-green-500" />
-                        ) : (
-                          <Copy className="w-3.5 h-3.5 text-foreground/60" />
-                        )}
-                      </motion.button>
+                      <div className="absolute -top-2 -right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <motion.button
+                          onClick={() => {
+                            const extractedData = parseAIResponseForFeatures(message.content);
+                            navigate('/scheduler', { 
+                              state: { 
+                                aiData: {
+                                  topic: message.content.substring(0, 100),
+                                  caption: message.content,
+                                  hashtags: extractedData.scheduler?.hashtags || [],
+                                  recommendedTime: extractedData.scheduler?.recommendedTime
+                                },
+                                autoOpenForm: true
+                              } 
+                            });
+                            toast.success('Konten dikirim ke Scheduler');
+                          }}
+                          className="p-1.5 bg-blue-500/90 hover:bg-blue-500 border border-blue-400/30 rounded-lg shadow-lg"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          title="Kirim ke Scheduler"
+                        >
+                          <Calendar className="w-3.5 h-3.5 text-white" />
+                        </motion.button>
+                        <motion.button
+                          onClick={() => handleCopyMessage(message.content, index)}
+                          className="p-1.5 bg-background/95 hover:bg-background border border-foreground/10 rounded-lg shadow-lg"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          title="Salin teks"
+                        >
+                          {copiedIndex === index ? (
+                            <Check className="w-3.5 h-3.5 text-green-500" />
+                          ) : (
+                            <Copy className="w-3.5 h-3.5 text-foreground/60" />
+                          )}
+                        </motion.button>
+                      </div>
                     )}
                     {message.role === 'user' && !isLoading && (
                       <motion.button
