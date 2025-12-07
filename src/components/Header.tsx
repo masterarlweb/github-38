@@ -1,6 +1,7 @@
 import { Menu, X, LogOut, User } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import Logo from './Logo';
 import { supabase } from '@/integrations/supabase/client';
 import { User as SupabaseUser } from '@supabase/supabase-js';
@@ -70,7 +71,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full bg-black/40 backdrop-blur-md z-50 border-b border-white/10">
+    <header className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border/50">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 px-4">
           {/* Logo */}
@@ -82,15 +83,16 @@ const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-white/80 hover:text-white transition-colors duration-200 font-medium"
+                className="text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium"
               >
                 {item.name}
               </a>
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* Theme Toggle & CTA Button */}
           <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             {user ? (
               <>
                 <Button
@@ -129,8 +131,9 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
             <button
-              className="p-2 text-white"
+              className="p-2 text-foreground"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
@@ -141,13 +144,13 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 w-full bg-black/90 border-b border-white/10 backdrop-blur-md">
+          <div className="md:hidden absolute top-16 left-0 w-full bg-background/95 border-b border-border/50 backdrop-blur-md">
             <nav className="flex flex-col space-y-4 p-4">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-white/80 hover:text-white transition-colors duration-200 font-medium py-2"
+                  className="text-foreground/80 hover:text-foreground transition-colors duration-200 font-medium py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
