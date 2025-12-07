@@ -1,0 +1,3 @@
+-- Add DELETE policy for profiles table to allow users to delete their own profile data
+CREATE POLICY "Users can delete their own profile" ON profiles
+  FOR DELETE USING (auth.uid() = id);
