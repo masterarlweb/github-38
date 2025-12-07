@@ -531,7 +531,7 @@ const KontenihAI = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-background flex overflow-hidden">
+    <div className="relative min-h-screen bg-transparent flex overflow-hidden z-10">
       {/* 3D Blob Orb - Shows when AI is processing */}
       <AnimatePresence>
         {isLoading && (

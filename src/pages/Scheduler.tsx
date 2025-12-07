@@ -169,7 +169,7 @@ const Scheduler = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative z-10 bg-transparent">
       {/* Header */}
       <motion.header 
         className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-foreground/10"

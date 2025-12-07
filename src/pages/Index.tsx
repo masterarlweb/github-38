@@ -13,7 +13,7 @@ import HomeChatbot from '@/components/HomeChatbot';
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative z-10">
       <Header />
       <Hero />
       <KontenihAI />

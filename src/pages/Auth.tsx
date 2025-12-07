@@ -143,7 +143,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+    <div className="min-h-screen relative overflow-hidden flex items-center justify-center z-10">
       <WebGLShader />
       
       {/* Theme Toggle */}
