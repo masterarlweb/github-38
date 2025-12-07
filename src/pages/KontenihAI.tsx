@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X, Copy, Check, Square, Pencil, Calendar, BarChart3, Users, ShoppingCart, Layout, ListChecks } from 'lucide-react';
+import { ArrowUp, Video, Image, FileText, Sparkles, Wand2, MessageSquare, LogOut, Paperclip, Command, SendIcon, XIcon, Menu, X, Copy, Check, Square, Pencil, Calendar, BarChart3 } from 'lucide-react';
 import SelectableAIOutput from '@/components/SelectableAIOutput';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -39,10 +39,7 @@ type AITool = {
 
 type AIShortcutsData = {
   scheduler?: { caption?: string; hashtags?: string[]; recommendedTime?: string };
-  carousel?: { template?: string; topic?: string };
   analytics?: boolean;
-  creator?: boolean;
-  ecommerce?: { productName?: string };
 };
 
 const KontenihAI = () => {
@@ -84,31 +81,9 @@ const KontenihAI = () => {
       };
     }
 
-    // Detect carousel/design-related content
-    if (lowerContent.includes('carousel') || lowerContent.includes('slide') || lowerContent.includes('desain') || lowerContent.includes('konten visual') || lowerContent.includes('template')) {
-      const topicMatch = content.match(/tentang\s+["']?([^"'\n.]+)["']?/i);
-      shortcuts.carousel = {
-        topic: topicMatch?.[1] || 'Brand Content',
-        template: lowerContent.includes('minimalist') ? 'minimalist' : lowerContent.includes('bold') ? 'bold' : 'modern'
-      };
-    }
-
     // Detect analytics-related content
     if (lowerContent.includes('analitik') || lowerContent.includes('analytics') || lowerContent.includes('performa') || lowerContent.includes('insight') || lowerContent.includes('metrik')) {
       shortcuts.analytics = true;
-    }
-
-    // Detect creator/collaboration-related content
-    if (lowerContent.includes('kreator') || lowerContent.includes('creator') || lowerContent.includes('kolaborasi') || lowerContent.includes('influencer') || lowerContent.includes('partnership')) {
-      shortcuts.creator = true;
-    }
-
-    // Detect e-commerce-related content
-    if (lowerContent.includes('produk') || lowerContent.includes('product') || lowerContent.includes('jual') || lowerContent.includes('toko') || lowerContent.includes('e-commerce') || lowerContent.includes('ecommerce')) {
-      const productMatch = content.match(/produk\s+["']?([^"'\n,]+)["']?/i);
-      shortcuts.ecommerce = {
-        productName: productMatch?.[1] || undefined
-      };
     }
 
     return shortcuts;
@@ -125,10 +100,7 @@ const KontenihAI = () => {
 
   const dashboardLinks = [
     { path: '/scheduler', name: 'Scheduler', icon: <Calendar className="w-4 h-4" />, color: 'from-blue-500/20 to-cyan-500/20' },
-    { path: '/carousel-builder', name: 'Carousel Builder', icon: <Layout className="w-4 h-4" />, color: 'from-violet-500/20 to-purple-500/20' },
     { path: '/analytics', name: 'Analytics', icon: <BarChart3 className="w-4 h-4" />, color: 'from-green-500/20 to-emerald-500/20' },
-    { path: '/creator-hub', name: 'Creator Hub', icon: <Users className="w-4 h-4" />, color: 'from-orange-500/20 to-amber-500/20' },
-    { path: '/ecommerce', name: 'E-commerce', icon: <ShoppingCart className="w-4 h-4" />, color: 'from-rose-500/20 to-red-500/20' },
   ];
 
   useEffect(() => {
@@ -826,7 +798,7 @@ const KontenihAI = () => {
                           whileTap={{ scale: 0.95 }}
                           title="Pilih teks untuk Scheduler"
                         >
-                          <ListChecks className="w-3.5 h-3.5 text-white" />
+                          <Check className="w-3.5 h-3.5 text-white" />
                         </motion.button>
                         <motion.button
                           onClick={() => {
