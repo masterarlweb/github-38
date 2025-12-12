@@ -1,0 +1,8 @@
+// Command to clone the specified repository:
+git clone https://github.com/masterarlweb/kontenih-57.git
+
+// After cloning the repository, you can push it to a new remote using the following commands:
+// cd kontenih-57
+// git remote set-url origin <NEW_REMOTE_URL>
+// git push -u origin main
+// (Replace <NEW_REMOTE_URL> with your destination repository URL.)

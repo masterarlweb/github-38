@@ -87,20 +87,31 @@ serve(async (req) => {
     }
 
     const { messages } = validatedData;
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    // Use environment variable for AI API endpoint, fallback to Lovable for backward compatibility
+    const AI_API_URL = Deno.env.get("AI_API_URL") || "https://ai.gateway.lovable.dev/v1/chat/completions";
+    const AI_API_KEY = Deno.env.get("AI_API_KEY") || Deno.env.get("LOVABLE_API_KEY");
+    const AI_MODEL = Deno.env.get("AI_MODEL") || "z-ai/glm-4.5-air:free";
+    const AI_HTTP_REFERER = Deno.env.get("AI_HTTP_REFERER");
+    const AI_TITLE = Deno.env.get("AI_TITLE");
     
-    if (!LOVABLE_API_KEY) {
-      throw new Error("LOVABLE_API_KEY is not configured");
+    if (!AI_API_KEY) {
+      throw new Error("AI_API_KEY or LOVABLE_API_KEY is not configured");
     }
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    const headers: Record<string, string> = {
+      Authorization: `Bearer ${AI_API_KEY}`,
+      "Content-Type": "application/json",
+    };
+
+    // OpenRouter recommends passing referer and title
+    if (AI_HTTP_REFERER) headers["HTTP-Referer"] = AI_HTTP_REFERER;
+    if (AI_TITLE) headers["X-Title"] = AI_TITLE;
+
+    const response = await fetch(AI_API_URL, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify({
-        model: "google/gemini-2.5-flash",
+        model: AI_MODEL,
         messages: [
           { 
             role: "system", 

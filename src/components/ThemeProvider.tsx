@@ -26,9 +26,19 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  )
+  const [theme, setTheme] = useState<Theme>(() => {
+    const stored = localStorage.getItem(storageKey) as Theme
+    // Jika tidak ada di localStorage, gunakan defaultTheme
+    // Jika ada tapi tidak valid, gunakan defaultTheme juga
+    if (!stored || (stored !== "dark" && stored !== "light" && stored !== "system")) {
+      // Set langsung ke localStorage agar konsisten
+      if (defaultTheme !== "system") {
+        localStorage.setItem(storageKey, defaultTheme)
+      }
+      return defaultTheme
+    }
+    return stored
+  })
 
   useEffect(() => {
     const root = window.document.documentElement
