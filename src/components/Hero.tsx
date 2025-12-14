@@ -50,7 +50,7 @@ const Hero = () => {
   };
   
   return (
-    <section id="home" className="relative overflow-hidden min-h-screen pb-20 pt-8 md:pb-24 md:pt-12 bg-slate-100 dark:bg-[#050a18]">
+    <section id="home" className="relative overflow-hidden min-h-screen pb-20 pt-8 md:pb-24 md:pt-12 bg-transparent dark:bg-[#050a18]">
       {/* WebGL Shader only in dark mode */}
       <div className="hidden dark:block absolute inset-0 z-0">
         <WebGLShader />
@@ -114,21 +114,14 @@ const Hero = () => {
           </motion.div>
         }
       >
-        {/* Video untuk desktop */}
+        {/* Video untuk desktop dan mobile */}
         <video
           src="/ui%20kontenih.mp4"
           autoPlay
           loop
           muted
           playsInline
-          className="hidden md:block mx-auto rounded-2xl object-cover h-full w-full"
-        />
-        {/* Fallback image untuk mobile */}
-        <img
-          src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&h=1080&fit=crop&q=80"
-          alt="Kontenih Dashboard"
-          className="md:hidden mx-auto rounded-2xl object-cover h-full object-left-top"
-          draggable={false}
+          className="mx-auto rounded-2xl w-full h-auto object-contain"
         />
       </ContainerScroll>
       </div>
