@@ -5,20 +5,18 @@ import type { Database } from './types';
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-// Clear old lovable session if exists
+// Clear old session if exists (for localhost development)
 if (typeof window !== 'undefined') {
   const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
   if (isLocalhost) {
-    // Check if there's a session stored from lovable
+    // Check if there's a stored session
     const supabaseAuthKey = `sb-${SUPABASE_URL?.split('//')[1]?.split('.')[0]}-auth-token`;
     const storedSession = localStorage.getItem(supabaseAuthKey);
     
-    // If we're on localhost but session might be from lovable, clear it
-    // This ensures fresh session for localhost
+    // Clear expired sessions on localhost
     if (storedSession && window.location.origin.includes('localhost')) {
       try {
         const sessionData = JSON.parse(storedSession);
-        // Clear if session was created from lovable domain
         if (sessionData?.expires_at && Date.now() / 1000 > sessionData.expires_at - 3600) {
           // Session might be old, clear it
           localStorage.removeItem(supabaseAuthKey);

@@ -35,19 +35,19 @@ const Gallery = () => {
     {
       title: 'Endorsement Rate Card',
       category: 'Rate Card Professional',
-      image: '/lovable-uploads/7363e89c-9acb-4aa0-a03e-599d2fbd5a5d.png',
+      image: '/uploads/7363e89c-9acb-4aa0-a03e-599d2fbd5a5d.png',
       description: 'Professional rate card for endorsement services with experienced talent Gabrielle Rora'
     },
     {
       title: 'Instagram Insights & Analytics',
       category: 'Social Media Performance',
-      image: '/lovable-uploads/383a3c2f-7973-4169-9848-5227567fd945.png',
+      image: '/uploads/383a3c2f-7973-4169-9848-5227567fd945.png',
       description: 'Instagram performance with 64.8K account reached, 459 account engaged, and 3.3K total followers'
     },
     {
       title: 'Food Review & Endorsement Portfolio',
       category: 'Culinary Content',
-      image: '/lovable-uploads/e67cb47d-660e-44fa-a92a-b1f6a99ba625.png',
+      image: '/uploads/e67cb47d-660e-44fa-a92a-b1f6a99ba625.png',
       description: 'Culinary review and endorsement portfolio as KulinerGresik talent with various food content and restaurant reviews'
     }
   ];
