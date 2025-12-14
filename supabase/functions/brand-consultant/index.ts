@@ -70,13 +70,89 @@ serve(async (req) => {
 
     const { message, tool } = validation.data;
 
+    // Use AI API directly instead of N8N webhook for independence
+    const AI_API_URL = Deno.env.get("AI_API_URL") || "https://openrouter.ai/api/v1/chat/completions";
+    const AI_API_KEY = Deno.env.get("AI_API_KEY");
+    const AI_MODEL = Deno.env.get("AI_MODEL") || "openrouter/auto";
+    const AI_HTTP_REFERER = Deno.env.get("AI_HTTP_REFERER");
+    const AI_TITLE = Deno.env.get("AI_TITLE") || "Kontenih AI";
+    
+    // Fallback to N8N if AI_API_KEY not configured (for backward compatibility)
     const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_URL');
-    if (!n8nWebhookUrl) {
+    
+    if (!AI_API_KEY && !n8nWebhookUrl) {
       return new Response(
-        JSON.stringify({ error: 'Webhook not configured' }),
+        JSON.stringify({ error: 'AI_API_KEY or N8N_WEBHOOK_URL must be configured' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
+
+    // Use AI API if configured, otherwise fallback to N8N
+    if (AI_API_KEY) {
+      const headers: Record<string, string> = {
+        Authorization: `Bearer ${AI_API_KEY}`,
+        "Content-Type": "application/json",
+      };
+
+      if (AI_HTTP_REFERER) headers["HTTP-Referer"] = AI_HTTP_REFERER;
+      if (AI_TITLE) headers["X-Title"] = AI_TITLE;
+
+      const systemPrompt = `You are Kontenih AI, an expert brand consultant and marketing strategist. You help businesses develop their brand identity, marketing strategies, and content plans.
+
+Your expertise includes:
+- Brand positioning and identity development
+- Marketing strategy and campaign planning
+- Content strategy for social media
+- Target audience analysis
+- Competitive analysis
+- Growth strategies
+
+Always provide:
+1. Clear, actionable advice
+2. Specific recommendations tailored to the business
+3. Practical examples when relevant
+4. Step-by-step guidance when appropriate
+
+Be professional, insightful, and focus on helping users grow their business through effective branding and marketing.`;
+
+      const aiResponse = await fetch(AI_API_URL, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          model: AI_MODEL,
+          messages: [
+            { role: "system", content: systemPrompt },
+            { role: "user", content: message }
+          ],
+        }),
+      });
+
+      if (!aiResponse.ok) {
+        const errorText = await aiResponse.text();
+        console.error("AI API error:", aiResponse.status, errorText);
+        return new Response(
+          JSON.stringify({ error: "AI service error" }),
+          { status: aiResponse.status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      const aiData = await aiResponse.json();
+      const output = aiData.choices?.[0]?.message?.content || 'Maaf, terjadi kesalahan dalam mendapatkan respons.';
+
+      // Increment usage count after successful response
+      await supabase.from('usage_tracking').upsert({
+        user_id: user.id,
+        usage_count: (usage?.usage_count || 0) + 1,
+        last_used_at: new Date().toISOString()
+      }, { onConflict: 'user_id' });
+
+      return new Response(
+        JSON.stringify({ output, response: output }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Fallback to N8N webhook if AI_API_KEY not configured
 
     const params = new URLSearchParams({
       message,

@@ -64,26 +64,28 @@ VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key_here
 
 **Catatan:** Tanpa konfigurasi ini, setelah sign in akan redirect ke URL lovable.app, bukan localhost!
 
-**Setup Supabase Edge Functions Environment Variables:**
+**PENTING - Setup Supabase Edge Functions Environment Variables (WAJIB untuk independensi):**
 1. Login ke [Supabase Dashboard](https://app.supabase.com/)
 2. Pilih project Anda
 3. Pergi ke **Project Settings > Edge Functions > Secrets**
-4. Tambahkan secrets berikut:
+4. Tambahkan secrets berikut (WAJIB):
    - `AI_API_URL` - URL endpoint AI API Anda (contoh: `https://openrouter.ai/api/v1/chat/completions`)
-   - `AI_API_KEY` - API key untuk AI service Anda (contoh: OpenRouter API key)
+   - `AI_API_KEY` - API key untuk AI service Anda (contoh: OpenRouter API key) - **WAJIB DI-SET**
    - `AI_MODEL` - model yang digunakan (contoh: `openrouter/auto` atau model spesifik lain)
    - `AI_HTTP_REFERER` (opsional, disarankan OpenRouter) - domain Anda
    - `AI_TITLE` (opsional, disarankan OpenRouter) - nama aplikasi untuk header
-   - `LOVABLE_API_KEY` (opsional fallback) jika masih memakai Lovable AI Gateway
 
 **Catatan:** 
-- Fungsi `video-script-chat` menggunakan `AI_API_URL`, `AI_API_KEY`, dan `AI_MODEL` untuk memanggil AI API
-- Jika tidak di-set, akan fallback ke Lovable gateway (untuk backward compatibility)
-- Untuk menggunakan OpenRouter, set:
+- ✅ Fungsi `brand-consultant` dan `video-script-chat` menggunakan `AI_API_URL`, `AI_API_KEY`, dan `AI_MODEL` untuk memanggil AI API
+- ❌ **TIDAK ADA** fallback ke Lovable gateway lagi - aplikasi sekarang 100% independen
+- ✅ Untuk menggunakan OpenRouter (recommended), set:
   - `AI_API_URL=https://openrouter.ai/api/v1/chat/completions`
-  - `AI_API_KEY=<OpenRouter Key>`
+  - `AI_API_KEY=<OpenRouter Key>` - **WAJIB**
   - `AI_MODEL=openrouter/auto` (atau model spesifik OpenRouter)
   - (opsional) `AI_HTTP_REFERER` dan `AI_TITLE` sesuai rekomendasi OpenRouter
+- ✅ `brand-consultant` masih support fallback ke `N8N_WEBHOOK_URL` jika `AI_API_KEY` tidak tersedia (untuk backward compatibility)
+
+**Lihat `INDEPENDENT_SETUP.md` untuk panduan lengkap setup independen dari Lovable.**
 
 ### 3. Jalankan Development Server
 

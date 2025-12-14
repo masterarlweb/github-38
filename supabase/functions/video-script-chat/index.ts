@@ -87,15 +87,15 @@ serve(async (req) => {
     }
 
     const { messages } = validatedData;
-    // Use environment variable for AI API endpoint, fallback to Lovable for backward compatibility
-    const AI_API_URL = Deno.env.get("AI_API_URL") || "https://ai.gateway.lovable.dev/v1/chat/completions";
-    const AI_API_KEY = Deno.env.get("AI_API_KEY") || Deno.env.get("LOVABLE_API_KEY");
-    const AI_MODEL = Deno.env.get("AI_MODEL") || "z-ai/glm-4.5-air:free";
+    // Use environment variable for AI API endpoint - NO Lovable fallback
+    const AI_API_URL = Deno.env.get("AI_API_URL") || "https://openrouter.ai/api/v1/chat/completions";
+    const AI_API_KEY = Deno.env.get("AI_API_KEY");
+    const AI_MODEL = Deno.env.get("AI_MODEL") || "openrouter/auto";
     const AI_HTTP_REFERER = Deno.env.get("AI_HTTP_REFERER");
-    const AI_TITLE = Deno.env.get("AI_TITLE");
+    const AI_TITLE = Deno.env.get("AI_TITLE") || "Kontenih AI";
     
     if (!AI_API_KEY) {
-      throw new Error("AI_API_KEY or LOVABLE_API_KEY is not configured");
+      throw new Error("AI_API_KEY is not configured. Please set AI_API_KEY in Supabase Edge Functions secrets.");
     }
 
     const headers: Record<string, string> = {
